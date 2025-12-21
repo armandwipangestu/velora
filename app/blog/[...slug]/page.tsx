@@ -29,6 +29,10 @@ export default async function PostPage({ params }: PostPageProps) {
         notFound()
     }
 
+
+    /**
+     * If you want to customize all of the components it rendered by mdx (not using prose dark:prose-invert). You can check mdx-components.tsx for more info
+     */
     return <article className="container py-6 prose dark:prose-invert max-w-3xl mx-auto">
         <h1 className="mb-2">{post.title}</h1>
         {post.description ? (
