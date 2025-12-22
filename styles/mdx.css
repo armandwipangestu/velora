@@ -1,21 +1,101 @@
 @reference "../app/globals.css";
 
+/* Load custom theme */
+@font-face {
+  font-family: "FiraCode Nerd Font";
+  src: url('/fonts/FiraCodeNerdFontMono-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* References: https://github.com/shadcn-ui/taxonomy/blob/main/styles/mdx.css */
 
 [data-rehype-pretty-code-figure] pre {
   @apply px-0;
   background-color: #eee;
+
+  /* This enables the font ligatures specifically */
+  font-variant-ligatures: discretionary-ligatures;
+  -webkit-font-feature-settings: "liga" 1, "calt" 1;
+  font-feature-settings: "liga" 1, "calt" 1;
+  
+  /* Set your Nerd Font as the default */
+  font-family: 'FiraCode Nerd Font', ui-monospace, monospace;
+}
+
+/* If a custom font is provided, we should let the browser decide ligatures 
+   (most standard fonts will then default to 'off') */
+[data-rehype-pretty-code-figure] pre[data-font] {
+  font-variant-ligatures: none !important;
+  font-feature-settings: "liga" 0, "calt" 0 !important;
+}
+
+/* 1. Default Ligatures (When data-ligatures is true or not present) */
+[data-rehype-pretty-code-figure] pre:not([data-ligatures="false"]) {
+  font-variant-ligatures: discretionary-ligatures;
+  -webkit-font-feature-settings: "liga" 1, "calt" 1;
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+/* 2. Disable Ligatures (When explicitly set to false OR when a custom font is used without explicit ligature true) */
+[data-rehype-pretty-code-figure] pre[data-ligatures="false"],
+[data-rehype-pretty-code-figure] pre[data-font]:not([data-ligatures="true"]) {
+  font-variant-ligatures: none !important;
+  -webkit-font-feature-settings: "liga" 0, "calt" 0 !important;
+  font-feature-settings: "liga" 0, "calt" 0 !important;
 }
 
 @media (prefers-color-scheme: dark) {
   html:not(.light) [data-rehype-pretty-code-figure] pre {
     @apply px-0;
     background-color: var(--shiki-dark-bg);
+
+    /* This enables the font ligatures specifically */
+    font-variant-ligatures: discretionary-ligatures;
+    -webkit-font-feature-settings: "liga" 1, "calt" 1;
+    font-feature-settings: "liga" 1, "calt" 1;
+    
+    /* Set your Nerd Font as the default */
+    font-family: 'FiraCode Nerd Font', ui-monospace, monospace;
+  }
+
+  html:not(.light) [data-rehype-pretty-code-figure] pre[data-font] {
+    font-variant-ligatures: none !important;
+    font-feature-settings: "liga" 0, "calt" 0 !important;
+  }
+
+  /* 1. Default Ligatures (When data-ligatures is true or not present) */
+  html:not(.light) [data-rehype-pretty-code-figure] pre:not([data-ligatures="false"]) {
+    font-variant-ligatures: discretionary-ligatures;
+    -webkit-font-feature-settings: "liga" 1, "calt" 1;
+    font-feature-settings: "liga" 1, "calt" 1;
+  }
+
+  /* 2. Disable Ligatures (When explicitly set to false OR when a custom font is used without explicit ligature true) */
+  html:not(.light) [data-rehype-pretty-code-figure] pre[data-ligatures="false"],
+  html:not(.light) [data-rehype-pretty-code-figure] pre[data-font]:not([data-ligatures="true"]) {
+    font-variant-ligatures: none !important;
+    -webkit-font-feature-settings: "liga" 0, "calt" 0 !important;
+    font-feature-settings: "liga" 0, "calt" 0 !important;
   }
 }
 
 [data-rehype-pretty-code-figure] code {
   @apply text-sm !leading-loose md:text-base border-0 p-0;
+}
+
+/* Target standard inline code (without language tags) */
+.prose :where(code):not(:where(pre *, [data-rehype-pretty-code-figure] *)) {
+  @apply rounded px-1.5 py-0.5 font-mono text-sm font-medium;
+  background-color: #e3e3e3;
+  color: #0f172a;
+}
+
+/* Dark mode support */
+html.dark .prose :where(code):not(:where(pre *, [data-rehype-pretty-code-figure] *)) {
+  background-color: #444;
+  color: #f1f5f9;
 }
 
 /* Dual theme support - light theme by default */
