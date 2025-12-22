@@ -1,4 +1,5 @@
 import { defineConfig, defineCollection, s } from "velite"
+import { visit } from "unist-util-visit"
 import rehypeSlug from "rehype-slug"
 import rehypePrettyCode from "rehype-pretty-code"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
@@ -21,6 +22,25 @@ const posts = defineCollection({
         body: s.mdx()
     }).transform(computedFields)
 })
+
+const rehypePreMeta = () => (tree: any) => {
+    visit(tree, "element", (node: any) => {
+        // Look for the code element inside the pre
+        if (node.tagName !== "pre") return
+        const codeEl = node.children.find((child: any) => child.tagName === "code")
+        if (!codeEl) return
+
+        // 1. Get the raw metadata string
+        const meta = codeEl.data?.meta || codeEl.properties?.meta || ""
+        
+        // 2. Extract title if it exists
+        const titleMatch = meta.match(/title="([^"]*)"/)
+        if (titleMatch) {
+            // Assign directly to the PRE node so your component sees it
+            node.properties["data-title"] = titleMatch[1]
+        }
+    })
+}
 
 export default defineConfig({
     root: "content",
@@ -54,6 +74,7 @@ export default defineConfig({
                     ],
                 }
             ],
+            rehypePreMeta,
             [rehypeAutolinkHeadings, 
                 {
                     behavior: "wrap",

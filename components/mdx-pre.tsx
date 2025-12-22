@@ -63,13 +63,20 @@ const languageIcons: Record<string, React.ReactNode> = {
 export function Pre({
     children,
     className,
-    title,
+    title, // This comes from MDX props if passed like <Pre title="foo" />
     ...props
 }: React.HTMLAttributes<HTMLPreElement> & { title?: string }) {
     const [isCopied, setIsCopied] = useState(false)
     const preRef = useRef<HTMLPreElement>(null)
 
+    // 1. Check props for data-title (passed from rehype)
+    const dataTitle = (props as Record<string, unknown>)["data-title"] as string
     const language = (props as Record<string, unknown>)["data-language"] as string || "text"
+
+    // 2. Determine the display label:
+    // Priority: Prop title > data-title attribute from rehype > language extension
+    const displayTitle = title || dataTitle || language
+
     const icon = languageIcons[language] || <FileCode className="size-4" />
 
     const onCopy = async () => {
@@ -119,9 +126,10 @@ export function Pre({
                         <div className="size-3 rounded-full bg-yellow-400/60 border border-yellow-500/80" />
                         <div className="size-3 rounded-full bg-green-400/60 border border-green-500/80" />
                     </div>
+                    {/* Icon and Title/Extension */}
                     <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
                         {icon}
-                        <span>{title || language}</span>
+                        <span className="truncate">{displayTitle}</span>
                     </div>
                 </div>
                 <button
