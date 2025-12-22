@@ -67,7 +67,7 @@ export function Callout({ type = "note", title, children }: CalloutProps) {
                 <p className="!m-0 !mb-1 font-semibold leading-tight">
                     {title || config.defaultTitle}
                 </p>
-                <div className="text-sm [&>p]:m-0">
+                <div className="text-sm [&>p]:m-0 text-foreground">
                     {children}
                 </div>
             </div>

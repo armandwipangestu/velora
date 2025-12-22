@@ -269,6 +269,40 @@ function Counter() {
 
 You can use inline code with specific language: `const x = 10{:ts}` or `SELECT * FROM users{:sql}`
 
+## Nested Code Block
+
+````md title="example.ts" showLineNumbers {1,13}
+```ts
+interface User {
+    name: string;
+    age: number;
+}
+
+const user: User = {
+    name: "John Doe",
+    age: 30,
+}
+
+console.log(user);
+```
+````
+
+The rendered result looks like this:
+
+```ts
+interface User {
+    name: string;
+    age: number;
+}
+
+const user: User = {
+    name: "John Doe",
+    age: 30,
+}
+
+console.log(user);
+```
+
 # Callout
 
 <Callout type="note">
@@ -291,8 +325,99 @@ You can use inline code with specific language: `const x = 10{:ts}` or `SELECT *
     Hello I am a callout caution
 </Callout>
 
-# Hello World
+---
 
-Welcome to my blog `inline code`
+# Markdown Syntax Guide
 
-### Header 3
+## Headings
+
+# H1 Heading
+## H2 Heading
+### H3 Heading
+#### H4 Heading
+##### H5 Heading
+###### H6 Heading
+
+## Basic Formatting
+
+### Bold Text
+
+**Bold Text** and __Bold Text__
+
+### Italic Text
+
+*Italic Text* and _Italic Text_
+
+### Bold and Italic Text
+
+***Bold and Italic***
+
+### Strikethrough
+
+~~Strikethrough~~
+
+### Inline Code
+
+`Inline Code`
+
+## Blockquotes
+
+> This is a blockquote.
+> It can span multiple lines.
+
+> Blockquotes can be nested...
+>> ...by using additional greater-than signs right next to each other...
+>>> ...or with spaces between arrows.
+
+Here an example blockquote with code block:
+
+> **NOTE**: Here is a note
+> 
+> ```tsx
+> const x = 10;
+> ```
+
+## Lists
+
+### Unordered List
+
+- Item 1
+- Item 2
+  - Subitem 2.1
+  - Subitem 2.2
+    - Sub-subitem 2.2.1
+- Item 3
+
+### Ordered List
+
+1. First Item
+2. Second Item
+   1. Subitem 2.1
+   2. Subitem 2.2
+3. Third Item
+
+### Task List
+
+- [x] Completed task
+- [ ] Incomplete task
+- [ ] Another incomplete task
+
+## Tables
+
+| Header 1 | Header 2 | Header 3 | Header 4 | Header 5 |
+| :--- | :---: | ---: | ---: | ---: |
+| Left-aligned | Center-aligned | Right-aligned | Right-aligned | Right-aligned |
+| Row 1, Col 1 | Row 1, Col 2 | Row 1, Col 3 | Row 1, Col 4 | Row 1, Col 5 |
+| Row 2, Col 1 | Row 2, Col 2 | Row 2, Col 3 | Row 2, Col 4 | Row 2, Col 5 |
+
+## Links and Images
+
+[External Link](https://example.com)
+[Internal Link](/blog)
+
+![Placeholder Image](https://placehold.co/600x400)
+
+## Horizontal Rule
+
+---
+
