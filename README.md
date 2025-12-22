@@ -58,6 +58,11 @@ docker run --rm -p 3000:3000 ghcr.io/armandwipangestu/nextjs-velite-blog-templat
 
 The following are the features I want to achieve or are under development:
 
+- [ ✅ ] Add some style type like github to callout component (`note`, `tip`, `important`, `warning`, `caution`)
+- [ ✅ ] Light / Dark mode theme in code block
+- [ ✅ ] Remove backtick in inline code
+- [ ✅ ] Adjust background line and word highlight in code block
+- [ ✅ ] Add multiple word highlighting based on char ids `#v` (variable/value) , `#s` (state/stateful) , `#i` (import/identifier)
 - [ ] Rehype transformers for diff notation
 - [ ] Code block group components
 - [ ] Copy button in code block
