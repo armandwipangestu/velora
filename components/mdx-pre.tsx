@@ -69,7 +69,7 @@ export function Pre({
     const [isCopied, setIsCopied] = useState(false)
     const preRef = useRef<HTMLPreElement>(null)
 
-    const language = (props as any)["data-language"] || "text"
+    const language = (props as Record<string, unknown>)["data-language"] as string || "text"
     const icon = languageIcons[language] || <FileCode className="size-4" />
 
     const onCopy = async () => {
