@@ -74,6 +74,7 @@ export function Pre({
     // 1. Check props for data-title (passed from rehype)
     const dataTitle = (props as Record<string, unknown>)["data-title"] as string
     const dataIcon = (props as Record<string, unknown>)["data-icon"] as string
+    const dataFont = (props as Record<string, unknown>)["data-font"] as string
     const language = (props as Record<string, unknown>)["data-language"] as string || "text"
 
     // 2. Determine the display label:
@@ -85,6 +86,15 @@ export function Pre({
     const icon = (dataIcon && languageIcons[dataIcon])
         || languageIcons[language]
         || <FileCode className="size-4" />
+
+    // 4. Determine Font
+    // Priority: Custom font from meta > default Fira Code
+    // Logic: If dataFont exists, use it. 
+    // We add !important via the style object if needed, 
+    // but usually React inline styles win over CSS files.
+    const style: React.CSSProperties = dataFont
+        ? { fontFamily: `"${dataFont}", monospace` }
+        : {};
 
     const onCopy = async () => {
         if (!preRef.current) return
@@ -159,6 +169,7 @@ export function Pre({
             </div>
             <pre
                 ref={preRef}
+                style={{ ...props.style, ...style }} // Merge Shiki styles with our Font style
                 className={cn("overflow-x-auto py-4 !mt-0 !mb-0 rounded-t-none rounded-b-none", className)}
                 {...props}
             >

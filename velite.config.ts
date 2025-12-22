@@ -45,6 +45,12 @@ const rehypePreMeta = () => (tree: any) => {
         if (iconMatch) {
             node.properties["data-icon"] = iconMatch[1]
         }
+
+        // 4. Extract Font if it exists
+        const fontMatch = meta.match(/font="([^"]*)"/)
+        if (fontMatch) {
+            node.properties["data-font"] = fontMatch[1]
+        }
     })
 }
 
