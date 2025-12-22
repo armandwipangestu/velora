@@ -48,8 +48,18 @@ html.dark [data-rehype-pretty-code-figure] code[data-theme*=" "] span {
 }
 
 [data-rehype-pretty-code-figure] [data-highlighted-line] {
-  background: rgba(200, 200, 255, 0.1);
+  background: rgba(200, 200, 255, 0.15) !important;
   @apply border-l-blue-400;
+}
+
+/* Light mode - use more visible blue background */
+html:not(.dark) [data-rehype-pretty-code-figure] [data-highlighted-line] {
+  background: rgba(59, 130, 246, 0.15) !important;
+}
+
+/* Make spans inside highlighted lines transparent so the line background shows */
+[data-rehype-pretty-code-figure] [data-highlighted-line] span {
+  background-color: transparent !important;
 }
 
 [data-rehype-pretty-code-figure] [data-highlighted-chars] {
