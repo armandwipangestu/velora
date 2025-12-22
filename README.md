@@ -49,6 +49,14 @@ bun run dev
 docker run --rm -p 3000:3000 ghcr.io/armandwipangestu/nextjs-velite-blog-template:latest
 ```
 
+## Roadmap
+
+The following are the features I want to achieve or are under development:
+
+- [ ] Rehype transformers for diff notation
+
+See the [open issues](https://github.com/armandwipangestu/nextjs-velite-blog-template/issues) for a list of proposed features (and known issues).
+
 ## Credis
 
 Much of the design of this project is taken from shadcn in his projects, such as [shadcn/ui](https://ui.shadcn.com/) and [Taxonomy](https://tx.shadcn.com/).
