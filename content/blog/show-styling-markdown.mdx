@@ -125,6 +125,122 @@ function isEven(number) {
 }
 ```
 
+## Diff Highlighting
+
+Show code changes with diff syntax highlighting. Lines starting with `+` are additions, `-` are deletions.
+
+```diff
+- const oldFunction = () => {
+-   return "old value";
+- };
++ const newFunction = () => {
++   return "new value";
++ };
+
+  // Unchanged context line
+- import { oldModule } from "./old";
++ import { newModule } from "./new";
+```
+
+## Shell/Bash Commands
+
+```bash title="Terminal"
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+```sh
+$ git clone https://github.com/user/repo.git
+$ cd repo
+$ npm install
+```
+
+## JSON with Highlighting
+
+```json {3-5} title="package.json"
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "description": "My awesome app",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build"
+  }
+}
+```
+
+## CSS Example
+
+```css showLineNumbers /primary/
+:root {
+  --color-primary: #3b82f6;
+  --color-secondary: #10b981;
+}
+
+.button {
+  background-color: var(--color-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+}
+```
+
+## SQL Query
+
+```sql
+SELECT users.name, orders.total
+FROM users
+INNER JOIN orders ON users.id = orders.user_id
+WHERE orders.created_at > '2024-01-01'
+ORDER BY orders.total DESC
+LIMIT 10;
+```
+
+## YAML Configuration
+
+```yaml title="docker-compose.yml"
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+```
+
+## Multiple Word Highlights
+
+You can highlight multiple different words with different styles.
+
+```tsx /useState/#v /useEffect/#s /React/#i
+import React, { useState, useEffect } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    document.title = `Count: ${count}`;
+  }, [count]);
+
+  return <button onClick={() => setCount(c => c + 1)}>{count}</button>;
+}
+```
+
+## Inline Code with Language
+
+You can use inline code with specific language: `const x = 10{:ts}` or `SELECT * FROM users{:sql}`
+
 # Callout
 
 <Callout type="note">

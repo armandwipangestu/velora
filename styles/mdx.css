@@ -4,7 +4,7 @@
 
 [data-rehype-pretty-code-figure] pre {
   @apply px-0;
-  background-color: var(--shiki-light-bg);
+  background-color: #eee;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,7 +22,7 @@
 [data-rehype-pretty-code-figure] code[data-theme*=" "],
 [data-rehype-pretty-code-figure] code[data-theme*=" "] span {
   color: var(--shiki-light);
-  background-color: var(--shiki-light-bg);
+  background-color: #eee;
 }
 
 /* Dark theme when .dark class is on html */
@@ -94,4 +94,25 @@ html:not(.dark) [data-rehype-pretty-code-figure] [data-highlighted-chars] {
 
 .subheading-anchor {
   @apply no-underline hover:underline;
+}
+
+/* Inline code with language highlighting */
+[data-rehype-pretty-code-figure] > code {
+  /* padding-inline: 0.25rem; */
+  padding-block: 0.125rem;
+  border-radius: 0.25rem;
+  padding-top: 6px;
+  padding-bottom: 4px;
+}
+
+/* Remove backticks from inline code - hide ::before and ::after pseudo-elements */
+[data-rehype-pretty-code-figure] > code::before,
+[data-rehype-pretty-code-figure] > code::after {
+  content: none !important;
+}
+
+/* Override prose inline code styling */
+.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::before,
+.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::after {
+  content: none !important;
 }
