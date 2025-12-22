@@ -4,6 +4,14 @@
 
 [data-rehype-pretty-code-figure] pre {
   @apply px-0;
+  background-color: var(--shiki-light-bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.light) [data-rehype-pretty-code-figure] pre {
+    @apply px-0;
+    background-color: var(--shiki-dark-bg);
+  }
 }
 
 [data-rehype-pretty-code-figure] code {
