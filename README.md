@@ -69,6 +69,7 @@ The following are the features I want to achieve or are under development:
 - [ ✅ ] Disable ligature for code block using `fontLigatures=false` meta string
 - [ ✅ ] Inline code (without specific language) with custom background color
 - [ ✅ ] Add umami analytics
+- [ ✅ ] Add vercel analytics
 - [ ] Add giscus components for discussion section
 - [ ] Rehype transformers for diff notation
 - [ ] Code block group components
