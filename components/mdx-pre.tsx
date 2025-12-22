@@ -1,7 +1,7 @@
 "use client"
 
 import { Check, Copy, FileCode } from "lucide-react"
-import { FaReact, FaCss3Alt, FaHtml5, FaMarkdown, FaFileCsv, FaJava, FaGolang, FaPython, FaDocker, FaRust, FaC, FaSwift, FaFlutter, FaLaravel } from "react-icons/fa6"
+import { FaReact, FaCss3Alt, FaHtml5, FaMarkdown, FaFileCsv, FaJava, FaGolang, FaPython, FaDocker, FaRust, FaC, FaSwift, FaLaravel, FaDartLang } from "react-icons/fa6"
 import { RiJavascriptFill, RiPhpLine } from "react-icons/ri"
 import { BiLogoTypescript } from "react-icons/bi"
 import { BsFiletypeYml, BsFiletypeSql, BsFiletypeXml } from "react-icons/bs"
@@ -51,7 +51,7 @@ const languageIcons: Record<string, React.ReactNode> = {
     cpp: <PiFileCppDuotone className="size-4" />,
     c: <FaC className="size-4" />,
     swift: <FaSwift className="size-4" />,
-    flutter: <FaFlutter className="size-4" />,
+    flutter: <FaDartLang className="size-4" />,
     xml: <BsFiletypeXml className="size-4" />,
     xaml: <BsFiletypeXml className="size-4" />,
     php: <RiPhpLine className="size-4" />,
