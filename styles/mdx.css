@@ -63,8 +63,21 @@ html:not(.dark) [data-rehype-pretty-code-figure] [data-highlighted-line] {
 }
 
 [data-rehype-pretty-code-figure] [data-highlighted-chars] {
-  @apply rounded bg-zinc-600/50;
-  box-shadow: 0 0 0 4px rgb(82 82 91 / 0.5);
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background-color: rgba(110, 110, 140, 0.4) !important;
+  box-shadow: 0 0 0 0 rgba(110, 110, 140, 0.4);
+}
+
+/* Light mode - more visible highlight */
+html:not(.dark) [data-rehype-pretty-code-figure] [data-highlighted-chars] {
+  background-color: rgba(250, 204, 21, 0.35) !important;
+  box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.35);
+}
+
+/* Make spans inside highlighted chars transparent so the background shows */
+[data-rehype-pretty-code-figure] [data-highlighted-chars] span {
+  background-color: transparent !important;
 }
 
 [data-rehype-pretty-code-figure] [data-chars-id] {
