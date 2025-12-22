@@ -39,6 +39,12 @@ const rehypePreMeta = () => (tree: any) => {
             // Assign directly to the PRE node so your component sees it
             node.properties["data-title"] = titleMatch[1]
         }
+
+        // 3. Extract Icon if it exists
+        const iconMatch = meta.match(/icon="([^"]*)"/)
+        if (iconMatch) {
+            node.properties["data-icon"] = iconMatch[1]
+        }
     })
 }
 

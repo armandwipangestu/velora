@@ -1,7 +1,7 @@
 "use client"
 
 import { Check, Copy, FileCode } from "lucide-react"
-import { FaReact, FaCss3Alt, FaHtml5, FaMarkdown, FaFileCsv, FaJava, FaGolang, FaPython, FaDocker, FaRust, FaC, FaSwift, FaLaravel, FaDartLang } from "react-icons/fa6"
+import { FaReact, FaCss3Alt, FaHtml5, FaMarkdown, FaFileCsv, FaJava, FaGolang, FaPython, FaDocker, FaRust, FaC, FaSwift, FaLaravel, FaDartLang, FaFlutter } from "react-icons/fa6"
 import { RiJavascriptFill, RiPhpLine } from "react-icons/ri"
 import { BiLogoTypescript } from "react-icons/bi"
 import { BsFiletypeYml, BsFiletypeSql, BsFiletypeXml } from "react-icons/bs"
@@ -51,11 +51,13 @@ const languageIcons: Record<string, React.ReactNode> = {
     cpp: <PiFileCppDuotone className="size-4" />,
     c: <FaC className="size-4" />,
     swift: <FaSwift className="size-4" />,
-    flutter: <FaDartLang className="size-4" />,
+    dart: <FaDartLang className="size-4" />,
+    flutter: <FaFlutter className="size-4" />,
     xml: <BsFiletypeXml className="size-4" />,
     xaml: <BsFiletypeXml className="size-4" />,
     php: <RiPhpLine className="size-4" />,
     blade: <FaLaravel className="size-4" />,
+    laravel: <FaLaravel className="size-4" />,
     kotlin: <SiKotlin className="size-4" />,
     kt: <SiKotlin className="size-4" />,
 }
@@ -71,13 +73,18 @@ export function Pre({
 
     // 1. Check props for data-title (passed from rehype)
     const dataTitle = (props as Record<string, unknown>)["data-title"] as string
+    const dataIcon = (props as Record<string, unknown>)["data-icon"] as string
     const language = (props as Record<string, unknown>)["data-language"] as string || "text"
 
     // 2. Determine the display label:
     // Priority: Prop title > data-title attribute from rehype > language extension
     const displayTitle = title || dataTitle || language
 
-    const icon = languageIcons[language] || <FileCode className="size-4" />
+    // 3. Determine Icon
+    // Priority: Custom icon from meta > language-based icon > default FileCode
+    const icon = (dataIcon && languageIcons[dataIcon])
+        || languageIcons[language]
+        || <FileCode className="size-4" />
 
     const onCopy = async () => {
         if (!preRef.current) return
