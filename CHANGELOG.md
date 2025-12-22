@@ -1,3 +1,10 @@
+# [1.2.0-rc.1](https://github.com/armandwipangestu/nextjs-velite-blog-template/compare/v1.1.0...v1.2.0-rc.1) (2025-12-22)
+
+
+### Features
+
+* add docs ([b271c22](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/b271c22566f1469d9d3d25eb4a83415526a7bd4a))
+
 # [1.1.0-rc.2](https://github.com/armandwipangestu/nextjs-velite-blog-template/compare/v1.1.0-rc.1...v1.1.0-rc.2) (2025-12-22)
 
 
