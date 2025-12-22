@@ -25,6 +25,9 @@ export async function GET(req: NextRequest) {
         const heading = title.length > 140 ? `${title.substring(0, 140)}...` : title;
 
         return new ImageResponse((
+            /**
+             * To preview your OG Image, you can use this playgroun: https://og-playground.vercel.app/
+             */
             <div tw="flex relative flex-col p-12 w-full h-full items-start text-black bg-white">
                 <div tw="flex items-center">
                     <svg
