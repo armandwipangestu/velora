@@ -44,8 +44,19 @@ jobs:
       # - name: Run tests
       #   run: bun test
 
+      - name: Generate Content (Velite)
+        run: bun run build:content
+
+      - name: Verify Generated Files
+        run: |
+          ls -la .velite
+          if [ ! -f .velite/posts.json ]; then
+            echo "Error: posts.json not found!"
+            exit 1
+          fi
+
       - name: Build app (for validation)
-        run: bun run build
+        run: bun run build:next
 
       - name: Setup Node.js 22 (for semantic-release)
         uses: actions/setup-node@v4
