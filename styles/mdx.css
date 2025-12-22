@@ -85,6 +85,19 @@
   @apply text-sm !leading-loose md:text-base border-0 p-0;
 }
 
+/* Target standard inline code (without language tags) */
+.prose :where(code):not(:where(pre *, [data-rehype-pretty-code-figure] *)) {
+  @apply rounded px-1.5 py-0.5 font-mono text-sm font-medium;
+  background-color: #e3e3e3;
+  color: #0f172a;
+}
+
+/* Dark mode support */
+html.dark .prose :where(code):not(:where(pre *, [data-rehype-pretty-code-figure] *)) {
+  background-color: #444;
+  color: #f1f5f9;
+}
+
 /* Dual theme support - light theme by default */
 [data-rehype-pretty-code-figure] code[data-theme*=" "],
 [data-rehype-pretty-code-figure] code[data-theme*=" "] span {
