@@ -15,6 +15,9 @@ jobs:
     name: Build and Test
     runs-on: ubuntu-latest
     environment: ${{ github.base_ref }}
+    env:
+      NEXT_PUBLIC_BASE_URL: ${{ vars.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000' }}
+      NEXT_PUBLIC_PUBLIC_ASSETS: ${{ vars.NEXT_PUBLIC_PUBLIC_ASSETS || 'http://localhost:3000/images/posts/assets' }}
 
     steps:
       - name: Checkout repository
@@ -46,6 +49,8 @@ jobs:
 
       - name: Build app (for validation)
         run: bun run build
+        env:
+          CI: true
 
       - name: Setup Node.js 22 (for semantic-release)
         uses: actions/setup-node@v4

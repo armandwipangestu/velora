@@ -51,7 +51,7 @@ export default function RootLayout({
         <Providers>
           <div className="relative flex min-h-dvh flex-col bg-background">
             <SiteHeader />
-            <main className="flex-1 md:mx-auto">
+            <main className="flex-1">
               {children}
             </main>
             <SiteFooter />

@@ -4,10 +4,81 @@
 
 [data-rehype-pretty-code-figure] pre {
   @apply px-0;
+  background-color: #eee;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.light) [data-rehype-pretty-code-figure] pre {
+    @apply px-0;
+    background-color: var(--shiki-dark-bg);
+  }
 }
 
 [data-rehype-pretty-code-figure] code {
   @apply text-sm !leading-loose md:text-base border-0 p-0;
+}
+
+/* Dual theme support - light theme by default */
+[data-rehype-pretty-code-figure] code[data-theme*=" "],
+[data-rehype-pretty-code-figure] code[data-theme*=" "] span {
+  color: var(--shiki-light);
+  background-color: #eee;
+}
+
+/* Dark theme when .dark class is on html */
+html.dark [data-rehype-pretty-code-figure] code[data-theme*=" "],
+html.dark [data-rehype-pretty-code-figure] code[data-theme*=" "] span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+/* Also support prefers-color-scheme for users without JS */
+@media (prefers-color-scheme: dark) {
+  html:not(.light) [data-rehype-pretty-code-figure] code[data-theme*=" "],
+  html:not(.light) [data-rehype-pretty-code-figure] code[data-theme*=" "] span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
+  }
+}
+
+/* Diff highlighting with transformerNotationDiff */
+[data-rehype-pretty-code-figure] .diff {
+  display: inline-block;
+  width: 100%;
+  padding-left: 1.5rem; /* Space for the marker */
+  position: relative;
+}
+
+[data-rehype-pretty-code-figure] .diff.add {
+  background-color: rgba(34, 197, 94, 0.2);
+}
+
+[data-rehype-pretty-code-figure] .diff.remove {
+  background-color: rgba(239, 68, 68, 0.2);
+}
+
+/* Add markers */
+[data-rehype-pretty-code-figure] .diff.add::before {
+  content: "+";
+  position: absolute;
+  left: 0.5rem;
+  color: rgb(34, 197, 94);
+}
+
+[data-rehype-pretty-code-figure] .diff.remove::before {
+  content: "-";
+  position: absolute;
+  left: 0.5rem;
+  color: rgb(239, 68, 68);
+}
+
+/* Dark mode adjustments */
+html.dark [data-rehype-pretty-code-figure] .diff.add {
+  background-color: rgba(34, 197, 94, 0.15);
+}
+
+html.dark [data-rehype-pretty-code-figure] .diff.remove {
+  background-color: rgba(239, 68, 68, 0.15);
 }
 
 [data-rehype-pretty-code-figure] code[data-line-numbers] {
@@ -25,19 +96,150 @@
 }
 
 [data-rehype-pretty-code-figure] [data-highlighted-line] {
-  background: rgba(200, 200, 255, 0.1);
+  background: rgba(200, 200, 255, 0.15) !important;
   @apply border-l-blue-400;
 }
 
+/* Light mode - use more visible blue background */
+html:not(.dark) [data-rehype-pretty-code-figure] [data-highlighted-line] {
+  background: rgba(59, 130, 246, 0.15) !important;
+}
+
+/* Make spans inside highlighted lines transparent so the line background shows */
+[data-rehype-pretty-code-figure] [data-highlighted-line] span {
+  background-color: transparent !important;
+}
+
 [data-rehype-pretty-code-figure] [data-highlighted-chars] {
-  @apply rounded bg-zinc-600/50;
-  box-shadow: 0 0 0 4px rgb(82 82 91 / 0.5);
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background-color: rgba(110, 110, 140, 0.4) !important;
+  box-shadow: 0 0 0 0 rgba(110, 110, 140, 0.4);
+}
+
+/* Light mode - more visible highlight */
+html:not(.dark) [data-rehype-pretty-code-figure] [data-highlighted-chars] {
+  background-color: rgba(250, 204, 21, 0.35) !important;
+  box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.35);
+}
+
+/* Make spans inside highlighted chars transparent so the background shows */
+[data-rehype-pretty-code-figure] [data-highlighted-chars] span {
+  background-color: transparent !important;
 }
 
 [data-rehype-pretty-code-figure] [data-chars-id] {
   @apply border-b-2 p-1 shadow-none;
 }
 
+/* Different colors for different char IDs */
+/* #v - variable/value - blue */
+html:not(.dark) [data-rehype-pretty-code-figure] [data-chars-id="v"] {
+  background-color: rgba(59, 130, 246, 0.3) !important;
+  border-bottom-color: rgba(59, 130, 246, 0.8);
+}
+
+/* #s - state/stateful - green */
+html:not(.dark) [data-rehype-pretty-code-figure] [data-chars-id="s"] {
+  background-color: rgba(34, 197, 94, 0.3) !important;
+  border-bottom-color: rgba(34, 197, 94, 0.8);
+}
+
+/* #i - import/identifier - purple */
+html:not(.dark) [data-rehype-pretty-code-figure] [data-chars-id="i"] {
+  background-color: rgba(168, 85, 247, 0.3) !important;
+  border-bottom-color: rgba(168, 85, 247, 0.8);
+}
+
+/* Make spans inside data-chars-id transparent */
+html:not(.dark) [data-rehype-pretty-code-figure] [data-chars-id] span {
+  background-color: transparent !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-rehype-pretty-code-figure] [data-chars-id="v"] {
+    background-color: rgba(59, 130, 246, 0.3) !important;
+    border-bottom-color: rgba(59, 130, 246, 0.8);
+  }
+
+  [data-rehype-pretty-code-figure] [data-chars-id="s"] {
+    background-color: rgba(34, 197, 94, 0.3) !important;
+    border-bottom-color: rgba(34, 197, 94, 0.8);
+  }
+
+  [data-rehype-pretty-code-figure] [data-chars-id="i"] {
+    background-color: rgba(168, 85, 247, 0.3) !important;
+    border-bottom-color: rgba(168, 85, 247, 0.8);
+  }
+
+  [data-rehype-pretty-code-figure] [data-chars-id] span {
+    background-color: transparent !important;
+  }
+}
+
 .subheading-anchor {
   @apply no-underline hover:underline;
+}
+
+/* Inline code with language highlighting */
+[data-rehype-pretty-code-figure] > code {
+  /* padding-inline: 0.25rem; */
+  padding-block: 0.125rem;
+  border-radius: 0.25rem;
+  padding-top: 6px;
+  padding-bottom: 4px;
+}
+
+/* Remove backticks from inline code - hide ::before and ::after pseudo-elements */
+[data-rehype-pretty-code-figure] > code::before,
+[data-rehype-pretty-code-figure] > code::after {
+  content: none !important;
+}
+
+/* Override prose inline code styling */
+.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::before,
+.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::after {
+  content: none !important;
+}
+
+pre.shiki {
+  @apply max-h-(--max-height,80svh) relative flex flex-col overflow-hidden p-0;
+
+  code {
+    @apply grid overflow-auto py-5;
+  }
+
+  .line {
+    @apply relative px-5;
+  }
+
+  button {
+    @apply hover:opacity-100! absolute right-3 top-3 flex cursor-pointer select-none items-center justify-center rounded-md bg-slate-600 text-sm font-medium text-white opacity-0 shadow outline-0 transition;
+
+    svg {
+      @apply m-2 size-5;
+    }
+
+    .check {
+      @apply opacity-0 transition-opacity;
+    }
+
+    &.copied {
+      @apply opacity-100!;
+
+      &::before {
+        @apply border-r border-[#0002] p-2 px-2.5 content-['Copied!'];
+      }
+
+      .check {
+        @apply opacity-100;
+      }
+    }
+  }
+
+  &:hover {
+    button {
+      @apply opacity-80;
+    }
+  }
 }
