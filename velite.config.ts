@@ -38,7 +38,13 @@ export default defineConfig({
             rehypeSlug, 
             [rehypePrettyCode, 
                 { 
-                    theme: "github-dark" 
+                    theme: {
+                        light: "github-light",
+                        dark: "github-dark"
+                    },
+                    defaultLang: {
+                        block: "plaintext"
+                    }
                 }
             ],
             [rehypeAutolinkHeadings, 
