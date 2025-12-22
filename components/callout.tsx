@@ -10,9 +10,12 @@ import type { ReactNode } from "react";
 
 export type CalloutType = "note" | "tip" | "important" | "warning" | "caution"
 
+export type CalloutDescriptionColor = "default" | "normal" | "muted"
+
 interface CalloutProps {
     type?: CalloutType;
     title?: string;
+    descriptionColor?: CalloutDescriptionColor;
     children: ReactNode;
 }
 
@@ -51,7 +54,7 @@ const calloutConfig: Record<
     }
 }
 
-export function Callout({ type = "note", title, children }: CalloutProps) {
+export function Callout({ type = "note", title, children, descriptionColor = "default" }: CalloutProps) {
     const config = calloutConfig[type]
     const Icon = config.icon;
 
@@ -67,7 +70,7 @@ export function Callout({ type = "note", title, children }: CalloutProps) {
                 <p className="!m-0 !mb-1 font-semibold leading-tight">
                     {title || config.defaultTitle}
                 </p>
-                <div className="text-sm [&>p]:m-0 text-foreground">
+                <div className={`text-sm [&>p]:m-0 ${descriptionColor === "default" ? "" : descriptionColor === "normal" ? "text-foreground" : "text-muted-foreground"}`}>
                     {children}
                 </div>
             </div>
