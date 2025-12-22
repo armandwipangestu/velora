@@ -51,6 +51,15 @@ const rehypePreMeta = () => (tree: any) => {
         if (fontMatch) {
             node.properties["data-font"] = fontMatch[1]
         }
+
+        // 5. Extract Font Ligatures preference
+        const ligatureMatch = meta.match(/fontLigatures=(true|false)/)
+        if (ligatureMatch) {
+            node.properties["data-ligatures"] = ligatureMatch[1]
+        } else {
+            // Set a default if you want, or handle it in React/CSS
+            node.properties["data-ligatures"] = "true" 
+        }
     })
 }
 

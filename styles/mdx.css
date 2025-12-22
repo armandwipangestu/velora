@@ -31,6 +31,21 @@
   font-feature-settings: "liga" 0, "calt" 0 !important;
 }
 
+/* 1. Default Ligatures (When data-ligatures is true or not present) */
+[data-rehype-pretty-code-figure] pre:not([data-ligatures="false"]) {
+  font-variant-ligatures: discretionary-ligatures;
+  -webkit-font-feature-settings: "liga" 1, "calt" 1;
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+/* 2. Disable Ligatures (When explicitly set to false OR when a custom font is used without explicit ligature true) */
+[data-rehype-pretty-code-figure] pre[data-ligatures="false"],
+[data-rehype-pretty-code-figure] pre[data-font]:not([data-ligatures="true"]) {
+  font-variant-ligatures: none !important;
+  -webkit-font-feature-settings: "liga" 0, "calt" 0 !important;
+  font-feature-settings: "liga" 0, "calt" 0 !important;
+}
+
 @media (prefers-color-scheme: dark) {
   html:not(.light) [data-rehype-pretty-code-figure] pre {
     @apply px-0;
@@ -47,6 +62,21 @@
 
   html:not(.light) [data-rehype-pretty-code-figure] pre[data-font] {
     font-variant-ligatures: none !important;
+    font-feature-settings: "liga" 0, "calt" 0 !important;
+  }
+
+  /* 1. Default Ligatures (When data-ligatures is true or not present) */
+  html:not(.light) [data-rehype-pretty-code-figure] pre:not([data-ligatures="false"]) {
+    font-variant-ligatures: discretionary-ligatures;
+    -webkit-font-feature-settings: "liga" 1, "calt" 1;
+    font-feature-settings: "liga" 1, "calt" 1;
+  }
+
+  /* 2. Disable Ligatures (When explicitly set to false OR when a custom font is used without explicit ligature true) */
+  html:not(.light) [data-rehype-pretty-code-figure] pre[data-ligatures="false"],
+  html:not(.light) [data-rehype-pretty-code-figure] pre[data-font]:not([data-ligatures="true"]) {
+    font-variant-ligatures: none !important;
+    -webkit-font-feature-settings: "liga" 0, "calt" 0 !important;
     font-feature-settings: "liga" 0, "calt" 0 !important;
   }
 }
