@@ -9,7 +9,8 @@ export const siteConfig = {
         linkedin: "https://www.linkedin.com/in/arman-dwi-pangestu",
         instagram: "https://instagram.com/armandwi.pangestu",
         youtube: "https://youtube.com/@armandwipangestu",
-        personalSite: "https://devvnull.vercel.app/en"
+        personalSite: "https://devvnull.vercel.app/en",
+        email: "armandwi.pangestu7@gmail.com"
     }
 }
 
