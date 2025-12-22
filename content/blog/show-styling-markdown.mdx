@@ -230,6 +230,23 @@ const [name, setName] = useState("Taylor");
 
 **Styling**: The chars `<span>` receives a `data-chars-id="<id>"` attribute to style via CSS.
 
+## Inline Diff Highlighting
+
+You can mark lines as additions or deletions in any language using `// [!code ++]` or `// [!code --]`.
+
+```tsx
+function MyComponent() {
+  return (
+    <div>
+      <h1>Hello World</h1> //[!code --]
+      <h1>Hello Next.js</h1> //[!code ++]
+      <p>Highlighted Line</p> //[!code highlight]
+      <p>Focused Line</p> // [!code focus]
+    </div>
+  );
+}
+```
+
 ## Multiple Word Highlights
 
 You can highlight multiple different words with different styles.
