@@ -1,7 +1,7 @@
+/* eslint-disable react-hooks/static-components */
 import Image from "next/image"
 import * as runtime from "react/jsx-runtime"
 import { Callout } from "./callout"
-import { cn } from "@/lib/utils"
 
 const useMdxComponents = (code: string) => {
     const fn = new Function(code)
