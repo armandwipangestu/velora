@@ -86,12 +86,12 @@ export function Pre({
 
     return (
         <div className="my-6 overflow-hidden rounded-lg border bg-background">
-            <div className="flex items-center justify-between border-b bg-muted/50 px-4 py-2.5">
+            <div className="flex items-center justify-between border-b bg-[#f6f8fa] dark:bg-[#161a20] px-4 py-2.5">
                 <div className="flex items-center gap-4">
                     <div className="flex items-center gap-1.5">
-                        <div className="size-3 rounded-full bg-red-500/20 border border-red-500/50" />
-                        <div className="size-3 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
-                        <div className="size-3 rounded-full bg-green-500/20 border border-green-500/50" />
+                        <div className="size-3 rounded-full bg-red-400/60 border border-red-500/80" />
+                        <div className="size-3 rounded-full bg-yellow-400/60 border border-yellow-500/80" />
+                        <div className="size-3 rounded-full bg-green-400/60 border border-green-500/80" />
                     </div>
                     <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
                         {icon}
@@ -100,7 +100,7 @@ export function Pre({
                 </div>
                 <button
                     onClick={onCopy}
-                    className="flex items-center gap-2 rounded-md p-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                    className="flex items-center gap-2 rounded-md p-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-ring/40 hover:text-foreground"
                     aria-label="Copy code"
                 >
                     {isCopied ? (
