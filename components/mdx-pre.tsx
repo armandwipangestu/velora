@@ -1,10 +1,10 @@
 "use client"
 
-import { Check, Copy, FileCode, FileJson, FileType, Terminal } from "lucide-react"
+import { Check, Copy, FileCode } from "lucide-react"
 import { FaReact, FaCss3Alt, FaHtml5, FaMarkdown, FaFileCsv, FaJava, FaGolang, FaPython, FaDocker, FaRust, FaC, FaSwift, FaFlutter, FaLaravel } from "react-icons/fa6"
 import { RiJavascriptFill, RiPhpLine } from "react-icons/ri"
-import { BiLogoTypescript, BiSolidFileJson } from "react-icons/bi"
-import { BsFiletypeJson, BsFiletypeYml, BsFiletypeSql, BsFiletypeXml } from "react-icons/bs"
+import { BiLogoTypescript } from "react-icons/bi"
+import { BsFiletypeYml, BsFiletypeSql, BsFiletypeXml } from "react-icons/bs"
 import { VscJson } from "react-icons/vsc"
 import { SiGnubash, SiMdx, SiVim, SiZsh, SiLua, SiKotlin } from "react-icons/si"
 import { DiRuby } from "react-icons/di"
