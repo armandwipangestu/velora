@@ -11,7 +11,7 @@ published: true
 
 Draw attention to a particular line of code. This should be highlight the line number `4`.
 
-```tsx {4} showLineNumbers
+```tsx title="example.tsx" {4} showLineNumbers
 import { useFloating } from "@floating-ui/react";
 
 function MyComponent() {
@@ -156,9 +156,15 @@ npm run build
 ```
 
 ```sh
-$ git clone https://github.com/user/repo.git
-$ cd repo
-$ npm install
+git clone https://github.com/user/repo.git
+cd repo
+npm install
+```
+
+```zsh
+git clone https://github.com/user/repo.git
+cd repo
+npm install
 ```
 
 ## JSON with Highlighting
@@ -191,6 +197,12 @@ $ npm install
 }
 ```
 
+## JavaScript Example
+
+```js
+const x = 10;
+```
+
 ## SQL Query
 
 ```sql
@@ -219,6 +231,185 @@ services:
       - postgres_data:/var/lib/postgresql/data
 ```
 
+## Docker Configuration
+
+```dockerfile
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm", "run", "dev"]
+```
+
+## CSV Example
+
+```csv
+name,age,city
+John,30,New York
+Jane,25,Los Angeles
+```
+
+## SQL Query
+
+```sql
+SELECT users.name, orders.total
+FROM users
+INNER JOIN orders ON users.id = orders.user_id
+WHERE orders.created_at > '2024-01-01'
+ORDER BY orders.total DESC
+LIMIT 10;
+```
+
+## Java Example
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+```
+
+## Golang Example
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World!")
+}
+```
+
+## Python Example
+
+```py
+def hello_world():
+    print("Hello, World!")
+```
+
+## Ruby Example
+
+```rb
+def hello_world
+    puts "Hello, World!"
+end
+```
+
+## Vimscript Example
+
+```vim
+function Hello()
+    echo "Hello, World!"
+endfunction
+```
+
+## Lua Example
+
+```lua
+function hello_world()
+    print("Hello, World!")
+end
+```
+
+## Rust Example
+
+```rust
+fn main() {
+    println!("Hello, World!");
+}
+```
+
+## C# Example
+
+```cs
+public class Main {
+    public static void Main() {
+        Console.WriteLine("Hello, World!");
+    }
+}
+```
+
+## C++ Example
+
+```cpp
+#include <iostream>
+
+int main() {
+    std::cout << "Hello, World!" << std::endl;
+    return 0;
+}
+```
+
+## C Example
+
+```c
+#include <stdio.h>
+
+int main() {
+    printf("Hello, World!\n");
+    return 0;
+}
+```
+
+## Swift Example
+
+```swift
+import Swift
+
+print("Hello, World!")
+```
+
+## Flutter Example
+
+```dart
+void main() {
+    print("Hello, World!");
+}
+```
+
+## XML Example
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <element>Hello, World!</element>
+</root>
+```
+
+## PHP Example
+
+```php
+<?php
+    echo "Hello, World!";
+?>
+```
+
+## Blade Example
+
+```blade
+@php
+    echo "Hello, World!";
+@endphp
+```
+
+## Kotlin Example
+
+```kotlin
+fun main() {
+    println("Hello, World!")
+}
+```
+
 ## Group Highlighted Chars By Id
 
 Place an id after # after the chars. This allows you to color chars differently based on their id.
@@ -230,7 +421,7 @@ const [name, setName] = useState("Taylor");
 
 **Styling**: The chars `<span>` receives a `data-chars-id="<id>"` attribute to style via CSS.
 
-## Inline Diff Highlighting
+## Inline Diff Highlighting (Not Work: Under Development)
 
 You can mark lines as additions or deletions in any language using `// [!code ++]` or `// [!code --]`.
 
@@ -251,7 +442,7 @@ function MyComponent() {
 
 You can highlight multiple different words with different styles.
 
-```tsx /useState/#v /useEffect/#s /React/#i
+```tsx showLineNumbers /useState/#v /useEffect/#s /React/#i
 import React, { useState, useEffect } from 'react';
 
 function Counter() {
@@ -269,30 +460,184 @@ function Counter() {
 
 You can use inline code with specific language: `const x = 10{:ts}` or `SELECT * FROM users{:sql}`
 
+## Nested Code Block
+
+````md title="example.ts" showLineNumbers {1,13}
+```ts
+interface User {
+    name: string;
+    age: number;
+}
+
+const user: User = {
+    name: "John Doe",
+    age: 30,
+}
+
+console.log(user);
+```
+````
+
+The rendered result looks like this:
+
+```ts
+interface User {
+    name: string;
+    age: number;
+}
+
+const user: User = {
+    name: "John Doe",
+    age: 30,
+}
+
+console.log(user);
+```
+
 # Callout
 
-<Callout type="note">
+## Callout Type: Note with descriptionColor `normal`
+
+<Callout type="note" descriptionColor="normal">
     Hello I am a callout note
 </Callout>
+
+## Callout Type: Tip
 
 <Callout type="tip">
     Hello I am a callout tip
 </Callout>
 
+## Callout Type: Important
+
 <Callout type="important">
     Hello I am a callout important
 </Callout>
+
+## Callout Type: Warning
 
 <Callout type="warning">
     Hello I am a callout warning
 </Callout>
 
+## Callout Type: Caution
+
 <Callout type="caution">
     Hello I am a callout caution
 </Callout>
 
-# Hello World
+## Callout Type: Note with Title
 
-Welcome to my blog `inline code`
+<Callout type="note" title="Example Title">
+    Hello I am a callout note with title
+</Callout>
 
-### Header 3
+## Callout Type: Tip with Inline Code
+
+<Callout type="tip">
+    Hello I am a callout tip with inline code `const x = 10{:ts}`
+</Callout>
+
+## Callout Type: Important with Code Block
+
+<Callout type="important">
+    Hello I am a callout important with code block
+    ```ts showLineNumbers /Hello World/
+    console.log("Hello World");
+    ```
+</Callout>
+
+# Markdown Syntax Guide
+
+## Headings
+
+# H1 Heading
+## H2 Heading
+### H3 Heading
+#### H4 Heading
+##### H5 Heading
+###### H6 Heading
+
+## Basic Formatting
+
+### Bold Text
+
+**Bold Text** and __Bold Text__
+
+### Italic Text
+
+*Italic Text* and _Italic Text_
+
+### Bold and Italic Text
+
+***Bold and Italic***
+
+### Strikethrough
+
+~~Strikethrough~~
+
+### Inline Code
+
+`Inline Code`
+
+## Blockquotes
+
+> This is a blockquote.
+> It can span multiple lines.
+
+> Blockquotes can be nested...
+>> ...by using additional greater-than signs right next to each other...
+>>> ...or with spaces between arrows.
+
+Here an example blockquote with code block:
+
+> **NOTE**: Here is a note
+> 
+> ```tsx
+> const x = 10;
+> ```
+
+## Lists
+
+### Unordered List
+
+- Item 1
+- Item 2
+  - Subitem 2.1
+  - Subitem 2.2
+    - Sub-subitem 2.2.1
+- Item 3
+
+### Ordered List
+
+1. First Item
+2. Second Item
+   1. Subitem 2.1
+   2. Subitem 2.2
+3. Third Item
+
+### Task List
+
+- [x] Completed task
+- [ ] Incomplete task
+- [ ] Another incomplete task
+
+## Tables
+
+| Header 1 | Header 2 | Header 3 | Header 4 | Header 5 |
+| :--- | :---: | ---: | ---: | ---: |
+| Left-aligned | Center-aligned | Right-aligned | Right-aligned | Right-aligned |
+| Row 1, Col 1 | Row 1, Col 2 | Row 1, Col 3 | Row 1, Col 4 | Row 1, Col 5 |
+| Row 2, Col 1 | Row 2, Col 2 | Row 2, Col 3 | Row 2, Col 4 | Row 2, Col 5 |
+
+## Links and Images
+
+[External Link](https://example.com)
+[Internal Link](/blog)
+
+![Placeholder Image](https://placehold.co/600x400)
+
+## Horizontal Rule
+
+---
+
