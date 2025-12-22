@@ -4,6 +4,7 @@ import rehypeSlug from "rehype-slug"
 import rehypePrettyCode from "rehype-pretty-code"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import { transformerNotationDiff, transformerNotationHighlight, transformerNotationFocus, transformerNotationErrorLevel } from "@shikijs/transformers"
+import type { Root, Element } from "hast"
 
 const computedFields = <T extends { slug: string }>(data: T) => ({
     ...data,
@@ -23,15 +24,24 @@ const posts = defineCollection({
     }).transform(computedFields)
 })
 
-const rehypePreMeta = () => (tree: any) => {
-    visit(tree, "element", (node: any) => {
+const rehypePreMeta = () => (tree: Root) => {
+    visit(tree, "element", (node: Element) => {
         // Look for the code element inside the pre
         if (node.tagName !== "pre") return
-        const codeEl = node.children.find((child: any) => child.tagName === "code")
+
+        // Find the code element
+        const codeEl = node.children.find(
+            (child): child is Element => child.type === "element" && child.tagName === "code"
+        )
         if (!codeEl) return
 
-        // 1. Get the raw metadata string
-        const meta = codeEl.data?.meta || codeEl.properties?.meta || ""
+        // Initialize properties if they don't exist
+        node.properties = node.properties || {}
+
+        // 1. Get metadata
+        // We use type casting here because 'data' and 'meta' aren't always in the base HAST spec
+        const codeData = codeEl.data as { meta?: string } | undefined
+        const meta = codeData?.meta || (codeEl.properties?.meta as string) || ""
         
         // 2. Extract title if it exists
         const titleMatch = meta.match(/title="([^"]*)"/)
