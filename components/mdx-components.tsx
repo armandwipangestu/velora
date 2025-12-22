@@ -13,6 +13,13 @@ const components = {
     Image,
     Callout,
     pre: Pre,
+    // Tell React to render nothing for the extra title tag
+    figcaption: (props: Record<string, undefined>) => {
+        if (props["data-rehype-pretty-code-title"] !== undefined) {
+            return null
+        }
+        return <figcaption {...props} />
+    }
     /**
      * If you want to customize all of the components it rendered by mdx (not using prose dark:prose-invert on container MDXContent in [...slug]/page.tsx). You can define all of style like h1, h2, etc in this. For reference you can see the https://github.com/shadcn-ui/taxonomy/blob/main/components/mdx-components.tsx
      */
