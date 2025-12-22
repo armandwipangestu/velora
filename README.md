@@ -59,6 +59,9 @@ docker run --rm -p 3000:3000 ghcr.io/armandwipangestu/nextjs-velite-blog-templat
 The following are the features I want to achieve or are under development:
 
 - [ ] Rehype transformers for diff notation
+- [ ] Code block group components
+- [ ] Copy button in code block
+- [ ] Title bar & language icon in code block
 
 See the [open issues](https://github.com/armandwipangestu/nextjs-velite-blog-template/issues) for a list of proposed features (and known issues).
 
