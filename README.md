@@ -19,6 +19,11 @@
 
 This repository is a simple implementaion of a markdown static blog, a demo can be seen [here](https://nextjs-velite-blog-template-mu.vercel.app/).
 
+<picture>
+  <source srcset="https://velite.js.org/assets/flow-dark.svg" media="(prefers-color-scheme: dark)">
+  <img src="https://velite.js.org/assets/flow.svg" alt="Velite Workflow" title="Velite Workflow">
+</picture>
+
 ## Features
 
 - MDX Components
@@ -48,6 +53,14 @@ bun run dev
 ```bash
 docker run --rm -p 3000:3000 ghcr.io/armandwipangestu/nextjs-velite-blog-template:latest
 ```
+
+## Roadmap
+
+The following are the features I want to achieve or are under development:
+
+- [ ] Rehype transformers for diff notation
+
+See the [open issues](https://github.com/armandwipangestu/nextjs-velite-blog-template/issues) for a list of proposed features (and known issues).
 
 ## Credis
 

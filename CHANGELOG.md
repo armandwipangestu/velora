@@ -1,4 +1,26 @@
-# [1.2.0](https://github.com/armandwipangestu/nextjs-velite-blog-template/compare/v1.1.0...v1.2.0) (2025-12-22)
+# [1.2.0-rc.2](https://github.com/armandwipangestu/nextjs-velite-blog-template/compare/v1.2.0-rc.1...v1.2.0-rc.2) (2025-12-22)
+
+
+### Bug Fixes
+
+* adjust some margin ([8e6af47](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/8e6af471a0b6c75f0b1f3f48eadbaa144f7fcd23))
+* **ci:** build velite ([edc4cde](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/edc4cde61002ac4ea7d5b1ba4e308a72ec81746e))
+* **ci:** build velite ([8e3aaca](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/8e3aaca62161dd032ce40bd1fa9bb129e21bd3a6))
+* **ci:** build velite ([272df86](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/272df86565b87e1154d2c360daa0ac57dec31a0a))
+* code block line highlighting ([2ef784d](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/2ef784d3140b9bf28fff8905976013c0ba5c0e97))
+* inline code highlighting (remove backticks) ([62234eb](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/62234ebd40ab97f6489657a55ff1427f44ae8823))
+* pre bacgkround from prose ([f499e33](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/f499e33dcaf1e2e44829376300a0c9f98549b32a))
+* word highlighting background ([7d78ff6](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/7d78ff60de375dfcc545d7f4138f5e671ba52e15))
+
+
+### Features
+
+* add group highlighted chars by id ([67813a0](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/67813a0f031a2ec6c899914e33f8bdf835f5edfd))
+* add light and dark theme for code block ([92ddb57](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/92ddb571ab6522687ea0e1976ae0bad2e73ccfaa))
+* add shiki transformer for diff notation and stuff (still bug) ([406353b](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/406353be3ec8d309cf4feb7bb270b7143d60ed7c))
+* **components:** add some style callout ([c624f90](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/c624f9093bbab26c1673a7c39d53cff8c23fdd92))
+
+# [1.2.0-rc.1](https://github.com/armandwipangestu/nextjs-velite-blog-template/compare/v1.1.0...v1.2.0-rc.1) (2025-12-22)
 
 
 ### Features

@@ -2,6 +2,7 @@ import { defineConfig, defineCollection, s } from "velite"
 import rehypeSlug from "rehype-slug"
 import rehypePrettyCode from "rehype-pretty-code"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import { transformerNotationDiff, transformerNotationHighlight, transformerNotationFocus, transformerNotationErrorLevel } from "@shikijs/transformers"
 
 const computedFields = <T extends { slug: string }>(data: T) => ({
     ...data,
@@ -38,7 +39,19 @@ export default defineConfig({
             rehypeSlug, 
             [rehypePrettyCode, 
                 { 
-                    theme: "github-dark" 
+                    theme: {
+                        light: "github-light",
+                        dark: "github-dark"
+                    },
+                    defaultLang: {
+                        block: "plaintext"
+                    },
+                    transformers: [
+                        transformerNotationDiff({ matchAlgorithm: 'v3' }),
+                        transformerNotationHighlight({ matchAlgorithm: 'v3' }),
+                        transformerNotationFocus({ matchAlgorithm: 'v3' }),
+                        transformerNotationErrorLevel({ matchAlgorithm: 'v3' }),
+                    ],
                 }
             ],
             [rehypeAutolinkHeadings, 
