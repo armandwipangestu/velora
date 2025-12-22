@@ -467,14 +467,19 @@ const [name, setName] = useState("Taylor");
 
 You can mark lines as additions or deletions in any language using `// [!code ++]` or `// [!code --]`.
 
-```tsx
+```tsx 
 function MyComponent() {
   return (
     <div>
-      <h1>Hello World</h1> //[!code --]
-      <h1>Hello Next.js</h1> //[!code ++]
-      <p>Highlighted Line</p> //[!code highlight]
-      <p>Focused Line</p> // [!code focus]
+      //[!code --]
+      <h1>Hello World</h1>
+      <p>Unchanged Line</p>
+
+      //[!code ++]
+      <h1>Hello Next.js</h1>
+
+      <p>Highlighted Line</p>
+      <p>Focused Line</p>
     </div>
   );
 }
