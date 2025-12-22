@@ -76,12 +76,38 @@ export function Pre({
         if (!preRef.current) return
 
         const code = preRef.current.querySelector("code")?.innerText || ""
-        await navigator.clipboard.writeText(code)
-        setIsCopied(true)
 
-        setTimeout(() => {
-            setIsCopied(false)
-        }, 2000)
+        try {
+            if (navigator?.clipboard?.writeText) {
+                await navigator.clipboard.writeText(code)
+                setIsCopied(true)
+            } else {
+                // Fallback for mobile/non-secure contexts
+                const textArea = document.createElement("textarea")
+                textArea.value = code
+                textArea.style.position = "fixed"
+                textArea.style.left = "-9999px"
+                textArea.style.top = "0"
+                document.body.appendChild(textArea)
+                textArea.focus()
+                textArea.select()
+
+                try {
+                    document.execCommand('copy')
+                    setIsCopied(true)
+                } catch (err) {
+                    console.error('Fallback: Oops, unable to copy', err)
+                }
+
+                document.body.removeChild(textArea)
+            }
+
+            setTimeout(() => {
+                setIsCopied(false)
+            }, 2000)
+        } catch (err) {
+            console.error('Failed to copy text: ', err)
+        }
     }
 
     return (
