@@ -1,7 +1,7 @@
 "use client"
 
 import { Check, Copy, FileCode } from "lucide-react"
-import { FaReact, FaCss3Alt, FaHtml5, FaMarkdown, FaFileCsv, FaJava, FaGolang, FaPython, FaDocker, FaRust, FaC, FaSwift, FaFlutter, FaLaravel } from "react-icons/fa6"
+import { FaReact, FaCss3Alt, FaHtml5, FaMarkdown, FaFileCsv, FaJava, FaGolang, FaPython, FaDocker, FaRust, FaC, FaSwift, FaLaravel, FaDartLang, FaFlutter } from "react-icons/fa6"
 import { RiJavascriptFill, RiPhpLine } from "react-icons/ri"
 import { BiLogoTypescript } from "react-icons/bi"
 import { BsFiletypeYml, BsFiletypeSql, BsFiletypeXml } from "react-icons/bs"
@@ -51,11 +51,13 @@ const languageIcons: Record<string, React.ReactNode> = {
     cpp: <PiFileCppDuotone className="size-4" />,
     c: <FaC className="size-4" />,
     swift: <FaSwift className="size-4" />,
+    dart: <FaDartLang className="size-4" />,
     flutter: <FaFlutter className="size-4" />,
     xml: <BsFiletypeXml className="size-4" />,
     xaml: <BsFiletypeXml className="size-4" />,
     php: <RiPhpLine className="size-4" />,
     blade: <FaLaravel className="size-4" />,
+    laravel: <FaLaravel className="size-4" />,
     kotlin: <SiKotlin className="size-4" />,
     kt: <SiKotlin className="size-4" />,
 }
@@ -63,14 +65,43 @@ const languageIcons: Record<string, React.ReactNode> = {
 export function Pre({
     children,
     className,
-    title,
+    title, // This comes from MDX props if passed like <Pre title="foo" />
     ...props
 }: React.HTMLAttributes<HTMLPreElement> & { title?: string }) {
     const [isCopied, setIsCopied] = useState(false)
     const preRef = useRef<HTMLPreElement>(null)
 
+    // 1. Check props for data-title (passed from rehype)
+    const dataTitle = (props as Record<string, unknown>)["data-title"] as string
+    const dataIcon = (props as Record<string, unknown>)["data-icon"] as string
+    const dataFont = (props as Record<string, unknown>)["data-font"] as string
+    const dataLigatures = (props as Record<string, unknown>)["data-ligatures"] as string
     const language = (props as Record<string, unknown>)["data-language"] as string || "text"
-    const icon = languageIcons[language] || <FileCode className="size-4" />
+
+    // 2. Determine the display label:
+    // Priority: Prop title > data-title attribute from rehype > language extension
+    const displayTitle = title || dataTitle || language
+
+    // 3. Determine Icon
+    // Priority: Custom icon from meta > language-based icon > default FileCode
+    const icon = (dataIcon && languageIcons[dataIcon])
+        || languageIcons[language]
+        || <FileCode className="size-4" />
+
+    // 4. Determine Font
+    // Priority: Custom font from meta > default Fira Code
+    // Logic: If dataFont exists, use it. 
+    // We add !important via the style object if needed, 
+    // but usually React inline styles win over CSS files.
+    const style: React.CSSProperties = {
+        ...props.style,
+        fontFamily: dataFont ? `"${dataFont}", monospace` : undefined,
+        // If fontLigatures=false is explicitly passed, we force them off via inline style
+        ...(dataLigatures === "false" && {
+            fontVariantLigatures: "none",
+            fontFeatureSettings: '"liga" 0, "calt" 0',
+        })
+    };
 
     const onCopy = async () => {
         if (!preRef.current) return
@@ -119,9 +150,10 @@ export function Pre({
                         <div className="size-3 rounded-full bg-yellow-400/60 border border-yellow-500/80" />
                         <div className="size-3 rounded-full bg-green-400/60 border border-green-500/80" />
                     </div>
+                    {/* Icon and Title/Extension */}
                     <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
                         {icon}
-                        <span>{title || language}</span>
+                        <span className="truncate">{displayTitle}</span>
                     </div>
                 </div>
                 <button
@@ -144,6 +176,7 @@ export function Pre({
             </div>
             <pre
                 ref={preRef}
+                style={style}
                 className={cn("overflow-x-auto py-4 !mt-0 !mb-0 rounded-t-none rounded-b-none", className)}
                 {...props}
             >

@@ -1,19 +1,23 @@
-# [1.4.0](https://github.com/armandwipangestu/nextjs-velite-blog-template/compare/v1.3.0...v1.4.0) (2025-12-22)
+# [1.4.0-rc.2](https://github.com/armandwipangestu/nextjs-velite-blog-template/compare/v1.4.0-rc.1...v1.4.0-rc.2) (2025-12-22)
 
 
 ### Bug Fixes
 
-* adjust some color title bar code block ([cd55eef](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/cd55eef7bb0ddaf2b7618914c5cd85aacb22b31a))
-* copy button in title bar code block when running in mobile device ([0e824e1](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/0e824e1cf46c80e2face7ecde4c01a022014fd05))
-* gap top, bottom between code block  and tab ([b246b2c](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/b246b2ca5a7caf1fa79a7b49af61bd43eb0b4042))
-* **lint:** remove any data type to Record<string, unknown> ([9fe5484](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/9fe54845971b7f26ceb17b7ac9dbd6c702907c00))
-* **lint:** remove un-used variable ([9038a27](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/9038a27ba8cc4faf03fa7cccf07116f5be19a6f5))
+* adjust flutter icon using dart ([e99843b](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/e99843b81b7ac21a646e6750510db0c35dce68ea))
+* callout with code block inside to use all width of container ([6be51bf](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/6be51bf733ec2f74671f93ed2c251c638b0c4da9))
+* **ci:** add HAST spec to change any data type ([c06f8bc](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/c06f8bcf30becfba403be88869c51663137fad59))
+* **components:** remove redundant render for the title in pre code ([828505d](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/828505d9eb3db48a902e97c0f69d3ff87833671f))
 
 
 ### Features
 
-* add some style for callout descriptionColor ([3ceaf49](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/3ceaf493f5e5ebfa5f8f2258fae97470fa2d7382))
-* add title bar (language icon, copy button, etc) in code block ([17073ec](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/17073ecd9e75e42e1ee8b82ebeaab70e4b5dcbb1))
+* add background color to inline code without specific language ([8ab755a](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/8ab755afa0e50d34b47aec2a7b813cb235b07f63))
+* add umami for web analytics ([989defa](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/989defa0b6db00e63b3a8d70a7fe6d12cf75910b))
+* add vercel analytics ([9670a36](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/9670a362f45c0e61a4efe976aa5967ed3035c5d6))
+* **components:** add custom font to pre code content ([476abdd](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/476abdd112993c5a40b9369bb6415c90dc5ba1f1))
+* **components:** add custom language icon by passing icon variable in mdx ([f1b20ef](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/f1b20ef65115d192201d60db46c21ce16ed395a4))
+* **components:** add fontLigatures option to code block ([47f88e0](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/47f88e03e900f9c123da32e5a31c1a023df4d7c7))
+* **components:** move title text in pre code render inside titlebar beside of the icon ([fb403b8](https://github.com/armandwipangestu/nextjs-velite-blog-template/commit/fb403b83bb667df846c275215458b216057932e8))
 
 # [1.4.0-rc.1](https://github.com/armandwipangestu/nextjs-velite-blog-template/compare/v1.3.0...v1.4.0-rc.1) (2025-12-22)
 

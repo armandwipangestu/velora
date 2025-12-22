@@ -64,14 +64,19 @@ The following are the features I want to achieve or are under development:
 - [ ✅ ] Adjust background line and word highlight in code block
 - [ ✅ ] Add multiple word highlighting based on char ids `#v` (variable/value) , `#s` (state/stateful) , `#i` (import/identifier)
 - [ ✅ ] Add title bar (language icon, copy button, etc) in code block
-- [ ] Make some logic to detect language from title in code block (e.g. if title has some name/keyword `blade`, show the icon using `Laravel` icon)
+- [ ✅ ] Make some logic to override language icon using `icon="..."` meta string
+- [ ✅ ] Custom font for code block using `font="..."` meta string
+- [ ✅ ] Disable ligature for code block using `fontLigatures=false` meta string
+- [ ✅ ] Inline code (without specific language) with custom background color
+- [ ✅ ] Add umami analytics
+- [ ✅ ] Add vercel analytics
+- [ ] Add giscus components for discussion section
 - [ ] Rehype transformers for diff notation
 - [ ] Code block group components
-- [ ] Copy button in code block
 
 See the [open issues](https://github.com/armandwipangestu/nextjs-velite-blog-template/issues) for a list of proposed features (and known issues).
 
-## Credis
+## Credits
 
 Much of the design of this project is taken from shadcn in his projects, such as [shadcn/ui](https://ui.shadcn.com/) and [Taxonomy](https://tx.shadcn.com/).
 

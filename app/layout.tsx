@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { SiteHeader } from "@/components/site-header";
@@ -48,6 +50,13 @@ export default function RootLayout({
       <body
         className={cn("min-h-screen bg-background font-sans antialiased", `${geistSans.variable} ${geistMono.variable}`)}
       >
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="7de589ea-cb8c-49e0-95e0-f08448a8e272"
+          strategy="afterInteractive"
+        />
+
         <Providers>
           <div className="relative flex min-h-dvh flex-col bg-background">
             <SiteHeader />
@@ -57,6 +66,8 @@ export default function RootLayout({
             <SiteFooter />
           </div>
         </Providers>
+
+        <Analytics />
       </body>
     </html>
   );
