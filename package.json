@@ -8,7 +8,7 @@
     "dev:next": "next dev",
     "build:next": "next build",
     "dev": "run-p dev:*",
-    "build": "run-s build:*",
+    "build": "bun run build:content && bun run build:next",
     "start": "next start",
     "lint": "eslint"
   },
