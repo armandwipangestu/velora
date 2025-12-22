@@ -67,7 +67,7 @@ The following are the features I want to achieve or are under development:
 - [ ✅ ] Make some logic to override language icon using `icon="..."` meta string
 - [ ✅ ] Custom font for code block using `font="..."` meta string
 - [ ✅ ] Disable ligature for code block using `fontLigatures=false` meta string
-- [ ] Inline code (without specific language) with custom background color
+- [ ✅ ] Inline code (without specific language) with custom background color
 - [ ] Add giscus components for discussion section
 - [ ] Rehype transformers for diff notation
 - [ ] Code block group components
