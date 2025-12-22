@@ -57,7 +57,7 @@ const languageIcons: Record<string, React.ReactNode> = {
     php: <RiPhpLine className="size-4" />,
     blade: <FaLaravel className="size-4" />,
     kotlin: <SiKotlin className="size-4" />,
-    kt: <SiKotlin className="size-4" />,    
+    kt: <SiKotlin className="size-4" />,
 }
 
 export function Pre({
@@ -118,7 +118,7 @@ export function Pre({
             </div>
             <pre
                 ref={preRef}
-                className={cn("overflow-x-auto py-4", className)}
+                className={cn("overflow-x-auto py-4 !mt-0 !mb-0 rounded-t-none rounded-b-none", className)}
                 {...props}
             >
                 {children}
