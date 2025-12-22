@@ -219,6 +219,17 @@ services:
       - postgres_data:/var/lib/postgresql/data
 ```
 
+## Group Highlighted Chars By Id
+
+Place an id after # after the chars. This allows you to color chars differently based on their id.
+
+```js showLineNumbers /age/#v /name/#v /setAge/#s /setName/#s /50/#i /"Taylor"/#i
+const [age, setAge] = useState(50);
+const [name, setName] = useState("Taylor");
+```
+
+**Styling**: The chars `<span>` receives a `data-chars-id="<id>"` attribute to style via CSS.
+
 ## Multiple Word Highlights
 
 You can highlight multiple different words with different styles.

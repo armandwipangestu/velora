@@ -92,6 +92,51 @@ html:not(.dark) [data-rehype-pretty-code-figure] [data-highlighted-chars] {
   @apply border-b-2 p-1 shadow-none;
 }
 
+/* Different colors for different char IDs */
+/* #v - variable/value - blue */
+html:not(.dark) [data-rehype-pretty-code-figure] [data-chars-id="v"] {
+  background-color: rgba(59, 130, 246, 0.3) !important;
+  border-bottom-color: rgba(59, 130, 246, 0.8);
+}
+
+/* #s - state/stateful - green */
+html:not(.dark) [data-rehype-pretty-code-figure] [data-chars-id="s"] {
+  background-color: rgba(34, 197, 94, 0.3) !important;
+  border-bottom-color: rgba(34, 197, 94, 0.8);
+}
+
+/* #i - import/identifier - purple */
+html:not(.dark) [data-rehype-pretty-code-figure] [data-chars-id="i"] {
+  background-color: rgba(168, 85, 247, 0.3) !important;
+  border-bottom-color: rgba(168, 85, 247, 0.8);
+}
+
+/* Make spans inside data-chars-id transparent */
+html:not(.dark) [data-rehype-pretty-code-figure] [data-chars-id] span {
+  background-color: transparent !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-rehype-pretty-code-figure] [data-chars-id="v"] {
+    background-color: rgba(59, 130, 246, 0.3) !important;
+    border-bottom-color: rgba(59, 130, 246, 0.8);
+  }
+
+  [data-rehype-pretty-code-figure] [data-chars-id="s"] {
+    background-color: rgba(34, 197, 94, 0.3) !important;
+    border-bottom-color: rgba(34, 197, 94, 0.8);
+  }
+
+  [data-rehype-pretty-code-figure] [data-chars-id="i"] {
+    background-color: rgba(168, 85, 247, 0.3) !important;
+    border-bottom-color: rgba(168, 85, 247, 0.8);
+  }
+
+  [data-rehype-pretty-code-figure] [data-chars-id] span {
+    background-color: transparent !important;
+  }
+}
+
 .subheading-anchor {
   @apply no-underline hover:underline;
 }
