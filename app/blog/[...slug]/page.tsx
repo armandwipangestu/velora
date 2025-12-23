@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import "@/styles/mdx.css"
 import { Metadata } from "next";
 import { siteConfig } from "@/config/site";
+import Giscus from "@/components/giscus";
 
 interface PostPageProps {
     params: Promise<{
@@ -89,5 +90,7 @@ export default async function PostPage({ params }: PostPageProps) {
         <hr className="my-4" />
 
         <MDXContent code={post.body} />
+
+        <Giscus />
     </article>
 }

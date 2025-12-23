@@ -61,10 +61,16 @@ function MyComponent() {
     It must be showing an `php` icon, but because i passing `icon="laravel"` it will show laravel icon.
 </Callout>
 
-```php title="example.blade.php" icon="laravel"
+```php title="example.blade.php" icon="laravel" iconColor=true
 @php
     echo "Hello, World!";
 @endphp
+```
+
+```ts showLineNumbers {2-4} title="example.tsx" /function/ caption="is a caption"
+export default function Home(props) {
+  return <></>
+}
 ```
 
 ## Custom Font
@@ -463,21 +469,47 @@ const [name, setName] = useState("Taylor");
 
 **Styling**: The chars `<span>` receives a `data-chars-id="<id>"` attribute to style via CSS.
 
-## Inline Diff Highlighting (Not Work: Under Development)
+## Inline Diff Highlighting
 
 You can mark lines as additions or deletions in any language using `// [!code ++]` or `// [!code --]`.
 
-```tsx
+```tsx showLineNumbers
 function MyComponent() {
   return (
     <div>
-      <h1>Hello World</h1> //[!code --]
-      <h1>Hello Next.js</h1> //[!code ++]
-      <p>Highlighted Line</p> //[!code highlight]
-      <p>Focused Line</p> // [!code focus]
+      //[!code --:3]
+      <h1>Hello World</h1>
+      <p>Unchanged Line</p>
+
+      //[!code ++]
+      <h1>Hello Next.js</h1>
+
+      <p>Highlighted Line</p>
+      <p>Focused Line</p>
     </div>
   );
 }
+```
+
+## Focused Lines
+
+```ts showLineNumbers
+console.log("not Focused")
+// [!code focus:2]
+// [!code --]
+console.log("focused 1")
+// [!code ++]
+console.log("focused 2")
+console.log("not focused")
+```
+
+## Error and Warning Lines
+
+```ts
+console.log("Normal")
+//[!code --]
+console.error("Error") //[!code error]
+console.warning("Warning") //[!code warning]
 ```
 
 ## Multiple Word Highlights
