@@ -23,6 +23,11 @@
   --mdx-chars-s-border: rgba(34, 197, 94, 0.8);
   --mdx-chars-i-bg: rgba(168, 85, 247, 0.3);
   --mdx-chars-i-border: rgba(168, 85, 247, 0.8);
+
+  --mdx-error-bg: rgba(239, 68, 68, 0.15);
+  --mdx-error-border: theme('colors.red.500');
+  --mdx-warning-bg: rgba(245, 158, 11, 0.15);
+  --mdx-warning-border: theme('colors.amber.500');
 }
 
 @media (prefers-color-scheme: dark) {
@@ -37,6 +42,9 @@
     --mdx-highlight-line-bg: rgba(200, 200, 255, 0.15);
     
     --mdx-highlight-chars-bg: rgba(110, 110, 140, 0.4);
+
+    --mdx-error-bg: rgba(239, 68, 68, 0.2);
+    --mdx-warning-bg: rgba(245, 158, 11, 0.2);
   }
 }
 
@@ -51,6 +59,9 @@ html.dark {
   --mdx-highlight-line-bg: rgba(200, 200, 255, 0.15);
   
   --mdx-highlight-chars-bg: rgba(110, 110, 140, 0.4);
+
+  --mdx-error-bg: rgba(239, 68, 68, 0.2);
+  --mdx-warning-bg: rgba(245, 158, 11, 0.2);
 }
 
 /* --- 2. Base Typography & Fonts --- */
@@ -153,6 +164,22 @@ html.dark {
 }
 
 [data-rehype-pretty-code-figure] [data-highlighted-line] span {
+  background-color: transparent !important;
+}
+
+/* Error & Warning Highlights */
+[data-rehype-pretty-code-figure] [data-line].highlighted.error {
+  background-color: var(--mdx-error-bg) !important;
+  border-left-color: var(--mdx-error-border);
+}
+
+[data-rehype-pretty-code-figure] [data-line].highlighted.warning {
+  background-color: var(--mdx-warning-bg) !important;
+  border-left-color: var(--mdx-warning-border);
+}
+
+[data-rehype-pretty-code-figure] [data-line].highlighted.error span,
+[data-rehype-pretty-code-figure] [data-line].highlighted.warning span {
   background-color: transparent !important;
 }
 
