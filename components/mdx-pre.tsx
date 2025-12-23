@@ -275,11 +275,12 @@ export function Pre({
             >
                 {children}
             </pre>
-            {dataCaption && (
+            {dataCaption && !isInCodeGroup && (
                 <div className="border-t bg-[#f6f8fa]/50 dark:bg-[#161a20]/50 px-4 py-2 text-xs text-muted-foreground italic">
                     {dataCaption}
                 </div>
             )}
+
         </div>
     )
 }

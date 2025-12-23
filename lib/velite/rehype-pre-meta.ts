@@ -59,9 +59,50 @@ export const rehypePostMeta = () => (tree: Root) => {
     visit(tree, "element", (node: Element, index, parent) => {
         if (node.tagName !== "pre") return
 
-        // If parent is a figure (from rehype-pretty-code), copy properties to it
-        if (parent && parent.type === "element" && parent.tagName === "figure") {
-            parent.properties = { ...parent.properties, ...node.properties }
+        const codeEl = node.children.find(
+            (child): child is Element => child.type === "element" && child.tagName === "code"
+        )
+        if (!codeEl) return
+
+        node.properties = node.properties || {}
+
+        // Mapping of meta keys to data attributes
+        const metaMap: Record<string, string> = {
+            title: "data-title",
+            icon: "data-icon",
+            font: "data-font",
+            fontLigatures: "data-ligatures",
+            iconColor: "data-icon-color",
+            caption: "data-caption"
+        }
+
+        // Restore attributes from code element to pre and figure
+        // rehype-pretty-code preserves data- attributes on the code element
+        Object.entries(metaMap).forEach(([metaKey, dataAttr]) => {
+            if (codeEl.properties?.[dataAttr] !== undefined) {
+                node.properties![dataAttr] = codeEl.properties[dataAttr]
+                
+                // If parent is a figure (from rehype-pretty-code), copy properties to it
+                if (parent && parent.type === "element" && parent.tagName === "figure") {
+                    parent.properties = parent.properties || {}
+                    parent.properties[dataAttr] = codeEl.properties[dataAttr]
+                }
+            }
+        })
+
+        // Also ensure data-language is synced to figure if present
+        const language = node.properties["data-language"] || codeEl.properties?.["data-language"]
+        if (language && parent && parent.type === "element" && parent.tagName === "figure") {
+            parent.properties = parent.properties || {}
+            parent.properties["data-language"] = language
+        }
+
+        // Set defaults for specific attributes if still not provided
+        if (node.properties["data-ligatures"] === undefined) {
+            node.properties["data-ligatures"] = "true"
+        }
+        if (node.properties["data-icon-color"] === undefined) {
+            node.properties["data-icon-color"] = "true"
         }
     })
 
@@ -75,4 +116,5 @@ export const rehypePostMeta = () => (tree: Root) => {
         }
     })
 }
+
 
