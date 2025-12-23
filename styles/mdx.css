@@ -1,6 +1,60 @@
 @reference "../app/globals.css";
 
-/* Load custom theme */
+/* --- 1. Variables & Theme Configuration --- */
+
+:root {
+  --mdx-pre-bg: #eee;
+  --mdx-inline-code-bg: #e3e3e3;
+  --mdx-inline-code-text: #0f172a;
+  
+  --mdx-diff-add-bg: rgba(34, 197, 94, 0.2);
+  --mdx-diff-remove-bg: rgba(239, 68, 68, 0.2);
+  --mdx-diff-add-marker: rgb(34, 197, 94);
+  --mdx-diff-remove-marker: rgb(239, 68, 68);
+
+  --mdx-highlight-line-bg: rgba(59, 130, 246, 0.15);
+  --mdx-highlight-line-border: theme('colors.blue.400');
+  
+  --mdx-highlight-chars-bg: rgba(250, 204, 21, 0.35);
+  
+  --mdx-chars-v-bg: rgba(59, 130, 246, 0.3);
+  --mdx-chars-v-border: rgba(59, 130, 246, 0.8);
+  --mdx-chars-s-bg: rgba(34, 197, 94, 0.3);
+  --mdx-chars-s-border: rgba(34, 197, 94, 0.8);
+  --mdx-chars-i-bg: rgba(168, 85, 247, 0.3);
+  --mdx-chars-i-border: rgba(168, 85, 247, 0.8);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.light) {
+    --mdx-pre-bg: var(--shiki-dark-bg);
+    --mdx-inline-code-bg: #444;
+    --mdx-inline-code-text: #f1f5f9;
+
+    --mdx-diff-add-bg: rgba(34, 197, 94, 0.15);
+    --mdx-diff-remove-bg: rgba(239, 68, 68, 0.15);
+
+    --mdx-highlight-line-bg: rgba(200, 200, 255, 0.15);
+    
+    --mdx-highlight-chars-bg: rgba(110, 110, 140, 0.4);
+  }
+}
+
+html.dark {
+  --mdx-pre-bg: var(--shiki-dark-bg);
+  --mdx-inline-code-bg: #444;
+  --mdx-inline-code-text: #f1f5f9;
+
+  --mdx-diff-add-bg: rgba(34, 197, 94, 0.15);
+  --mdx-diff-remove-bg: rgba(239, 68, 68, 0.15);
+
+  --mdx-highlight-line-bg: rgba(200, 200, 255, 0.15);
+  
+  --mdx-highlight-chars-bg: rgba(110, 110, 140, 0.4);
+}
+
+/* --- 2. Base Typography & Fonts --- */
+
 @font-face {
   font-family: "FiraCode Nerd Font";
   src: url('/fonts/FiraCodeNerdFontMono-Regular.ttf') format('truetype');
@@ -9,190 +63,75 @@
   font-display: swap;
 }
 
-/* References: https://github.com/shadcn-ui/taxonomy/blob/main/styles/mdx.css */
-
 [data-rehype-pretty-code-figure] pre {
   @apply px-0;
-  background-color: #eee;
-
-  /* This enables the font ligatures specifically */
-  font-variant-ligatures: discretionary-ligatures;
-  -webkit-font-feature-settings: "liga" 1, "calt" 1;
-  font-feature-settings: "liga" 1, "calt" 1;
-  
-  /* Set your Nerd Font as the default */
+  background-color: var(--mdx-pre-bg);
   font-family: 'FiraCode Nerd Font', ui-monospace, monospace;
 }
 
-/* If a custom font is provided, we should let the browser decide ligatures 
-   (most standard fonts will then default to 'off') */
-[data-rehype-pretty-code-figure] pre[data-font] {
-  font-variant-ligatures: none !important;
-  font-feature-settings: "liga" 0, "calt" 0 !important;
-}
-
-/* 1. Default Ligatures (When data-ligatures is true or not present) */
+/* Ligature Management */
 [data-rehype-pretty-code-figure] pre:not([data-ligatures="false"]) {
   font-variant-ligatures: discretionary-ligatures;
-  -webkit-font-feature-settings: "liga" 1, "calt" 1;
   font-feature-settings: "liga" 1, "calt" 1;
 }
 
-/* 2. Disable Ligatures (When explicitly set to false OR when a custom font is used without explicit ligature true) */
 [data-rehype-pretty-code-figure] pre[data-ligatures="false"],
 [data-rehype-pretty-code-figure] pre[data-font]:not([data-ligatures="true"]) {
   font-variant-ligatures: none !important;
-  -webkit-font-feature-settings: "liga" 0, "calt" 0 !important;
   font-feature-settings: "liga" 0, "calt" 0 !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  html:not(.light) [data-rehype-pretty-code-figure] pre {
-    @apply px-0;
-    background-color: var(--shiki-dark-bg);
-
-    /* This enables the font ligatures specifically */
-    font-variant-ligatures: discretionary-ligatures;
-    -webkit-font-feature-settings: "liga" 1, "calt" 1;
-    font-feature-settings: "liga" 1, "calt" 1;
-    
-    /* Set your Nerd Font as the default */
-    font-family: 'FiraCode Nerd Font', ui-monospace, monospace;
-  }
-
-  html:not(.light) [data-rehype-pretty-code-figure] pre[data-font] {
-    font-variant-ligatures: none !important;
-    font-feature-settings: "liga" 0, "calt" 0 !important;
-  }
-
-  /* 1. Default Ligatures (When data-ligatures is true or not present) */
-  html:not(.light) [data-rehype-pretty-code-figure] pre:not([data-ligatures="false"]) {
-    font-variant-ligatures: discretionary-ligatures;
-    -webkit-font-feature-settings: "liga" 1, "calt" 1;
-    font-feature-settings: "liga" 1, "calt" 1;
-  }
-
-  /* 2. Disable Ligatures (When explicitly set to false OR when a custom font is used without explicit ligature true) */
-  html:not(.light) [data-rehype-pretty-code-figure] pre[data-ligatures="false"],
-  html:not(.light) [data-rehype-pretty-code-figure] pre[data-font]:not([data-ligatures="true"]) {
-    font-variant-ligatures: none !important;
-    -webkit-font-feature-settings: "liga" 0, "calt" 0 !important;
-    font-feature-settings: "liga" 0, "calt" 0 !important;
-  }
-}
+/* --- 3. Code & Inline Styling --- */
 
 [data-rehype-pretty-code-figure] code {
-  @apply text-sm !leading-loose md:text-base border-0 p-0;
+  @apply text-sm leading-loose! md:text-base border-0 p-0;
 }
 
-/* Target standard inline code (without language tags) */
+/* Standard inline code (outside pre) */
 .prose :where(code):not(:where(pre *, [data-rehype-pretty-code-figure] *)) {
   @apply rounded px-1.5 py-0.5 font-mono text-sm font-medium;
-  background-color: #e3e3e3;
-  color: #0f172a;
+  background-color: var(--mdx-inline-code-bg);
+  color: var(--mdx-inline-code-text);
 }
 
-/* Dark mode support */
-html.dark .prose :where(code):not(:where(pre *, [data-rehype-pretty-code-figure] *)) {
-  background-color: #444;
-  color: #f1f5f9;
+/* Inline code with language highlighting */
+[data-rehype-pretty-code-figure] > code {
+  @apply rounded py-1.5 pt-[6px] pb-[4px];
 }
 
-/* Dual theme support - light theme by default */
+/* Dual theme support for code spans */
 [data-rehype-pretty-code-figure] code[data-theme*=" "],
 [data-rehype-pretty-code-figure] code[data-theme*=" "] span {
   color: var(--shiki-light);
-  background-color: #eee;
 }
 
-/* Dark theme when .dark class is on html */
-html.dark [data-rehype-pretty-code-figure] code[data-theme*=" "],
-html.dark [data-rehype-pretty-code-figure] code[data-theme*=" "] span {
+.dark [data-rehype-pretty-code-figure] code[data-theme*=" "],
+.dark [data-rehype-pretty-code-figure] code[data-theme*=" "] span {
   color: var(--shiki-dark);
-  background-color: var(--shiki-dark-bg);
 }
 
-/* Also support prefers-color-scheme for users without JS */
 @media (prefers-color-scheme: dark) {
   html:not(.light) [data-rehype-pretty-code-figure] code[data-theme*=" "],
   html:not(.light) [data-rehype-pretty-code-figure] code[data-theme*=" "] span {
     color: var(--shiki-dark);
-    background-color: var(--shiki-dark-bg);
   }
 }
 
-/* 1. Add 'pre' to the selector so it doesn't affect inline code */
-[data-rehype-pretty-code-figure] pre [data-line].diff {
-  @apply flex w-full transition-colors duration-200;
-  display: flex !important; 
-  padding-left: 0;           
+/* Remove backticks */
+[data-rehype-pretty-code-figure] > code::before,
+[data-rehype-pretty-code-figure] > code::after,
+.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::before,
+.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::after {
+  content: none !important;
 }
 
-/* 2. Update the gutter/marker selector */
-[data-rehype-pretty-code-figure] pre [data-line]::before {
-  content: "";
-  @apply w-5 shrink-0 flex items-center justify-center mr-2;
+/* --- 4. Line-level Features --- */
+
+[data-rehype-pretty-code-figure] [data-line] {
+  @apply border-l-2 border-l-transparent px-3;
 }
 
-/* 3. Update the marker symbols */
-[data-rehype-pretty-code-figure] pre [data-line].diff.add::before {
-  content: "+";
-  @apply text-green-500 font-bold;
-}
-
-[data-rehype-pretty-code-figure] pre [data-line].diff.remove::before {
-  content: "-";
-  @apply text-red-500 font-bold;
-}
-
-/* 4. Keep your existing background colors */
-[data-rehype-pretty-code-figure] .diff.add {
-  background-color: rgba(34, 197, 94, 0.2);
-}
-
-[data-rehype-pretty-code-figure] .diff.remove {
-  background-color: rgba(239, 68, 68, 0.2);
-}
-
-/* 5. Clean up Dark Mode and Transparency */
-html.dark [data-rehype-pretty-code-figure] .diff.add {
-  background-color: rgba(34, 197, 94, 0.15);
-}
-
-html.dark [data-rehype-pretty-code-figure] .diff.remove {
-  background-color: rgba(239, 68, 68, 0.15);
-}
-
-[data-rehype-pretty-code-figure] [data-line].diff span {
-  background-color: transparent !important;
-}
-
-/* --- Focus Highlighting Logic (Fixed Selectors) --- */
-
-/* 1. When a code block contains focused lines, dim all lines by default */
-[data-rehype-pretty-code-figure] pre.has-focused [data-line] {
-  @apply transition-all duration-300;
-  filter: blur(1.5px);
-  opacity: 0.4;
-}
-
-/* 2. Keep focused lines sharp and bright */
-[data-rehype-pretty-code-figure] pre.has-focused [data-line].focused {
-  filter: blur(0);
-  opacity: 1;
-}
-
-/* 3. On hover, remove the blur and dimming from the entire block */
-[data-rehype-pretty-code-figure] pre.has-focused:hover [data-line] {
-  filter: blur(0);
-  opacity: 1;
-}
-
-/* 4. Ensure spans inside focused lines don't have their own backgrounds */
-[data-rehype-pretty-code-figure] [data-line].focused span {
-  background-color: transparent !important;
-}
-
+/* Line Numbers */
 [data-rehype-pretty-code-figure] code[data-line-numbers] {
   counter-reset: line;
 }
@@ -203,118 +142,112 @@ html.dark [data-rehype-pretty-code-figure] .diff.remove {
   @apply mr-4 inline-block w-4 text-right text-gray-500;
 }
 
-[data-rehype-pretty-code-figure] [data-line] {
-  @apply border-l-2 border-l-transparent px-3;
-}
+/* --- 5. Highlighting (Lines & Chars) --- */
 
-/* Ensure this only targets code blocks, not inline code */
-[data-rehype-pretty-code-figure] pre [data-line] {
-  @apply border-l-2 border-l-transparent px-3;
-}
-
+/* Line Highlight */
 [data-rehype-pretty-code-figure] [data-highlighted-line] {
-  background: rgba(200, 200, 255, 0.15) !important;
-  @apply border-l-blue-400;
+  background: var(--mdx-highlight-line-bg) !important;
+  border-left-color: var(--mdx-highlight-line-border);
 }
 
-/* Light mode - use more visible blue background */
-html:not(.dark) [data-rehype-pretty-code-figure] [data-highlighted-line] {
-  background: rgba(59, 130, 246, 0.15) !important;
-}
-
-/* Make spans inside highlighted lines transparent so the line background shows */
 [data-rehype-pretty-code-figure] [data-highlighted-line] span {
   background-color: transparent !important;
 }
 
+/* Character Highlight */
 [data-rehype-pretty-code-figure] [data-highlighted-chars] {
-  border-radius: 0.25rem;
-  padding: 0.25rem 0.5rem;
-  background-color: rgba(110, 110, 140, 0.4) !important;
-  box-shadow: 0 0 0 0 rgba(110, 110, 140, 0.4);
+  @apply rounded px-2 py-1;
+  background-color: var(--mdx-highlight-chars-bg) !important;
+  box-shadow: 0 0 0 0 var(--mdx-highlight-chars-bg);
 }
 
-/* Light mode - more visible highlight */
-html:not(.dark) [data-rehype-pretty-code-figure] [data-highlighted-chars] {
-  background-color: rgba(250, 204, 21, 0.35) !important;
-  box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.35);
-}
-
-/* Make spans inside highlighted chars transparent so the background shows */
 [data-rehype-pretty-code-figure] [data-highlighted-chars] span {
   background-color: transparent !important;
 }
 
+/* Character IDs (#v, #s, #i) */
 [data-rehype-pretty-code-figure] [data-chars-id] {
   @apply border-b-2 p-1 shadow-none;
 }
 
-/* Different colors for different char IDs */
-/* #v - variable/value - blue */
-html:not(.dark) [data-rehype-pretty-code-figure] [data-chars-id="v"] {
-  background-color: rgba(59, 130, 246, 0.3) !important;
-  border-bottom-color: rgba(59, 130, 246, 0.8);
+[data-rehype-pretty-code-figure] [data-chars-id="v"] {
+  background-color: var(--mdx-chars-v-bg) !important;
+  border-bottom-color: var(--mdx-chars-v-border);
 }
 
-/* #s - state/stateful - green */
-html:not(.dark) [data-rehype-pretty-code-figure] [data-chars-id="s"] {
-  background-color: rgba(34, 197, 94, 0.3) !important;
-  border-bottom-color: rgba(34, 197, 94, 0.8);
+[data-rehype-pretty-code-figure] [data-chars-id="s"] {
+  background-color: var(--mdx-chars-s-bg) !important;
+  border-bottom-color: var(--mdx-chars-s-border);
 }
 
-/* #i - import/identifier - purple */
-html:not(.dark) [data-rehype-pretty-code-figure] [data-chars-id="i"] {
-  background-color: rgba(168, 85, 247, 0.3) !important;
-  border-bottom-color: rgba(168, 85, 247, 0.8);
+[data-rehype-pretty-code-figure] [data-chars-id="i"] {
+  background-color: var(--mdx-chars-i-bg) !important;
+  border-bottom-color: var(--mdx-chars-i-border);
 }
 
-/* Make spans inside data-chars-id transparent */
-html:not(.dark) [data-rehype-pretty-code-figure] [data-chars-id] span {
+[data-rehype-pretty-code-figure] [data-chars-id] span {
   background-color: transparent !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  [data-rehype-pretty-code-figure] [data-chars-id="v"] {
-    background-color: rgba(59, 130, 246, 0.3) !important;
-    border-bottom-color: rgba(59, 130, 246, 0.8);
-  }
+/* --- 6. Notations (Diff, Focus, Error/Warning) --- */
 
-  [data-rehype-pretty-code-figure] [data-chars-id="s"] {
-    background-color: rgba(34, 197, 94, 0.3) !important;
-    border-bottom-color: rgba(34, 197, 94, 0.8);
-  }
-
-  [data-rehype-pretty-code-figure] [data-chars-id="i"] {
-    background-color: rgba(168, 85, 247, 0.3) !important;
-    border-bottom-color: rgba(168, 85, 247, 0.8);
-  }
-
-  [data-rehype-pretty-code-figure] [data-chars-id] span {
-    background-color: transparent !important;
-  }
+/* Diff Notation */
+[data-rehype-pretty-code-figure] pre [data-line].diff {
+  @apply flex w-full transition-colors duration-200;
+  display: flex !important;
+  padding-left: 0;
 }
+
+[data-rehype-pretty-code-figure] pre [data-line].diff::before {
+  content: "";
+  @apply w-5 shrink-0 flex items-center justify-center mr-2;
+}
+
+[data-rehype-pretty-code-figure] pre [data-line].diff.add {
+  background-color: var(--mdx-diff-add-bg);
+}
+
+[data-rehype-pretty-code-figure] pre [data-line].diff.add::before {
+  content: "+";
+  @apply text-green-500 font-bold;
+}
+
+[data-rehype-pretty-code-figure] pre [data-line].diff.remove {
+  background-color: var(--mdx-diff-remove-bg);
+}
+
+[data-rehype-pretty-code-figure] pre [data-line].diff.remove::before {
+  content: "-";
+  @apply text-red-500 font-bold;
+}
+
+[data-rehype-pretty-code-figure] [data-line].diff span {
+  background-color: transparent !important;
+}
+
+/* Focus Notation */
+[data-rehype-pretty-code-figure] pre.has-focused [data-line] {
+  @apply transition-all duration-300;
+  filter: blur(1.5px);
+  opacity: 0.4;
+}
+
+[data-rehype-pretty-code-figure] pre.has-focused [data-line].focused {
+  filter: blur(0);
+  opacity: 1;
+}
+
+[data-rehype-pretty-code-figure] pre.has-focused:hover [data-line] {
+  filter: blur(0);
+  opacity: 1;
+}
+
+[data-rehype-pretty-code-figure] [data-line].focused span {
+  background-color: transparent !important;
+}
+
+/* --- 7. Utilities --- */
 
 .subheading-anchor {
   @apply no-underline hover:underline;
-}
-
-/* Inline code with language highlighting */
-[data-rehype-pretty-code-figure] > code {
-  /* padding-inline: 0.25rem; */
-  padding-block: 0.125rem;
-  border-radius: 0.25rem;
-  padding-top: 6px;
-  padding-bottom: 4px;
-}
-
-/* Remove backticks from inline code - hide ::before and ::after pseudo-elements */
-[data-rehype-pretty-code-figure] > code::before,
-[data-rehype-pretty-code-figure] > code::after {
-  content: none !important;
-}
-
-/* Override prose inline code styling */
-.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::before,
-.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::after {
-  content: none !important;
 }
