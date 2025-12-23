@@ -30,7 +30,22 @@ This repository is a simple implementaion of a markdown static blog, a demo can 
 - Shadcn UI
 - Pagination
 - Dynamic Open Graph Image
-- Syntax Highlighting in Code Block using Shiki and Rehype
+- Very Rich Code Block Feature
+  - Syntax Highlighting using Shiki and Rehype
+    - Line Numbers
+    - Line Highlighting
+    - Word Highlighting
+    - ANSI Highlighting
+    - Word Group Highlighting (based on id `#v` for variable, `#s` for state, `#i` for identifier)
+    - Inline Diff Highlighting
+    - Focused and Unfocused Lines
+    - Error and Warning Highlighting
+    - Inline Code with Language
+    - Nested Code Block
+  - Title Bar
+  - Copy Button
+  - Custom Font with Ligatures Support
+  - Custom Language Icon
 - Docker Support
 - Velite Integration for Content Pipeline
 
