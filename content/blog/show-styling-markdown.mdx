@@ -473,7 +473,7 @@ const [name, setName] = useState("Taylor");
 
 You can mark lines as additions or deletions in any language using `// [!code ++]` or `// [!code --]`.
 
-```tsx 
+```tsx showLineNumbers
 function MyComponent() {
   return (
     <div>
@@ -493,7 +493,7 @@ function MyComponent() {
 
 ## Focused Lines
 
-```ts
+```ts showLineNumbers
 console.log("not Focused")
 // [!code focus:2]
 // [!code --]
@@ -507,6 +507,7 @@ console.log("not focused")
 
 ```ts
 console.log("Normal")
+//[!code --]
 console.error("Error") //[!code error]
 console.warning("Warning") //[!code warning]
 ```

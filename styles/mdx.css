@@ -11,6 +11,8 @@
   --mdx-diff-remove-bg: rgba(239, 68, 68, 0.2);
   --mdx-diff-add-marker: rgb(34, 197, 94);
   --mdx-diff-remove-marker: rgb(239, 68, 68);
+  --mdx-diff-add-border: theme('colors.green.500');
+  --mdx-diff-remove-border: theme('colors.red.500');
 
   --mdx-highlight-line-bg: rgba(59, 130, 246, 0.15);
   --mdx-highlight-line-border: theme('colors.blue.400');
@@ -32,7 +34,7 @@
 
 @media (prefers-color-scheme: dark) {
   html:not(.light) {
-    --mdx-pre-bg: var(--shiki-dark-bg);
+    --mdx-pre-bg: #171717;
     --mdx-inline-code-bg: #444;
     --mdx-inline-code-text: #f1f5f9;
 
@@ -49,7 +51,7 @@
 }
 
 html.dark {
-  --mdx-pre-bg: var(--shiki-dark-bg);
+  --mdx-pre-bg: #171717;
   --mdx-inline-code-bg: #444;
   --mdx-inline-code-text: #f1f5f9;
 
@@ -234,6 +236,7 @@ html.dark {
 
 [data-rehype-pretty-code-figure] pre [data-line].diff.add {
   background-color: var(--mdx-diff-add-bg);
+  border-left-color: var(--mdx-diff-add-border);
 }
 
 [data-rehype-pretty-code-figure] pre [data-line].diff.add::before {
@@ -243,6 +246,7 @@ html.dark {
 
 [data-rehype-pretty-code-figure] pre [data-line].diff.remove {
   background-color: var(--mdx-diff-remove-bg);
+  border-left-color: var(--mdx-diff-remove-border);
 }
 
 [data-rehype-pretty-code-figure] pre [data-line].diff.remove::before {
