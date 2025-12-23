@@ -20,11 +20,14 @@ export default function Giscus({
     mapping = "pathname",
     term,
 }: GiscusProps) {
-    const { theme, resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        setMounted(true);
+        const raf = requestAnimationFrame(() => {
+            setMounted(true);
+        });
+        return () => cancelAnimationFrame(raf);
     }, []);
 
     useEffect(() => {
@@ -55,7 +58,7 @@ export default function Giscus({
             container.innerHTML = "";
             container.appendChild(script);
         }
-    }, [mounted, repo, repoId, category, categoryId, mapping, term]);
+    }, [mounted, repo, repoId, category, categoryId, mapping, term, resolvedTheme]);
 
     useEffect(() => {
         if (!mounted) return;
@@ -70,6 +73,7 @@ export default function Giscus({
             );
         }
     }, [resolvedTheme, mounted]);
+
 
     if (!mounted)
         return (
