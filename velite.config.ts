@@ -6,7 +6,8 @@ import { transformerNotationDiff, transformerNotationHighlight, transformerNotat
 
 import { computedFields } from "./lib/velite/utils"
 import { rehypeCodeGroup } from "./lib/velite/rehype-code-group"
-import { rehypePreMeta } from "./lib/velite/rehype-pre-meta"
+import { rehypePreMeta, rehypePostMeta } from "./lib/velite/rehype-pre-meta"
+import { remarkExtractMeta } from "./lib/velite/remark-extract-meta"
 
 const posts = defineCollection({
     name: "Post",
@@ -36,6 +37,7 @@ export default defineConfig({
     mdx: {
         rehypePlugins: [
             rehypeSlug, 
+            rehypePreMeta,
             [rehypePrettyCode, 
                 { 
                     theme: {
@@ -53,8 +55,9 @@ export default defineConfig({
                     ],
                 }
             ],
+            rehypePostMeta,
             rehypeCodeGroup,
-            rehypePreMeta,
+
             [rehypeAutolinkHeadings, 
                 {
                     behavior: "wrap",
@@ -65,6 +68,6 @@ export default defineConfig({
                 }
             ]
         ],
-        remarkPlugins: [],
+        remarkPlugins: [remarkExtractMeta],
     }
 })

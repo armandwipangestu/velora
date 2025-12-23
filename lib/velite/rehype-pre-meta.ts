@@ -1,31 +1,6 @@
 import { visit } from "unist-util-visit"
 import type { Root, Element } from "hast"
-
-/**
- * Parses the meta string from a code block and extracts attributes.
- * Example: title="example.tsx" icon="typescript" fontLigatures=true
- */
-const parseMeta = (meta: string) => {
-    const attributes: Record<string, string> = {}
-    
-    // Match patterns like key="value" or key=value
-    const regex = /([a-zA-Z0-9]+)=("[^"]*"|[^ ]+)/g
-    let match
-    
-    while ((match = regex.exec(meta)) !== null) {
-        const key = match[1]
-        let value = match[2]
-        
-        // Remove quotes if present
-        if (value.startsWith('"') && value.endsWith('"')) {
-            value = value.slice(1, -1)
-        }
-        
-        attributes[key] = value
-    }
-    
-    return attributes
-}
+import { parseMeta } from "./utils"
 
 export const rehypePreMeta = () => (tree: Root) => {
     visit(tree, "element", (node: Element, index, parent) => {
@@ -38,6 +13,8 @@ export const rehypePreMeta = () => (tree: Root) => {
 
         node.properties = node.properties || {}
 
+        // 1. Check if attributes are already on the code element (from remarkExtractMeta)
+        // 2. If not, try to parse from meta (for cases where remarkExtractMeta didn't run)
         const codeData = codeEl.data as { meta?: string } | undefined
         const meta = codeData?.meta || (codeEl.properties?.meta as string) || ""
         
@@ -55,24 +32,32 @@ export const rehypePreMeta = () => (tree: Root) => {
 
         // Apply extracted attributes to the pre element
         Object.entries(metaMap).forEach(([metaKey, dataAttr]) => {
-            if (attributes[metaKey] !== undefined) {
-                node.properties![dataAttr] = attributes[metaKey]
+            // Priority:
+            // 1. Properties already on node (pre)
+            // 2. Properties on codeEl (from remarkExtractMeta)
+            // 3. Parsed from meta string
+            if (node.properties![dataAttr] === undefined) {
+                if (codeEl.properties?.[dataAttr] !== undefined) {
+                    node.properties![dataAttr] = codeEl.properties[dataAttr]
+                } else if (attributes[metaKey] !== undefined) {
+                    node.properties![dataAttr] = attributes[metaKey]
+                }
             }
         })
 
         // Set defaults for specific attributes if not provided
-        if (attributes.fontLigatures === undefined) {
+        if (node.properties["data-ligatures"] === undefined) {
             node.properties["data-ligatures"] = "true"
         }
-        if (attributes.iconColor === undefined) {
+        if (node.properties["data-icon-color"] === undefined) {
             node.properties["data-icon-color"] = "true"
         }
+    })
+}
 
-        // Preserve language if present
-        const language = node.properties["data-language"] as string || ""
-        if (language) {
-            node.properties["data-language"] = language
-        }
+export const rehypePostMeta = () => (tree: Root) => {
+    visit(tree, "element", (node: Element, index, parent) => {
+        if (node.tagName !== "pre") return
 
         // If parent is a figure (from rehype-pretty-code), copy properties to it
         if (parent && parent.type === "element" && parent.tagName === "figure") {
@@ -90,3 +75,4 @@ export const rehypePreMeta = () => (tree: Root) => {
         }
     })
 }
+

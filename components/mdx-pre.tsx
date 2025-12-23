@@ -139,6 +139,7 @@ export function Pre({
     const dataFont = (props as Record<string, unknown>)["data-font"] as string
     const dataLigatures = (props as Record<string, unknown>)["data-ligatures"] as string
     const dataIconColor = (props as Record<string, unknown>)["data-icon-color"] as string
+    const dataCaption = (props as Record<string, unknown>)["data-caption"] as string
     const language = (props as Record<string, unknown>)["data-language"] as string || "text"
 
     // 2. Determine the display label:
@@ -274,7 +275,13 @@ export function Pre({
             >
                 {children}
             </pre>
+            {dataCaption && (
+                <div className="border-t bg-[#f6f8fa]/50 dark:bg-[#161a20]/50 px-4 py-2 text-xs text-muted-foreground italic">
+                    {dataCaption}
+                </div>
+            )}
         </div>
     )
 }
+
 
