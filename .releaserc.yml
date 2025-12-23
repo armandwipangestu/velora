@@ -55,7 +55,7 @@ plugins:
     - successComment: |
         🎉 This PR is included in version **${nextRelease.version}** 🎉
 
-        🔗 **View Release:** [${nextRelease.gitTag}](https://github.com/armandwipangestu/nextjs-velite-blog-template/releases/tag/${nextRelease.gitTag})
+        🔗 **View Release:** [${nextRelease.gitTag}](https://github.com/armandwipangestu/velora/releases/tag/${nextRelease.gitTag})
 
         🤖 *"Kill all humans"* - Your [semantic-release](https://github.com/semantic-release/semantic-release) bot 🚀
       failComment: |

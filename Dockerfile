@@ -3,6 +3,9 @@
 # --------
 FROM oven/bun:1.2.23-alpine AS builder
 
+# Add the link to your new repository here
+LABEL org.opencontainers.image.source="https://github.com/armandwipangestu/velora"
+
 WORKDIR /app
 
 # Install dependencies using cached layer
