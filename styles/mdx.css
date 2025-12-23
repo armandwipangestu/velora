@@ -194,6 +194,51 @@ html.dark [data-rehype-pretty-code-figure] .diff.remove {
   background-color: transparent !important;
 }
 
+/* --- Global Line Alignment --- */
+
+/* Apply this to ALL lines so they align perfectly */
+[data-rehype-pretty-code-figure] [data-line] {
+  @apply flex w-full border-l-4 border-l-transparent;
+  display: flex !important;
+  padding-left: 0.5rem; /* This is your baseline indentation */
+}
+
+/* --- Clean Error and Warning Line Styling --- */
+
+/* 1. Base style for all lines to ensure they are block-level for the background */
+[data-rehype-pretty-code-figure] [data-line] {
+  display: block;
+  width: 100%;
+  /* Remove any existing borders or padding that cause shifts */
+  border: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* 2. Error Line: Just the background */
+[data-rehype-pretty-code-figure] [data-line].highlighted.error {
+  background-color: rgba(239, 68, 68, 0.25) !important;
+}
+
+/* 3. Warning Line: Just the background */
+[data-rehype-pretty-code-figure] [data-line].highlighted.warning {
+  background-color: rgba(234, 179, 8, 0.25) !important;
+}
+
+/* Dark Mode Adjustments */
+html.dark [data-rehype-pretty-code-figure] [data-line].highlighted.error {
+  background-color: rgba(239, 68, 68, 0.2) !important;
+}
+
+html.dark [data-rehype-pretty-code-figure] [data-line].highlighted.warning {
+  background-color: rgba(234, 179, 8, 0.2) !important;
+}
+
+/* 4. Ensure syntax highlighting spans don't have their own backgrounds */
+[data-rehype-pretty-code-figure] [data-line].highlighted span {
+  background-color: transparent !important;
+}
+
 [data-rehype-pretty-code-figure] code[data-line-numbers] {
   counter-reset: line;
 }

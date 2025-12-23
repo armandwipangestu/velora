@@ -72,7 +72,7 @@ The following are the features I want to achieve or are under development:
 - [ ✅ ] Add vercel analytics
 - [ ✅ ] Rehype transformers for diff notation
 - [ ✅ ] Add code block focus
-- [ ] Add code block error and warning
+- [ ✅ ] Add code block error and warning
 - [ ] Add giscus components for discussion section
 - [ ] Code block group components
 
