@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useRef, createContext, useContext } from "react"
 import { cn } from "@/lib/utils"
-import { languageIcons, languageColors } from "./mdx-pre"
+import { languageIcons, languageColors, languageAliases } from "./mdx-pre"
 import { FileCode, Check, Copy } from "lucide-react"
 
 interface CodeGroupContextType {
@@ -41,12 +41,19 @@ export function CodeGroup({ children }: CodeGroupProps) {
             const language = props["data-language"] || "text"
             const iconColorEnabled = props["data-icon-color"] !== "false"
             const caption = props["data-caption"]
+            const rawIcon = props["data-icon"] as string;
 
-            const iconElement = (iconName && languageIcons[iconName])
-                || languageIcons[language]
-                || <FileCode className="size-4" />
+            // Helper to resolve aliases (e.g., "iNpm" -> "npm")
+            const resolveKey = (key: string) => languageAliases[key] || key;
 
-            const colors = languageColors[iconName || language]
+            const iconKey = resolveKey(rawIcon);
+            const langKey = resolveKey(language);
+
+            const iconElement = languageIcons[iconKey]
+                || languageIcons[langKey]
+                || <FileCode className="size-4" />;
+
+            const colors = languageColors[iconKey || langKey];
             const icon = iconColorEnabled && colors ? (
                 <span
                     className="flex items-center justify-center"
