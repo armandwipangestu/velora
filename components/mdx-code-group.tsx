@@ -125,9 +125,9 @@ export function CodeGroup({ children }: CodeGroupProps) {
                                         onClick={() => setActiveIndex(index)}
                                         data-active={activeIndex === index}
                                         className={cn(
-                                            "flex items-center gap-2 rounded-md px-3 py-1.5 text-xs font-medium transition-all whitespace-nowrap",
+                                            "flex items-center gap-2 rounded-md px-3 py-1.5 text-xs font-medium transition-all whitespace-nowrap cursor-pointer",
                                             activeIndex === index
-                                                ? "bg-muted/80 text-foreground shadow-sm"
+                                                ? "bg-foreground/10 text-foreground border-2 border-foreground/15"
                                                 : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
                                         )}
                                     >
@@ -140,7 +140,7 @@ export function CodeGroup({ children }: CodeGroupProps) {
 
                         <button
                             onClick={onCopy}
-                            className="flex items-center gap-2 rounded-md p-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-ring/40 hover:text-foreground shrink-0"
+                            className="flex items-center gap-2 rounded-md p-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-ring/40 hover:text-foreground shrink-0 cursor-pointer"
                             aria-label="Copy code"
                         >
                             {isCopied ? (

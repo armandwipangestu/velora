@@ -232,7 +232,7 @@ export function Pre({
                     </div>
                     <button
                         onClick={onCopy}
-                        className="flex items-center gap-2 rounded-md p-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-ring/40 hover:text-foreground"
+                        className="flex items-center gap-2 rounded-md p-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-ring/40 hover:text-foreground cursor-pointer"
                         aria-label="Copy code"
                     >
                         {isCopied ? (
