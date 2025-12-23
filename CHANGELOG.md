@@ -1,3 +1,19 @@
+# [1.7.0-rc.1](https://github.com/armandwipangestu/velora/compare/v1.6.0...v1.7.0-rc.1) (2025-12-23)
+
+
+### Bug Fixes
+
+* adjust some style for single and group code block ([e66de48](https://github.com/armandwipangestu/velora/commit/e66de48ddd644ac4b6152eb63976a3b29ef7ce53))
+* **ci:** change any[] type to ElementContent[] ([ad0de2d](https://github.com/armandwipangestu/velora/commit/ad0de2d63f006fb587f436bf1da4eb4f3fa92aa1))
+* remove border in code group when used caption ([c685912](https://github.com/armandwipangestu/velora/commit/c685912c75dd48b824e11632cc308f7786e0b599))
+* searchParams Promise unwrapped with await ([6fc02d2](https://github.com/armandwipangestu/velora/commit/6fc02d285890709a5b459b2fb9779c160406bd87))
+
+
+### Features
+
+* add prototype code block group ([01f7423](https://github.com/armandwipangestu/velora/commit/01f74237e90ed5b46f3f01e229d6cc0fa42869c2))
+* **components:** add code group ([f43ae37](https://github.com/armandwipangestu/velora/commit/f43ae378c4b31341267ed89e2b9988a977197e5a))
+
 # [1.6.0-rc.2](https://github.com/armandwipangestu/velora/compare/v1.6.0-rc.1...v1.6.0-rc.2) (2025-12-23)
 
 
