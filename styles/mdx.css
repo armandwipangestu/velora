@@ -97,12 +97,14 @@ html.dark {
 /* Inline code with language highlighting */
 [data-rehype-pretty-code-figure] > code {
   @apply rounded py-1.5 pt-[6px] pb-[4px];
+  background-color: var(--mdx-pre-bg);
 }
 
 /* Dual theme support for code spans */
 [data-rehype-pretty-code-figure] code[data-theme*=" "],
 [data-rehype-pretty-code-figure] code[data-theme*=" "] span {
   color: var(--shiki-light);
+  background-color: var(--mdx-pre-bg);
 }
 
 .dark [data-rehype-pretty-code-figure] code[data-theme*=" "],
