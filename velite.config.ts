@@ -3,8 +3,10 @@ import { visit } from "unist-util-visit"
 import rehypeSlug from "rehype-slug"
 import rehypePrettyCode from "rehype-pretty-code"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import remarkDirective from "remark-directive"
 import { transformerNotationDiff, transformerNotationHighlight, transformerNotationFocus, transformerNotationErrorLevel } from "@shikijs/transformers"
 import type { Root, Element } from "hast"
+import type { Root as RemarkRoot } from "mdast"
 
 const computedFields = <T extends { slug: string }>(data: T) => ({
     ...data,
@@ -24,8 +26,59 @@ const posts = defineCollection({
     }).transform(computedFields)
 })
 
+const remarkCodeGroup = () => (tree: RemarkRoot) => {
+    visit(tree, (node) => {
+        if (node.type === "containerDirective") {
+            if (node.name !== "code-group") return
+
+            const data = node.data || (node.data = {})
+            data.hName = "div"
+            data.hProperties = { "data-code-group": "" }
+        }
+    })
+}
+
+const rehypeCodeGroup = () => (tree: Root) => {
+    visit(tree, "element", (node: Element, index, parent) => {
+        if (node.tagName === "p" && parent && typeof index === "number") {
+            const firstChild = node.children[0]
+            if (firstChild?.type === "text" && firstChild.value.trim() === "::: code-group") {
+                // Found start
+                let endIndex = -1
+                for (let i = index + 1; i < parent.children.length; i++) {
+                    const nextNode = parent.children[i]
+                    if (nextNode.type === "element" && nextNode.tagName === "p") {
+                        const nextFirstChild = nextNode.children[0]
+                        if (nextFirstChild?.type === "text" && nextFirstChild.value.trim() === ":::") {
+                            endIndex = i
+                            break
+                        }
+                    }
+                }
+
+                if (endIndex !== -1) {
+                    const children = parent.children.slice(index + 1, endIndex)
+                    // Filter out whitespace/empty text nodes between code blocks
+                    const filteredChildren = children.filter(c => 
+                        c.type === "element" || (c.type === "text" && c.value.trim() !== "")
+                    )
+                    
+                    const groupNode: Element = {
+                        type: "element",
+                        tagName: "div",
+                        properties: { "data-code-group": "" },
+                        children: filteredChildren as any[] // Cast to avoid RootContent vs ElementContent mismatch
+                    }
+                    parent.children.splice(index, endIndex - index + 1, groupNode)
+                    return index
+                }
+            }
+        }
+    })
+}
+
 const rehypePreMeta = () => (tree: Root) => {
-    visit(tree, "element", (node: Element) => {
+    visit(tree, "element", (node: Element, index, parent) => {
         // Look for the code element inside the pre
         if (node.tagName !== "pre") return
 
@@ -78,7 +131,20 @@ const rehypePreMeta = () => (tree: Root) => {
         } else {
             node.properties["data-icon-color"] = "true"
         }
+
+        // 7. Determine language
+        const language = node.properties["data-language"] as string || ""
+        if (language) {
+            node.properties["data-language"] = language
+        }
+
+        // If parent is a figure (from rehype-pretty-code), copy properties to it
+        // This allows the CodeGroup component to see the properties on its direct children
+        if (parent && parent.type === "element" && parent.tagName === "figure") {
+            parent.properties = { ...parent.properties, ...node.properties }
+        }
     })
+
 
     // Remove redundant title elements
     visit(tree, "element", (node: Element, index, parent) => {
@@ -123,6 +189,7 @@ export default defineConfig({
                     ],
                 }
             ],
+            rehypeCodeGroup,
             rehypePreMeta,
             [rehypeAutolinkHeadings, 
                 {

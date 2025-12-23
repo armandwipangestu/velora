@@ -13,7 +13,7 @@ import { PiFileCSharp, PiFileCppDuotone } from "react-icons/pi"
 import { useState, useRef } from "react"
 import { cn } from "@/lib/utils"
 
-const languageIcons: Record<string, React.ReactNode> = {
+export const languageIcons: Record<string, React.ReactNode> = {
     js: <RiJavascriptFill className="size-4" />,
     jsx: <FaReact className="size-4" />,
     ts: <BiLogoTypescript className="size-4" />,
@@ -62,7 +62,7 @@ const languageIcons: Record<string, React.ReactNode> = {
     kt: <SiKotlin className="size-4" />,
 }
 
-const languageColors: Record<string, { light: string; dark: string }> = {
+export const languageColors: Record<string, { light: string; dark: string }> = {
     js: { light: "#F7DF1E", dark: "#F7DF1E" },
     jsx: { light: "#61DAFB", dark: "#61DAFB" },
     ts: { light: "#3178C6", dark: "#3178C6" },

@@ -1,0 +1,70 @@
+---
+title: Testing Code Groups
+description: A test post to verify the new code group feature.
+date: 2025-12-23
+published: true
+---
+
+# Single Code Block
+
+```tsx title="App.tsx" showLineNumbers {3,7} caption="Main Components"
+import React from 'react';
+
+function App() {
+  return (
+    <div>
+      <h1>Hello, Code Group!</h1>
+    </div>
+  );
+}
+
+export default App;
+```
+
+# Code Group Test
+
+::: code-group
+```tsx title="App.tsx" showLineNumbers {3,7} caption="Main Components"
+import React from 'react';
+
+function App() {
+  return (
+    <div>
+      <h1>Hello, Code Group!</h1>
+    </div>
+  );
+}
+
+export default App;
+```
+
+```tsx title="Main.tsx"
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+ReactDOM.render(<App />, document.getElementById('root'));
+```
+:::
+
+## Another Group with different languages
+
+::: code-group
+```go title="main.go"
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello from Go!")
+}
+```
+
+```python title="app.py"
+def main():
+    print("Hello from Python!")
+
+if __name__ == "__main__":
+    main()
+```
+:::

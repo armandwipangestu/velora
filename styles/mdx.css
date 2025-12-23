@@ -284,3 +284,42 @@ html.dark {
 .subheading-anchor {
   @apply no-underline hover:underline;
 }
+
+/* Code Group Styles */
+.code-group {
+  @apply my-6 overflow-hidden rounded-xl border bg-background;
+}
+
+.code-group .code-group-tabs {
+  @apply flex overflow-x-auto border-b bg-muted/50 px-2 pt-2;
+}
+
+.code-group .code-group-tab {
+  @apply flex items-center gap-2 rounded-t-lg px-4 py-2 text-sm font-medium transition-colors whitespace-nowrap border-b-2;
+}
+
+.code-group .code-group-tab[data-active="true"] {
+  @apply border-primary bg-background text-foreground;
+}
+
+.code-group .code-group-tab[data-active="false"] {
+  @apply border-transparent text-muted-foreground hover:bg-muted hover:text-foreground;
+}
+
+.code-group .code-block-wrapper [data-rehype-pretty-code-figure] {
+  @apply my-0 border-0 rounded-none;
+}
+
+.code-group .code-block-wrapper [data-rehype-pretty-code-figure] pre {
+  @apply rounded-none border-0;
+}
+
+/* Utilities */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
