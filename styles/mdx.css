@@ -121,27 +121,26 @@ html.dark [data-rehype-pretty-code-figure] code[data-theme*=" "] span {
   }
 }
 
-/* 1. Update the base diff line to use Flexbox instead of absolute positioning */
-[data-rehype-pretty-code-figure] [data-line].diff {
+/* 1. Add 'pre' to the selector so it doesn't affect inline code */
+[data-rehype-pretty-code-figure] pre [data-line].diff {
   @apply flex w-full transition-colors duration-200;
-  display: flex !important; /* Force flex to create the gutter */
-  padding-left: 0;           /* Remove the old padding */
+  display: flex !important; 
+  padding-left: 0;           
 }
 
-/* 2. Create a consistent gutter for ALL lines so code stays aligned */
-[data-rehype-pretty-code-figure] [data-line]::before {
+/* 2. Update the gutter/marker selector */
+[data-rehype-pretty-code-figure] pre [data-line]::before {
   content: "";
   @apply w-5 shrink-0 flex items-center justify-center mr-2;
-  /* This empty space ensures non-diff lines align with diff lines */
 }
 
-/* 3. Add markers into that flex gutter */
-[data-rehype-pretty-code-figure] [data-line].diff.add::before {
+/* 3. Update the marker symbols */
+[data-rehype-pretty-code-figure] pre [data-line].diff.add::before {
   content: "+";
   @apply text-green-500 font-bold;
 }
 
-[data-rehype-pretty-code-figure] [data-line].diff.remove::before {
+[data-rehype-pretty-code-figure] pre [data-line].diff.remove::before {
   content: "-";
   @apply text-red-500 font-bold;
 }
@@ -194,51 +193,6 @@ html.dark [data-rehype-pretty-code-figure] .diff.remove {
   background-color: transparent !important;
 }
 
-/* --- Global Line Alignment --- */
-
-/* Apply this to ALL lines so they align perfectly */
-[data-rehype-pretty-code-figure] [data-line] {
-  @apply flex w-full border-l-4 border-l-transparent;
-  display: flex !important;
-  padding-left: 0.5rem; /* This is your baseline indentation */
-}
-
-/* --- Clean Error and Warning Line Styling --- */
-
-/* 1. Base style for all lines to ensure they are block-level for the background */
-[data-rehype-pretty-code-figure] [data-line] {
-  display: block;
-  width: 100%;
-  /* Remove any existing borders or padding that cause shifts */
-  border: none !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-/* 2. Error Line: Just the background */
-[data-rehype-pretty-code-figure] [data-line].highlighted.error {
-  background-color: rgba(239, 68, 68, 0.25) !important;
-}
-
-/* 3. Warning Line: Just the background */
-[data-rehype-pretty-code-figure] [data-line].highlighted.warning {
-  background-color: rgba(234, 179, 8, 0.25) !important;
-}
-
-/* Dark Mode Adjustments */
-html.dark [data-rehype-pretty-code-figure] [data-line].highlighted.error {
-  background-color: rgba(239, 68, 68, 0.2) !important;
-}
-
-html.dark [data-rehype-pretty-code-figure] [data-line].highlighted.warning {
-  background-color: rgba(234, 179, 8, 0.2) !important;
-}
-
-/* 4. Ensure syntax highlighting spans don't have their own backgrounds */
-[data-rehype-pretty-code-figure] [data-line].highlighted span {
-  background-color: transparent !important;
-}
-
 [data-rehype-pretty-code-figure] code[data-line-numbers] {
   counter-reset: line;
 }
@@ -250,6 +204,11 @@ html.dark [data-rehype-pretty-code-figure] [data-line].highlighted.warning {
 }
 
 [data-rehype-pretty-code-figure] [data-line] {
+  @apply border-l-2 border-l-transparent px-3;
+}
+
+/* Ensure this only targets code blocks, not inline code */
+[data-rehype-pretty-code-figure] pre [data-line] {
   @apply border-l-2 border-l-transparent px-3;
 }
 
@@ -358,46 +317,4 @@ html:not(.dark) [data-rehype-pretty-code-figure] [data-chars-id] span {
 .prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::before,
 .prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::after {
   content: none !important;
-}
-
-pre.shiki {
-  @apply max-h-(--max-height,80svh) relative flex flex-col overflow-hidden p-0;
-
-  code {
-    @apply grid overflow-auto py-5;
-  }
-
-  .line {
-    @apply relative px-5;
-  }
-
-  button {
-    @apply hover:opacity-100! absolute right-3 top-3 flex cursor-pointer select-none items-center justify-center rounded-md bg-slate-600 text-sm font-medium text-white opacity-0 shadow outline-0 transition;
-
-    svg {
-      @apply m-2 size-5;
-    }
-
-    .check {
-      @apply opacity-0 transition-opacity;
-    }
-
-    &.copied {
-      @apply opacity-100!;
-
-      &::before {
-        @apply border-r border-[#0002] p-2 px-2.5 content-['Copied!'];
-      }
-
-      .check {
-        @apply opacity-100;
-      }
-    }
-  }
-
-  &:hover {
-    button {
-      @apply opacity-80;
-    }
-  }
 }
