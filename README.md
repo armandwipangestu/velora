@@ -70,8 +70,10 @@ The following are the features I want to achieve or are under development:
 - [ ✅ ] Inline code (without specific language) with custom background color
 - [ ✅ ] Add umami analytics
 - [ ✅ ] Add vercel analytics
+- [ ✅ ] Rehype transformers for diff notation
+- [ ] Add code block focus
+- [ ] Add code block error and warning
 - [ ] Add giscus components for discussion section
-- [ ] Rehype transformers for diff notation
 - [ ] Code block group components
 
 See the [open issues](https://github.com/armandwipangestu/nextjs-velite-blog-template/issues) for a list of proposed features (and known issues).

@@ -161,6 +161,12 @@ html.dark [data-rehype-pretty-code-figure] .diff.remove {
   background-color: rgba(239, 68, 68, 0.15);
 }
 
+/* Make spans inside diff lines transparent so the diff background shows through */
+[data-rehype-pretty-code-figure] .diff.add span,
+[data-rehype-pretty-code-figure] .diff.remove span {
+  background-color: transparent !important;
+}
+
 [data-rehype-pretty-code-figure] code[data-line-numbers] {
   counter-reset: line;
 }
