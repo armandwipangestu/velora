@@ -7,7 +7,7 @@ on:
             - main
 
 env:
-    IMAGE_NAME: ghcr.io/armandwipangestu/nextjs-velite-blog-template
+    IMAGE_NAME: ghcr.io/armandwipangestu/velora
 
 jobs:
     # ------------------------------------------------------

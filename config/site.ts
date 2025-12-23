@@ -1,6 +1,6 @@
 export const siteConfig = {
     name: "DevnullBlog",
-    url: "https://nextjs-velite-blog-template-mu.vercel.app/",
+    url: "https://velora-example.vercel.app/",
     description: "Nextjs 16 blog using velite, tailwindcss, and shadcn",
     author: "Arman Dwi Pangestu",
     links: {

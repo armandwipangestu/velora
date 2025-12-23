@@ -70,6 +70,24 @@ const rehypePreMeta = () => (tree: Root) => {
             // Set a default if you want, or handle it in React/CSS
             node.properties["data-ligatures"] = "true" 
         }
+
+        // 6. Extract Icon Color preference
+        const iconColorMatch = meta.match(/iconColor=(true|false)/)
+        if (iconColorMatch) {
+            node.properties["data-icon-color"] = iconColorMatch[1]
+        } else {
+            node.properties["data-icon-color"] = "true"
+        }
+    })
+
+    // Remove redundant title elements
+    visit(tree, "element", (node: Element, index, parent) => {
+        if (node.properties && "data-rehype-pretty-code-title" in node.properties) {
+            if (parent && typeof index === "number") {
+                parent.children.splice(index, 1)
+                return index
+            }
+        }
     })
 }
 

@@ -17,7 +17,7 @@
 
 ## Description
 
-This repository is a simple implementaion of a markdown static blog, a demo can be seen [here](https://nextjs-velite-blog-template-mu.vercel.app/).
+This repository is a simple implementaion of a markdown static blog, a demo can be seen [here](https://velora-example.vercel.app/).
 
 <picture>
   <source srcset="https://velite.js.org/assets/flow-dark.svg" media="(prefers-color-scheme: dark)">
@@ -30,18 +30,34 @@ This repository is a simple implementaion of a markdown static blog, a demo can 
 - Shadcn UI
 - Pagination
 - Dynamic Open Graph Image
-- Syntax Highlighting in Code Block using Shiki and Rehype
+- Very Rich Code Block Feature
+  - Syntax Highlighting using Shiki and Rehype
+    - Line Numbers
+    - Line Highlighting
+    - Word Highlighting
+    - ANSI Highlighting
+    - Word Group Highlighting (based on id `#v` for variable, `#s` for state, `#i` for identifier)
+    - Inline Diff Highlighting
+    - Focused and Unfocused Lines
+    - Error and Warning Highlighting
+    - Inline Code with Language
+    - Nested Code Block
+  - Title Bar
+  - Copy Button
+  - Custom Font with Ligatures Support
+  - Custom Language Icon
 - Docker Support
 - Velite Integration for Content Pipeline
+- Giscus Integration for Discussion Section
 
 ## Running the Application
 
 - Using bun
 
 ```bash
-git clone https://github.com/armandwipangestu/nextjs-velite-blog-template.git
+git clone https://github.com/armandwipangestu/velora.git
 
-cd nextjs-velite-blog-template
+cd velora
 
 bun install
 
@@ -51,7 +67,7 @@ bun run dev
 - Using docker
 
 ```bash
-docker run --rm -p 3000:3000 ghcr.io/armandwipangestu/nextjs-velite-blog-template:latest
+docker run --rm -p 3000:3000 ghcr.io/armandwipangestu/velora:latest
 ```
 
 ## Roadmap
@@ -70,11 +86,13 @@ The following are the features I want to achieve or are under development:
 - [ ✅ ] Inline code (without specific language) with custom background color
 - [ ✅ ] Add umami analytics
 - [ ✅ ] Add vercel analytics
-- [ ] Add giscus components for discussion section
-- [ ] Rehype transformers for diff notation
+- [ ✅ ] Rehype transformers for diff notation
+- [ ✅ ] Add code block focus
+- [ ✅ ] Add code block error and warning
+- [ ✅ ] Add giscus components for discussion section
 - [ ] Code block group components
 
-See the [open issues](https://github.com/armandwipangestu/nextjs-velite-blog-template/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/armandwipangestu/velora/issues) for a list of proposed features (and known issues).
 
 ## Credits
 
