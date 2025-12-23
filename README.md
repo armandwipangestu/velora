@@ -90,7 +90,7 @@ The following are the features I want to achieve or are under development:
 - [ ✅ ] Add code block focus
 - [ ✅ ] Add code block error and warning
 - [ ✅ ] Add giscus components for discussion section
-- [ ] Code block group components
+- [ ✅ ] Code block group components
 - [ ] Wrap code block content
 
 See the [open issues](https://github.com/armandwipangestu/velora/issues) for a list of proposed features (and known issues).
