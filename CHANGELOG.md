@@ -1,3 +1,29 @@
+# [1.6.0-rc.1](https://github.com/armandwipangestu/velora/compare/v1.5.0...v1.6.0-rc.1) (2025-12-23)
+
+
+### Bug Fixes
+
+* add example code focus, error, warning, diff multiple line ([490ddbf](https://github.com/armandwipangestu/velora/commit/490ddbf3239435387175a9c15151f96eaa1fda2e))
+* add some background color to inline code with highlighting ([6814676](https://github.com/armandwipangestu/velora/commit/6814676bc1c645ab681fe74a3a64f7cc7eb4f757))
+* adjust some icon color ([ebf6f6a](https://github.com/armandwipangestu/velora/commit/ebf6f6a1dc2cde4bb8040328b1d0546260669bf9))
+* adjust some style ([479a74b](https://github.com/armandwipangestu/velora/commit/479a74ba3e0c1ef128787825660fe0aa6bd4e4c2))
+* **ci:** giscus Avoid calling setState() directly within an effect ([2a3e247](https://github.com/armandwipangestu/velora/commit/2a3e24743d005775816e3e8df269ce3944ccf336))
+* error and warning lines ([bbc94b7](https://github.com/armandwipangestu/velora/commit/bbc94b7599e5c836fa23d48644e74235eb2156e8))
+* inline diff highlighting ([35455f2](https://github.com/armandwipangestu/velora/commit/35455f24712fd2c7a97c9b3569faa01dfeaabb0b))
+* remove duplicate title when using caption ([2efe0b2](https://github.com/armandwipangestu/velora/commit/2efe0b28c8e2bb98c1573412c65e31f979738624))
+* revert error and warning lines, because there some bug ([0707c6a](https://github.com/armandwipangestu/velora/commit/0707c6abcfc249e28a6e40b6e0d6875b9d84c7d0))
+
+
+### Features
+
+* add code block error and warning ([7c492f3](https://github.com/armandwipangestu/velora/commit/7c492f32b2bb6951408a9f5eda8ba0bf60dbf78f))
+* add diff notation embedded in code block mdx ([6bec6f2](https://github.com/armandwipangestu/velora/commit/6bec6f29a2c275f12556684876fb15dca2e7d225))
+* add focused lines ([35b2a6c](https://github.com/armandwipangestu/velora/commit/35b2a6c5c7d85fd9d6da7698a7abe3b7e19d9938))
+* add icon color ([c985a38](https://github.com/armandwipangestu/velora/commit/c985a38efab84a96266956d0779407a65812d74e))
+* change repository name to velora ([36408c5](https://github.com/armandwipangestu/velora/commit/36408c5c0b79c7086fa791dc587b861e3d77a155))
+* **components:** add giscus integration ([9b6b98e](https://github.com/armandwipangestu/velora/commit/9b6b98ea977e927e4a19dbb6ed404f865a2e39d1))
+* refactor css ([f3c13c0](https://github.com/armandwipangestu/velora/commit/f3c13c0fc9410372515c1a54084604d36fa8db8c))
+
 # [1.5.0-rc.2](https://github.com/armandwipangestu/velora/compare/v1.5.0-rc.1...v1.5.0-rc.2) (2025-12-23)
 
 
