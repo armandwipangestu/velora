@@ -491,10 +491,15 @@ function MyComponent() {
 }
 ```
 
+## Focused Lines
+
 ```ts
 console.log("not Focused")
-// [!code focus]
-console.log("focused") //[!code focus]
+// [!code focus:2]
+// [!code --]
+console.log("focused 1")
+// [!code ++]
+console.log("focused 2")
 console.log("not focused")
 ```
 
