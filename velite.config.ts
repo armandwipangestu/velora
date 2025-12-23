@@ -3,10 +3,8 @@ import { visit } from "unist-util-visit"
 import rehypeSlug from "rehype-slug"
 import rehypePrettyCode from "rehype-pretty-code"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
-import remarkDirective from "remark-directive"
 import { transformerNotationDiff, transformerNotationHighlight, transformerNotationFocus, transformerNotationErrorLevel } from "@shikijs/transformers"
-import type { Root, Element } from "hast"
-import type { Root as RemarkRoot } from "mdast"
+import type { Root, Element, ElementContent } from "hast"
 
 const computedFields = <T extends { slug: string }>(data: T) => ({
     ...data,
@@ -25,18 +23,6 @@ const posts = defineCollection({
         body: s.mdx()
     }).transform(computedFields)
 })
-
-const remarkCodeGroup = () => (tree: RemarkRoot) => {
-    visit(tree, (node) => {
-        if (node.type === "containerDirective") {
-            if (node.name !== "code-group") return
-
-            const data = node.data || (node.data = {})
-            data.hName = "div"
-            data.hProperties = { "data-code-group": "" }
-        }
-    })
-}
 
 const rehypeCodeGroup = () => (tree: Root) => {
     visit(tree, "element", (node: Element, index, parent) => {
@@ -67,7 +53,7 @@ const rehypeCodeGroup = () => (tree: Root) => {
                         type: "element",
                         tagName: "div",
                         properties: { "data-code-group": "" },
-                        children: filteredChildren as any[] // Cast to avoid RootContent vs ElementContent mismatch
+                        children: filteredChildren as ElementContent[] // Cast to avoid RootContent vs ElementContent mismatch
                     }
                     parent.children.splice(index, endIndex - index + 1, groupNode)
                     return index
