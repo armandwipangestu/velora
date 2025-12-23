@@ -16,7 +16,7 @@ export default function Home() {
             Hello, I&apos;m {siteConfig.author}
           </h1>
           <p className="max-w-[42rem] mx-auto text-muted-foreground sm:text-xl text-balance">
-            Welcome to my blog template. Built using tailwind, shadcn, velite, and Nextjs 16.
+            {siteConfig.description}
           </p>
           <div className="flex flex-col gap-4 justify-center sm:flex-row ">
             <Link href="/blog" className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-fit")}>

@@ -1,7 +1,7 @@
 export const siteConfig = {
-    name: "DevnullBlog",
+    name: "Velora",
     url: "https://velora-example.vercel.app/",
-    description: "Nextjs 16 blog using velite, tailwindcss, and shadcn",
+    description: "A modern, type-safe MDX blog template built with Next.js, Velite, TailwindCSS, Shadcn UI, Shiki, and Rehype",
     author: "Arman Dwi Pangestu",
     links: {
         github: "https://github.com/armandwipangestu",
