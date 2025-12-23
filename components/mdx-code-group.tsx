@@ -33,12 +33,14 @@ export function CodeGroup({ children }: CodeGroupProps) {
                 "data-language"?: string
                 "data-icon"?: string
                 "data-icon-color"?: string
+                "data-caption"?: string
             }
 
             const title = props["data-title"] || props["data-language"] || "Code"
             const iconName = props["data-icon"]
             const language = props["data-language"] || "text"
             const iconColorEnabled = props["data-icon-color"] !== "false"
+            const caption = props["data-caption"]
 
             const iconElement = (iconName && languageIcons[iconName])
                 || languageIcons[language]
@@ -60,7 +62,7 @@ export function CodeGroup({ children }: CodeGroupProps) {
                 </span>
             ) : iconElement
 
-            return { title, icon }
+            return { title, icon, caption }
         })?.filter(Boolean) || []
     }, [children])
 
@@ -100,75 +102,84 @@ export function CodeGroup({ children }: CodeGroupProps) {
 
     if (tabs.length === 0) return <>{children}</>
 
+    const activeTab = tabs[activeIndex]
+
     return (
         <CodeGroupContext.Provider value={{ isInCodeGroup: true }}>
-            <div ref={containerRef} className="code-group my-6 overflow-hidden rounded-lg border bg-background">
-                {/* Integrated Title Bar */}
-                <div className="flex items-center justify-between border-b bg-[#f6f8fa] dark:bg-[#161a20] px-4 py-1">
-                    <div className="flex items-center gap-4 overflow-hidden">
-                        <div className="flex items-center gap-1.5 shrink-0">
-                            <div className="size-3 rounded-full bg-red-400/60 border border-red-500/80" />
-                            <div className="size-3 rounded-full bg-yellow-400/60 border border-yellow-500/80" />
-                            <div className="size-3 rounded-full bg-green-400/60 border border-green-500/80" />
+            <div className="my-6">
+                <div ref={containerRef} className="code-group overflow-hidden rounded-lg border bg-background">
+                    {/* Integrated Title Bar */}
+                    <div className="flex items-center justify-between border-b bg-[#f6f8fa] dark:bg-[#161a20] px-4 py-1">
+                        <div className="flex items-center gap-4 overflow-hidden">
+                            <div className="flex items-center gap-1.5 shrink-0">
+                                <div className="size-3 rounded-full bg-red-400/60 border border-red-500/80" />
+                                <div className="size-3 rounded-full bg-yellow-400/60 border border-yellow-500/80" />
+                                <div className="size-3 rounded-full bg-green-400/60 border border-green-500/80" />
+                            </div>
+
+                            {/* Tabs */}
+                            <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide py-1">
+                                {tabs.map((tab, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => setActiveIndex(index)}
+                                        data-active={activeIndex === index}
+                                        className={cn(
+                                            "flex items-center gap-2 rounded-md px-3 py-1.5 text-xs font-medium transition-all whitespace-nowrap",
+                                            activeIndex === index
+                                                ? "bg-muted/80 text-foreground shadow-sm"
+                                                : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                                        )}
+                                    >
+                                        {tab?.icon}
+                                        {tab?.title}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
 
-                        {/* Tabs */}
-                        <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide py-1">
-                            {tabs.map((tab, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => setActiveIndex(index)}
-                                    data-active={activeIndex === index}
-                                    className={cn(
-                                        "flex items-center gap-2 rounded-md px-3 py-1.5 text-xs font-medium transition-all whitespace-nowrap",
-                                        activeIndex === index
-                                            ? "bg-muted/80 text-foreground shadow-sm"
-                                            : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
-                                    )}
-                                >
-                                    {tab?.icon}
-                                    {tab?.title}
-                                </button>
-                            ))}
-                        </div>
+                        <button
+                            onClick={onCopy}
+                            className="flex items-center gap-2 rounded-md p-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-ring/40 hover:text-foreground shrink-0"
+                            aria-label="Copy code"
+                        >
+                            {isCopied ? (
+                                <>
+                                    <Check className="size-3.5" />
+                                    <span>Copied!</span>
+                                </>
+                            ) : (
+                                <>
+                                    <Copy className="size-3.5" />
+                                    <span>Copy</span>
+                                </>
+                            )}
+                        </button>
                     </div>
 
-                    <button
-                        onClick={onCopy}
-                        className="flex items-center gap-2 rounded-md p-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-ring/40 hover:text-foreground shrink-0"
-                        aria-label="Copy code"
-                    >
-                        {isCopied ? (
-                            <>
-                                <Check className="size-3.5" />
-                                <span>Copied!</span>
-                            </>
-                        ) : (
-                            <>
-                                <Copy className="size-3.5" />
-                                <span>Copy</span>
-                            </>
-                        )}
-                    </button>
-                </div>
+                    <div className="code-group-content">
+                        {React.Children.map(children, (child, index) => {
+                            if (!React.isValidElement(child)) return null
 
-                <div className="code-group-content">
-                    {React.Children.map(children, (child, index) => {
-                        if (!React.isValidElement(child)) return null
-
-                        return (
-                            <div
-                                key={index}
-                                className={cn(
-                                    "code-block-wrapper",
-                                    activeIndex === index ? "block" : "hidden"
-                                )}
-                            >
-                                {child}
-                            </div>
-                        )
-                    })}
+                            return (
+                                <div
+                                    key={index}
+                                    className={cn(
+                                        "code-block-wrapper",
+                                        activeIndex === index ? "block" : "hidden"
+                                    )}
+                                >
+                                    {child}
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
+                {activeTab?.caption && (
+                    <div className="mt-2 text-center text-sm text-muted-foreground">
+                        {activeTab.caption}
+                    </div>
+                )}
             </div>
         </CodeGroupContext.Provider>
     )

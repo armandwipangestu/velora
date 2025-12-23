@@ -132,7 +132,13 @@ const rehypePreMeta = () => (tree: Root) => {
             node.properties["data-icon-color"] = "true"
         }
 
-        // 7. Determine language
+        // 7. Extract Caption if it exists
+        const captionMatch = meta.match(/caption="([^"]*)"/)
+        if (captionMatch) {
+            node.properties["data-caption"] = captionMatch[1]
+        }
+
+        // 8. Determine language
         const language = node.properties["data-language"] as string || ""
         if (language) {
             node.properties["data-language"] = language

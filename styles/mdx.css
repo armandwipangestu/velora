@@ -287,7 +287,7 @@ html.dark {
 
 /* Code Group Styles */
 .code-group {
-  @apply my-6 overflow-hidden rounded-lg border bg-background;
+  @apply overflow-hidden rounded-lg border bg-background;
 }
 
 .code-group .code-group-tabs {
@@ -315,6 +315,15 @@ html.dark {
   @apply rounded-none border-0;
 }
 
+/* Hide internal figcaption within code group */
+.code-group figcaption {
+  @apply hidden;
+}
+
+/* Make caption center aligned */
+[data-rehype-pretty-code-caption] {
+  @apply mt-2 text-center text-sm text-muted-foreground;
+}
 
 /* Utilities */
 .scrollbar-hide {
