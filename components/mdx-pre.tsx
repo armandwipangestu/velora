@@ -100,12 +100,24 @@ export const languageColors: Record<string, { light: string; dark: string }> = {
     kt: { light: "#7F52FF", dark: "#7F52FF" },
 }
 
+import { useCodeGroup } from "./mdx-code-group"
+
 export function Pre({
     children,
     className,
     title, // This comes from MDX props if passed like <Pre title="foo" />
+    hideTitleBar: hideTitleBarProp = false,
+    hideBorder: hideBorderProp = false,
     ...props
-}: React.HTMLAttributes<HTMLPreElement> & { title?: string }) {
+}: React.HTMLAttributes<HTMLPreElement> & {
+    title?: string;
+    hideTitleBar?: boolean;
+    hideBorder?: boolean;
+}) {
+    const { isInCodeGroup } = useCodeGroup()
+    const hideTitleBar = hideTitleBarProp || isInCodeGroup
+    const hideBorder = hideBorderProp || isInCodeGroup
+
     const [isCopied, setIsCopied] = useState(false)
     const preRef = useRef<HTMLPreElement>(null)
 
@@ -200,42 +212,52 @@ export function Pre({
     }
 
     return (
-        <div className="my-6 overflow-hidden rounded-lg border bg-background">
-            <div className="flex items-center justify-between border-b bg-[#f6f8fa] dark:bg-[#161a20] px-4 py-2.5">
-                <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-1.5">
-                        <div className="size-3 rounded-full bg-red-400/60 border border-red-500/80" />
-                        <div className="size-3 rounded-full bg-yellow-400/60 border border-yellow-500/80" />
-                        <div className="size-3 rounded-full bg-green-400/60 border border-green-500/80" />
+        <div className={cn(
+            "my-6 overflow-hidden",
+            !hideBorder && "rounded-lg border bg-background"
+        )}>
+            {!hideTitleBar && (
+                <div className="flex items-center justify-between border-b bg-[#f6f8fa] dark:bg-[#161a20] px-4 py-2.5">
+                    <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-1.5">
+                            <div className="size-3 rounded-full bg-red-400/60 border border-red-500/80" />
+                            <div className="size-3 rounded-full bg-yellow-400/60 border border-yellow-500/80" />
+                            <div className="size-3 rounded-full bg-green-400/60 border border-green-500/80" />
+                        </div>
+                        {/* Icon and Title/Extension */}
+                        <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                            {icon}
+                            <span className="truncate">{displayTitle}</span>
+                        </div>
                     </div>
-                    {/* Icon and Title/Extension */}
-                    <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                        {icon}
-                        <span className="truncate">{displayTitle}</span>
-                    </div>
+                    <button
+                        onClick={onCopy}
+                        className="flex items-center gap-2 rounded-md p-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-ring/40 hover:text-foreground"
+                        aria-label="Copy code"
+                    >
+                        {isCopied ? (
+                            <>
+                                <Check className="size-3.5" />
+                                <span>Copied!</span>
+                            </>
+                        ) : (
+                            <>
+                                <Copy className="size-3.5" />
+                                <span>Copy</span>
+                            </>
+                        )}
+                    </button>
                 </div>
-                <button
-                    onClick={onCopy}
-                    className="flex items-center gap-2 rounded-md p-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-ring/40 hover:text-foreground"
-                    aria-label="Copy code"
-                >
-                    {isCopied ? (
-                        <>
-                            <Check className="size-3.5" />
-                            <span>Copied!</span>
-                        </>
-                    ) : (
-                        <>
-                            <Copy className="size-3.5" />
-                            <span>Copy</span>
-                        </>
-                    )}
-                </button>
-            </div>
+            )}
             <pre
                 ref={preRef}
                 style={style}
-                className={cn("overflow-x-auto py-4 !mt-0 !mb-0 rounded-t-none rounded-b-none", className)}
+                className={cn(
+                    "overflow-x-auto py-4 !mt-0 !mb-0",
+                    !hideTitleBar && "rounded-t-none",
+                    !hideBorder && "rounded-b-none",
+                    className
+                )}
                 {...props}
             >
                 {children}
@@ -243,3 +265,4 @@ export function Pre({
         </div>
     )
 }
+

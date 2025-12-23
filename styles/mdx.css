@@ -287,25 +287,26 @@ html.dark {
 
 /* Code Group Styles */
 .code-group {
-  @apply my-6 overflow-hidden rounded-xl border bg-background;
+  @apply my-6 overflow-hidden rounded-lg border bg-background;
 }
 
 .code-group .code-group-tabs {
-  @apply flex overflow-x-auto border-b bg-muted/50 px-2 pt-2;
+  @apply flex items-center gap-1 overflow-x-auto py-1;
 }
 
 .code-group .code-group-tab {
-  @apply flex items-center gap-2 rounded-t-lg px-4 py-2 text-sm font-medium transition-colors whitespace-nowrap border-b-2;
+  @apply flex items-center gap-2 rounded-md px-3 py-1.5 text-xs font-medium transition-all whitespace-nowrap;
 }
 
 .code-group .code-group-tab[data-active="true"] {
-  @apply border-primary bg-background text-foreground;
+  @apply bg-muted/80 text-foreground shadow-sm;
 }
 
 .code-group .code-group-tab[data-active="false"] {
-  @apply border-transparent text-muted-foreground hover:bg-muted hover:text-foreground;
+  @apply text-muted-foreground hover:bg-muted/50 hover:text-foreground;
 }
 
+/* Ensure figure inside code group doesn't have redundant styles */
 .code-group .code-block-wrapper [data-rehype-pretty-code-figure] {
   @apply my-0 border-0 rounded-none;
 }
@@ -313,6 +314,7 @@ html.dark {
 .code-group .code-block-wrapper [data-rehype-pretty-code-figure] pre {
   @apply rounded-none border-0;
 }
+
 
 /* Utilities */
 .scrollbar-hide {
