@@ -70,6 +70,14 @@ const rehypePreMeta = () => (tree: Root) => {
             // Set a default if you want, or handle it in React/CSS
             node.properties["data-ligatures"] = "true" 
         }
+
+        // 6. Extract Icon Color preference
+        const iconColorMatch = meta.match(/iconColor=(true|false)/)
+        if (iconColorMatch) {
+            node.properties["data-icon-color"] = iconColorMatch[1]
+        } else {
+            node.properties["data-icon-color"] = "true"
+        }
     })
 }
 

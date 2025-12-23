@@ -62,6 +62,48 @@ const languageIcons: Record<string, React.ReactNode> = {
     kt: <SiKotlin className="size-4" />,
 }
 
+const languageColors: Record<string, { light: string; dark: string }> = {
+    js: { light: "#F7DF1E", dark: "#F7DF1E" },
+    jsx: { light: "#61DAFB", dark: "#61DAFB" },
+    ts: { light: "#3178C6", dark: "#3178C6" },
+    tsx: { light: "#61DAFB", dark: "#61DAFB" },
+    css: { light: "#1572B6", dark: "#33A9DC" },
+    html: { light: "#E34F26", dark: "#E34F26" },
+    json: { light: "#000000", dark: "#FFFFFF" },
+    md: { light: "#000000", dark: "#FFFFFF" },
+    mdx: { light: "#FCB32C", dark: "#FCB32C" },
+    bash: { light: "#4EAA25", dark: "#4EAA25" },
+    sh: { light: "#4EAA25", dark: "#4EAA25" },
+    zsh: { light: "#4EAA25", dark: "#4EAA25" },
+    shell: { light: "#4EAA25", dark: "#4EAA25" },
+    yml: { light: "#CB171E", dark: "#CB171E" },
+    yaml: { light: "#CB171E", dark: "#CB171E" },
+    sql: { light: "#4479A1", dark: "#4479A1" },
+    java: { light: "#007396", dark: "#007396" },
+    go: { light: "#00ADD8", dark: "#00ADD8" },
+    golang: { light: "#00ADD8", dark: "#00ADD8" },
+    py: { light: "#3776AB", dark: "#3776AB" },
+    python: { light: "#3776AB", dark: "#3776AB" },
+    rb: { light: "#CC342D", dark: "#CC342D" },
+    ruby: { light: "#CC342D", dark: "#CC342D" },
+    docker: { light: "#2496ED", dark: "#2496ED" },
+    dockerfile: { light: "#2496ED", dark: "#2496ED" },
+    lua: { light: "#000080", dark: "#000080" },
+    rust: { light: "#000000", dark: "#FFFFFF" },
+    cs: { light: "#239120", dark: "#239120" },
+    csharp: { light: "#239120", dark: "#239120" },
+    cpp: { light: "#00599C", dark: "#00599C" },
+    c: { light: "#A8B9CC", dark: "#A8B9CC" },
+    swift: { light: "#F05138", dark: "#F05138" },
+    dart: { light: "#0175C2", dark: "#0175C2" },
+    flutter: { light: "#02569B", dark: "#02569B" },
+    php: { light: "#777BB4", dark: "#777BB4" },
+    blade: { light: "#FF2D20", dark: "#FF2D20" },
+    laravel: { light: "#FF2D20", dark: "#FF2D20" },
+    kotlin: { light: "#7F52FF", dark: "#7F52FF" },
+    kt: { light: "#7F52FF", dark: "#7F52FF" },
+}
+
 export function Pre({
     children,
     className,
@@ -76,6 +118,7 @@ export function Pre({
     const dataIcon = (props as Record<string, unknown>)["data-icon"] as string
     const dataFont = (props as Record<string, unknown>)["data-font"] as string
     const dataLigatures = (props as Record<string, unknown>)["data-ligatures"] as string
+    const dataIconColor = (props as Record<string, unknown>)["data-icon-color"] as string
     const language = (props as Record<string, unknown>)["data-language"] as string || "text"
 
     // 2. Determine the display label:
@@ -84,9 +127,28 @@ export function Pre({
 
     // 3. Determine Icon
     // Priority: Custom icon from meta > language-based icon > default FileCode
-    const icon = (dataIcon && languageIcons[dataIcon])
+    const iconElement = (dataIcon && languageIcons[dataIcon])
         || languageIcons[language]
         || <FileCode className="size-4" />
+
+    // 5. Apply Icon Color if enabled
+    const colors = languageColors[dataIcon || language];
+    const icon = dataIconColor === "true" && colors ? (
+        <span
+            className="flex items-center justify-center"
+            style={{
+                color: colors.light,
+                // We use a CSS variable to handle the dark mode switch
+                // This is cleaner than trying to use Tailwind classes for dynamic colors
+                ["--icon-dark-color" as string]: colors.dark
+            } as React.CSSProperties}
+        >
+            <span className="dark:hidden">{iconElement}</span>
+            <span className="hidden dark:block" style={{ color: "var(--icon-dark-color)" }}>
+                {iconElement}
+            </span>
+        </span>
+    ) : iconElement;
 
     // 4. Determine Font
     // Priority: Custom font from meta > default Fira Code
