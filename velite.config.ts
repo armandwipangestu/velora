@@ -79,6 +79,16 @@ const rehypePreMeta = () => (tree: Root) => {
             node.properties["data-icon-color"] = "true"
         }
     })
+
+    // Remove redundant title elements
+    visit(tree, "element", (node: Element, index, parent) => {
+        if (node.properties && "data-rehype-pretty-code-title" in node.properties) {
+            if (parent && typeof index === "number") {
+                parent.children.splice(index, 1)
+                return index
+            }
+        }
+    })
 }
 
 export default defineConfig({
