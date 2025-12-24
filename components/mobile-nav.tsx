@@ -8,6 +8,7 @@ import Link, { LinkProps } from "next/link"
 import { useRouter } from "next/navigation"
 import { Icons } from "./icons"
 import { siteConfig } from "@/config/site"
+import { ThemeToggle } from "./layout/theme-toggle"
 
 export function MobileNav() {
     const [open, setOpen] = useState<boolean>(false)
@@ -21,26 +22,44 @@ export function MobileNav() {
                 </Button>
             </SheetTrigger>
 
-            <SheetContent side="right">
+            <SheetContent side="right" className="flex flex-col">
                 <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
                 <SheetDescription className="sr-only">Mobile navigation menu</SheetDescription>
-                <MobileLink onOpenChange={setOpen} href="/" className="flex items-center mt-4 ml-4">
-                    <Icons.logo className="mr-2 h-4 w-4" />
-                    <span className="font-bold">{siteConfig.name}</span>
-                </MobileLink>
-                <div className="flex flex-col gap-3 ml-4">
-                    <MobileLink onOpenChange={setOpen} href="/blog">
-                        Blog
+                <div className="flex flex-col gap-6 mt-8">
+                    <MobileLink onOpenChange={setOpen} href="/" className="flex items-center">
+                        <Icons.logo className="mr-2 h-6 w-6" />
+                        <span className="font-bold text-lg">{siteConfig.name}</span>
                     </MobileLink>
-                    <MobileLink onOpenChange={setOpen} href="/about">
-                        About
-                    </MobileLink>
-                    <Link target="_blank" rel="norefferrer noopener" href={siteConfig.links.github}>
-                        GitHub
-                    </Link>
-                    <Link target="_blank" rel="norefferrer noopener" href={siteConfig.links.instagram}>
-                        Instagram
-                    </Link>
+
+                    <div className="flex flex-col gap-4">
+                        <MobileLink onOpenChange={setOpen} href="/guide" className="text-lg font-medium border-b border-border pb-2">
+                            Guide
+                        </MobileLink>
+                        <MobileLink onOpenChange={setOpen} href="/reference" className="text-lg font-medium border-b border-border pb-2">
+                            Reference
+                        </MobileLink>
+                        <MobileLink onOpenChange={setOpen} href="/examples" className="text-lg font-medium border-b border-border pb-2">
+                            Examples
+                        </MobileLink>
+                    </div>
+
+                    <div className="flex flex-col gap-4 p-4 rounded-lg bg-muted/50">
+                        <div className="flex items-center justify-between">
+                            <span className="text-sm font-medium text-muted-foreground">Appearance</span>
+                            <ThemeToggle />
+                        </div>
+                    </div>
+
+                    <div className="flex justify-center mt-auto">
+                        <Link
+                            target="_blank"
+                            rel="norefferrer noopener"
+                            href={siteConfig.links.github}
+                            className="text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                            <Icons.gitHub className="h-8 w-8" />
+                        </Link>
+                    </div>
                 </div>
             </SheetContent>
         </Sheet>

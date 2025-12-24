@@ -4,17 +4,27 @@ export const Icons = {
     logo: (props: IconProps) => (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
+            viewBox="0 0 100 100"
             fill="none"
             stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            strokeWidth="0"
             {...props}
         >
-            <path d="M4 11a9 9 0 0 1 9 9" />
-            <path d="M4 4a16 16 0 0 1 16 16" />
-            <circle cx="5" cy="19" r="1" />
+            <path
+                d="M10 20 L40 90 L60 90 L90 20 L75 20 L50 75 L25 20 Z"
+                fill="currentColor"
+            />
+            <path
+                d="M40 90 L60 90 L90 20 L75 20 L55 65 L45 65 L40 65 Z"
+                fill="url(#logo-gradient)"
+                opacity="0.5"
+            />
+            <defs>
+                <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#10b981" />
+                    <stop offset="100%" stopColor="#06b6d4" />
+                </linearGradient>
+            </defs>
         </svg>
     ),
     twitter: (props: IconProps) => (
