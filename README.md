@@ -92,6 +92,7 @@ The following are the features I want to achieve or are under development:
 - [ ✅ ] Add giscus components for discussion section
 - [ ✅ ] Code block group components
 - [ ] Wrap code block content
+- [ ] Add preview rendered code block
 
 See the [open issues](https://github.com/armandwipangestu/velora/issues) for a list of proposed features (and known issues).
 
