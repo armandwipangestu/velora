@@ -1,3 +1,32 @@
+# [1.8.0-rc.1](https://github.com/armandwipangestu/velora/compare/v1.7.0...v1.8.0-rc.1) (2025-12-25)
+
+
+### Bug Fixes
+
+* add icon alias that use prefix `i` to avoid word highlight bug ([cc68270](https://github.com/armandwipangestu/velora/commit/cc68270a6ea0b4130057f0ac3f36c0c2ba034c5b))
+* adjust gradient ([0a43766](https://github.com/armandwipangestu/velora/commit/0a43766330dee2f3aeebabdea507e3ea51f1871b))
+* adjust infinite slider ([9dbf694](https://github.com/armandwipangestu/velora/commit/9dbf6949652105ec4c934a7681c0bdcf52f7374c))
+* adjust navbar ([692b538](https://github.com/armandwipangestu/velora/commit/692b538a6a768d7e517b93254fbd7e94555e747f))
+* adjust the docs looks ([34a5aac](https://github.com/armandwipangestu/velora/commit/34a5aaca8f42d10e35a1d2b9d350201b566467dd))
+* adjust the responsive landing page and footer ([448b4ba](https://github.com/armandwipangestu/velora/commit/448b4ba7244dc4f60584414aada299d9cde45671))
+* **ci:** remove any data type ([03d85cd](https://github.com/armandwipangestu/velora/commit/03d85cd5de62b264c56004adf2cc597da5aa39c2))
+* **ci:** remove warning ([635b651](https://github.com/armandwipangestu/velora/commit/635b651907c50d4a70c6cefc39ebc175bea2f333))
+* docs order ([26fb0f1](https://github.com/armandwipangestu/velora/commit/26fb0f1291a2d69902d2e8f259b47560476a415f))
+* previous page button ([5f9aa9c](https://github.com/armandwipangestu/velora/commit/5f9aa9c94a738d8c0d3eb6d6d25738a6d9eb14cf))
+* toc list ([9623fb2](https://github.com/armandwipangestu/velora/commit/9623fb2996772c76a2fcfd44f216e2f8b2859d48))
+
+
+### Features
+
+* add docs prototype ([80655d6](https://github.com/armandwipangestu/velora/commit/80655d632ad428d59d07f0ea5dff04daeb8b5d00))
+* add grid pattern background ([65e7fb5](https://github.com/armandwipangestu/velora/commit/65e7fb52571b438af2049e92ea9338f260ead315))
+* add infinite scroll animation ([d1891cf](https://github.com/armandwipangestu/velora/commit/d1891cf737e2d17c431a9118ab4c04696af93c40))
+* add sample mdx in landing page ([8cda2d5](https://github.com/armandwipangestu/velora/commit/8cda2d5c639013259172d9d6d117b837bfce5a2d))
+* add tanstack query ([00c4088](https://github.com/armandwipangestu/velora/commit/00c40881a22e31967198e1b79f39cf0e0e590b0c))
+* add version badge ([54a50d7](https://github.com/armandwipangestu/velora/commit/54a50d7285e4ce3592279e9d9bd8071293a218ce))
+* **docs:** add prototype ([37f49b2](https://github.com/armandwipangestu/velora/commit/37f49b27523bb36062c2d4f1a5fba3c30c7190f3))
+* update icon ([aedb230](https://github.com/armandwipangestu/velora/commit/aedb230063c483ef00978588a6c4d744c4640132))
+
 # [1.7.0-rc.2](https://github.com/armandwipangestu/velora/compare/v1.7.0-rc.1...v1.7.0-rc.2) (2025-12-25)
 
 
