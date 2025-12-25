@@ -4,12 +4,8 @@ export const siteConfig = {
     description: "A modern, type-safe MDX blog template built with Next.js, Velite, TailwindCSS, Shadcn UI, Shiki, and Rehype",
     author: "Arman Dwi Pangestu",
     links: {
-        github: "https://github.com/armandwipangestu",
-        gitlab: "https://gitlab.com/armandwipangestu",
-        linkedin: "https://www.linkedin.com/in/arman-dwi-pangestu",
-        instagram: "https://instagram.com/armandwi.pangestu",
-        youtube: "https://youtube.com/@armandwipangestu",
-        personalSite: "https://devvnull.vercel.app/en",
+        github: "https://github.com/armandwipangestu/velora",
+        personalSite: "https://velora-example.vercel.app/",
         email: "armandwi.pangestu7@gmail.com"
     }
 }

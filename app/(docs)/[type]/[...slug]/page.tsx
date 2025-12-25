@@ -31,6 +31,17 @@ export default async function DocPage({ params }: DocPageProps) {
 
     const { prev, next } = getPager(docs, resolvedParams.type, doc.slug);
 
+    // Get parent title for subheading if exists
+    const slugParts = doc.slug.split("/");
+    let displayTitle = doc.title;
+    if (slugParts.length > 2) {
+        const parentSlug = slugParts.slice(0, -1).join("/");
+        const parentDoc = docs.find((d) => d.slug === parentSlug);
+        if (parentDoc) {
+            displayTitle = `${parentDoc.title} - ${doc.title}`;
+        }
+    }
+
     return (
         <article className="prose dark:prose-invert max-w-none">
             <div className="mb-4">
@@ -39,7 +50,7 @@ export default async function DocPage({ params }: DocPageProps) {
                         {doc.category}
                     </p>
                 )}
-                <h1 className="text-4xl font-black tracking-tight mt-0">{doc.title}</h1>
+                <h1 className="text-4xl font-black tracking-tight mt-0">{displayTitle}</h1>
                 {doc.description && (
                     <p className="text-xl text-muted-foreground mt-4 mb-8">
                         {doc.description}

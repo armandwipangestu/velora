@@ -1,0 +1,77 @@
+---
+title: Custom Font
+description: Enabling custom font in code blocks
+category: Custom Components
+categoryOrder: 2
+order: 5
+---
+
+# Custom Font
+
+<Callout type="note">
+    The default font is using `FiraCode Nerd Font Mono` (which is support ligature variant)
+</Callout>
+
+Enabling custom font in code blocks
+
+## Code Example
+
+Show custom font using the `font="<FontName>"` meta tag.
+
+- Using default font `FiraCode Nerd Font Mono` (which is support ligature variant)
+
+````mdx
+```ts
+const check = a !== b;
+```
+````
+
+it will show like this
+
+```ts
+const check = a !== b;
+```
+
+- Using custom font `Ubuntu Mono` (which is not support ligature variant)
+
+````mdx
+```ts font="Ubuntu Mono"
+const check = a !== b;
+```
+````
+
+it will show like this
+
+```ts font="Ubuntu Mono"
+const check = a !== b;
+```
+
+- Using custom font `Geist Mono` (which is support ligature variant)
+
+````mdx
+```ts font="Geist Mono"
+const check = a !== b;
+```
+````
+
+it will show like this
+
+```ts font="Geist Mono"
+const check = a !== b;
+```
+
+## Disable Ligatures
+
+You can also use font that support ligature variant, but want to disable it. You can use `fontLigatures=false` meta tag.
+
+````mdx
+```ts fontLigatures=false
+const check = a !== b;
+```
+````
+
+That will use `FiraCode Nerd Font Mono` font, but disable ligatures and it will show like this
+
+```ts fontLigatures=false
+const check = a !== b;
+```

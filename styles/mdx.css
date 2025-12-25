@@ -79,7 +79,7 @@ html.dark {
 [data-rehype-pretty-code-figure] pre {
   @apply px-0;
   background-color: var(--mdx-pre-bg);
-  font-family: 'FiraCode Nerd Font', ui-monospace, monospace;
+  font-family: var(--mdx-font-family, 'FiraCode Nerd Font', ui-monospace, monospace);
 }
 
 /* Ligature Management */

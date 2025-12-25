@@ -112,6 +112,11 @@ export const languageColors: Record<string, { light: string; dark: string }> = {
     kt: { light: "#7F52FF", dark: "#7F52FF" },
 }
 
+export const fontAliases: Record<string, string> = {
+    "Ubuntu Mono": "var(--font-ubuntu-mono)",
+    "Geist Mono": "var(--font-mono)",
+};
+
 export const languageAliases: Record<string, string> = {
     iJs: "js",
     iJsx: "jsx",
@@ -198,9 +203,11 @@ export function Pre({
 
     // Helper to resolve aliases (e.g., "iNpm" -> "npm")
     const resolveKey = (key: string) => languageAliases[key] || key;
+    const resolveFont = (font: string) => fontAliases[font] || font;
 
     const iconKey = resolveKey(rawIcon);
     const langKey = resolveKey(language);
+    const fontValue = resolveFont(dataFont);
 
     // 2. Determine the display label:
     // Priority: Prop title > data-title attribute from rehype > language extension
@@ -238,7 +245,9 @@ export function Pre({
     // but usually React inline styles win over CSS files.
     const style: React.CSSProperties = {
         ...props.style,
-        fontFamily: dataFont ? `"${dataFont}", monospace` : undefined,
+        fontFamily: fontValue ? `${fontValue}, monospace` : undefined,
+        // Set the CSS variable we added to mdx.css
+        ...((fontValue) && { ["--mdx-font-family" as string]: `${fontValue}, monospace` }),
         // If fontLigatures=false is explicitly passed, we force them off via inline style
         ...(dataLigatures === "false" && {
             fontVariantLigatures: "none",
@@ -285,10 +294,15 @@ export function Pre({
     }
 
     return (
-        <div className={cn(
-            "my-6 overflow-hidden",
-            !hideBorder && "rounded-lg border bg-background"
-        )}>
+        <div
+            className={cn(
+                "my-6 overflow-hidden",
+                !hideBorder && "rounded-lg border bg-background"
+            )}
+            style={{
+                ...((fontValue) && { ["--mdx-font-family" as string]: `${fontValue}, monospace` }),
+            }}
+        >
             {!hideTitleBar && (
                 <div className="flex items-center justify-between border-b bg-[#f6f8fa] dark:bg-[#161a20] px-4 py-2.5">
                     <div className="flex items-center gap-4">
@@ -323,6 +337,7 @@ export function Pre({
                 </div>
             )}
             <pre
+                {...props}
                 ref={preRef}
                 style={style}
                 className={cn(
@@ -331,7 +346,6 @@ export function Pre({
                     !hideBorder && "rounded-b-none",
                     className
                 )}
-                {...props}
             >
                 {children}
             </pre>

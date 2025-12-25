@@ -9,23 +9,61 @@ order: 1
 # Introduction
 
 <Callout type="warning" title="WARNING" descriptionColor="normal">
-    🚧 The velora code is not optimal because the author not an expert in frontend development, but the functionality is enough for a blog.
-    <br />
-    So if you want to use this template, you can use it as a starting point and improve it.
+    🚧 **Velora's code is still being optimized**. As the author is not a frontend expert, some areas may need refinement; however, the functionality is fully sufficient for a blog. If you choose to use this template, consider it a solid starting point for your own improvements.
 </Callout>
 
 ## What is Velora?
 
-It's an open-source blog template, the core tech stack is using `Next.js`, `Tailwind CSS`, `Velite`, and `MDX`. With the velite, you can create a blog with type-safe data layer (because it's defined using typescript and zod for schema validation). See the velite <a className='text-[#10b981]' href="https://velite.js.org/guide/introduction" target="_blank">docs</a> for more information.
+It is an open-source blog template. The core tech stack uses Next.js, Tailwind CSS, Velite, MDX, <a className='text-[#10b981]' href="https://shiki.style/" target="_blank">Shiki</a>, and <a className='text-[#10b981]' href="https://rehype-pretty.pages.dev/" target="_blank">Rehype Pretty Code</a>. With Velite, you can create a blog with a type-safe data layer, as it is defined using TypeScript and Zod for schema validation. See the Velite <a className='text-[#10b981]' href="https://velite.js.org/guide/introduction" target="_blank">docs</a> for more information.
 
-Velora just create a template for blog with some features that I need. So you don't need to create content pipeline from scratch using Velite, inside of Velora there's some pre-built components and utilities that you can use to create a blog.
+Velora provides a blog template with all the essential features built-in. This means you don't need to build a content pipeline from scratch; Velora includes pre-built components and utilities to help you get your blog running immediately.
 
 ## History
 
-The author start this project because he want to redesign his portfolio and blog <a className='text-[#10b981]' href="https://devvnull.vercel.app/en" target="_blank">page</a> in December 2025
+The author started this project in December 2025 to redesign his portfolio and blog <a className='text-[#10b981]' href="https://devvnull.vercel.app/en" target="_blank">page</a>. His previous portfolio and blog <a className='text-[#10b981]' href="https://armandwipangestu.vercel.app/blog" target="_blank">page</a> used a tech stack consisting of Next.js, Tailwind CSS, and Markdown.
+
+However, the previous setup required significant manual configuration for frontmatter and syntax highlighting (using highlight.js), and the code blocks were limited to basic highlighting. After researching ways to create a richer code block experience—including features like line numbers, word/line highlighting, and diff notation—the author discovered Shiki and Rehype Pretty Code. These libraries are the core of modern code block tools like <a className='text-[#10b981]' href="https://expressive-code.com/" target="_blank">Expressive Code</a> and <a className='text-[#10b981]' href="https://nextra.site/" target="_blank">Nextra</a>.
+
+Shiki is a powerful syntax highlighter, while Rehype Pretty Code is a plugin that transforms Markdown into HTML with specialized classes and attributes.
+
+After learning about these capabilities, the author became interested in building a sample blog using Next.js, Tailwind CSS, and MDX. To overcome the difficulties of configuring these plugins, he found a helpful YouTube video by <a className='text-[#10b981]' href="https://youtu.be/tSI98g3PDyE?si=bqgUHaJsqzyCJorx" target="_blank">Jolly Coding</a> and its accompanying repository, <a className='text-[#10b981]' href="https://github.com/jolbol1/nextjs-velite-blog-template" target="_blank">nextjs-velite-blog-template</a>.
+
+Following that tutorial made everything click. The most impressive part of this setup is how easily the plugins can be configured and how Velite acts as a seamless content pipeline, making MDX content easy to maintain, parse, and extend with custom React components.
+
+## Why Choose Shiki and Rehype Pretty Code?
+
+After doing some research, the author explored several options for syntax highlighting, such as <a className='text-[#10b981]' href="https://highlightjs.org" target="_blank">highlight.js</a>, <a className='text-[#10b981]' href="https://prismjs.com/" target="_blank">Prism.js</a>, and <a className='text-[#10b981]' href="https://codehike.org/" target="_blank">Code Hike</a>. However, after reviewing their configurations, the author found that Shiki and Rehype Pretty Code were the best options.
+
+What makes Shiki particularly interesting is that it uses the same engine that powers VS Code: <a className='text-[#10b981]' href="https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide#textmate-grammars" target="_blank">TextMate Grammars</a>. This provides some of the most accurate and beautiful syntax highlighting available; you can read more about Shiki's history <a className='text-[#10b981]' href="https://nuxt.com/blog/shiki-v1" target="_blank">here</a>. The best part is that Shiki is static rather than runtime-based. It’s fast and doesn't require loading additional files because it’s bundled during the build process—unlike highlight.js or Prism.js, which typically run in the browser and can impact performance.
+
+Rehype Pretty Code is a plugin that transforms Markdown into HTML with specialized classes and attributes. It provides features like line numbers, line highlighting, and word highlighting. The ecosystem also supports advanced features like diff notation via <a className='text-[#10b981]' href="https://shiki.style/packages/transformers" target="_blank">@shiki/transformers</a> and interactive TypeScript code samples via <a className='text-[#10b981]' href="https://shiki.style/packages/twoslash" target="_blank">@shiki/twoslash</a>.
+
+Finally, the author observed that many modern documentation sites are migrating to Shiki and Rehype for their superior syntax highlighting capabilities.
 
 ## Key Features
 
-- Rich Code Blocks
-- Dynamic OG Images
-- Responsive Design
+- MDX Components
+- Shadcn UI
+- Pagination
+- Dynamic Open Graph Image (for SEO)
+- Very Rich Code Block
+    - Syntax Highlighting using Shiki and Rehype
+        - Line numbers
+        - Line highlighting
+        - Word highlighting
+        - ANSI Highlighting
+        - Word Group Highlighting (based on id `#v` for variable, `#s` for state, `#i` for identifier)
+        - Inline Diff / Diff Notation Highlighting
+        - Focused and Unfocused lines
+        - Error and Warning Highlighting
+        - Inline Code with language
+        - Nested Code Block
+    - Title Bar
+    - Copy Button
+    - Custom Title Name
+    - Custom Font with Ligatures support
+    - Custom Language Icon
+    - Code Group
+- Docker support
+- Velite Integration for Content Pipeline
+- Giscus Integration for Discussion Section

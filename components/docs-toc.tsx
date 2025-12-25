@@ -58,10 +58,10 @@ export function DocsToc({ items }: DocsTocProps) {
 
     return (
         <div className="space-y-4">
-            <p className="text-[10px] font-black tracking-[0.2em] text-foreground/70 uppercase">
+            <p className="text-[10px] font-black tracking-[0.2em] text-foreground/70 uppercase px-3">
                 On this page
             </p>
-            <ul className="m-0 list-none text-[13px] font-medium leading-relaxed">
+            <ul className="m-0 list-none text-[13px] font-medium leading-relaxed border-l border-border/40">
                 {items.map((item, index) => (
                     <TocNavInternalItem key={index} item={item} activeId={activeId} />
                 ))}
@@ -83,20 +83,21 @@ function TocNavInternalItem({
     const isActive = activeId === id;
 
     return (
-        <li className={cn("mt-0 pt-3", level > 0 && "pl-4 border-l ml-1")}>
+        <li className="mt-0">
             <a
                 href={item.url}
+                style={{ paddingLeft: `${(level + 1) * 12}px` }}
                 className={cn(
-                    "inline-block no-underline transition-all duration-200 hover:text-primary",
+                    "block no-underline transition-all duration-200 hover:text-primary py-1.5 pr-3 border-l-2 -ml-px",
                     isActive
-                        ? "font-bold text-primary translate-x-1"
-                        : "text-muted-foreground/80"
+                        ? "font-bold text-primary border-primary bg-primary/5"
+                        : "text-muted-foreground/80 border-transparent"
                 )}
             >
                 {item.title}
             </a>
             {item.items && item.items.length > 0 && (
-                <ul className="m-0 list-none mt-1">
+                <ul className="m-0 list-none">
                     {item.items.map((subItem, index) => (
                         <TocNavInternalItem
                             key={index}

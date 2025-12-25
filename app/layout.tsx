@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Ubuntu_Mono} from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
@@ -16,6 +16,12 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-mono",
+  subsets: ["latin"],
+});
+
+const ubuntuMono = Ubuntu_Mono({
+  weight: ["400", "700"],
+  variable: "--font-ubuntu-mono",
   subsets: ["latin"],
 });
 
@@ -48,7 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="scroll-pt-[3.5rem]">
       <body
-        className={cn("min-h-screen bg-background font-sans antialiased", `${geistSans.variable} ${geistMono.variable}`)}
+        className={cn("min-h-screen bg-background font-sans antialiased", `${geistSans.variable} ${geistMono.variable} ${ubuntuMono.variable}`)}
       >
         <Script
           defer
