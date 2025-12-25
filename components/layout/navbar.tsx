@@ -13,7 +13,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { VersionBadge } from "../ui/version-badge";
 
 const navLinks = [
-    { href: "/guide", label: "Guide" },
+    { href: "/guide/introduction", label: "Guide" },
     { href: "/reference", label: "Reference" },
     { href: "/examples", label: "Examples" },
 ];
