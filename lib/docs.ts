@@ -59,19 +59,29 @@ export function getDocsSidebar(docs: Doc[], type: string): SidebarGroup[] {
 }
 
 export function getPager(docs: Doc[], type: string, slug: string) {
-    const filteredDocs = docs
-        .filter((doc) => doc.slug.startsWith(type))
-        .sort((a, b) => {
-            if (a.categoryOrder !== b.categoryOrder) {
-                return (a.categoryOrder || 999) - (b.categoryOrder || 999);
-            }
-            return (a.order || 999) - (b.order || 999);
-        });
-        
-    const index = filteredDocs.findIndex((doc) => doc.slug === slug);
+    const sidebar = getDocsSidebar(docs, type);
     
+    const flattened: { title: string; href: string }[] = [];
+    const walk = (items: SidebarItem[]) => {
+        items.forEach(item => {
+            if (item.href) {
+                flattened.push({ title: item.title, href: item.href });
+            }
+            if (item.items && item.items.length > 0) {
+                walk(item.items);
+            }
+        });
+    };
+    
+    sidebar.forEach(group => walk(group.items));
+    
+    const currentHref = `/${slug}`;
+    const index = flattened.findIndex(item => item.href === currentHref);
+    
+    if (index === -1) return { prev: null, next: null };
+
     return {
-        prev: index > 0 ? { title: filteredDocs[index - 1].title, href: `/${filteredDocs[index - 1].slug}` } : null,
-        next: index < filteredDocs.length - 1 ? { title: filteredDocs[index + 1].title, href: `/${filteredDocs[index + 1].slug}` } : null,
+        prev: index > 0 ? flattened[index - 1] : null,
+        next: index < flattened.length - 1 ? flattened[index + 1] : null,
     };
 }

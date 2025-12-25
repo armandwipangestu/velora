@@ -1,0 +1,35 @@
+---
+title: Custom Icon
+description: Enabling custom icon in code blocks
+category: Custom Components
+categoryOrder: 2
+order: 4
+---
+
+# Custom Icon
+
+<Callout type="note">
+    The default icon is detect using `language` or `title` name, but it can be override using `icon="..."` meta string.
+</Callout>
+
+Enabling custom icon in code blocks
+
+## Code Example
+
+Show custom icon using the `icon="i<IconName>"` meta tag.
+
+````mdx icon="mdx" showLineNumbers /icon="iLaravel"/#v
+```php title="example.blade.php" icon="iLaravel"
+    @php
+        echo "Hello, World!";
+    @endphp
+```
+````
+
+It must be showing an `php` icon, but because i passing `icon="iLaravel"` it will show laravel icon like this.
+
+```php title="example.blade.php" icon="iLaravel"
+@php
+    echo "Hello, World!";
+@endphp
+```

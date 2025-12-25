@@ -66,7 +66,7 @@ export default function Home() {
 
             <div className="flex flex-row gap-3 justify-center lg:justify-start pt-4 px-2">
               <Link
-                href="/guide"
+                href="/guide/introduction"
                 className={cn(
                   buttonVariants({ size: "default" }),
                   "flex-1 sm:flex-none px-6 sm:px-8 rounded-full h-11 sm:h-12 text-sm sm:text-base font-semibold transition-all duration-300 hover:scale-105 bg-[#10b981] hover:bg-[#10b981]/90"

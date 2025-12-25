@@ -1,0 +1,49 @@
+---
+title: Word Highlighting
+description: Enabling word highlighting in code blocks
+category: Custom Components
+categoryOrder: 2
+order: 3
+---
+
+# Word Highlighting
+
+Enabling word highlighting in code blocks
+
+## Code Example
+
+Show word highlighting using the `/<word>/` meta tag.
+
+````mdx 
+```tsx /floatingStyles/
+import { useFloating } from "@floating-ui/react";
+ 
+function MyComponent() {
+  const { refs, floatingStyles } = useFloating();
+ 
+  return (
+    <>
+      <div ref={refs.setReference} />
+      <div ref={refs.setFloating} style={floatingStyles} />
+    </>
+  );
+}
+```
+````
+
+This should be highlight the word floatingStyles.
+
+```tsx /floatingStyles/
+import { useFloating } from "@floating-ui/react";
+ 
+function MyComponent() {
+  const { refs, floatingStyles } = useFloating();
+ 
+  return (
+    <>
+      <div ref={refs.setReference} />
+      <div ref={refs.setFloating} style={floatingStyles} />
+    </>
+  );
+}
+```

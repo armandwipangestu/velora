@@ -1,0 +1,55 @@
+---
+title: Diff Notation
+description: Enabling diff notation in code blocks
+category: Custom Components
+categoryOrder: 2
+order: 6
+---
+
+# Diff Notation
+
+Diff notation is a way to show the changes between two versions of a file, like git diff if you familiar.
+
+## Code Example
+
+Show diff notation using the `// [!code ++]` for added line and `// [!code --]` for removed line identifier. The identifier is place at top of the line.
+
+````bash title="mdx" icon="iMdx" {5,9}
+```ts showLineNumbers
+function MyComponent() {
+  return (
+    <div>
+      //[!code --:3]
+      <h1>Hello World</h1>
+      <p>Unchanged Line</p>
+
+      //[!code ++]
+      <h1>Hello Next.js</h1>
+
+      <p>Highlighted Line</p>
+      <p>Focused Line</p>
+    </div>
+  );
+}
+```
+````
+
+It will show like this
+
+```ts showLineNumbers
+function MyComponent() {
+  return (
+    <div>
+      //[!code --:3]
+      <h1>Hello World</h1>
+      <p>Unchanged Line</p>
+
+      //[!code ++]
+      <h1>Hello Next.js</h1>
+
+      <p>Highlighted Line</p>
+      <p>Focused Line</p>
+    </div>
+  );
+}
+```

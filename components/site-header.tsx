@@ -22,15 +22,6 @@ export function SiteHeader() {
                         </div>
                     </Link>
 
-                    <Link href={siteConfig.links.instagram} target="_blank" rel="norefferrer noopener">
-                        <div className={cn(buttonVariants({
-                            variant: "ghost",
-                        }), "w-10 px-0 hidden sm:inline-flex")}>
-                            <Icons.isntagram className="h-4 w-4" />
-                            <div className="sr-only">Instagram</div>
-                        </div>
-                    </Link>
-
                     <ModeToggle />
                     <MobileNav />
                 </nav>
