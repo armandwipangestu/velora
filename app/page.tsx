@@ -4,13 +4,17 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Icons } from "@/components/icons";
 import { Github, Rocket, ShieldCheck, Zap, Files } from "lucide-react";
-import Image from "next/image";
+import { pages } from "#site/content";
+import { MDXContent } from "@/components/mdx-components";
+import "@/styles/mdx.css"
 
 export default function Home() {
+  const landingPage = pages.find((p) => p.slug === "landing");
+
   return (
     <div className="flex flex-col min-h-screen">
       <section className="container pt-20 pb-16 md:pt-32 md:pb-24 lg:pt-48">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-8">
           <div className="flex-1 text-center lg:text-left space-y-6">
             <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-balance">
               <span className="text-primary block">Velite</span>
@@ -19,6 +23,15 @@ export default function Home() {
             <p className="max-w-[42rem] mx-auto lg:mx-0 text-muted-foreground text-lg sm:text-xl md:text-2xl text-balance font-medium">
               New Choices for Content-first Apps
             </p>
+
+            <div className="max-w-[42rem] mx-auto lg:mx-0 text-left prose dark:prose-invert">
+              {landingPage ? (
+                <MDXContent code={landingPage.body} />
+              ) : (
+                <p>No description available.</p>
+              )}
+            </div>
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
               <Link
                 href="/guide"

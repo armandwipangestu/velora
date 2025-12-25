@@ -24,6 +24,15 @@ const posts = defineCollection({
     }).transform(computedFields)
 })
 
+const pages = defineCollection({
+    name: "Page",
+    pattern: "*.mdx",
+    schema: s.object({
+        slug: s.path(),
+        body: s.mdx()
+    })
+})
+
 const rehypeCodeGroup = () => (tree: Root) => {
     visit(tree, "element", (node: Element, index, parent) => {
         if (node.tagName === "p" && parent && typeof index === "number") {
@@ -159,7 +168,8 @@ export default defineConfig({
         clean: true
     },
     collections: {
-        posts
+        posts,
+        pages
     },
     mdx: {
         rehypePlugins: [
