@@ -167,6 +167,7 @@ const docs = defineCollection({
         description: s.string().max(999).optional(),
         published: s.boolean().default(true),
         category: s.string().optional(),
+        categoryOrder: s.number().default(0),
         order: s.number().default(0),
         toc: s.toc(),
         body: s.mdx()

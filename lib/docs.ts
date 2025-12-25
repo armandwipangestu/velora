@@ -11,9 +11,7 @@ export function getDocsSidebar(docs: Doc[], type: string): SidebarGroup[] {
         const category = doc.category || "General";
         if (!groups[category]) {
             groups[category] = [];
-            categoryOrder[category] = doc.order || 999;
-        } else {
-            categoryOrder[category] = Math.min(categoryOrder[category], doc.order || 999);
+            categoryOrder[category] = doc.categoryOrder || 999;
         }
         
         const slugParts = doc.slug.split("/").slice(1);
@@ -63,7 +61,12 @@ export function getDocsSidebar(docs: Doc[], type: string): SidebarGroup[] {
 export function getPager(docs: Doc[], type: string, slug: string) {
     const filteredDocs = docs
         .filter((doc) => doc.slug.startsWith(type))
-        .sort((a, b) => (a.order || 999) - (b.order || 999));
+        .sort((a, b) => {
+            if (a.categoryOrder !== b.categoryOrder) {
+                return (a.categoryOrder || 999) - (b.categoryOrder || 999);
+            }
+            return (a.order || 999) - (b.order || 999);
+        });
         
     const index = filteredDocs.findIndex((doc) => doc.slug === slug);
     
