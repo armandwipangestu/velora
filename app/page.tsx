@@ -6,30 +6,8 @@ import { Icons } from "@/components/icons";
 import { Github, Rocket, ShieldCheck, Zap, Files } from "lucide-react";
 import { pages } from "#site/content";
 import { MDXContent } from "@/components/mdx-components";
+import { TechStack } from "@/components/tech-stack";
 import "@/styles/mdx.css"
-import { InfiniteSlider } from "@/components/infinite-scroll";
-import { BiLogoTypescript } from "react-icons/bi";
-import { SiMdx, SiShadcnui, SiTailwindcss } from "react-icons/si";
-import { RiNextjsFill } from "react-icons/ri";
-import { FaDocker } from "react-icons/fa6";
-
-interface IconConfig {
-  Icon: React.ComponentType<{
-    width?: number;
-    height?: number;
-    className?: string;
-  }>;
-  label: string;
-}
-
-const LOGO_TECH_STACKS: IconConfig[] = [
-  { Icon: RiNextjsFill, label: "Next.js" },
-  { Icon: BiLogoTypescript, label: "TypeScript" },
-  { Icon: SiMdx, label: "MDX" },
-  { Icon: SiTailwindcss, label: "Tailwind CSS" },
-  { Icon: SiShadcnui, label: "Shadcn UI" },
-  { Icon: FaDocker, label: "Docker" },
-];
 
 export default function Home() {
   const landingPage = pages.find((p) => p.slug === "landing");
@@ -55,13 +33,7 @@ export default function Home() {
               )}
             </div>
 
-            <div className="space-y-6">
-              <InfiniteSlider
-                title="Build Using"
-                icons={LOGO_TECH_STACKS}
-                direction="left"
-              />
-            </div>
+            <TechStack />
 
             <div className="flex flex-row gap-3 justify-center lg:justify-start pt-4 px-2">
               <Link
