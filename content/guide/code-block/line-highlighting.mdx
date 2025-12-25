@@ -1,0 +1,76 @@
+---
+title: Line Highlighting
+description: Enabling line highlighting in code blocks
+category: Custom Components
+order: 4
+---
+
+# Line Highlighting
+
+Enabling line highlighting in code blocks
+
+## Code Example
+
+Show line highlighting using the `{<line_number>}` meta tag.
+
+````mdx /2/
+```ts {2}
+interface User {
+    id: number;
+    name: string;
+}
+```
+````
+
+It will be rendered as:
+
+```ts {2}
+interface User {
+    id: number;
+    name: string;
+}
+```
+
+### Multiple Line Highlighting
+
+You can highlight multiple lines by using `{<line_number>,<line_number>}` meta tags.
+
+````mdx /2/ /4/
+```ts {2,4}
+interface User {
+    id: number;
+    name: string;
+}
+```
+````
+
+It will be rendered as:
+
+```ts {2,4}
+interface User {
+    id: number;
+    name: string;
+}
+```
+
+### Range of Line Highlighting
+
+Or you can use range of line number like `{<start>-<end>}`.
+
+````mdx /2-4/
+```ts {2-4}
+interface User {
+    id: number;
+    name: string;
+}
+```
+````
+
+It will be rendered as:
+
+```ts {2-4}
+interface User {
+    id: number;
+    name: string;
+}
+```
