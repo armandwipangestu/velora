@@ -112,6 +112,61 @@ export const languageColors: Record<string, { light: string; dark: string }> = {
     kt: { light: "#7F52FF", dark: "#7F52FF" },
 }
 
+export const languageAliases: Record<string, string> = {
+    iJs: "js",
+    iJsx: "jsx",
+    iTs: "ts",
+    iTsx: "tsx",
+    iNode: "node",
+    iNodejs: "nodejs",
+    iNpm: "npm",
+    iYarn: "yarn",
+    iPnpm: "pnpm",
+    iBun: "bun",
+    iCss: "css",
+    iHtml: "html",
+    iJson: "json",
+    iMd: "md",
+    iMdx: "mdx",
+    iAnsi: "ansi",
+    iBash: "bash",
+    iSh: "sh",
+    iZsh: "zsh",
+    iShell: "shell",
+    iYml: "yml",
+    iYaml: "yaml",
+    iCsv: "csv",
+    iSql: "sql",
+    iJava: "java",
+    iGo: "go",
+    iGolang: "golang",
+    iPy: "py",
+    iPython: "python",
+    iRb: "rb",
+    iRuby: "ruby",
+    iVim: "vim",
+    iVimscript: "vimscript",
+    iDocker: "docker",
+    iDockerfile: "dockerfile",
+    iDiff: "diff",
+    iLua: "lua",
+    iRust: "rust",
+    iCs: "cs",
+    iCsharp: "csharp",
+    iCpp: "cpp",
+    iC: "c",
+    iSwift: "swift",
+    iDart: "dart",
+    iFlutter: "flutter",
+    iXml: "xml",
+    iXaml: "xaml",
+    iPhp: "php",
+    iBlade: "blade",
+    iLaravel: "laravel",
+    iKotlin: "kotlin",
+    iKt: "kt",
+};
+
 import { useCodeGroup } from "./mdx-code-group"
 
 export function Pre({
@@ -135,11 +190,17 @@ export function Pre({
 
     // 1. Check props for data-title (passed from rehype)
     const dataTitle = (props as Record<string, unknown>)["data-title"] as string
-    const dataIcon = (props as Record<string, unknown>)["data-icon"] as string
     const dataFont = (props as Record<string, unknown>)["data-font"] as string
     const dataLigatures = (props as Record<string, unknown>)["data-ligatures"] as string
     const dataIconColor = (props as Record<string, unknown>)["data-icon-color"] as string
+    const rawIcon = (props as Record<string, unknown>)["data-icon"] as string;
     const language = (props as Record<string, unknown>)["data-language"] as string || "text"
+
+    // Helper to resolve aliases (e.g., "iNpm" -> "npm")
+    const resolveKey = (key: string) => languageAliases[key] || key;
+
+    const iconKey = resolveKey(rawIcon);
+    const langKey = resolveKey(language);
 
     // 2. Determine the display label:
     // Priority: Prop title > data-title attribute from rehype > language extension
@@ -147,12 +208,12 @@ export function Pre({
 
     // 3. Determine Icon
     // Priority: Custom icon from meta > language-based icon > default FileCode
-    const iconElement = (dataIcon && languageIcons[dataIcon])
-        || languageIcons[language]
-        || <FileCode className="size-4" />
+    const iconElement = languageIcons[iconKey]
+        || languageIcons[langKey]
+        || <FileCode className="size-4" />;
 
     // 5. Apply Icon Color if enabled
-    const colors = languageColors[dataIcon || language];
+    const colors = languageColors[iconKey || langKey];
     const icon = dataIconColor === "true" && colors ? (
         <span
             className="flex items-center justify-center"
@@ -265,7 +326,7 @@ export function Pre({
                 ref={preRef}
                 style={style}
                 className={cn(
-                    "overflow-x-auto py-4 !mt-0 !mb-0",
+                    "overflow-x-auto py-4 mt-0! mb-0!",
                     !hideTitleBar && "rounded-t-none",
                     !hideBorder && "rounded-b-none",
                     className
