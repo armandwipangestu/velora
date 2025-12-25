@@ -1,3 +1,24 @@
+# [1.9.0](https://github.com/armandwipangestu/velora/compare/v1.8.0...v1.9.0) (2025-12-25)
+
+
+### Bug Fixes
+
+* custom font in code block ([b95d1ce](https://github.com/armandwipangestu/velora/commit/b95d1ceac52967d5150b15b050bc36483634bbb5))
+* remove underline to docs-pager ([5ed2d8d](https://github.com/armandwipangestu/velora/commit/5ed2d8d24d4eab2ba7827bf66d705fb8b5c56a0f))
+* sorted logic ([689d1d7](https://github.com/armandwipangestu/velora/commit/689d1d75e208ec986b607587f3be35639309c9eb))
+
+
+### Features
+
+* add active bar in the toc list ([a3fe1c4](https://github.com/armandwipangestu/velora/commit/a3fe1c4eb884f220e812ba54d06eb52b0e436ee3))
+* **docs:** add callout example ([188df04](https://github.com/armandwipangestu/velora/commit/188df04be5fb391ecfd95f8c6502dcc233ce7eee))
+* **docs:** add custom font usage ([9cc4298](https://github.com/armandwipangestu/velora/commit/9cc4298703870617c1f41fcaa65a7a05ccb4061e))
+* **docs:** add custom icon usage ([6d2b01d](https://github.com/armandwipangestu/velora/commit/6d2b01dd606c8bed3dd01292a2d948d9892a473d))
+* **docs:** add diff notation usage ([e801235](https://github.com/armandwipangestu/velora/commit/e801235f14876c956a29af844178838c3e7951e8))
+* **docs:** add quick start ([e5d98ac](https://github.com/armandwipangestu/velora/commit/e5d98ac5a76515710c34b2ed3786229e0fa82866))
+* **docs:** add word highlighting usage ([3ad0266](https://github.com/armandwipangestu/velora/commit/3ad02663a7cfd40581b36738b413aa38f79b7929))
+* **docs:** update introduction page ([91aab36](https://github.com/armandwipangestu/velora/commit/91aab36b2f857b9620b44470f0a997e6f7da5464))
+
 # [1.8.0-rc.2](https://github.com/armandwipangestu/velora/compare/v1.8.0-rc.1...v1.8.0-rc.2) (2025-12-25)
 
 
