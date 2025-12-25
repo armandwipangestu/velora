@@ -7,26 +7,22 @@ import { DocsToc } from "@/components/docs-toc";
 
 interface DocsLayoutProps {
     children: React.ReactNode;
+    toc: React.ReactNode;
     params: Promise<{
         type: string;
         slug?: string[];
     }>;
 }
 
-export default async function DocsLayout({ children, params }: DocsLayoutProps) {
+export default async function DocsLayout({ children, toc, params }: DocsLayoutProps) {
     const resolvedParams = await params;
     const sidebarItems = getDocsSidebar(docs, resolvedParams.type);
-
-    // Find current doc to get TOC
-    const slugArray = resolvedParams.slug || [];
-    const currentSlug = `${resolvedParams.type}/${slugArray.join("/")}`;
-    const doc = docs.find((d) => d.slug === currentSlug);
 
     return (
         <div className="flex flex-col min-h-screen">
             <DocsMobileNav
                 sidebar={<DocsSidebar items={sidebarItems} />}
-                toc={doc ? <DocsToc items={doc.toc} /> : null}
+                toc={toc}
             />
             <div className="max-w-[1440px] mx-auto w-full flex-1 items-start md:grid md:grid-cols-[240px_minmax(0,1fr)_240px] md:gap-6 lg:grid-cols-[280px_minmax(0,1fr)_280px] lg:gap-10 px-4 md:px-6">
                 <aside className="fixed top-16 z-30 hidden h-[calc(100vh-4rem)] w-full shrink-0 md:sticky md:block">
@@ -41,7 +37,7 @@ export default async function DocsLayout({ children, params }: DocsLayoutProps) 
                 </main>
                 <aside className="fixed top-16 z-30 hidden h-[calc(100vh-4rem)] w-full shrink-0 md:sticky md:block">
                     <ScrollArea className="h-full py-6 pl-6">
-                        {doc && <DocsToc items={doc.toc} />}
+                        {toc}
                     </ScrollArea>
                 </aside>
             </div>

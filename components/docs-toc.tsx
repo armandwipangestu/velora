@@ -52,6 +52,10 @@ export function DocsToc({ items }: DocsTocProps) {
         return () => observer.disconnect();
     }, [items]);
 
+    if (!items || items.length === 0) {
+        return null;
+    }
+
     return (
         <div className="space-y-4">
             <p className="text-[10px] font-black tracking-[0.2em] text-foreground/70 uppercase">
@@ -75,6 +79,9 @@ function TocNavInternalItem({
     activeId: string;
     level?: number;
 }) {
+    const id = item.url.replace("#", "");
+    const isActive = activeId === id;
+
     return (
         <li className={cn("mt-0 pt-3", level > 0 && "pl-4 border-l ml-1")}>
             <a
