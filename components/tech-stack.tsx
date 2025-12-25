@@ -20,7 +20,7 @@ export function TechStack() {
     return (
         <div className="space-y-6">
             <InfiniteSlider
-                title="Build Using"
+                title="Build With"
                 icons={LOGO_TECH_STACKS}
                 direction="left"
             />

@@ -14,8 +14,37 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <section className="container pt-8 pb-16 md:pt-32 md:pb-24 lg:pt-12 overflow-x-hidden">
-        <div className="flex flex-col-reverse lg:flex-row items-center gap-8 lg:gap-12">
+      <section className="container relative pt-8 pb-16 md:pt-32 md:pb-24 lg:pt-16 overflow-x-hidden">
+
+        <div
+          className="absolute inset-0 z-0 dark:hidden"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, #f0f0f0 1px, transparent 1px), linear-gradient(to bottom, #f0f0f0 1px, transparent 1px)",
+            backgroundSize: "6rem 4rem",
+            maskImage:
+              "radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 70%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 70%)",
+            opacity: 0.85,
+          }}
+        />
+
+        <div
+          className="absolute inset-0 z-0 hidden dark:block"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)",
+            backgroundSize: "6rem 4rem",
+            maskImage:
+              "radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 70%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 70%)",
+            opacity: 0.8,
+          }}
+        />
+
+        <div className="relative z-10 flex flex-col-reverse lg:flex-row items-center gap-8 lg:gap-12">
           <div className="flex-1 w-full text-center lg:text-left space-y-4 md:space-y-6">
             <h1 className="text-3xl sm:text-6xl md:text-4xl lg:text-5xl font-black tracking-tight text-balance leading-[1.2]">
               <span className="text-primary block">Velora</span>
