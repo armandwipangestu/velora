@@ -8,6 +8,7 @@ import Link, { LinkProps } from "next/link"
 import { useRouter } from "next/navigation"
 import { Icons } from "./icons"
 import { siteConfig } from "@/config/site"
+import { VersionBadge } from "./ui/version-badge"
 
 export function MobileNav() {
     const [open, setOpen] = useState<boolean>(false)
@@ -15,32 +16,61 @@ export function MobileNav() {
     return (
         <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-                <Button variant="outline" className="w-10 px-0 sm:hidden">
+                <Button variant="ghost" size="icon" className="md:hidden">
                     <Menu className="h-5 w-5" />
-                    <span className="sr-only">Toggle Theme</span>
+                    <span className="sr-only">Toggle Menu</span>
                 </Button>
             </SheetTrigger>
 
-            <SheetContent side="right">
+            <SheetContent side="right" className="flex flex-col w-full sm:w-full p-0 gap-0">
                 <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
                 <SheetDescription className="sr-only">Mobile navigation menu</SheetDescription>
-                <MobileLink onOpenChange={setOpen} href="/" className="flex items-center mt-4 ml-4">
-                    <Icons.logo className="mr-2 h-4 w-4" />
-                    <span className="font-bold">{siteConfig.name}</span>
-                </MobileLink>
-                <div className="flex flex-col gap-3 ml-4">
-                    <MobileLink onOpenChange={setOpen} href="/blog">
-                        Blog
-                    </MobileLink>
-                    <MobileLink onOpenChange={setOpen} href="/about">
-                        About
-                    </MobileLink>
-                    <Link target="_blank" rel="norefferrer noopener" href={siteConfig.links.github}>
-                        GitHub
-                    </Link>
-                    <Link target="_blank" rel="norefferrer noopener" href={siteConfig.links.instagram}>
-                        Instagram
-                    </Link>
+
+                {/* Custom Header */}
+                <div className="flex h-16 items-center justify-between px-4 border-b">
+                    <div className="flex items-center gap-2">
+                        <MobileLink onOpenChange={setOpen} href="/" className="flex items-center gap-2">
+                            <Icons.logo className="h-8 w-8" />
+                        </MobileLink>
+                        <VersionBadge />
+                    </div>
+                </div>
+
+                <div className="flex flex-col flex-1 px-4 py-8 overflow-y-auto">
+                    <nav className="flex flex-col space-y-1">
+                        <MobileLink
+                            onOpenChange={setOpen}
+                            href="/guide"
+                            className="text-lg font-medium py-4 border-b border-border/50 transition-colors hover:text-primary active:bg-muted/50"
+                        >
+                            Guide
+                        </MobileLink>
+                        <MobileLink
+                            onOpenChange={setOpen}
+                            href="/reference"
+                            className="text-lg font-medium py-4 border-b border-border/50 transition-colors hover:text-primary active:bg-muted/50"
+                        >
+                            Reference
+                        </MobileLink>
+                        <MobileLink
+                            onOpenChange={setOpen}
+                            href="/examples"
+                            className="text-lg font-medium py-4 border-b border-border/50 transition-colors hover:text-primary active:bg-muted/50"
+                        >
+                            Examples
+                        </MobileLink>
+                    </nav>
+
+                    <div className="mt-12 flex justify-center">
+                        <Link
+                            target="_blank"
+                            rel="norefferrer noopener"
+                            href={siteConfig.links.github}
+                            className="text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                            <Icons.gitHub className="h-8 w-8" />
+                        </Link>
+                    </div>
                 </div>
             </SheetContent>
         </Sheet>

@@ -1,4 +1,4 @@
-<h1 align="center">A Blog Template Application built using Next.js 16, Tailwind CSS, Shadcn UI, MDX, Velite, and Docker</h1>
+<h1 align="center">A developer-first MDX blog template powered by Velite</h1>
 
 <div align="center">
 
@@ -17,7 +17,7 @@
 
 ## Description
 
-This repository is a simple implementaion of a markdown static blog, a demo can be seen [here](https://velora-example.vercel.app/).
+A type-safe, very rich code block feature (using Shiki & Rehype), dynamic open graph image, and more, a demo can be seen [here](https://velora-example.vercel.app/).
 
 <picture>
   <source srcset="https://velite.js.org/assets/flow-dark.svg" media="(prefers-color-scheme: dark)">
@@ -92,6 +92,7 @@ The following are the features I want to achieve or are under development:
 - [ ✅ ] Add giscus components for discussion section
 - [ ✅ ] Code block group components
 - [ ] Wrap code block content
+- [ ] Add preview rendered code block
 
 See the [open issues](https://github.com/armandwipangestu/velora/issues) for a list of proposed features (and known issues).
 

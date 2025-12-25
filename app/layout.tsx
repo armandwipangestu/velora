@@ -4,10 +4,10 @@ import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { SiteHeader } from "@/components/site-header";
 import { Providers } from "@/components/providers";
 import { siteConfig } from "@/config/site";
 import { SiteFooter } from "@/components/site-footer";
+import Navbar from "@/components/layout/navbar";
 
 const geistSans = Geist({
   variable: "--font-sans",
@@ -59,7 +59,7 @@ export default function RootLayout({
 
         <Providers>
           <div className="relative flex min-h-dvh flex-col bg-background">
-            <SiteHeader />
+            <Navbar />
             <main className="flex-1">
               {children}
             </main>

@@ -135,3 +135,73 @@
     @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-6;
   }
 }
+
+/* Marquee (horizontal loop) */
+.marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Marquee tweaks */
+.marquee__track {
+    display: flex;
+    gap: 1.5rem;
+    will-change: transform;
+}
+
+.marquee--left .marquee__track {
+    animation: marquee-left var(--marquee-duration, 18s) linear infinite;
+}
+.marquee--right .marquee__track {
+    animation: marquee-right var(--marquee-duration, 18s) linear infinite;
+}
+
+/* pause on hover (accessibility) */
+.marquee:hover .marquee__track {
+    animation-play-state: paused;
+}
+
+@keyframes marquee-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+@keyframes marquee-right {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* small performance hint */
+.marquee__track > * {
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+@media (max-width: 767px) {
+    .marquee--left .marquee__track,
+    .marquee--right .marquee__track {
+        animation-duration: calc(var(--marquee-duration, 18s) / 2);
+    }
+}
+
+@theme {
+    /* Biarkan durasi kosong atau jadikan default saja */
+    --animate-infinite-slider: infiniteSlider linear infinite;
+
+    @keyframes infiniteSlider {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+}

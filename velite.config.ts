@@ -24,6 +24,15 @@ const posts = defineCollection({
     }).transform(computedFields)
 })
 
+const pages = defineCollection({
+    name: "Page",
+    pattern: "*.mdx",
+    schema: s.object({
+        slug: s.path(),
+        body: s.mdx()
+    })
+})
+
 const rehypeCodeGroup = () => (tree: Root) => {
     visit(tree, "element", (node: Element, index, parent) => {
         if (node.tagName === "p" && parent && typeof index === "number") {
@@ -149,6 +158,22 @@ const rehypePreMeta = () => (tree: Root) => {
     })
 }
 
+const docs = defineCollection({
+    name: "Doc",
+    pattern: "{guide,reference,examples}/**/*.mdx",
+    schema: s.object({
+        slug: s.path(),
+        title: s.string().max(999),
+        description: s.string().max(999).optional(),
+        published: s.boolean().default(true),
+        category: s.string().optional(),
+        categoryOrder: s.number().default(0),
+        order: s.number().default(0),
+        toc: s.toc(),
+        body: s.mdx()
+    }).transform(computedFields)
+})
+
 export default defineConfig({
     root: "content",
     output: {
@@ -159,7 +184,9 @@ export default defineConfig({
         clean: true
     },
     collections: {
-        posts
+        posts,
+        pages,
+        docs
     },
     mdx: {
         rehypePlugins: [
