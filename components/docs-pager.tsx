@@ -18,31 +18,31 @@ interface DocsPagerProps {
 
 export function DocsPager({ prev, next }: DocsPagerProps) {
     return (
-        <div className="flex flex-row items-center justify-between py-12">
+        <div className="flex flex-row items-center justify-between py-12 gap-4">
             {prev ? (
                 <Link
                     href={prev.href}
-                    className={cn(buttonVariants({ variant: "outline" }), "gap-2")}
+                    className={cn(buttonVariants({ variant: "outline" }), "flex-1 h-auto py-5 px-6 gap-4 justify-start border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all group")}
                 >
-                    <ChevronLeft className="h-4 w-4" />
-                    <div className="flex flex-col items-start">
-                        <span className="text-[10px] text-muted-foreground uppercase font-black tracking-widest">Previous</span>
-                        <span className="text-sm font-semibold">{prev.title}</span>
+                    <ChevronLeft className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                    <div className="flex flex-col items-start gap-1">
+                        <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-[0.2em]">Previous</span>
+                        <span className="text-base font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1">{prev.title}</span>
                     </div>
                 </Link>
             ) : (
-                <div />
+                <div className="flex-1" />
             )}
             {next && (
                 <Link
                     href={next.href}
-                    className={cn(buttonVariants({ variant: "outline" }), "gap-2 ml-auto text-right")}
+                    className={cn(buttonVariants({ variant: "outline" }), "flex-1 h-auto py-5 px-6 gap-4 justify-end text-right border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all group")}
                 >
-                    <div className="flex flex-col items-end">
-                        <span className="text-[10px] text-muted-foreground uppercase font-black tracking-widest">Next</span>
-                        <span className="text-sm font-semibold">{next.title}</span>
+                    <div className="flex flex-col items-end gap-1">
+                        <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-[0.2em]">Next</span>
+                        <span className="text-base font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1">{next.title}</span>
                     </div>
-                    <ChevronRight className="h-4 w-4" />
+                    <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 </Link>
             )}
         </div>

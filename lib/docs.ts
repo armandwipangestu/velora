@@ -5,11 +5,15 @@ export function getDocsSidebar(docs: Doc[], type: string): SidebarGroup[] {
     const filteredDocs = docs.filter((doc) => doc.slug.startsWith(type));
     
     const groups: Record<string, SidebarItem[]> = {};
+    const categoryOrder: Record<string, number> = {};
     
     filteredDocs.forEach((doc) => {
         const category = doc.category || "General";
         if (!groups[category]) {
             groups[category] = [];
+            categoryOrder[category] = doc.order || 999;
+        } else {
+            categoryOrder[category] = Math.min(categoryOrder[category], doc.order || 999);
         }
         
         const slugParts = doc.slug.split("/").slice(1);
@@ -22,30 +26,45 @@ export function getDocsSidebar(docs: Doc[], type: string): SidebarGroup[] {
             let item = currentItems.find((itm) => itm.href === `/${currentSlug}` || (!itm.href && itm.title === slugParts[i]));
             
             if (!item) {
+                // Find potential doc for this parent to get its order and title
+                const parentDoc = docs.find(d => d.slug === currentSlug);
                 item = {
-                    title: isLast ? doc.title : slugParts[i],
-                    href: isLast ? `/${doc.slug}` : undefined,
+                    title: isLast ? doc.title : (parentDoc?.title || slugParts[i]),
+                    href: isLast ? `/${doc.slug}` : (parentDoc ? `/${parentDoc.slug}` : undefined),
                     items: [],
-                };
+                    order: isLast ? doc.order : (parentDoc?.order || 999)
+                } as SidebarItem & { order: number };
                 currentItems.push(item);
             } else if (isLast) {
-                // If item existed but was a placeholder parent, update its title and href
                 item.title = doc.title;
                 item.href = `/${doc.slug}`;
+                (item as any).order = doc.order;
             }
             
             currentItems = item.items!;
         }
     });
 
-    return Object.entries(groups).map(([title, items]) => ({
-        title,
-        items: items.sort((a, b) => (a.href && b.href ? 0 : a.title.localeCompare(b.title))),
-    }));
+    const sortItems = (items: SidebarItem[]) => {
+        items.sort((a, b) => ((a as any).order || 999) - ((b as any).order || 999));
+        items.forEach(item => {
+            if (item.items) sortItems(item.items);
+        });
+    };
+
+    return Object.entries(groups)
+        .sort(([nameA], [nameB]) => categoryOrder[nameA] - categoryOrder[nameB])
+        .map(([title, items]) => {
+            sortItems(items);
+            return { title, items };
+        });
 }
 
 export function getPager(docs: Doc[], type: string, slug: string) {
-    const filteredDocs = docs.filter((doc) => doc.slug.startsWith(type));
+    const filteredDocs = docs
+        .filter((doc) => doc.slug.startsWith(type))
+        .sort((a, b) => (a.order || 999) - (b.order || 999));
+        
     const index = filteredDocs.findIndex((doc) => doc.slug === slug);
     
     return {

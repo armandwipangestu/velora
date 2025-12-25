@@ -2,8 +2,31 @@
 title: Line Numbers
 description: Enabling line numbers in code blocks
 category: Custom Components
+order: 3
 ---
 
 # Line Numbers
 
+Enabling line numbers in code blocks
+
+## Code Example
+
 Show line numbers using the `showLineNumbers` meta tag.
+
+````mdx
+```ts showLineNumbers
+interface User {
+    id: number;
+    name: string;
+}
+```
+````
+
+It will be rendered as:
+
+```ts showLineNumbers
+interface User {
+    id: number;
+    name: string;
+}
+```

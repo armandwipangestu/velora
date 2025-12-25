@@ -52,16 +52,12 @@ export function DocsToc({ items }: DocsTocProps) {
         return () => observer.disconnect();
     }, [items]);
 
-    if (!items?.length) {
-        return null;
-    }
-
     return (
-        <div className="space-y-2">
-            <p className="text-sm font-semibold text-foreground uppercase tracking-wider">
+        <div className="space-y-4">
+            <p className="text-[10px] font-black tracking-[0.2em] text-foreground/70 uppercase">
                 On this page
             </p>
-            <ul className="m-0 list-none text-sm">
+            <ul className="m-0 list-none text-[13px] font-medium leading-relaxed">
                 {items.map((item, index) => (
                     <TocNavInternalItem key={index} item={item} activeId={activeId} />
                 ))}
@@ -79,22 +75,21 @@ function TocNavInternalItem({
     activeId: string;
     level?: number;
 }) {
-    const id = item.url.replace("#", "");
-    const isActive = activeId === id;
-
     return (
-        <li className={cn("mt-0 pt-2", level > 0 && "pl-4")}>
+        <li className={cn("mt-0 pt-3", level > 0 && "pl-4 border-l ml-1")}>
             <a
                 href={item.url}
                 className={cn(
-                    "inline-block no-underline transition-colors hover:text-primary",
-                    isActive ? "font-medium text-primary" : "text-muted-foreground"
+                    "inline-block no-underline transition-all duration-200 hover:text-primary",
+                    isActive
+                        ? "font-bold text-primary translate-x-1"
+                        : "text-muted-foreground/80"
                 )}
             >
                 {item.title}
             </a>
             {item.items && item.items.length > 0 && (
-                <ul className="m-0 list-none">
+                <ul className="m-0 list-none mt-1">
                     {item.items.map((subItem, index) => (
                         <TocNavInternalItem
                             key={index}
