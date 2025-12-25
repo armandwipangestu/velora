@@ -18,11 +18,11 @@ interface DocsPagerProps {
 
 export function DocsPager({ prev, next }: DocsPagerProps) {
     return (
-        <div className="flex flex-row items-center justify-between py-12 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-12">
             {prev ? (
                 <Link
                     href={prev.href}
-                    className={cn(buttonVariants({ variant: "outline" }), "flex-1 h-auto py-5 px-6 gap-4 justify-start border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all group")}
+                    className={cn(buttonVariants({ variant: "outline" }), "h-auto py-5 px-6 gap-4 justify-start border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all group")}
                 >
                     <ChevronLeft className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
                     <div className="flex flex-col items-start gap-1">
@@ -31,12 +31,12 @@ export function DocsPager({ prev, next }: DocsPagerProps) {
                     </div>
                 </Link>
             ) : (
-                <div className="flex-1" />
+                <div />
             )}
-            {next && (
+            {next ? (
                 <Link
                     href={next.href}
-                    className={cn(buttonVariants({ variant: "outline" }), "flex-1 h-auto py-5 px-6 gap-4 justify-end text-right border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all group")}
+                    className={cn(buttonVariants({ variant: "outline" }), "h-auto py-5 px-6 gap-4 justify-end text-right border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all group")}
                 >
                     <div className="flex flex-col items-end gap-1">
                         <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-[0.2em]">Next</span>
@@ -44,6 +44,8 @@ export function DocsPager({ prev, next }: DocsPagerProps) {
                     </div>
                     <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 </Link>
+            ) : (
+                <div />
             )}
         </div>
     );
