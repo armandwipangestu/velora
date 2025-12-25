@@ -10,6 +10,7 @@ export interface SidebarItem {
     title: string;
     href?: string;
     items?: SidebarItem[];
+    order?: number;
 }
 
 export interface SidebarGroup {

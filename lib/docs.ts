@@ -31,12 +31,12 @@ export function getDocsSidebar(docs: Doc[], type: string): SidebarGroup[] {
                     href: isLast ? `/${doc.slug}` : (parentDoc ? `/${parentDoc.slug}` : undefined),
                     items: [],
                     order: isLast ? doc.order : (parentDoc?.order || 999)
-                } as SidebarItem & { order: number };
+                };
                 currentItems.push(item);
             } else if (isLast) {
                 item.title = doc.title;
                 item.href = `/${doc.slug}`;
-                (item as any).order = doc.order;
+                item.order = doc.order;
             }
             
             currentItems = item.items!;
@@ -44,7 +44,7 @@ export function getDocsSidebar(docs: Doc[], type: string): SidebarGroup[] {
     });
 
     const sortItems = (items: SidebarItem[]) => {
-        items.sort((a, b) => ((a as any).order || 999) - ((b as any).order || 999));
+        items.sort((a, b) => (a.order || 999) - (b.order || 999));
         items.forEach(item => {
             if (item.items) sortItems(item.items);
         });
