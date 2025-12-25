@@ -13,8 +13,8 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <section className="container pt-20 pb-16 md:pt-32 md:pb-24 lg:pt-48">
-        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-8">
+      <section className="container pt-12 pb-16 md:pt-32 md:pb-24 lg:pt-24">
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-8 lg:gap-12">
           <div className="flex-1 text-center lg:text-left space-y-6">
             <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-balance">
               <span className="text-primary block">Velite</span>
@@ -24,7 +24,7 @@ export default function Home() {
               New Choices for Content-first Apps
             </p>
 
-            <div className="max-w-[42rem] mx-auto lg:mx-0 text-left prose dark:prose-invert">
+            <div className="max-w-[42rem] mx-auto lg:mx-0 text-left prose dark:prose-invert prose-pre:my-0 prose-pre:rounded-none">
               {landingPage ? (
                 <MDXContent code={landingPage.body} />
               ) : (
@@ -57,10 +57,10 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex-1 relative flex justify-center items-center py-20 lg:py-0">
-            <div className="absolute inset-0 bg-radial-[at_50%_50%] from-[#10b981]/40 via-[#06b6d4]/10 to-transparent blur-3xl scale-150 animate-pulse pointer-events-none" />
-            <div className="absolute inset-0 bg-radial-[at_50%_50%] from-[#10b981]/20 via-transparent to-transparent blur-2xl scale-110 pointer-events-none" />
-            <div className="relative z-10 w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 drop-shadow-[0_0_50px_rgba(16,185,129,0.3)] transition-transform duration-500 hover:scale-110">
+          <div className="flex-1 relative flex justify-center items-center py-10 lg:py-0">
+            <div className="absolute inset-0 bg-radial-[at_50%_50%] from-[#10b981]/40 via-[#06b6d4]/10 to-transparent blur-2xl sm:blur-3xl scale-100 sm:scale-150 animate-pulse pointer-events-none" />
+            <div className="absolute inset-0 bg-radial-[at_50%_50%] from-[#10b981]/20 via-transparent to-transparent blur-xl sm:blur-2xl scale-100 sm:scale-110 pointer-events-none" />
+            <div className="relative z-10 w-48 h-48 sm:w-64 md:w-80 md:h-80 lg:w-96 lg:h-96 drop-shadow-[0_0_50px_rgba(16,185,129,0.3)] transition-transform duration-500 hover:scale-110">
               <Icons.logo className="w-full h-full" />
             </div>
           </div>
