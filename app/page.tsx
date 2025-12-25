@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <section className="container pt-8 pb-16 md:pt-32 md:pb-24 lg:pt-24 overflow-x-hidden">
+      <section className="container pt-8 pb-16 md:pt-32 md:pb-24 lg:pt-12 overflow-x-hidden">
         <div className="flex flex-col-reverse lg:flex-row items-center gap-8 lg:gap-12">
           <div className="flex-1 w-full text-center lg:text-left space-y-4 md:space-y-6">
             <h1 className="text-3xl sm:text-6xl md:text-4xl lg:text-5xl font-black tracking-tight text-balance leading-[1.2]">
