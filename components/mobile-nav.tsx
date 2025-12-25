@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation"
 import { Icons } from "./icons"
 import { siteConfig } from "@/config/site"
 import { VersionBadge } from "./ui/version-badge"
+import { navLinks } from "./layout/navbar"
 
 export function MobileNav() {
     const [open, setOpen] = useState<boolean>(false)
@@ -38,27 +39,16 @@ export function MobileNav() {
 
                 <div className="flex flex-col flex-1 px-4 py-8 overflow-y-auto">
                     <nav className="flex flex-col space-y-1">
-                        <MobileLink
-                            onOpenChange={setOpen}
-                            href="/guide"
-                            className="text-lg font-medium py-4 border-b border-border/50 transition-colors hover:text-primary active:bg-muted/50"
-                        >
-                            Guide
-                        </MobileLink>
-                        <MobileLink
-                            onOpenChange={setOpen}
-                            href="/reference"
-                            className="text-lg font-medium py-4 border-b border-border/50 transition-colors hover:text-primary active:bg-muted/50"
-                        >
-                            Reference
-                        </MobileLink>
-                        <MobileLink
-                            onOpenChange={setOpen}
-                            href="/examples"
-                            className="text-lg font-medium py-4 border-b border-border/50 transition-colors hover:text-primary active:bg-muted/50"
-                        >
-                            Examples
-                        </MobileLink>
+                        {navLinks.map((link) => (
+                            <MobileLink
+                                key={link.href}
+                                onOpenChange={setOpen}
+                                href={link.href}
+                                className="text-lg font-medium py-4 border-b border-border/50 transition-colors hover:text-primary active:bg-muted/50"
+                            >
+                                {link.label}
+                            </MobileLink>
+                        ))}
                     </nav>
 
                     <div className="mt-12 flex justify-center">

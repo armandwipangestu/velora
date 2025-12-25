@@ -11,7 +11,7 @@ import { MobileNav } from "@/components/mobile-nav";
 import { buttonVariants } from "@/components/ui/button";
 import { VersionBadge } from "../ui/version-badge";
 
-const navLinks = [
+export const navLinks = [
     { href: "/guide/introduction", label: "Guide" },
     { href: "/reference", label: "Reference" },
     { href: "/examples", label: "Examples" },
