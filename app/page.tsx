@@ -13,18 +13,18 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <section className="container pt-12 pb-16 md:pt-32 md:pb-24 lg:pt-24">
+      <section className="container pt-8 pb-16 md:pt-32 md:pb-24 lg:pt-24 overflow-x-hidden">
         <div className="flex flex-col-reverse lg:flex-row items-center gap-8 lg:gap-12">
-          <div className="flex-1 text-center lg:text-left space-y-6">
-            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-balance">
+          <div className="flex-1 w-full text-center lg:text-left space-y-4 md:space-y-6">
+            <h1 className="text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-balance leading-[1.2]">
               <span className="text-primary block">Velite</span>
               Make Creative Contents Easy
             </h1>
-            <p className="max-w-[42rem] mx-auto lg:mx-0 text-muted-foreground text-lg sm:text-xl md:text-2xl text-balance font-medium">
+            <p className="max-w-[42rem] mx-auto lg:mx-0 text-muted-foreground text-base sm:text-xl md:text-2xl text-balance font-medium">
               New Choices for Content-first Apps
             </p>
 
-            <div className="max-w-[42rem] mx-auto lg:mx-0 text-left prose dark:prose-invert prose-pre:my-0 prose-pre:rounded-none">
+            <div className="w-full max-w-[42rem] mx-auto lg:mx-0 text-left prose dark:prose-invert prose-pre:my-0 prose-pre:rounded-none overflow-hidden">
               {landingPage ? (
                 <MDXContent code={landingPage.body} />
               ) : (
@@ -32,12 +32,12 @@ export default function Home() {
               )}
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+            <div className="flex flex-row gap-3 justify-center lg:justify-start pt-4 px-2">
               <Link
                 href="/guide"
                 className={cn(
-                  buttonVariants({ size: "lg" }),
-                  "w-full sm:w-fit px-8 rounded-full h-12 text-base font-semibold transition-all duration-300 hover:scale-105 bg-[#10b981] hover:bg-[#10b981]/90"
+                  buttonVariants({ size: "default" }),
+                  "flex-1 sm:flex-none px-6 sm:px-8 rounded-full h-11 sm:h-12 text-sm sm:text-base font-semibold transition-all duration-300 hover:scale-105 bg-[#10b981] hover:bg-[#10b981]/90"
                 )}
               >
                 Get Started
@@ -47,20 +47,19 @@ export default function Home() {
                 target="_blank"
                 rel="norefferrer noopener"
                 className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" }),
-                  "w-full sm:w-fit px-8 rounded-full h-12 text-base font-semibold transition-all duration-300 hover:scale-105 bg-muted/50"
+                  buttonVariants({ variant: "outline", size: "default" }),
+                  "flex-1 sm:flex-none px-6 sm:px-8 rounded-full h-11 sm:h-12 text-sm sm:text-base font-semibold transition-all duration-300 hover:scale-105 bg-muted/50"
                 )}
               >
-                <Github size={20} className="mr-2" />
-                View on GitHub
+                GitHub
               </Link>
             </div>
           </div>
 
-          <div className="flex-1 relative flex justify-center items-center py-10 lg:py-0">
-            <div className="absolute inset-0 bg-radial-[at_50%_50%] from-[#10b981]/40 via-[#06b6d4]/10 to-transparent blur-2xl sm:blur-3xl scale-100 sm:scale-150 animate-pulse pointer-events-none" />
-            <div className="absolute inset-0 bg-radial-[at_50%_50%] from-[#10b981]/20 via-transparent to-transparent blur-xl sm:blur-2xl scale-100 sm:scale-110 pointer-events-none" />
-            <div className="relative z-10 w-48 h-48 sm:w-64 md:w-80 md:h-80 lg:w-96 lg:h-96 drop-shadow-[0_0_50px_rgba(16,185,129,0.3)] transition-transform duration-500 hover:scale-110">
+          <div className="flex-1 w-full relative flex justify-center items-center py-6 lg:py-0">
+            <div className="absolute inset-0 bg-radial-[at_50%_50%] from-[#10b981]/30 via-[#06b6d4]/5 via-transparent-70% to-transparent blur-2xl sm:blur-3xl scale-90 sm:scale-80 animate-pulse pointer-events-none" />
+            <div className="absolute inset-0 bg-radial-[at_50%_50%] from-[#10b981]/15 via-transparent to-transparent blur-xl sm:blur-2xl scale-75 sm:scale-110 pointer-events-none" />
+            <div className="relative z-10 w-40 h-40 sm:w-64 md:w-80 md:h-80 lg:w-96 lg:h-96 drop-shadow-[0_0_50px_rgba(16,185,129,0.3)] transition-transform duration-500 hover:scale-110">
               <Icons.logo className="w-full h-full" />
             </div>
           </div>
@@ -91,13 +90,6 @@ export default function Home() {
           />
         </div>
       </section>
-
-      <footer className="container py-12 mt-auto border-t border-border/40">
-        <div className="flex flex-col items-center gap-2 text-center text-sm text-muted-foreground">
-          <p>Distributed under the MIT License.</p>
-          <p>© 2025 Velora. All rights reserved.</p>
-        </div>
-      </footer>
     </div>
   );
 }
