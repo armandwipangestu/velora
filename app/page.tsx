@@ -7,6 +7,29 @@ import { Github, Rocket, ShieldCheck, Zap, Files } from "lucide-react";
 import { pages } from "#site/content";
 import { MDXContent } from "@/components/mdx-components";
 import "@/styles/mdx.css"
+import { InfiniteSlider } from "@/components/infinite-scroll";
+import { BiLogoTypescript } from "react-icons/bi";
+import { SiMdx, SiShadcnui, SiTailwindcss } from "react-icons/si";
+import { RiNextjsFill } from "react-icons/ri";
+import { FaDocker } from "react-icons/fa6";
+
+interface IconConfig {
+  Icon: React.ComponentType<{
+    width?: number;
+    height?: number;
+    className?: string;
+  }>;
+  label: string;
+}
+
+const LOGO_TECH_STACKS: IconConfig[] = [
+  { Icon: RiNextjsFill, label: "Next.js" },
+  { Icon: BiLogoTypescript, label: "TypeScript" },
+  { Icon: SiMdx, label: "MDX" },
+  { Icon: SiTailwindcss, label: "Tailwind CSS" },
+  { Icon: SiShadcnui, label: "Shadcn UI" },
+  { Icon: FaDocker, label: "Docker" },
+];
 
 export default function Home() {
   const landingPage = pages.find((p) => p.slug === "landing");
@@ -16,12 +39,12 @@ export default function Home() {
       <section className="container pt-8 pb-16 md:pt-32 md:pb-24 lg:pt-24 overflow-x-hidden">
         <div className="flex flex-col-reverse lg:flex-row items-center gap-8 lg:gap-12">
           <div className="flex-1 w-full text-center lg:text-left space-y-4 md:space-y-6">
-            <h1 className="text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-balance leading-[1.2]">
-              <span className="text-primary block">Velite</span>
-              Make Creative Contents Easy
+            <h1 className="text-3xl sm:text-6xl md:text-4xl lg:text-5xl font-black tracking-tight text-balance leading-[1.2]">
+              <span className="text-primary block">Velora</span>
+              A developer-first MDX blog powered by Velite
             </h1>
             <p className="max-w-[42rem] mx-auto lg:mx-0 text-muted-foreground text-base sm:text-xl md:text-2xl text-balance font-medium">
-              New Choices for Content-first Apps
+              A type-safe, very rich code block feature, dynamic open graph image, and more.
             </p>
 
             <div className="w-full max-w-[42rem] mx-auto lg:mx-0 text-left prose dark:prose-invert prose-pre:my-0 prose-pre:rounded-none overflow-hidden">
@@ -30,6 +53,14 @@ export default function Home() {
               ) : (
                 <p>No description available.</p>
               )}
+            </div>
+
+            <div className="space-y-6">
+              <InfiniteSlider
+                title="Build Using"
+                icons={LOGO_TECH_STACKS}
+                direction="left"
+              />
             </div>
 
             <div className="flex flex-row gap-3 justify-center lg:justify-start pt-4 px-2">
