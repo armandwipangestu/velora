@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Icons } from "@/components/icons";
 import { Github, Rocket, ShieldCheck, Zap, Files } from "lucide-react";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -44,9 +45,10 @@ export default function Home() {
           </div>
 
           <div className="flex-1 relative flex justify-center items-center py-20 lg:py-0">
-            <div className="absolute inset-0 bg-radial-[at_50%_50%] from-[#10b981]/20 via-transparent to-transparent blur-3xl scale-150 animate-pulse pointer-events-none" />
+            <div className="absolute inset-0 bg-radial-[at_50%_50%] from-[#10b981]/40 via-[#06b6d4]/10 to-transparent blur-3xl scale-150 animate-pulse pointer-events-none" />
+            <div className="absolute inset-0 bg-radial-[at_50%_50%] from-[#10b981]/20 via-transparent to-transparent blur-2xl scale-110 pointer-events-none" />
             <div className="relative z-10 w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 drop-shadow-[0_0_50px_rgba(16,185,129,0.3)] transition-transform duration-500 hover:scale-110">
-              <Icons.logo className="w-full h-full text-foreground" />
+              <Icons.logo className="w-full h-full" />
             </div>
           </div>
         </div>
