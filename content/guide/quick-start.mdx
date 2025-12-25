@@ -1,11 +1,91 @@
 ---
 title: Quick Start
-description: Welcome to Velora
 category: Getting Started
 categoryOrder: 1
 order: 2
 ---
 
-# Quick Start
+# Installation
 
-Example 
+## Prerequisites
+
+- <a className='text-[#10b981]' href="https://nodejs.org/" target="_blank">Node.js</a> (v18.20 or higher, LTS version is recommended)
+- Linux, macOS, or Windows are supported
+
+::: code-group
+```bash title="npm" icon="iNpm"
+npx create-velora@latest
+```
+
+```bash title="yarn" icon="iYarn"
+yarn create velora
+```
+
+```bash title="pnpm" icon="iPnpm"
+pnpm create velora
+```
+
+```bash title="bun" icon="iBun"
+bunx create-velora@latest
+```
+:::
+
+## Create Contents files
+
+Add your contents files in the `content` directory. Velora use the `content` directory as the root directory for the contents files.
+
+```bash title="Project Structure"
+   root
+  ├──  app
+# [!code focus:4]
+  ├──  content
+  │  ├──  blog
+  │  │  ├──  velora-example-post.mdx
+# [!code ++]
+│  │  └──  your-new-post.mdx
+  ├──  README.md
+  ├──  tsconfig.json
+  └──  velite.config.ts
+```
+
+## Run Development Server
+
+To run development server, use the following command:
+
+::: code-group
+```bash title="npm" icon="iNpm"
+npm run dev
+```
+
+```bash title="yarn" icon="iYarn"
+yarn dev
+```
+
+```bash title="pnpm" icon="iPnpm"
+pnpm dev
+```
+
+```bash title="bun" icon="iBun"
+bun run dev
+```
+:::
+
+## Build Production
+
+::: code-group
+```bash title="npm" icon="iNpm"
+npm run build:content && npm run build:next
+```
+
+```bash title="yarn" icon="iYarn"
+yarn build:content && yarn run build:next
+```
+
+```bash title="pnpm" icon="iPnpm"
+pnpm build:content && pnpm run build:next
+```
+
+```bash title="bun" icon="iBun"
+bun build:content && bun run build:next
+```
+:::
