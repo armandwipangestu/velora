@@ -37,7 +37,6 @@ export function CodeGroup({ children }: CodeGroupProps) {
             }
 
             const title = props["data-title"] || props["data-language"] || "Code"
-            const iconName = props["data-icon"]
             const language = props["data-language"] || "text"
             const iconColorEnabled = props["data-icon-color"] !== "false"
             const caption = props["data-caption"]

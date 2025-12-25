@@ -1,6 +1,5 @@
 import { docs } from "#site/content";
 import { DocsToc } from "@/components/docs-toc";
-import { notFound } from "next/navigation";
 
 interface TocPageProps {
     params: Promise<{

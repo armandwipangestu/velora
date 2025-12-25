@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
 import { useState } from "react";
-import { Doc } from "#site/content";
 
 export interface SidebarItem {
     title: string;

@@ -190,7 +190,6 @@ export function Pre({
 
     // 1. Check props for data-title (passed from rehype)
     const dataTitle = (props as Record<string, unknown>)["data-title"] as string
-    const dataIcon = (props as Record<string, unknown>)["data-icon"] as string
     const dataFont = (props as Record<string, unknown>)["data-font"] as string
     const dataLigatures = (props as Record<string, unknown>)["data-ligatures"] as string
     const dataIconColor = (props as Record<string, unknown>)["data-icon-color"] as string

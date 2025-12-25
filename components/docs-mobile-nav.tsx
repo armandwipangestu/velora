@@ -1,11 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { ListFilter, ChevronRight, Menu } from "lucide-react";
+import { ChevronRight, Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "./ui/sheet";
-import { Button } from "./ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn } from "@/lib/utils";
 
 interface DocsMobileNavProps {
     sidebar: React.ReactNode;

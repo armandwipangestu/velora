@@ -19,7 +19,7 @@ export function DocsToc({ items }: DocsTocProps) {
 
     useEffect(() => {
         const extractIds = (items: TocItem[]): string[] => {
-            let ids: string[] = [];
+            const ids: string[] = [];
             items.forEach((item) => {
                 ids.push(item.url.replace("#", ""));
                 if (item.items) {

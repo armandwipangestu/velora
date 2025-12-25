@@ -3,7 +3,7 @@ import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Icons } from "@/components/icons";
-import { Github, Rocket, ShieldCheck, Zap, Files } from "lucide-react";
+import { Rocket, ShieldCheck, Zap, Files } from "lucide-react";
 import { pages } from "#site/content";
 import { MDXContent } from "@/components/mdx-components";
 import { TechStack } from "@/components/tech-stack";

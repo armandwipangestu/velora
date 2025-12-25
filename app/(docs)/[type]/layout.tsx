@@ -1,9 +1,8 @@
-import { docs, Doc } from "#site/content";
+import { docs } from "#site/content";
 import { getDocsSidebar } from "@/lib/docs";
 import { DocsSidebar } from "@/components/docs-sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { DocsMobileNav } from "@/components/docs-mobile-nav";
-import { DocsToc } from "@/components/docs-toc";
 
 interface DocsLayoutProps {
     children: React.ReactNode;

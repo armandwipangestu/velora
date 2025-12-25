@@ -48,7 +48,7 @@ export function VersionBadge() {
         repo: GITHUB_REPO,
     });
 
-    const { data: repoInfo, isLoading: isLoadingRepo } = useRepoInfo({
+    const { data: repoInfo } = useRepoInfo({
         owner: GITHUB_OWNER,
         repo: GITHUB_REPO,
     });
