@@ -48,10 +48,10 @@ export default function Home() {
           <div className="flex-1 w-full text-center lg:text-left space-y-4 md:space-y-6">
             <h1 className="text-3xl sm:text-6xl md:text-4xl lg:text-5xl font-black tracking-tight text-balance leading-[1.2]">
               <span className="text-primary block">Velora</span>
-              A developer-first MDX blog powered by Velite
+              A developer-first MDX blog template powered by Velite
             </h1>
             <p className="max-w-[42rem] mx-auto lg:mx-0 text-muted-foreground text-base sm:text-xl md:text-2xl text-balance font-medium">
-              A type-safe, very rich code block feature, dynamic open graph image, and more.
+              A type-safe, very rich code block feature (using Shiki & Rehype), dynamic open graph image, and more.
             </p>
 
             <div className="w-full max-w-[42rem] mx-auto lg:mx-0 text-left prose dark:prose-invert prose-pre:my-0 prose-pre:rounded-none overflow-hidden">
