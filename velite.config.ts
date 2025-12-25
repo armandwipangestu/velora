@@ -158,6 +158,20 @@ const rehypePreMeta = () => (tree: Root) => {
     })
 }
 
+const docs = defineCollection({
+    name: "Doc",
+    pattern: "{guide,reference,examples}/**/*.mdx",
+    schema: s.object({
+        slug: s.path(),
+        title: s.string().max(999),
+        description: s.string().max(999).optional(),
+        published: s.boolean().default(true),
+        category: s.string().optional(),
+        toc: s.toc(),
+        body: s.mdx()
+    }).transform(computedFields)
+})
+
 export default defineConfig({
     root: "content",
     output: {
@@ -169,7 +183,8 @@ export default defineConfig({
     },
     collections: {
         posts,
-        pages
+        pages,
+        docs
     },
     mdx: {
         rehypePlugins: [
