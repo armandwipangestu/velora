@@ -32,7 +32,7 @@ export default function Navbar() {
                         </span>
                     </Link>
 
-                    <div className="relative hidden md:flex items-center">
+                    <div className="relative flex items-center">
                         <VersionBadge />
                     </div>
                 </div>
@@ -53,7 +53,7 @@ export default function Navbar() {
                         ))}
                     </div>
 
-                    <div className="flex items-center gap-2 border-l border-border pl-4 ml-2">
+                    <div className="flex items-center gap-1 sm:gap-2 ml-2">
                         <ThemeToggle />
                         <Link
                             href={siteConfig.links.github}
@@ -61,7 +61,7 @@ export default function Navbar() {
                             rel="noreferrer"
                             className={cn(
                                 buttonVariants({ variant: "ghost", size: "icon" }),
-                                "hidden sm:flex"
+                                "hidden md:flex"
                             )}
                         >
                             <Github className="h-5 w-5" />
