@@ -10,6 +10,7 @@ import { siteConfig } from "@/config/site";
 import { ThemeToggle } from "./theme-toggle";
 import { MobileNav } from "@/components/mobile-nav";
 import { buttonVariants } from "@/components/ui/button";
+import { VersionBadge } from "../ui/version-badge";
 
 const navLinks = [
     { href: "/guide", label: "Guide" },
@@ -31,16 +32,8 @@ export default function Navbar() {
                         </span>
                     </Link>
 
-                    <div className="relative hidden md:flex items-center ml-4">
-                        <button className="flex h-9 w-64 items-center justify-between rounded-md border border-input bg-muted/50 px-3 py-1 text-sm text-muted-foreground hover:bg-muted transition-colors">
-                            <span className="flex items-center">
-                                <Search className="mr-2 h-4 w-4" />
-                                Search
-                            </span>
-                            <kbd className="pointer-events-none hidden h-5 select-none items-center gap-1 rounded border bg-background px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
-                                <span className="text-xs">Ctrl</span>K
-                            </kbd>
-                        </button>
+                    <div className="relative hidden md:flex items-center">
+                        <VersionBadge />
                     </div>
                 </div>
 
