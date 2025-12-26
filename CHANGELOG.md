@@ -1,3 +1,19 @@
+# [1.10.0](https://github.com/armandwipangestu/velora/compare/v1.9.0...v1.10.0) (2025-12-26)
+
+
+### Bug Fixes
+
+* add supressHydrationWarning to body tag ([265607f](https://github.com/armandwipangestu/velora/commit/265607fb3478519d1efdc21656854b079109f41e))
+
+
+### Features
+
+* **docs:** add docker integration ([626b2be](https://github.com/armandwipangestu/velora/commit/626b2be1b476ab65e20a6dd2598384d6776ee08f))
+* **docs:** add giscus integration ([8924e5d](https://github.com/armandwipangestu/velora/commit/8924e5d4787e36ccc9c6d1b3c6e2d60837f8532b))
+* **docs:** add group/word highlight, focused line, error/warning line, code group ([09b7ad0](https://github.com/armandwipangestu/velora/commit/09b7ad0f5316c76938801d3fad7fdb15e632b7f3))
+* **docs:** add roadmap ([debb578](https://github.com/armandwipangestu/velora/commit/debb578d38648734da9151654657ab7468229946))
+* **docs:** add umami integration ([6960c6f](https://github.com/armandwipangestu/velora/commit/6960c6f43ed600153b5f37fa8ed865f280997ffa))
+
 # [1.9.0-rc.2](https://github.com/armandwipangestu/velora/compare/v1.9.0-rc.1...v1.9.0-rc.2) (2025-12-26)
 
 
