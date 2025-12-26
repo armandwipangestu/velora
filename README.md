@@ -91,6 +91,8 @@ The following are the features I want to achieve or are under development:
 - [ ✅ ] Add code block error and warning
 - [ ✅ ] Add giscus components for discussion section
 - [ ✅ ] Code block group components
+- [ ✅ ] Add pagination blog posts
+- [ ✅ ] Add some logic to filter posts (search, date, per page, tags)
 - [ ] Wrap code block content
 - [ ] Add preview rendered code block
 
