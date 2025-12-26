@@ -22,9 +22,32 @@ And it will be rendered as:
     Here is a note callout
 </Callout>
 
+## API Reference
+
+| Prop | Type | Default |
+| :--- | :--- | :--- |
+| `type` | `"note" \| "tip" \| "important" \| "warning" \| "caution"` | - |
+| `title` | `string` | - |
+| `descriptionColor` | `"default" \| "normal" \| "muted"` | - |
+
 ## Basic Usage
 
 See detail info about how to use callout.
 
-- <a className='text-[#10b981]' href="/guide/callout/type">Callout Type</a>
+- <Link className='text-[#10b981]' href="/guide/callout/type">Type</Link>
+- <Link className='text-[#10b981]' href="/guide/callout/title">Title</Link>
+- <Link className='text-[#10b981]' href="/guide/callout/description-color">Description Color</Link>
 
+## Example Usage
+
+```mdx
+<Callout type="note" title="Custom Title" descriptionColor="normal">
+    Here is a note callout with custom title and description color muted
+</Callout>
+```
+
+And it will be rendered as:
+
+<Callout type="note" title="Custom Title" descriptionColor="normal">
+    Here is a note callout with custom title and description color muted
+</Callout>
