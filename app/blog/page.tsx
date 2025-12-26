@@ -77,21 +77,9 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         <>
             <BlogHeader />
             <main className="container max-w-6xl py-6 lg:py-10">
-                <div className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">
+                <div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
                     {/* Posts List */}
                     <div className="flex-1">
-                        <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8 mb-8">
-                            <div className="flex-1 space-y-4">
-                                <h1 className="inline-block font-black text-4xl lg:text-5xl">
-                                    Blog
-                                </h1>
-                                <p className="text-xl text-muted-foreground">
-                                    My ramblings on all things web dev.
-                                </p>
-                            </div>
-                        </div>
-
-                        <hr className="my-8" />
 
                         {displayPosts?.length > 0 ? (
                             <ul className="flex flex-col">
@@ -121,7 +109,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                     </div>
 
                     {/* Sidebar */}
-                    <aside className="w-full lg:w-[250px] shrink-0">
+                    <aside className="w-full lg:w-[250px] shrink-0 order-first lg:order-0">
                         <div className="sticky top-20">
                             <BlogSidebar tags={tags} />
                         </div>
