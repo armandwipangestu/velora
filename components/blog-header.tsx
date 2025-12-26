@@ -3,22 +3,40 @@
 import { useState, useCallback, useEffect } from "react"
 import { Search } from "lucide-react"
 import { BookOpenText } from "lucide-react"
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useDebounce } from "@/hooks/use-debounce";
 
-export function BlogHeader({
-    onSearch,
-}: {
-    onSearch: (query: string) => void;
-}) {
-    const [searchQuery, setSearchQuery] = useState<string>("")
+export function BlogHeader() {
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const pathname = usePathname();
+
+    const [searchQuery, setSearchQuery] = useState<string>(searchParams.get("query") || "")
+    const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
     const handleSearch = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
-            const query = e.target.value;
-            setSearchQuery(query);
-            onSearch(query);
+            setSearchQuery(e.target.value);
         },
-        [onSearch]
+        []
     )
+
+    useEffect(() => {
+        const params = new URLSearchParams(searchParams.toString());
+        const currentQuery = params.get("query") || "";
+
+        if (debouncedSearchQuery === currentQuery) {
+            return;
+        }
+
+        if (debouncedSearchQuery) {
+            params.set("query", debouncedSearchQuery);
+        } else {
+            params.delete("query");
+        }
+        params.set("page", "1"); // Reset to first page on search
+        router.push(`${pathname}?${params.toString()}`);
+    }, [debouncedSearchQuery, pathname, router, searchParams]);
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {

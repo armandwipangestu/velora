@@ -16,6 +16,7 @@ const POSTS_PER_PAGE = 5;
 interface BlogPageProps {
     searchParams: Promise<{
         page?: string;
+        query?: string;
     }>;
 }
 
@@ -23,10 +24,24 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     const resolvedSearchParams = await searchParams;
 
     const currentPage = Number(resolvedSearchParams?.page) || 1
-    const sortedPosts = sortPosts(posts.filter(post => post.published))
-    const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE)
+    const query = resolvedSearchParams?.query || "";
 
-    const displayPosts = sortedPosts.slice(
+    const sortedPosts = sortPosts(posts.filter(post => post.published))
+
+    const filteredPosts = sortedPosts.filter(post => {
+        if (!query) return true;
+        const searchLower = query.toLowerCase();
+        return (
+            post.title.toLowerCase().includes(searchLower) ||
+            post.slug.toLowerCase().includes(searchLower) ||
+            (post.description && post.description.toLowerCase().includes(searchLower)) ||
+            (post.tags && post.tags.some(tag => tag.toLowerCase().includes(searchLower)))
+        );
+    });
+
+    const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)
+
+    const displayPosts = filteredPosts.slice(
         POSTS_PER_PAGE * (currentPage - 1),
         POSTS_PER_PAGE * currentPage
     )
