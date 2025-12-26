@@ -37,6 +37,14 @@ jobs:
               run: |
                   docker build \
                     -f Dockerfile \
+                    --build-arg NEXT_PUBLIC_APP_URL=${{ secrets.NEXT_PUBLIC_APP_URL }} \
+                    --build-arg NEXT_PUBLIC_GISCUS_REPO=${{ secrets.NEXT_PUBLIC_GISCUS_REPO }} \
+                    --build-arg NEXT_PUBLIC_GISCUS_REPO_ID=${{ secrets.NEXT_PUBLIC_GISCUS_REPO_ID }} \
+                    --build-arg NEXT_PUBLIC_GISCUS_CATEGORY=${{ secrets.NEXT_PUBLIC_GISCUS_CATEGORY }} \
+                    --build-arg NEXT_PUBLIC_GISCUS_CATEGORY_ID=${{ secrets.NEXT_PUBLIC_GISCUS_CATEGORY_ID }} \
+                    --build-arg NEXT_PUBLIC_GISCUS_MAPPING=${{ secrets.NEXT_PUBLIC_GISCUS_MAPPING }} \
+                    --build-arg NEXT_PUBLIC_GISCUS_TERM=${{ secrets.NEXT_PUBLIC_GISCUS_TERM }} \
+                    --build-arg NEXT_PUBLIC_UMAMI_DATA_WEBSITE_ID=${{ secrets.NEXT_PUBLIC_UMAMI_DATA_WEBSITE_ID }} \
                     -t $IMAGE_NAME:${{ env.SHORT_SHA }} .
     
             - name: Push Docker Image (SHA tag)
