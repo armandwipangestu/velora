@@ -91,10 +91,10 @@ docker build \
 
 ## References
 
-You can see how velora add CI Pipeline automation to release and push docker image to GitHub Container Registry in <a className='text-[#10b981]' href="https://github.com/armandwipangestu/velora/blob/main/.github/workflows/release.yml" target="_blank">release.yml</a>. You can also pull the latest docker image velora using the following command.
+You can see how velora add CI Pipeline automation to release and push docker image to GitHub Container Registry in <a className='text-[#10b981]' href="https://github.com/armandwipangestu/velora/blob/main/.github/workflows/release.yml" target="_blank">release.yml</a>. You can also use the latest docker image velora using the following command.
 
 ```bash
-docker pull ghcr.io/armandwipangestu/velora:latest
+docker run --rm -p 3000:3000 ghcr.io/armandwipangestu/velora:latest
 ```
 
 The docker image velora is available on <a className='text-[#10b981]' href="https://github.com/users/armandwipangestu/packages/container/package/velora" target="_blank">GitHub Container Registry</a>
