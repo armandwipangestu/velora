@@ -1,0 +1,51 @@
+---
+title: Group or Multiple Word Highlight
+description: Enabling group or multiple word highlighting in code blocks
+category: Custom Components
+categoryOrder: 2
+order: 8
+---
+
+# Group or Multiple Word Highlight
+
+Enabling group or multiple word highlighting in code blocks. So you can highlight multiple words with different styles based on chars id.
+
+- `#v` is for variable
+- `#s` is for state
+- `#i` is for identifier
+
+## Code Example
+
+Show group or multiple word highlighting using the `#v` for variable, `#s` for state, and `#i` for identifier.
+
+````mdx
+```tsx showLineNumbers /useState/#v /useEffect/#s /React/#i
+import React, { useState, useEffect } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    document.title = `Count: ${count}`;
+  }, [count]);
+
+  return <button onClick={() => setCount(c => c + 1)}>{count}</button>;
+}
+```
+````
+
+It will show like this
+
+```tsx showLineNumbers /useState/#v /useEffect/#s /React/#i
+import React, { useState, useEffect } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    document.title = `Count: ${count}`;
+  }, [count]);
+
+  return <button onClick={() => setCount(c => c + 1)}>{count}</button>;
+}
+```

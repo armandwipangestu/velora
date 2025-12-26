@@ -1,0 +1,33 @@
+---
+title: Focused Line
+description: Enabling focused line in code blocks
+category: Custom Components
+categoryOrder: 2
+order: 9
+---
+
+# Focused Line
+
+Focused line is a way to show the line that you want to focus on, when you hover the code block it will remove the blur effect.
+
+## Code Example
+
+Show focused line using the `// [!code focus]` identifier.
+
+````mdx /[!code focus]/
+```bash showLineNumbers
+console.log("not Focused")
+// [!code focus]
+console.log("hover me")
+console.log("not Focused")
+```
+````
+
+It will show like this
+
+```ts showLineNumbers
+console.log("not Focused")
+// [!code focus]
+console.log("hover me")
+console.log("not Focused")
+```
