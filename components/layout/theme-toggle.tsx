@@ -39,7 +39,7 @@ export function ThemeToggle() {
                         key={option.value}
                         onClick={() => setTheme(option.value)}
                         className={cn(
-                            "p-1.5 rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                            "p-1.5 rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer",
                             isActive
                                 ? "bg-background text-foreground shadow-sm scale-110"
                                 : "text-muted-foreground hover:text-foreground hover:bg-muted"

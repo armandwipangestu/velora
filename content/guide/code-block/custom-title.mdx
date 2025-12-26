@@ -1,0 +1,39 @@
+---
+title: Custom Title
+description: Enabling custom title in code blocks
+category: Custom Components
+categoryOrder: 2
+order: 4
+---
+
+# Custom Title
+
+<Callout type="note">
+    The default title is detect using `language` name, but it can be override using `title="..."` meta string.
+</Callout>
+
+Enabling custom title in code blocks
+
+## Code Example
+
+Show custom title using the `title="..."` meta tag.
+
+````mdx icon="mdx" showLineNumbers /Custom Title/#v
+```go title="Custom Title"
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World!")
+}
+```
+````
+
+It must be showing an `go` title (detect from language), but because i passing `title="Custom Title"` it will show custom title like this.
+
+```go title="Custom Title"
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World!")
+}
+```

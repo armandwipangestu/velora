@@ -1,0 +1,63 @@
+---
+title: Code Group
+description: Enabling code group in code blocks
+category: Custom Components
+categoryOrder: 2
+order: 11
+---
+
+# Code Group
+
+Code group is a way to group multiple code blocks into a single group, it will be useful for showing multiple code with multiple languages or files. The identifier is using `::: code-group` on start and `:::` on end.
+
+## Code Example
+
+Here an example of code group that show an hello world in multiple languages.
+
+````mdx /::: code-group/ /:::/
+::: code-group
+```bash showLineNumbers
+echo -e "Hello World!"
+```
+
+```ts showLineNumbers
+console.log("Hello World!")
+```
+
+```rust showLineNumbers
+println!("Hello World!");
+```
+
+```py showLineNumbers
+print("Hello World!")
+```
+
+```go showLineNumbers
+fmt.Println("Hello World!")
+```
+:::
+````
+
+It will show like this
+
+::: code-group
+```bash showLineNumbers
+echo -e "Hello World!"
+```
+
+```ts showLineNumbers
+console.log("Hello World!")
+```
+
+```rust showLineNumbers
+println!("Hello World!");
+```
+
+```py showLineNumbers
+print("Hello World!")
+```
+
+```go showLineNumbers
+fmt.Println("Hello World!")
+```
+:::

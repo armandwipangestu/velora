@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/static-components */
 import Image from "next/image"
+import Link from "next/link"
 import * as runtime from "react/jsx-runtime"
 import { Pre } from "./mdx-pre"
 import { Callout } from "./callout"
@@ -12,6 +13,7 @@ const useMdxComponents = (code: string) => {
 
 const components = {
     Image,
+    Link,
     Callout,
     pre: Pre,
     div: ({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) => {
