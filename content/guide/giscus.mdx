@@ -1,0 +1,72 @@
+---
+title: Giscus
+description: How to add giscus to your site
+category: Integration
+categoryOrder: 3
+order: 1
+---
+
+# Setup Giscus
+
+## Enable Discussions Repository
+
+Create a dedicated repository or used existing repository for Giscus comments. Go to the repository `Settings` > `Features` > `Enable Discussions`
+
+## Create Category for Discussions
+
+After enable the discussions, you need to create a dedicated category for discussions (or used existing category).
+
+To create a category, go to `Discussions` > `Edit Categories` > `New category` and fill the form.
+
+```
+Category name: Blog-Comments
+Description: This topic is used for blog comments
+Discussion Format: Open-ended discussion
+No section: true
+```
+
+## Get Giscus Data Attribute
+
+After create the category, you need to get the giscus data attribute. To get the data attribute, you can visit [giscus.app](https://giscus.app/).
+
+Then fill the configuration form with your repository information and category information like this.
+
+```
+repository: username/repository
+Page <> Discussions Mapping: Discussion title contains page `pathname`
+Discussion Category: Blog-Comments
+```
+
+After that, you will get the data attribute like this.
+
+```html
+<script src="https://giscus.app/client.js"
+        data-repo="username/repository"
+        data-repo-id="your-repo-id"
+        data-category="Blog-Comments"
+        data-category-id="your-category-id"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+```
+
+## Add Giscus Configuration to Environment Variable
+
+After getting the data attribute, you need to add the data attribute to the environment variable, fill the `.env.local` file with the data attribute.
+
+```env
+# Giscus Configuration
+NEXT_PUBLIC_GISCUS_REPO=username/repository
+NEXT_PUBLIC_GISCUS_REPO_ID=your-repo-id
+NEXT_PUBLIC_GISCUS_CATEGORY=Blog-Comments
+NEXT_PUBLIC_GISCUS_CATEGORY_ID=your-category-id
+NEXT_PUBLIC_GISCUS_MAPPING=pathname
+NEXT_PUBLIC_GISCUS_TERM=
+```
