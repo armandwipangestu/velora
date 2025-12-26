@@ -1,0 +1,33 @@
+---
+title: Umami
+description: How to add umami to your site
+category: Integration
+categoryOrder: 3
+order: 1
+---
+
+# Setup Umami
+
+What is Umami? Umami is a free, open source, and privacy-first analytics tool. With Umami, you can track your website traffic and get insights about your visitors.
+
+## Add Website
+
+Login to [Umami Cloud](https://cloud.umami.is/login) and add your website. Fill the form with your website information.
+
+```
+Name: Your Website Name
+Domain: Your Website Domain
+```
+
+## Get Umami Website ID
+
+After adding the website, you need to get the umami website id. Go to `Website` > `Edit Website` and copy the website id.
+
+## Add Umami Configuration to Environment Variable
+
+After getting the umami website id, you need to add the umami website id to the environment variable, fill the `.env.local` file with the umami website id.
+
+```env
+# Umami Configuration
+NEXT_PUBLIC_UMAMI_DATA_WEBSITE_ID=your-umami-website-id
+```
