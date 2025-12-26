@@ -13,8 +13,6 @@ import { VersionBadge } from "../ui/version-badge";
 
 export const navLinks = [
     { href: "/guide/introduction", label: "Guide" },
-    { href: "/reference", label: "Reference" },
-    { href: "/examples", label: "Examples" },
 ];
 
 export default function Navbar() {
