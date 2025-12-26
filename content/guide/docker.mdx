@@ -1,0 +1,100 @@
+---
+title: Docker
+description: How to add docker to your application
+category: Integration
+categoryOrder: 3
+order: 3
+---
+
+# Setup Docker
+
+You can add docker to your application by using the following command. Create a `Dockerfile` in the root directory of your application and fill the following content.
+
+```dockerfile
+# --------
+# 1. Builder
+# --------
+FROM oven/bun:1.2.23-alpine AS builder
+
+# Add the link to your new repository here
+LABEL org.opencontainers.image.source="https://github.com/username/repository"
+
+WORKDIR /app
+
+# Install dependencies using cached layer
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
+
+# Declare the argument that expect to receive at build time
+ARG NEXT_PUBLIC_APP_URL
+ARG NEXT_PUBLIC_GISCUS_REPO
+ARG NEXT_PUBLIC_GISCUS_REPO_ID
+ARG NEXT_PUBLIC_GISCUS_CATEGORY
+ARG NEXT_PUBLIC_GISCUS_CATEGORY_ID
+ARG NEXT_PUBLIC_GISCUS_MAPPING
+ARG NEXT_PUBLIC_GISCUS_TERM
+ARG NEXT_PUBLIC_UMAMI_DATA_WEBSITE_ID
+
+# Set is as an environment variable so the build can access it
+ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
+ENV NEXT_PUBLIC_GISCUS_REPO=$NEXT_PUBLIC_GISCUS_REPO
+ENV NEXT_PUBLIC_GISCUS_REPO_ID=$NEXT_PUBLIC_GISCUS_REPO_ID
+ENV NEXT_PUBLIC_GISCUS_CATEGORY=$NEXT_PUBLIC_GISCUS_CATEGORY
+ENV NEXT_PUBLIC_GISCUS_CATEGORY_ID=$NEXT_PUBLIC_GISCUS_CATEGORY_ID
+ENV NEXT_PUBLIC_GISCUS_MAPPING=$NEXT_PUBLIC_GISCUS_MAPPING
+ENV NEXT_PUBLIC_GISCUS_TERM=$NEXT_PUBLIC_GISCUS_TERM
+ENV NEXT_PUBLIC_UMAMI_DATA_WEBSITE_ID=$NEXT_PUBLIC_UMAMI_DATA_WEBSITE_ID
+
+# Copy all source
+COPY . .
+
+# Build Next.js
+RUN bun run build
+
+
+# --------
+# 2. Runner
+# --------
+FROM oven/bun:1.2.23-alpine AS runner
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV PORT=3000
+
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/static ./.next/static
+
+EXPOSE 3000
+
+CMD ["bun", "run", "server.js"]
+```
+
+## Build Docker Image
+
+To build the docker image, you can use the following command.
+
+```bash
+docker build \
+    -f Dockerfile \
+    --build-arg NEXT_PUBLIC_APP_URL=your-app-url \
+    --build-arg NEXT_PUBLIC_GISCUS_REPO=your-giscus-repo \
+    --build-arg NEXT_PUBLIC_GISCUS_REPO_ID=your-giscus-repo-id \
+    --build-arg NEXT_PUBLIC_GISCUS_CATEGORY=your-giscus-category \
+    --build-arg NEXT_PUBLIC_GISCUS_CATEGORY_ID=your-giscus-category-id \
+    --build-arg NEXT_PUBLIC_GISCUS_MAPPING=your-giscus-mapping \
+    --build-arg NEXT_PUBLIC_GISCUS_TERM=your-giscus-term \
+    --build-arg NEXT_PUBLIC_UMAMI_DATA_WEBSITE_ID=your-umami-data-website-id \
+    -t your-image-name:your-tag .
+```
+
+## References
+
+You can see how velora add CI Pipeline automation to release and push docker image to GitHub Container Registry in <a className='text-[#10b981]' href="https://github.com/armandwipangestu/velora/blob/main/.github/workflows/release.yml" target="_blank">release.yml</a>. You can also use the latest docker image velora using the following command.
+
+```bash
+docker run --rm -p 3000:3000 ghcr.io/armandwipangestu/velora:latest
+```
+
+The docker image velora is available on <a className='text-[#10b981]' href="https://github.com/users/armandwipangestu/packages/container/package/velora" target="_blank">GitHub Container Registry</a>

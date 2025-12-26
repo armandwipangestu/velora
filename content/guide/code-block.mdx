@@ -10,9 +10,88 @@ order: 2
 
 We use Shiki for highlighting.
 
+## API Reference
+
+| Name | Prop | Type | Default |
+| :--- | :--- | :--- | :--- |
+| Show Line Numbers | `showLineNumbers` | `boolean` | `false` |
+| Line Highlighting | `{<line_number>} \| {<line_number>,<line_number>} \| {<start>-<end>}` | `number{}` | - |
+| Word Highlighting | `/<word>/` | `string` | - |
+| Custom Title | `title="..."` | `string` | - |
+| Custom Icon | `icon="i<IconName>"` | `string` | - |
+| Custom Font | `font="<FontName>"` | `string` | - |
+| Font Ligatures | `fontLigatures` | `boolean` | `true` |
+| Diff Notation | `// [!code ++] \| // [!code --]` | `string` | - |
+
+## List Available Icon
+
+| Variable Name | Icon Render |
+| :--- | :--- |
+| `iJs` | js |
+| `iJsx` | jsx |
+| `iTs` | ts |
+| `iTsx` | tsx |
+| `iNode` | node |
+| `iNodejs` | nodejs |
+| `iNpm` | npm |
+| `iYarn` | yarn |
+| `iPnpm` | pnpm |
+| `iBun` | bun |
+| `iCss` | css |
+| `iHtml` | html |
+| `iJson` | json |
+| `iMd` | md |
+| `iMdx` | mdx |
+| `iAnsi` | ansi |
+| `iBash` | bash |
+| `iSh` | sh |
+| `iZsh` | zsh |
+| `iShell` | shell |
+| `iYml` | yml |
+| `iYaml` | yaml |
+| `iCsv` | csv |
+| `iSql` | sql |
+| `iJava` | java |
+| `iGo` | go |
+| `iGolang` | golang |
+| `iPy` | py |
+| `iPython` | python |
+| `iRb` | rb |
+| `iRuby` | ruby |
+| `iVim` | vim |
+| `iVimscript` | vimscript |
+| `iDocker` | docker |
+| `iDockerfile` | dockerfile |
+| `iDiff` | diff |
+| `iLua` | lua |
+| `iRust` | rust |
+| `iCs` | cs |
+| `iCsharp` | csharp |
+| `iCpp` | cpp |
+| `iC` | c |
+| `iSwift` | swift |
+| `iDart` | dart |
+| `iFlutter` | flutter |
+| `iXml` | xml |
+| `iXaml` | xaml |
+| `iPhp` | php |
+| `iBlade` | blade |
+| `iLaravel` | laravel |
+| `iKotlin` | kotlin |
+| `iKt` | kt |
+
 ## Basic Usage
 
 See detail info about how to use code blocks.
 
-- <a className='text-[#10b981]' href="/guide/code-block/line-numbers">Line Numbers</a>
-- <a className='text-[#10b981]' href="/guide/code-block/line-highlighting">Line Highlight</a>
+- <Link className='text-[#10b981]' href="/guide/code-block/line-numbers">Line Numbers</Link>
+- <Link className='text-[#10b981]' href="/guide/code-block/line-highlighting">Line Highlight</Link>
+- <Link className='text-[#10b981]' href="/guide/code-block/word-highlighting">Word Highlight</Link>
+- <Link className='text-[#10b981]' href="/guide/code-block/custom-title">Custom Title</Link>
+- <Link className='text-[#10b981]' href="/guide/code-block/custom-icon">Custom Icon</Link>
+- <Link className='text-[#10b981]' href="/guide/code-block/custom-font">Custom Font</Link>
+- <Link className='text-[#10b981]' href="/guide/code-block/diff-notation">Diff Notation</Link>
+- <Link className='text-[#10b981]' href="/guide/code-block/group-or-multiple-word-highlight">Group or Multiple Word Highlight</Link>
+- <Link className='text-[#10b981]' href="/guide/code-block/focused-line">Focused Line</Link>
+- <Link className='text-[#10b981]' href="/guide/code-block/error-and-warning-lines">Error and Warning Lines</Link>
+- <Link className='text-[#10b981]' href="/guide/code-block/code-group">Code Group</Link>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Ubuntu_Mono} from "next/font/google";
+import { Geist, Geist_Mono, Ubuntu_Mono } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
@@ -55,11 +55,12 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className="scroll-pt-[3.5rem]">
       <body
         className={cn("min-h-screen bg-background font-sans antialiased", `${geistSans.variable} ${geistMono.variable} ${ubuntuMono.variable}`)}
+        suppressHydrationWarning
       >
         <Script
           defer
           src="https://cloud.umami.is/script.js"
-          data-website-id="7de589ea-cb8c-49e0-95e0-f08448a8e272"
+          data-website-id={process.env.NEXT_PUBLIC_UMAMI_DATA_WEBSITE_ID}
           strategy="afterInteractive"
         />
 

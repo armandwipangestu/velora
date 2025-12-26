@@ -13,12 +13,12 @@ interface GiscusProps {
 }
 
 export default function Giscus({
-    repo = "armandwipangestu/velora",
-    repoId = "R_kgDOQsjyhA",
-    category = "Blog-Comments",
-    categoryId = "DIC_kwDOQsjyhM4C0KEL",
-    mapping = "pathname",
-    term,
+    repo = process.env.NEXT_PUBLIC_GISCUS_REPO,
+    repoId = process.env.NEXT_PUBLIC_GISCUS_REPO_ID,
+    category = process.env.NEXT_PUBLIC_GISCUS_CATEGORY,
+    categoryId = process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID,
+    mapping = process.env.NEXT_PUBLIC_GISCUS_MAPPING as GiscusProps["mapping"],
+    term = process.env.NEXT_PUBLIC_GISCUS_TERM,
 }: GiscusProps) {
     const { resolvedTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
@@ -37,6 +37,8 @@ export default function Giscus({
         script.src = "https://giscus.app/client.js";
         script.async = true;
         script.crossOrigin = "anonymous";
+
+        if (!repo || !repoId || !category || !categoryId || !mapping) return;
 
         script.setAttribute("data-repo", repo);
         script.setAttribute("data-repo-id", repoId);
