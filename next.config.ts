@@ -11,7 +11,17 @@ if (!isCI && !process.env.VELITE_STARTED && (isDev || isBuild)) {
 
 const nextConfig: NextConfig = {
   /* config options here */
-  output: "standalone"
+  output: "standalone",
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "placehold.co",
+        port: '',
+        pathname: "/**",
+      }
+    ]
+  }
 };
 
 export default nextConfig;

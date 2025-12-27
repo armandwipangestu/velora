@@ -5,6 +5,11 @@ import "@/styles/mdx.css"
 import { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 import Giscus from "@/components/giscus";
+import { TocSidebar, MobileToc } from "@/components/toc";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { PostItem } from "@/components/post-item"
 
 interface PostPageProps {
     params: Promise<{
@@ -80,17 +85,86 @@ export default async function PostPage({ params }: PostPageProps) {
     /**
      * If you want to customize all of the components it rendered by mdx (not using prose dark:prose-invert). You can check mdx-components.tsx for more info
      */
-    return <article className="container py-6 prose dark:prose-invert max-w-3xl">
-        <h1 className="mb-2">{post.title}</h1>
-        {post.description ? (
-            <p className="text-xl mt-0 text-muted-foreground">
-                {post.description}
-            </p>
-        ) : null}
-        <hr className="my-4" />
+    // Related Posts
+    const relatedPosts = posts
+        .filter(p => p.slug !== post.slug && p.published && p.tags?.some(t => post.tags?.includes(t)))
+        .slice(0, 3);
 
-        <MDXContent code={post.body} />
+    return (
+        <article className="container py-6 max-w-6xl">
+            {/* Header: Full Width */}
+            <div className="flex flex-col space-y-4 mb-8">
+                <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-5xl lg:text-5xl">{post.title}</h1>
 
-        <Giscus />
-    </article>
+                {/* Tags */}
+                {post.tags && post.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 not-prose">
+                        {post.tags.map(tag => (
+                            <Link
+                                key={tag}
+                                href={`/blog?tag=${tag}`}
+                                className={cn(buttonVariants({ variant: "outline", size: "sm" }), "h-6 text-xs")}
+                            >
+                                {tag}
+                            </Link>
+                        ))}
+                    </div>
+                )}
+
+                {post.description ? (
+                    <p className="text-lg text-muted-foreground">
+                        {post.description}
+                    </p>
+                ) : null}
+            </div>
+
+            <hr className="my-8" />
+
+            {/* Content Grid: Main Content + Sidebar TOC */}
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_250px] gap-8">
+                {/* Main Content */}
+                <div className="prose dark:prose-invert max-w-3xl">
+                    <MDXContent code={post.body} />
+                </div>
+
+                {/* Sidebar TOC - Desktop */}
+                <aside className="hidden lg:block relative">
+                    <div className="sticky top-20 h-fit">
+                        <TocSidebar items={post.toc} />
+                    </div>
+                </aside>
+            </div>
+
+            <hr className="my-8" />
+
+            {/* Full Width Footer: Giscus & Related Posts */}
+            <div className="flex flex-col gap-12">
+                <Giscus />
+
+                {/* Related Posts */}
+                {relatedPosts.length > 0 && (
+                    <div className="not-prose">
+                        <h3 className="text-2xl font-bold mb-6">Related Posts</h3>
+                        <div className="flex flex-col gap-4">
+                            {relatedPosts.map(p => (
+                                <PostItem
+                                    key={p.slug}
+                                    slug={p.slug}
+                                    title={p.title}
+                                    date={p.date}
+                                    description={p.description}
+                                    tags={p.tags}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </div>
+
+            {/* Mobile TOC - Visible on small/medium, Hidden on large */}
+            <div className="lg:hidden">
+                <MobileToc items={post.toc} />
+            </div>
+        </article>
+    )
 }

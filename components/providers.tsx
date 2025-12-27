@@ -18,7 +18,10 @@ export function Providers({ children }: { children: ReactNode }) {
                 {children}
             </ThemeProvider>
 
-            <ReactQueryDevtools initialIsOpen={false} />
+            <ReactQueryDevtools
+                initialIsOpen={false}
+                buttonPosition="top-left"
+            />
         </QueryClientProvider>
     )
 }

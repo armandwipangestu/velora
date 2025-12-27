@@ -1,13 +1,14 @@
 "use client"
 
 import { Check, Copy, FileCode } from "lucide-react"
-import { FaReact, FaCss3Alt, FaHtml5, FaMarkdown, FaFileCsv, FaJava, FaGolang, FaPython, FaDocker, FaRust, FaC, FaSwift, FaLaravel, FaDartLang, FaFlutter, FaNpm, FaYarn, FaNodeJs } from "react-icons/fa6"
+import { FaReact, FaCss3Alt, FaHtml5, FaMarkdown, FaFileCsv, FaJava, FaGolang, FaPython, FaDocker, FaRust, FaC, FaSwift, FaLaravel, FaDartLang, FaFlutter, FaNpm, FaYarn, FaNodeJs, FaVuejs, FaAngular, FaSass, FaGitAlt, FaGithub } from "react-icons/fa6"
+import { FaGitlab } from "react-icons/fa"
 import { RiJavascriptFill, RiPhpLine } from "react-icons/ri"
-import { BiLogoTypescript } from "react-icons/bi"
+import { BiLogoTypescript, BiLogoPostgresql } from "react-icons/bi"
 import { BsFiletypeYml, BsFiletypeSql, BsFiletypeXml } from "react-icons/bs"
 import { VscJson } from "react-icons/vsc"
-import { SiGnubash, SiMdx, SiVim, SiZsh, SiLua, SiKotlin, SiPnpm, SiBun } from "react-icons/si"
-import { DiRuby } from "react-icons/di"
+import { SiGnubash, SiMdx, SiVim, SiZsh, SiLua, SiKotlin, SiPnpm, SiBun, SiTerraform, SiAnsible, SiOpentofu, SiKubernetes, SiNginx, SiArduino, SiTailwindcss, SiDotnet, SiGraphql, SiPrisma, SiMysql, SiMariadb, SiRabbitmq, SiApachekafka, SiRedis, SiMongodb, SiSupabase, SiGithubactions, SiPodman, SiArgo } from "react-icons/si"
+import { DiRuby, DiMsqlServer } from "react-icons/di"
 import { MdDifference } from "react-icons/md"
 import { PiFileCSharp, PiFileCppDuotone } from "react-icons/pi"
 import { useState, useRef } from "react"
@@ -66,6 +67,38 @@ export const languageIcons: Record<string, React.ReactNode> = {
     laravel: <FaLaravel className="size-4" />,
     kotlin: <SiKotlin className="size-4" />,
     kt: <SiKotlin className="size-4" />,
+    vue: <FaVuejs className="size-4" />,
+    vuejs: <FaVuejs className="size-4" />,
+    angular: <FaAngular className="size-4" />,
+    sass: <FaSass className="size-4" />,
+    git: <FaGitAlt className="size-4" />,
+    github: <FaGithub className="size-4" />,
+    gitlab: <FaGitlab className="size-4" />,
+    postgresql: <BiLogoPostgresql className="size-4" />,
+    tf: <SiTerraform className="size-4" />,
+    terraform: <SiTerraform className="size-4" />,
+    ansible: <SiAnsible className="size-4" />,
+    tofu: <SiOpentofu className="size-4" />,
+    kubernetes: <SiKubernetes className="size-4" />,
+    k8s: <SiKubernetes className="size-4" />,
+    nginx: <SiNginx className="size-4" />,
+    arduino: <SiArduino className="size-4" />,
+    tailwind: <SiTailwindcss className="size-4" />,
+    dotnet: <SiDotnet className="size-4" />,
+    graphql: <SiGraphql className="size-4" />,
+    prisma: <SiPrisma className="size-4" />,
+    mysql: <SiMysql className="size-4" />,
+    mariadb: <SiMariadb className="size-4" />,
+    rabbitmq: <SiRabbitmq className="size-4" />,
+    kafka: <SiApachekafka className="size-4" />,
+    redis: <SiRedis className="size-4" />,
+    mongodb: <SiMongodb className="size-4" />,
+    supabase: <SiSupabase className="size-4" />,
+    githubactions: <SiGithubactions className="size-4" />,
+    mssql: <DiMsqlServer className="size-4" />,
+    sqlserver: <DiMsqlServer className="size-4" />,
+    podman: <SiPodman className="size-4" />,
+    argo: <SiArgo className="size-4" />,
 }
 
 export const languageColors: Record<string, { light: string; dark: string }> = {
@@ -94,6 +127,8 @@ export const languageColors: Record<string, { light: string; dark: string }> = {
     python: { light: "#3776AB", dark: "#3776AB" },
     rb: { light: "#CC342D", dark: "#CC342D" },
     ruby: { light: "#CC342D", dark: "#CC342D" },
+    vim: { light: "#169744", dark: "#41B883" },
+    vimscript: { light: "#169744", dark: "#41B883" },
     docker: { light: "#2496ED", dark: "#2496ED" },
     dockerfile: { light: "#2496ED", dark: "#2496ED" },
     lua: { light: "#000080", dark: "#1717ff" },
@@ -110,6 +145,38 @@ export const languageColors: Record<string, { light: string; dark: string }> = {
     laravel: { light: "#FF2D20", dark: "#FF2D20" },
     kotlin: { light: "#7F52FF", dark: "#7F52FF" },
     kt: { light: "#7F52FF", dark: "#7F52FF" },
+    vue: { light: "#4FC08D", dark: "#4FC08D" },
+    vuejs: { light: "#4FC08D", dark: "#4FC08D" },
+    angular: { light: "#DD0031", dark: "#DD0031" },
+    sass: { light: "#CC6699", dark: "#F06292" },
+    git: { light: "#F05032", dark: "#F05032" },
+    github: { light: "#181717", dark: "#FFFFFF" },
+    gitlab: { light: "#FC6D26", dark: "#FC6D26" },
+    postgresql: { light: "#4169E1", dark: "#336791" },
+    tf: { light: "#7B42BC", dark: "#844FBA" },
+    terraform: { light: "#7B42BC", dark: "#844FBA" },
+    ansible: { light: "#000000", dark: "#FFFFFF" },
+    tofu: { light: "#FFDA18", dark: "#FFDA18" },
+    kubernetes: { light: "#326CE5", dark: "#326CE5" },
+    k8s: { light: "#326CE5", dark: "#326CE5" },
+    nginx: { light: "#009639", dark: "#009639" },
+    arduino: { light: "#00979D", dark: "#00979D" },
+    tailwind: { light: "#06B6D4", dark: "#38BDF8" },
+    dotnet: { light: "#512BD4", dark: "#512BD4" },
+    graphql: { light: "#E10098", dark: "#E10098" },
+    prisma: { light: "#2D3748", dark: "#FFFFFF" },
+    mysql: { light: "#4479A1", dark: "#4479A1" },
+    mariadb: { light: "#003545", dark: "#FFFFFF" },
+    rabbitmq: { light: "#FF6600", dark: "#FF6600" },
+    kafka: { light: "#231F20", dark: "#FFFFFF" },
+    redis: { light: "#DC382D", dark: "#DC382D" },
+    mongodb: { light: "#47A248", dark: "#47A248" },
+    supabase: { light: "#3ECF8E", dark: "#3ECF8E" },
+    githubactions: { light: "#2088FF", dark: "#47A1FF" },
+    mssql: { light: "#CC2927", dark: "#FF5F5E" },
+    sqlserver: { light: "#CC2927", dark: "#FF5F5E" },
+    podman: { light: "#892CA0", dark: "#B166CC" },
+    argo: { light: "#ef7b4d", dark: "#ffa07a" },
 }
 
 export const fontAliases: Record<string, string> = {
@@ -170,6 +237,39 @@ export const languageAliases: Record<string, string> = {
     iLaravel: "laravel",
     iKotlin: "kotlin",
     iKt: "kt",
+    iVue: "vue",
+    iVuejs: "vuejs",
+    iAngular: "angular",
+    iSass: "sass",
+    iGit: "git",
+    iGithub: "github",
+    iGitlab: "gitlab",
+    iPostgresql: "postgresql",
+    iTf: "tf",
+    iTerraform: "terraform",
+    iAnsible: "ansible",
+    iTofu: "tofu",
+    iKubernetes: "kubernetes",
+    iK8s: "k8s",
+    iNginx: "nginx",
+    iArduino: "arduino",
+    iIno: "arduino",
+    iTailwind: "tailwind",
+    iDotnet: "dotnet",
+    iGraphql: "graphql",
+    iPrisma: "prisma",
+    iMysql: "mysql",
+    iMariadb: "mariadb",
+    iRabbitmq: "rabbitmq",
+    iKafka: "kafka",
+    iRedis: "redis",
+    iMongodb: "mongodb",
+    iSupabase: "supabase",
+    iGithubactions: "githubactions",
+    iMssql: "mssql",
+    iSqlserver: "sqlserver",
+    iPodman: "podman",
+    iArgo: "argo"
 };
 
 import { useCodeGroup } from "./mdx-code-group"
