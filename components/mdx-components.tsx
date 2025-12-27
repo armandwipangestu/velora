@@ -13,6 +13,8 @@ const useMdxComponents = (code: string) => {
 
 import { MDXImage } from "@/components/mdx-image"
 
+import { cn } from "@/lib/utils"
+
 const components = {
     Image: MDXImage,
     BlogImage: MDXImage,
@@ -25,6 +27,11 @@ const components = {
         }
         return <div {...props}>{children}</div>
     },
+    table: ({ className, ...props }: React.ComponentProps<"table">) => (
+        <div className="my-6 w-full overflow-x-auto">
+            <table className={cn("w-full", className)} {...props} />
+        </div>
+    ),
     /**
      * If you want to customize all of the components it rendered by mdx (not using prose dark:prose-invert on container MDXContent in [...slug]/page.tsx). You can define all of style like h1, h2, etc in this. For reference you can see the https://github.com/shadcn-ui/taxonomy/blob/main/components/mdx-components.tsx
      */
