@@ -1,0 +1,344 @@
+---
+title: Syntax Highlighting
+description: This post is to see all language and icon syntax highlighting
+date: 2025-12-26
+tags:
+    - mdx
+    - syntax-highlighting
+published: true
+---
+
+
+# Example
+
+## Language
+
+```sass title="example.scss" icon="iSass"
+// Testing Sass Icon
+$primary-color: #CC6699;
+body { color: $primary-color; }
+```
+
+```css title="example.css" icon="iTailwind"
+/* Testing Tailwind Icon */
+@tailwind base;
+```
+
+```cpp title="example.cpp" icon="iArduino"
+// Testing Arduino Icon
+void setup() {}
+```
+
+```cpp title="example.ino" icon="iIno"
+// Testing Arduino Icon
+void setup() {}
+```
+
+## Framework
+
+```ts title="example.vue" icon="iVue"
+// Testing Vue Icon
+export default {
+  name: 'VueComponent'
+}
+```
+
+```ts title="example.vue" icon="iVuejs"
+// Testing Vue Icon
+export default {
+  name: 'VueComponent'
+}
+```
+
+```ts title="example.ts" icon="iAngular"
+// Testing Angular Icon
+@Component({
+  selector: 'app-root'
+})
+```
+
+```csharp title="example.cs" icon="iDotnet"
+// Testing .NET Icon
+var builder = WebApplication.CreateBuilder(args);
+```
+
+## Database
+
+```sql title="example.sql" icon="iPostgresql"
+-- Testing PostgreSQL Icon
+SELECT * FROM users;
+```
+
+```prisma title="example.prisma" icon="iPrisma"
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "mysql"
+  url               = env("DATABASE_URL") // NOTE: Please consider when using multiple environment (e.g. dev, staging, and production)
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model User {
+  id           String     @id @default(uuid())
+  fullName     String
+  email        String     @unique
+  gender       UserGender
+  age          Int
+  phoneNumber  String
+  password     String
+  refreshToken String?    @db.VarChar(512)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  role   Role   @relation(fields: [roleId], references: [id])
+  roleId String
+
+  profile Profile?
+
+  UserChatRoom   ChatRoom[] @relation("UserChatRoom")
+  ExpertChatRoom ChatRoom[] @relation("ExpertChatRoom")
+
+  @@map("users")
+}
+```
+
+```sql title="example.sql" icon="iMysql"
+-- Testing MySQL Icon
+SELECT * FROM users;
+```
+
+```sql title="example.sql" icon="iMariadb"
+-- Testing MySQL Icon
+SELECT * FROM users;
+```
+
+```sql title="example.sql" icon="iMssql"
+-- Testing MySQL Icon
+SELECT * FROM users;
+```
+
+```sql title="example.sql" icon="iSqlserver"
+-- Testing MySQL Icon
+SELECT * FROM users;
+```
+
+```conf title="redis.conf" icon="iRedis"
+bind 127.0.0.1 -::1 192.168.100.65
+
+bind-source-addr 192.168.100.63
+
+protected-mode yes
+
+port 6379
+```
+
+```conf title="mongodb.conf" icon="iMongodb"
+bind 127.0.0.1 -::1 192.168.100.65
+bind-source-addr 192.168.100.63
+protected-mode yes
+port 27017
+```
+
+```js title="example.js" icon="iSupabase"
+// Testing Supabase Icon
+const { data } = await supabase.from('test').select();
+```
+
+## Infrastructure as Code (IaC)
+
+```hcl title="example.tf" icon="iTf"
+# Testing Terraform Icon
+resource "aws_instance" "example" {}
+```
+
+```hcl title="example.tf" icon="iTerraform"
+# Testing Terraform Icon
+resource "aws_instance" "example" {}
+```
+
+```yml title="example.yml" icon="iAnsible"
+# Testing Ansible Icon (B&W Toggle)
+- name: test playbook
+  hosts: all
+```
+
+```hcl title="example.tf" icon="iTofu"
+resource "aws_s3_bucket" "demo_bucket" {
+  # The bucket name is dynamically generated using the random_id resource
+  bucket = "opentofu-demo-bucket-${random_id.bucket_id.hex}"
+}
+
+resource "random_id" "bucket_id" {
+  byte_length = 8
+}
+```
+
+## Container
+
+```dockerfile icon="iDocker"
+# --------
+# 1. Builder
+# --------
+FROM oven/bun:1.2.23-alpine AS builder
+
+# Add the link to your new repository here
+LABEL org.opencontainers.image.source="https://github.com/username/velora"
+
+WORKDIR /app
+
+# Install dependencies using cached layer
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
+
+# Copy all source
+COPY . .
+
+# Build Next.js
+RUN bun run build
+
+
+# --------
+# 2. Runner
+# --------
+FROM oven/bun:1.2.23-alpine AS runner
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV PORT=3000
+
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/static ./.next/static
+
+EXPOSE 3000
+
+CMD ["bun", "run", "server.js"]
+```
+
+```yml title="docker-compose.yml" icon="iDocker"
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+```
+
+```yml title="docker-compose.yml" icon="iPodman"
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+```
+
+```yml title="example.yml" icon="iKubernetes"
+# Testing Kubernetes Icon
+apiVersion: v1
+kind: Pod
+```
+
+```yml title="example.yml" icon="iK8s"
+# Testing Kubernetes Icon
+apiVersion: v1
+kind: Pod
+```
+
+## CI/CD
+
+```yml title=".gitlab-ci.yml" icon="iGitlab"
+workflow:
+    rules:
+        # MR pipelines
+        - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+        # Branch/tag pipelines
+        - if: $CI_PIPELINE_SOURCE == "push"
+        # Default: skip
+        - when: never
+
+stages:
+    - release
+    - build
+
+variables:
+    GITLAB_TOKEN: $GITLAB_TOKEN
+    CI_REGISTRY_USER: $CI_REGISTRY_USER
+    CI_REGISTRY_PASSWORD: $CI_REGISTRY_PASSWORD
+    CI_REGISTRY: $CI_REGISTRY
+    GIT_DEPTH: 100
+```
+
+```yml title=".github/workflows/pr-build.yml" icon="iGithubactions"
+name: PR Build & Test
+
+on:
+  pull_request:
+    branches:
+      - staging
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    environment: ${{ github.base_ref }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+```
+
+## Configuration
+
+```nginx title="nginx.conf" icon="iNginx"
+# Testing Nginx Icon
+server {
+    listen 80;
+}
+```
+
+```conf title="rabbitmq.conf" icon="iRabbitmq"
+###--- MANAGEMENT CONFIGURATION ---####
+#management.listener.ip = 127.0.0.1
+management.listener.ssl = true
+management.listener.port = 15672
+```
+
+```conf title="kafka.properties" icon="iKafka"
+# server.properties Example
+broker.id=0
+listeners=PLAINTEXT://:9092
+log.dirs=/var/lib/kafka/data
+num.partitions=3
+auto.create.topics.enable=true
+zookeeper.connect=localhost:2181
+```
+
+## Utility
+
+```bash title="example.sh" icon="iGit"
+# Testing Git Icon
+git commit -m "Test icon"
+```
+
+```bash title="example.sh" icon="iGithub"
+# Testing GitHub Icon (B&W Toggle)
+ssh -T git@github.com
+```
+
+```ts title="example.ts" icon="iGraphql"
+# Testing GraphQL Icon
+query { user { id } }
+```
