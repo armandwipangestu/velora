@@ -8,10 +8,45 @@ tags:
 published: true
 ---
 
-
 # Example
 
 ## Language
+
+```html title="example.html" icon="iHtml"
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Example</title>
+</head>
+<body>
+    <h1>Hello World</h1>
+</body>
+</html>
+```
+
+```css title="example.css" icon="iCss"
+body {
+    color: #000;
+}
+```
+
+```js title="example.js" icon="iJs"
+console.log('Hello World');
+```
+
+```ts title="example.ts" icon="iTs"
+console.log('Hello World');
+```
+
+```md title="example.md" icon="iMd"
+# Hello World
+This is **bold** text.
+```
+
+```mdx title="example.mdx" icon="iMdx"
+# Hello World
+<Component />
+```
 
 ```sass title="example.scss" icon="iSass"
 // Testing Sass Icon
@@ -24,6 +59,77 @@ body { color: $primary-color; }
 @tailwind base;
 ```
 
+```bash title="example.sh" icon="iBash"
+# Testing Bash Icon
+echo "Hello World"
+```
+
+```py title="example.py" icon="iPython"
+def hello():
+    print("Hello World")
+```
+
+```go title="main.go" icon="iGolang"
+package main
+import "fmt"
+func main() {
+    fmt.Println("Hello World")
+}
+```
+
+```rust title="main.rs" icon="iRust"
+fn main() {
+    println!("Hello World");
+}
+```
+
+```java title="Main.java" icon="iJava"
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+}
+```
+
+```php title="index.php" icon="iPhp"
+<?php
+echo "Hello World";
+?>
+```
+
+```rb title="example.rb" icon="iRuby"
+puts "Hello World"
+```
+
+```swift title="example.swift" icon="iSwift"
+print("Hello World")
+```
+
+```kt title="example.kt" icon="iKotlin"
+fun main() {
+    println("Hello World")
+}
+```
+
+```dart title="example.dart" icon="iDart"
+void main() {
+  print('Hello World');
+}
+```
+
+```lua title="example.lua" icon="iLua"
+print("Hello World")
+```
+
+```xml title="example.xml" icon="iXml"
+<note>
+  <to>Tove</to>
+  <from>Jani</from>
+  <heading>Reminder</heading>
+  <body>Don't forget me this weekend!</body>
+</note>
+```
+
 ```cpp title="example.cpp" icon="iArduino"
 // Testing Arduino Icon
 void setup() {}
@@ -31,6 +137,16 @@ void setup() {}
 
 ```cpp title="example.ino" icon="iIno"
 // Testing Arduino Icon
+void setup() {}
+```
+
+```c title="example.c" icon="iC"
+// Testing C Icon
+void setup() {}
+```
+
+```csharp title="example.cs" icon="iCsharp"
+// Testing C# Icon
 void setup() {}
 ```
 
@@ -60,6 +176,20 @@ export default {
 ```csharp title="example.cs" icon="iDotnet"
 // Testing .NET Icon
 var builder = WebApplication.CreateBuilder(args);
+```
+
+```blade title="example.blade.php" icon="iLaravel"
+@if (count($records) === 1)
+    I have one record!
+@endif
+```
+
+```dart title="main.dart" icon="iFlutter"
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
 ```
 
 ## Database
@@ -341,4 +471,38 @@ ssh -T git@github.com
 ```ts title="example.ts" icon="iGraphql"
 # Testing GraphQL Icon
 query { user { id } }
+```
+
+::: code-group
+```bash title="npm" icon="iNpm"
+npm i <package_name>
+```
+
+```bash title="pnpm" icon="iPnpm"
+pnpm i <package_name>
+```
+
+```bash title="yarn" icon="iYarn"
+yarn add <package_name>
+```
+
+```bash title="bun" icon="iBun"
+bun add <package_name>
+```
+:::
+
+```csv title="example.csv" icon="iCsv"
+name,age,city
+John,30,New York
+Jane,25,Los Angeles
+```
+
+```diff title="example.diff" icon="iDiff"
+- const a = 1;
++ const a = 2;
+```
+
+```vim title=".vimrc" icon="iVim"
+set number
+syntax on
 ```
