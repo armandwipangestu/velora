@@ -80,8 +80,10 @@ export function TocSidebar({ items }: TocProps) {
 
     return (
         <div className="space-y-2">
-            <p className="font-medium">On This Page</p>
-            <TocList items={items} activeId={activeId} />
+            <h3 className="font-medium">On This Page</h3>
+            <div className="relative pl-6 border-l border-border max-h-[calc(100vh-100px)] overflow-y-auto pt-2 pb-4">
+                <TocList items={items} activeId={activeId} />
+            </div>
         </div>
     );
 }
@@ -100,47 +102,44 @@ export function MobileToc({ items }: TocProps) {
                     <List className="h-6 w-6" />
                 </Button>
             </SheetTrigger>
-            <SheetContent side="bottom">
-                <SheetHeader className="text-left">
+            <SheetContent side="bottom" className="max-h-[80vh] overflow-y-auto pb-10">
+                <SheetHeader className="text-left mb-4">
                     <SheetTitle>Table of Contents</SheetTitle>
                 </SheetHeader>
-                <div className="mt-4 max-h-[80vh] overflow-y-auto">
-                    {/* Re-implementing list to handle closing sheet on click */}
-                    <ul className="m-0 list-none space-y-3">
-                        {items.map((item) => (
-                            <li key={item.url} className="space-y-2">
-                                <a
-                                    href={item.url}
-                                    onClick={() => setOpen(false)}
-                                    className={cn(
-                                        "block no-underline transition-colors hover:text-foreground",
-                                        item.url === `#${activeId}` ? "font-medium text-primary" : "text-muted-foreground"
-                                    )}
-                                >
-                                    {item.title}
-                                </a>
-                                {item.items?.length ? (
-                                    <ul className="pl-4 space-y-2 list-none">
-                                        {item.items.map(sub => (
-                                            <li key={sub.url}>
-                                                <a
-                                                    href={sub.url}
-                                                    onClick={() => setOpen(false)}
-                                                    className={cn(
-                                                        "block no-underline transition-colors hover:text-foreground",
-                                                        sub.url === `#${activeId}` ? "font-medium text-primary" : "text-muted-foreground"
-                                                    )}
-                                                >
-                                                    {sub.title}
-                                                </a>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                ) : null}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                <ul className="list-none space-y-3 mx-5">
+                    {items.map((item) => (
+                        <li key={item.url} className="space-y-2">
+                            <a
+                                href={item.url}
+                                onClick={() => setOpen(false)}
+                                className={cn(
+                                    "block no-underline transition-colors hover:text-foreground",
+                                    item.url === `#${activeId}` ? "font-medium text-primary" : "text-muted-foreground"
+                                )}
+                            >
+                                {item.title}
+                            </a>
+                            {item.items?.length ? (
+                                <ul className="pl-4 space-y-2 list-none">
+                                    {item.items.map(sub => (
+                                        <li key={sub.url}>
+                                            <a
+                                                href={sub.url}
+                                                onClick={() => setOpen(false)}
+                                                className={cn(
+                                                    "block no-underline transition-colors hover:text-foreground",
+                                                    sub.url === `#${activeId}` ? "font-medium text-primary" : "text-muted-foreground"
+                                                )}
+                                            >
+                                                {sub.title}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : null}
+                        </li>
+                    ))}
+                </ul>
             </SheetContent>
         </Sheet>
     );
