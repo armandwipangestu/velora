@@ -383,7 +383,7 @@ html.dark {
     transition: color 0.2s ease;
 }
 
-.prose :is(h1, h2, h3):hover .subheading-anchor {
+.prose :is(h1, h2, h3) .subheading-anchor:hover {
     color: #10b981 !important;
     text-decoration: underline;
 }
