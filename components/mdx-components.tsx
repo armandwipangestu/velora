@@ -11,8 +11,10 @@ const useMdxComponents = (code: string) => {
     return fn({ ...runtime }).default
 }
 
+import { MDXImage } from "@/components/mdx-image"
+
 const components = {
-    Image,
+    Image: MDXImage,
     Link,
     Callout,
     pre: Pre,
