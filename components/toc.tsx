@@ -116,8 +116,8 @@ function TocItemRenderer({ item, activeId, level }: { item: TocItem, activeId: s
                 className={cn(
                     "block no-underline transition-colors hover:text-foreground -ml-px border-l-2 py-2 pr-2",
                     isActive
-                        ? "border-primary font-medium text-foreground"
-                        : "border-transparent text-muted-foreground"
+                        ? "border-primary font-medium text-foreground bg-muted rounded-tr-sm rounded-br-sm"
+                        : "border-transparent text-muted-foreground hover:bg-muted/50 rounded-tr-sm rounded-br-sm"
                 )}
                 style={{ paddingLeft: `${level === 1 ? 16 : 16 + (level - 1) * 12}px` }}
             >
