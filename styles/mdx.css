@@ -364,13 +364,13 @@ html.dark {
 }
 
 /* --- 9. a tag styling --- */
-.prose a:not(.subheading-anchor) {
+.prose a:not(.subheading-anchor):not(.group) {
     color: #10b981;
     transition: color 0.2s ease;
     text-decoration: none;
 }
 
-.prose a:not(.subheading-anchor):hover {
+.prose a:not(.subheading-anchor):not(.group):hover {
     color: #059669;
     text-decoration: underline;
 }
