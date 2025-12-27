@@ -161,8 +161,10 @@ export default async function PostPage({ params }: PostPageProps) {
                 )}
             </div>
 
-            {/* Mobile TOC */}
-            <MobileToc items={post.toc} />
+            {/* Mobile TOC - Visible on small/medium, Hidden on large */}
+            <div className="lg:hidden">
+                <MobileToc items={post.toc} />
+            </div>
         </article>
     )
 }
