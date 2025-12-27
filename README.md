@@ -93,6 +93,8 @@ The following are the features I want to achieve or are under development:
 - [ ✅ ] Code block group components
 - [ ✅ ] Add pagination blog posts
 - [ ✅ ] Add some logic to filter posts (search, date, per page, tags)
+- [ ] Responsive table
+- [ ] Custom Blockquote component
 - [ ] Wrap code block content
 - [ ] Add preview rendered code block
 
