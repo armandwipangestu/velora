@@ -7,7 +7,7 @@ import { RiJavascriptFill, RiPhpLine } from "react-icons/ri"
 import { BiLogoTypescript, BiLogoPostgresql } from "react-icons/bi"
 import { BsFiletypeYml, BsFiletypeSql, BsFiletypeXml } from "react-icons/bs"
 import { VscJson } from "react-icons/vsc"
-import { SiGnubash, SiMdx, SiVim, SiZsh, SiLua, SiKotlin, SiPnpm, SiBun, SiTerraform, SiAnsible, SiOpentofu, SiKubernetes, SiNginx, SiArduino, SiTailwindcss, SiDotnet, SiGraphql, SiPrisma, SiMysql, SiMariadb, SiRabbitmq, SiApachekafka, SiRedis, SiMongodb, SiSupabase, SiGithubactions, SiPodman } from "react-icons/si"
+import { SiGnubash, SiMdx, SiVim, SiZsh, SiLua, SiKotlin, SiPnpm, SiBun, SiTerraform, SiAnsible, SiOpentofu, SiKubernetes, SiNginx, SiArduino, SiTailwindcss, SiDotnet, SiGraphql, SiPrisma, SiMysql, SiMariadb, SiRabbitmq, SiApachekafka, SiRedis, SiMongodb, SiSupabase, SiGithubactions, SiPodman, SiArgo } from "react-icons/si"
 import { DiRuby, DiMsqlServer } from "react-icons/di"
 import { MdDifference } from "react-icons/md"
 import { PiFileCSharp, PiFileCppDuotone } from "react-icons/pi"
@@ -98,6 +98,7 @@ export const languageIcons: Record<string, React.ReactNode> = {
     mssql: <DiMsqlServer className="size-4" />,
     sqlserver: <DiMsqlServer className="size-4" />,
     podman: <SiPodman className="size-4" />,
+    argo: <SiArgo className="size-4" />,
 }
 
 export const languageColors: Record<string, { light: string; dark: string }> = {
@@ -126,6 +127,8 @@ export const languageColors: Record<string, { light: string; dark: string }> = {
     python: { light: "#3776AB", dark: "#3776AB" },
     rb: { light: "#CC342D", dark: "#CC342D" },
     ruby: { light: "#CC342D", dark: "#CC342D" },
+    vim: { light: "#169744", dark: "#41B883" },
+    vimscript: { light: "#169744", dark: "#41B883" },
     docker: { light: "#2496ED", dark: "#2496ED" },
     dockerfile: { light: "#2496ED", dark: "#2496ED" },
     lua: { light: "#000080", dark: "#1717ff" },
@@ -173,6 +176,7 @@ export const languageColors: Record<string, { light: string; dark: string }> = {
     mssql: { light: "#CC2927", dark: "#FF5F5E" },
     sqlserver: { light: "#CC2927", dark: "#FF5F5E" },
     podman: { light: "#892CA0", dark: "#B166CC" },
+    argo: { light: "#ef7b4d", dark: "#ffa07a" },
 }
 
 export const fontAliases: Record<string, string> = {
@@ -264,7 +268,8 @@ export const languageAliases: Record<string, string> = {
     iGithubactions: "githubactions",
     iMssql: "mssql",
     iSqlserver: "sqlserver",
-    iPodman: "podman"
+    iPodman: "podman",
+    iArgo: "argo"
 };
 
 import { useCodeGroup } from "./mdx-code-group"
