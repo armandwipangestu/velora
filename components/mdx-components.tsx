@@ -15,6 +15,7 @@ import { MDXImage } from "@/components/mdx-image"
 
 const components = {
     Image: MDXImage,
+    BlogImage: MDXImage,
     Link,
     Callout,
     pre: Pre,
