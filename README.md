@@ -91,7 +91,14 @@ The following are the features I want to achieve or are under development:
 - [ ✅ ] Add code block error and warning
 - [ ✅ ] Add giscus components for discussion section
 - [ ✅ ] Code block group components
+- [ ✅ ] Add pagination blog posts
+- [ ✅ ] Add some logic to filter posts (search, date, per page, tags)
+- [ ✅ ] Responsive table
+- [ ✅ ] Custom Blockquote component
 - [ ] Wrap code block content
+- [ ] Max line (Expand code / Wrap Vertical)
+- [ ] Language switcher (one code block have an dropdown to switch language)
+- [ ] Code block Theme switcher button
 - [ ] Add preview rendered code block
 
 See the [open issues](https://github.com/armandwipangestu/velora/issues) for a list of proposed features (and known issues).

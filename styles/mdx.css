@@ -30,6 +30,8 @@
   --mdx-error-border: theme('colors.red.500');
   --mdx-warning-bg: rgba(245, 158, 11, 0.15);
   --mdx-warning-border: theme('colors.amber.500');
+
+  --mdx-blockquote-border-left: theme('colors.yellow.500');
 }
 
 @media (prefers-color-scheme: dark) {
@@ -333,4 +335,55 @@ html.dark {
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
+}
+
+/* --- 8. Blockquote Styling --- */
+.prose blockquote {
+    font-style: normal;
+    font-weight: normal;
+    color: var(--foreground);
+    background-color: var(--muted);
+    border-left-color: var(--mdx-blockquote-border-left);
+    border-left-width: 4px;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    quotes: none;
+}
+
+.prose blockquote strong {
+    font-weight: bold;
+}
+
+.prose blockquote p:first-of-type::before,
+.prose blockquote p:last-of-type::after {
+    content: none;
+}
+
+/* --- 9. a tag styling --- */
+.prose a:not(.subheading-anchor):not(.group) {
+    color: #10b981;
+    transition: color 0.2s ease;
+    text-decoration: none;
+}
+
+.prose a:not(.subheading-anchor):not(.group):hover {
+    color: #059669;
+    text-decoration: underline;
+}
+
+/* 10. Heading styling */
+.prose h1 .subheading-anchor,
+.prose h2 .subheading-anchor,
+.prose h3 .subheading-anchor {
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.prose :is(h1, h2, h3) .subheading-anchor:hover {
+    color: #10b981 !important;
+    text-decoration: underline;
 }

@@ -8,9 +8,10 @@ interface PostItemProps {
     title: string;
     description?: string;
     date: string;
+    tags?: string[];
 }
 
-export function PostItem({ slug, title, description, date }: PostItemProps) {
+export function PostItem({ slug, title, description, date, tags }: PostItemProps) {
     return <article className="flex flex-col gap-2 border-border border-b py-3">
         <div>
             <h2 className="text-2xl font-bold">
@@ -18,6 +19,22 @@ export function PostItem({ slug, title, description, date }: PostItemProps) {
             </h2>
         </div>
         <div className="max-w-none text-muted-foreground">{description}</div>
+        {tags && tags.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+                {tags.map((tag) => (
+                    <Link
+                        key={tag}
+                        href={`/blog?tag=${tag}`}
+                        className={cn(
+                            buttonVariants({ variant: "outline", size: "sm" }),
+                            "h-7 px-2 text-xs"
+                        )}
+                    >
+                        {tag}
+                    </Link>
+                ))}
+            </div>
+        )}
         <div className="flex justify-between items-center">
             <dl>
                 <dt className="sr-only">Published On</dt>

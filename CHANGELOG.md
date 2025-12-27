@@ -1,4 +1,23 @@
-# [1.10.0](https://github.com/armandwipangestu/velora/compare/v1.9.0...v1.10.0) (2025-12-26)
+# [1.10.0-rc.2](https://github.com/armandwipangestu/velora/compare/v1.10.0-rc.1...v1.10.0-rc.2) (2025-12-27)
+
+
+### Bug Fixes
+
+* adjust blog layout ([2781ee9](https://github.com/armandwipangestu/velora/commit/2781ee913be5d02a6dc72f58fa4302db3d7f0938))
+* adjust the toc ([c0fb503](https://github.com/armandwipangestu/velora/commit/c0fb503e7da41fcefb48d2933189c456b7257325))
+* toc blog page ([dbcc4bd](https://github.com/armandwipangestu/velora/commit/dbcc4bdd950c67b76ca67424479b36789ba5afa4))
+
+
+### Features
+
+* add not found page ([1fbed86](https://github.com/armandwipangestu/velora/commit/1fbed86b5465a47d3a247dd112388e5875eceffd))
+* add responsive table using mdx component ([db540d1](https://github.com/armandwipangestu/velora/commit/db540d113b2c06e2b74b4a745417cdbbbedef4ee))
+* add search blog ([705cf73](https://github.com/armandwipangestu/velora/commit/705cf73a19342feaf609927ca772d3efcc4319b2))
+* add sort by date, tags in blog posts ([dfd37e9](https://github.com/armandwipangestu/velora/commit/dfd37e9b2ab57d73bb0d756cbf1b0ce6edb1aa94))
+* add toc for post page and custom image component ([1972db6](https://github.com/armandwipangestu/velora/commit/1972db64288dd0df5cb53e25d0d5f3aafec21d37))
+* **components:** add blog header ([8e75995](https://github.com/armandwipangestu/velora/commit/8e7599541a440075aa5912196111a3e00658ac8b))
+
+# [1.10.0-rc.1](https://github.com/armandwipangestu/velora/compare/v1.9.0...v1.10.0-rc.1) (2025-12-26)
 
 
 ### Bug Fixes
