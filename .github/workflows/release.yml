@@ -7,7 +7,7 @@ on:
             - main
 
 env:
-    GHCR: ghcr.io/armandwipangestu/velora
+    GHCR_IMAGE: ghcr.io/armandwipangestu/velora
     DOCKERHUB_IMAGE: devvnull/velora
 
 jobs:
@@ -51,12 +51,12 @@ jobs:
                     --build-arg NEXT_PUBLIC_GISCUS_TERM=${{ secrets.NEXT_PUBLIC_GISCUS_TERM }} \
                     --build-arg NEXT_PUBLIC_UMAMI_DATA_WEBSITE_ID=${{ secrets.NEXT_PUBLIC_UMAMI_DATA_WEBSITE_ID }} \
                     --build-arg NEXT_PUBLIC_GA_MEASUREMENT_ID=${{ secrets.NEXT_PUBLIC_GA_MEASUREMENT_ID }} \
-                    -t $GHCR:${{ env.SHORT_SHA }} \
+                    -t $GHCR_IMAGE:${{ env.SHORT_SHA }} \
                     -t $DOCKERHUB_IMAGE:${{ env.SHORT_SHA }} .
     
             - name: Push Docker Image (SHA tag)
               run: |
-                  docker push $GHCR:${{ env.SHORT_SHA }}
+                  docker push $GHCR_IMAGE:${{ env.SHORT_SHA }}
                   docker push $DOCKERHUB_IMAGE:${{ env.SHORT_SHA }}
     
             - name: Save SHA to file
@@ -105,11 +105,16 @@ jobs:
             - name: Install dependencies
               run: bun install --frozen-lockfile
 
+            - name: Setup Node.js 25 for Semantic Release
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "25"
+
             - name: Run semantic-release
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   NPM_TOKEN: false
-              run: bunx semantic-release
+              run: npx semantic-release
 
             - name: Upload version.txt artifact
               uses: actions/upload-artifact@v4
@@ -189,7 +194,7 @@ jobs:
             - name: Retag latest (only on main)
               if: steps.check-version.outputs.RELEASE_EXISTS == 'true' && github.ref_name == 'main'
               run: |
-                  docker tag $GHCR:${{ env.VERSION }} $GHCR:latest
+                  docker tag $GHCR_IMAGE:${{ env.VERSION }} $GHCR_IMAGE:latest
                   docker tag $GHCR_IMAGE:${{ env.VERSION }} $DOCKERHUB_IMAGE:latest
-                  docker push $GHCR:latest
+                  docker push $GHCR_IMAGE:latest
                   docker push $DOCKERHUB_IMAGE:latest
