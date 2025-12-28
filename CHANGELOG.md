@@ -1,9 +1,8 @@
-## [1.11.1](https://github.com/armandwipangestu/velora/compare/v1.11.0...v1.11.1) (2025-12-28)
+## [1.11.1-rc.2](https://github.com/armandwipangestu/velora/compare/v1.11.1-rc.1...v1.11.1-rc.2) (2025-12-28)
 
 ### Bug Fixes
 
-* add patch rule ([58aa1aa](https://github.com/armandwipangestu/velora/commit/58aa1aaae8143c81b78fd96b3167a32b0b2e8866))
-* **ci:** add npm for semantic-release and typo variable name ([a4f46e9](https://github.com/armandwipangestu/velora/commit/a4f46e90020239e5c6a861b364d58eb2325623c9))
+* add ARG NEXT_PUBLIC_GA_MEASUREMENT_ID ([910e856](https://github.com/armandwipangestu/velora/commit/910e8560165a3cc515ed1f2bc38760a9c9d3b375))
 
 ## [1.11.1-rc.1](https://github.com/armandwipangestu/velora/compare/v1.11.0...v1.11.1-rc.1) (2025-12-28)
 

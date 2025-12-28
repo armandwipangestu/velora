@@ -1,6 +1,6 @@
 {
   "name": "velora",
-  "version": "1.11.1",
+  "version": "1.11.1-rc.2",
   "private": true,
   "scripts": {
     "dev:content": "velite --watch",
