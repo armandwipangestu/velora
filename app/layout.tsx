@@ -51,12 +51,40 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
   return (
+
     <html lang="en" suppressHydrationWarning className="scroll-pt-[3.5rem]">
       <body
         className={cn("min-h-screen bg-background font-sans antialiased", `${geistSans.variable} ${geistMono.variable} ${ubuntuMono.variable}`)}
         suppressHydrationWarning
       >
+        {/* Google Analytics */}
+        {gaId && (
+          <>
+            <Script
+              strategy="afterInteractive"
+              src={`https://www.googletamanager.com/gtag/js?id=${gaId}`}
+            />
+            <Script
+              id="google-analytics"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date())
+                  gtag('config', '${gaId}', {
+                    page_path: window.location.pathname,
+                  })
+                `
+              }}
+            />
+          </>
+        )}
+
+        {/* Umami Analytics */}
         <Script
           defer
           src="https://cloud.umami.is/script.js"
@@ -74,6 +102,7 @@ export default function RootLayout({
           </div>
         </Providers>
 
+        {/* Vercel Analytics */}
         <Analytics />
       </body>
     </html>

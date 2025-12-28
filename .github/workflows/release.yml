@@ -50,6 +50,7 @@ jobs:
                     --build-arg NEXT_PUBLIC_GISCUS_MAPPING=${{ secrets.NEXT_PUBLIC_GISCUS_MAPPING }} \
                     --build-arg NEXT_PUBLIC_GISCUS_TERM=${{ secrets.NEXT_PUBLIC_GISCUS_TERM }} \
                     --build-arg NEXT_PUBLIC_UMAMI_DATA_WEBSITE_ID=${{ secrets.NEXT_PUBLIC_UMAMI_DATA_WEBSITE_ID }} \
+                    --build-arg NEXT_PUBLIC_GA_MEASUREMENT_ID=${{ secrets.NEXT_PUBLIC_GA_MEASUREMENT_ID }} \
                     -t $GHCR:${{ env.SHORT_SHA }} \
                     -t $DOCKERHUB_IMAGE:${{ env.SHORT_SHA }} .
     
