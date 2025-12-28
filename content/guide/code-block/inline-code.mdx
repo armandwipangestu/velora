@@ -1,0 +1,45 @@
+---
+title: Inline Code
+description: Enabling inline code in code blocks
+category: Custom Components
+categoryOrder: 2
+order: 12
+---
+
+# Inline Code
+
+Inline code is a way to show a code in a single line, it will be useful for showing a short code. The identifier is using backtick char (`` ` ``).
+
+## Code Example
+
+Here an example of inline code that show an highlighted code.
+
+```mdx
+`echo -e "Hello World!"`
+```
+
+It will show like this
+
+`echo -e "Hello World!"`
+
+## Specific Language
+
+You can also specify the language of the inline code, it will be useful for showing a short code with specific language and syntax highlighting.
+
+```mdx
+`SELECT * FROM users JOIN orders ON users.id = orders.user_id{:sql}`
+```
+
+It will show like this
+
+`SELECT * FROM users JOIN orders ON users.id = orders.user_id{:sql}`
+
+Here an example for piece of code with typescript language
+
+```mdx
+`const name = "World"; {:ts}`
+```
+
+It will show like this
+
+`const name = "World"; {:ts}`
