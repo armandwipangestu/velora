@@ -1,3 +1,9 @@
+## [1.11.2](https://github.com/armandwipangestu/velora/compare/v1.11.1...v1.11.2) (2025-12-28)
+
+### Bug Fixes
+
+* add ARG NEXT_PUBLIC_GA_MEASUREMENT_ID ([910e856](https://github.com/armandwipangestu/velora/commit/910e8560165a3cc515ed1f2bc38760a9c9d3b375))
+
 ## [1.11.1-rc.2](https://github.com/armandwipangestu/velora/compare/v1.11.1-rc.1...v1.11.1-rc.2) (2025-12-28)
 
 ### Bug Fixes
