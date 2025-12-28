@@ -7,7 +7,8 @@ on:
             - main
 
 env:
-    IMAGE_NAME: ghcr.io/armandwipangestu/velora
+    GHCR_IMAGE: ghcr.io/armandwipangestu/velora
+    DOCKERHUB_IMAGE: devvnull/velora
 
 jobs:
     # ------------------------------------------------------
@@ -32,10 +33,14 @@ jobs:
     
             - name: Log in to GitHub Container Registry
               run: echo "${{ secrets.GH_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GH_USERNAME }}" --password-stdin
+
+            - name: Log in to Docker Hub
+              run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
     
             - name: Build Docker Image with SHA tag
               run: |
                   docker build \
+                    --platform linux/amd64 \
                     -f Dockerfile \
                     --build-arg NEXT_PUBLIC_APP_URL=${{ secrets.NEXT_PUBLIC_APP_URL }} \
                     --build-arg NEXT_PUBLIC_GISCUS_REPO=${{ secrets.NEXT_PUBLIC_GISCUS_REPO }} \
@@ -45,10 +50,14 @@ jobs:
                     --build-arg NEXT_PUBLIC_GISCUS_MAPPING=${{ secrets.NEXT_PUBLIC_GISCUS_MAPPING }} \
                     --build-arg NEXT_PUBLIC_GISCUS_TERM=${{ secrets.NEXT_PUBLIC_GISCUS_TERM }} \
                     --build-arg NEXT_PUBLIC_UMAMI_DATA_WEBSITE_ID=${{ secrets.NEXT_PUBLIC_UMAMI_DATA_WEBSITE_ID }} \
-                    -t $IMAGE_NAME:${{ env.SHORT_SHA }} .
+                    --build-arg NEXT_PUBLIC_GA_MEASUREMENT_ID=${{ secrets.NEXT_PUBLIC_GA_MEASUREMENT_ID }} \
+                    -t $GHCR_IMAGE:${{ env.SHORT_SHA }} \
+                    -t $DOCKERHUB_IMAGE:${{ env.SHORT_SHA }} .
     
             - name: Push Docker Image (SHA tag)
-              run: docker push $IMAGE_NAME:${{ env.SHORT_SHA }}
+              run: |
+                  docker push $GHCR_IMAGE:${{ env.SHORT_SHA }}
+                  docker push $DOCKERHUB_IMAGE:${{ env.SHORT_SHA }}
     
             - name: Save SHA to file
               run: echo "${SHORT_SHA}" > sha.txt
@@ -78,24 +87,33 @@ jobs:
               with:
                   fetch-depth: 0
 
-            - name: Setup Node.js for Semantic Release
+            - name: Setup Bun for Semantic Release
+              uses: oven-sh/setup-bun@v2
+              with:
+                bun-version: "latest"
+
+            - name: Restore Bun Cache
+              uses: actions/cache@v4
+              with:
+                path: |
+                  ~/.bun/install/cache
+                  node_modules
+                key: ${{ runner.os }}-bun-${{ hashFiles('bun.lockb') }}
+                restore-keys: |
+                  ${{ runner.os }}-bun-
+
+            - name: Install dependencies
+              run: bun install --frozen-lockfile
+
+            - name: Setup Node.js 25 for Semantic Release
               uses: actions/setup-node@v4
               with:
                   node-version: "25"
 
-            - name: Install semantic-release globally
-              run: |
-                  npm install -g \
-                    semantic-release \
-                    @semantic-release/changelog \
-                    @semantic-release/git \
-                    @semantic-release/exec \
-                    @semantic-release/github \
-                    conventional-changelog-conventionalcommits
-
             - name: Run semantic-release
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NPM_TOKEN: false
               run: npx semantic-release
 
             - name: Upload version.txt artifact
@@ -117,6 +135,7 @@ jobs:
             contents: write
             issues: write
             pull-requests: write
+            packages: write
         environment: ${{ github.ref_name }}
     
         steps:
@@ -127,32 +146,55 @@ jobs:
               uses: actions/download-artifact@v4
               with:
                   name: release-version
+              continue-on-error: true # Prevents crash if no release happened
     
-            - name: Set VERSION env
-              run: echo "VERSION=$(cat version.txt)" >> $GITHUB_ENV
+            - name: Check if version exists
+              id: check-version
+              run: |
+                  if [ -f "version.txt" ]; then
+                      echo "VERSION=$(cat version.txt)" >> $GITHUB_ENV
+                      echo "RELEASE_EXISTS=true" >> $GITHUB_OUTPUT
+                  else
+                      echo "No new version released. Skipping retag."
+                      echo "RELEASE_EXISTS=false" >> $GITHUB_OUTPUT
+                  fi
     
             - name: Download sha.txt artifact
+              if: steps.check-version.outputs.RELEASE_EXISTS == 'true'
               uses: actions/download-artifact@v4
               with:
                   name: built-sha
     
             - name: Set SHORT_SHA env
+              if: steps.check-version.outputs.RELEASE_EXISTS == 'true'
               run: echo "SHORT_SHA=$(cat sha.txt)" >> $GITHUB_ENV
     
             - name: Log in to GitHub Container Registry
+              if: steps.check-version.outputs.RELEASE_EXISTS == 'true'
               run: echo "${{ secrets.GH_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GH_USERNAME }}" --password-stdin
+
+            - name: Log in to Docker Hub
+              if: steps.check-version.outputs.RELEASE_EXISTS == 'true'
+              run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
     
-            - name: Pull SHA image
-              run: docker pull $IMAGE_NAME:${{ env.SHORT_SHA }}
-    
-            - name: Retag SHA -> Version
-              run: docker tag $IMAGE_NAME:${{ env.SHORT_SHA }} $IMAGE_NAME:${{ env.VERSION }}
-    
-            - name: Push Version Tag
-              run: docker push $IMAGE_NAME:${{ env.VERSION }}
+            - name: Retag and Push
+              if: steps.check-version.outputs.RELEASE_EXISTS == 'true'
+              run: |
+                  # Pull from GHCR (using the SHA pushed in Job 1)
+                  docker pull --platform linux/amd64 $GHCR_IMAGE:${{ env.SHORT_SHA }}
+
+                  # Retag and Push to GHCR
+                  docker tag $GHCR_IMAGE:${{ env.SHORT_SHA }} $GHCR_IMAGE:${{ env.VERSION }}
+                  docker push $GHCR_IMAGE:${{ env.VERSION }}
+
+                  # Retag and Push to Docker Hub
+                  docker tag $GHCR_IMAGE:${{ env.SHORT_SHA }} $DOCKERHUB_IMAGE:${{ env.VERSION }}
+                  docker push $DOCKERHUB_IMAGE:${{ env.VERSION }}
     
             - name: Retag latest (only on main)
-              if: github.ref_name == 'main'
+              if: steps.check-version.outputs.RELEASE_EXISTS == 'true' && github.ref_name == 'main'
               run: |
-                  docker tag $IMAGE_NAME:${{ env.VERSION }} $IMAGE_NAME:latest
-                  docker push $IMAGE_NAME:latest
+                  docker tag $GHCR_IMAGE:${{ env.VERSION }} $GHCR_IMAGE:latest
+                  docker tag $GHCR_IMAGE:${{ env.VERSION }} $DOCKERHUB_IMAGE:latest
+                  docker push $GHCR_IMAGE:latest
+                  docker push $DOCKERHUB_IMAGE:latest
