@@ -35,6 +35,7 @@ module.exports = {
           { type: "revert", release: "patch" },
           { type: "perf", release: "patch" },
           { type: "refactor", release: "patch" },
+          { type: "patch", release: "patch" },
 
           // NO release
           { type: "docs", release: false },
