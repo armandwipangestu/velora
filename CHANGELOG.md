@@ -1,3 +1,9 @@
+## [1.11.3](https://github.com/armandwipangestu/velora/compare/v1.11.2...v1.11.3) (2026-01-08)
+
+### Bug Fixes
+
+* syntax highlighting mdx docs callout ([6204ac1](https://github.com/armandwipangestu/velora/commit/6204ac1e48a4ee292ed009178fc26d07ccd7ec20))
+
 ## [1.11.2](https://github.com/armandwipangestu/velora/compare/v1.11.1...v1.11.2) (2025-12-28)
 
 ### Bug Fixes
