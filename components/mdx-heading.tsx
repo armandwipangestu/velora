@@ -2,6 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { gaEvent } from '@/lib/ga';
+import { phCapture } from '@/lib/posthog';
 
 type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
@@ -36,6 +37,11 @@ export function MDXHeading({
                             action: 'click_mdx_heading_anchor',
                             category: 'blog_navigation',
                             label: `h${level}: ${id}`,
+                        });
+
+                        phCapture("click_mdx_heading_anchor", {
+                            heading_title: children,
+                            heading_id: id,
                         });
                     }}
                 >

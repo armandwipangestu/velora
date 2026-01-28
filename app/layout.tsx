@@ -9,6 +9,9 @@ import { siteConfig } from "@/config/site";
 import { SiteFooter } from "@/components/site-footer";
 import Navbar from "@/components/layout/navbar";
 import GoogleAnalytics from "@/components/google-analytics";
+import { PostHogProvider } from "@/components/providers/posthog-provider";
+import { Suspense } from "react";
+import { PostHogPageView } from "@/components/posthog-pageview";
 
 const geistSans = Geist({
   variable: "--font-sans",
@@ -75,15 +78,21 @@ export default function RootLayout({
         suppressHydrationWarning
       >
 
-        <Providers>
-          <div className="relative flex min-h-dvh flex-col bg-background">
-            <Navbar />
-            <main className="flex-1">
-              {children}
-            </main>
-            <SiteFooter />
-          </div>
-        </Providers>
+        <PostHogProvider>
+          <Suspense fallback={null}>
+            <PostHogPageView />
+          </Suspense>
+
+          <Providers>
+            <div className="relative flex min-h-dvh flex-col bg-background">
+              <Navbar />
+              <main className="flex-1">
+                {children}
+              </main>
+              <SiteFooter />
+            </div>
+          </Providers>
+        </PostHogProvider>
       </body>
     </html>
   );

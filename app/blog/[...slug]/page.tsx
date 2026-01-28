@@ -10,6 +10,7 @@ import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { PostItem } from "@/components/post-item"
+import { BlogPostTracking } from "@/components/blog-post-tracking";
 
 interface PostPageProps {
     params: Promise<{
@@ -92,6 +93,8 @@ export default async function PostPage({ params }: PostPageProps) {
 
     return (
         <article className="container py-6 max-w-6xl">
+            <BlogPostTracking postTitle={post.title} postSlug={post.slug} />
+
             {/* Header: Full Width */}
             <div className="flex flex-col space-y-4 mb-8">
                 <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-5xl lg:text-5xl">{post.title}</h1>

@@ -9,6 +9,7 @@ import { MDXContent } from "@/components/mdx-components";
 import { TechStack } from "@/components/tech-stack";
 import "@/styles/mdx.css"
 import { GALink } from "@/components/google-analytics-link";
+import { phCapture } from "@/lib/posthog";
 
 export default function Home() {
   const landingPage = pages.find((p) => p.slug === "landing");

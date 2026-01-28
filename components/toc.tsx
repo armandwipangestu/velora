@@ -6,6 +6,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "./ui
 import { Button } from "./ui/button";
 import { List } from "lucide-react";
 import { gaEvent } from "@/lib/ga";
+import { phCapture } from "@/lib/posthog";
 
 interface TocItem {
     title: string;
@@ -127,6 +128,11 @@ function TocItemRenderer({ item, activeId, level }: { item: TocItem, activeId: s
                         category: "blog_navigation",
                         label: item.title,
                     });
+
+                    phCapture("toc_link_clicked", {
+                        heading_title: item.title,
+                        heading_id: item.url,
+                    });
                 }}
             >
                 {item.title}
@@ -157,6 +163,12 @@ function MobileTocList({ items, activeId, setOpen }: { items: TocItem[], activeI
                                 action: "click_toc",
                                 category: "blog_navigation",
                                 label: item.title,
+                            });
+
+                            phCapture("toc_link_clicked", {
+                                heading_title: item.title,
+                                heading_id: item.url,
+                                location: "mobile_menu",
                             });
                         }}
                         className={cn(
@@ -201,7 +213,21 @@ export function MobileToc({ items }: TocProps) {
                             <li key={item.url} className="space-y-2">
                                 <a
                                     href={item.url}
-                                    onClick={() => setOpen(false)}
+                                    onClick={() => {
+                                        setOpen(false)
+
+                                        gaEvent({
+                                            action: "click_toc",
+                                            category: "blog_navigation",
+                                            label: item.title,
+                                        });
+
+                                        phCapture("toc_link_clicked", {
+                                            heading_title: item.title,
+                                            heading_id: item.url,
+                                            location: "mobile_tab",
+                                        });
+                                    }}
                                     className={cn(
                                         "block no-underline transition-colors hover:text-foreground",
                                         item.url === `#${activeId}` ? "font-medium text-primary" : "text-muted-foreground"

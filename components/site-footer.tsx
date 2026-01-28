@@ -1,6 +1,9 @@
+"use client";
+
 import { siteConfig } from "@/config/site";
 import { Github, Globe } from "lucide-react";
 import { GALink } from "./google-analytics-link";
+import { phCapture } from "@/lib/posthog";
 
 export function SiteFooter() {
     return (
@@ -13,7 +16,13 @@ export function SiteFooter() {
                     label="Footer"
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={`${siteConfig.links.personalSite}`}>
+                    href={`${siteConfig.links.personalSite}`}
+                    onClick={() =>
+                        phCapture("personal_site_clicked", {
+                            location: "footer",
+                        })
+                    }
+                >
                     <span className="sr-only">Personal Site</span>
                     <Globe className="h-6 w-6" />
                 </GALink>
@@ -24,7 +33,13 @@ export function SiteFooter() {
                     label="Footer"
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={`${siteConfig.links.github}`}>
+                    href={`${siteConfig.links.github}`}
+                    onClick={() =>
+                        phCapture("github_clicked", {
+                            location: "footer",
+                        })
+                    }
+                >
                     <span className="sr-only">Github</span>
                     <Github className="h-6 w-6" />
                 </GALink>
