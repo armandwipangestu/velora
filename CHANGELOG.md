@@ -1,3 +1,9 @@
+## [1.13.0](https://github.com/armandwipangestu/velora/compare/v1.12.0...v1.13.0) (2026-01-28)
+
+### Features
+
+* **components:** add green color to copy button on code ([54d782b](https://github.com/armandwipangestu/velora/commit/54d782bdbdbe3ab0ee99d86a6682f244806d7402))
+
 ## [1.12.0](https://github.com/armandwipangestu/velora/compare/v1.11.3...v1.12.0) (2026-01-28)
 
 ### Features
