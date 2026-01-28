@@ -1,3 +1,5 @@
+## [1.12.0-rc.2](https://github.com/armandwipangestu/velora/compare/v1.12.0-rc.1...v1.12.0-rc.2) (2026-01-28)
+
 ## [1.12.0-rc.1](https://github.com/armandwipangestu/velora/compare/v1.11.2-rc.1...v1.12.0-rc.1) (2026-01-28)
 
 ### Features
