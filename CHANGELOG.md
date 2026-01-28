@@ -1,3 +1,9 @@
+## [1.14.0](https://github.com/armandwipangestu/velora/compare/v1.13.0...v1.14.0) (2026-01-28)
+
+### Features
+
+* **env:** disable analytics if development mode ([da8c018](https://github.com/armandwipangestu/velora/commit/da8c01841e96e3b0981b71ffde4c9b544bce1c5b))
+
 ## [1.13.0](https://github.com/armandwipangestu/velora/compare/v1.12.0...v1.13.0) (2026-01-28)
 
 ### Features
