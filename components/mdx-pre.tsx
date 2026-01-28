@@ -7,7 +7,8 @@ import { RiJavascriptFill, RiPhpLine } from "react-icons/ri"
 import { BiLogoTypescript, BiLogoPostgresql } from "react-icons/bi"
 import { BsFiletypeYml, BsFiletypeSql, BsFiletypeXml } from "react-icons/bs"
 import { VscJson } from "react-icons/vsc"
-import { SiGnubash, SiMdx, SiVim, SiZsh, SiLua, SiKotlin, SiPnpm, SiBun, SiTerraform, SiAnsible, SiOpentofu, SiKubernetes, SiNginx, SiArduino, SiTailwindcss, SiDotnet, SiGraphql, SiPrisma, SiMysql, SiMariadb, SiRabbitmq, SiApachekafka, SiRedis, SiMongodb, SiSupabase, SiGithubactions, SiPodman, SiArgo } from "react-icons/si"
+import { SiGnubash, SiMdx, SiVim, SiZsh, SiLua, SiKotlin, SiPnpm, SiBun, SiTerraform, SiAnsible, SiOpentofu, SiKubernetes, SiNginx, SiArduino, SiTailwindcss, SiDotnet, SiGraphql, SiPrisma, SiMysql, SiMariadb, SiRabbitmq, SiApachekafka, SiRedis, SiMongodb, SiSupabase, SiGithubactions, SiPodman, SiArgo, SiPosthog, SiGoogleanalytics } from "react-icons/si"
+import { TbBrandTypescript } from "react-icons/tb";
 import { DiRuby, DiMsqlServer } from "react-icons/di"
 import { MdDifference } from "react-icons/md"
 import { PiFileCSharp, PiFileCppDuotone } from "react-icons/pi"
@@ -19,6 +20,7 @@ export const languageIcons: Record<string, React.ReactNode> = {
     js: <RiJavascriptFill className="size-4" />,
     jsx: <FaReact className="size-4" />,
     ts: <BiLogoTypescript className="size-4" />,
+    dts: <TbBrandTypescript className="size-4" />,
     tsx: <FaReact className="size-4" />,
     node: <FaNodeJs className="size-4" />,
     nodejs: <FaNodeJs className="size-4" />,
@@ -100,12 +102,15 @@ export const languageIcons: Record<string, React.ReactNode> = {
     sqlserver: <DiMsqlServer className="size-4" />,
     podman: <SiPodman className="size-4" />,
     argo: <SiArgo className="size-4" />,
+    posthog: <SiPosthog className="size-4" />,
+    ga: <SiGoogleanalytics className="size-4" />,
 }
 
 export const languageColors: Record<string, { light: string; dark: string }> = {
     js: { light: "#F7DF1E", dark: "#F7DF1E" },
     jsx: { light: "#61DAFB", dark: "#61DAFB" },
     ts: { light: "#3178C6", dark: "#3178C6" },
+    dts: { light: "#3178C6", dark: "#3178C6" },
     tsx: { light: "#61DAFB", dark: "#61DAFB" },
     node: { light: "#66CC33", dark: "#336633" },
     nodejs: { light: "#66CC33", dark: "#336633" },
@@ -178,6 +183,8 @@ export const languageColors: Record<string, { light: string; dark: string }> = {
     sqlserver: { light: "#CC2927", dark: "#FF5F5E" },
     podman: { light: "#892CA0", dark: "#B166CC" },
     argo: { light: "#ef7b4d", dark: "#ffa07a" },
+    posthog: { light: "#F7A501", dark: "#FBBF24" },
+    ga: { light: "#E8710A", dark: "#F9AB00" },
 }
 
 export const fontAliases: Record<string, string> = {
@@ -189,6 +196,7 @@ export const languageAliases: Record<string, string> = {
     iJs: "js",
     iJsx: "jsx",
     iTs: "ts",
+    iDts: "dts",
     iTsx: "tsx",
     iNode: "node",
     iNodejs: "nodejs",
@@ -270,10 +278,14 @@ export const languageAliases: Record<string, string> = {
     iMssql: "mssql",
     iSqlserver: "sqlserver",
     iPodman: "podman",
-    iArgo: "argo"
+    iArgo: "argo",
+    iPosthog: "posthog",
+    iGa: "ga",
+    iGoogleAnalytics: "ga",
 };
 
 import { useCodeGroup } from "./mdx-code-group"
+import { phCapture } from "@/lib/posthog"
 
 export function Pre({
     children,
@@ -393,6 +405,12 @@ export function Pre({
                     action: "copy_code",
                     category: "blog_engagement",
                     label: displayTitle,
+                });
+
+                phCapture("code_copied", {
+                    block_title: displayTitle,
+                    language: language,
+                    location: "blog_post",
                 });
             }, 2000)
         } catch (err) {
