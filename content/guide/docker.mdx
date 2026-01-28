@@ -26,6 +26,7 @@ COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile
 
 # Declare the argument that expect to receive at build time
+ARG NEXT_PUBLIC_APP_ENV
 ARG NEXT_PUBLIC_APP_URL
 ARG NEXT_PUBLIC_GISCUS_REPO
 ARG NEXT_PUBLIC_GISCUS_REPO_ID
@@ -39,6 +40,7 @@ ARG NEXT_PUBLIC_POSTHOG_KEY
 ARG NEXT_PUBLIC_POSTHOG_HOST
 
 # Set is as an environment variable so the build can access it
+ENV NEXT_PUBLIC_APP_ENV=$NEXT_PUBLIC_APP_ENV
 ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
 ENV NEXT_PUBLIC_GISCUS_REPO=$NEXT_PUBLIC_GISCUS_REPO
 ENV NEXT_PUBLIC_GISCUS_REPO_ID=$NEXT_PUBLIC_GISCUS_REPO_ID
@@ -83,7 +85,9 @@ To build the docker image, you can use the following command.
 
 ```bash
 docker build \
+    --platform linux/amd64 \
     -f Dockerfile \
+    --build-arg NEXT_PUBLIC_APP_ENV=your-app-env \
     --build-arg NEXT_PUBLIC_APP_URL=your-app-url \
     --build-arg NEXT_PUBLIC_GISCUS_REPO=your-giscus-repo \
     --build-arg NEXT_PUBLIC_GISCUS_REPO_ID=your-giscus-repo-id \
