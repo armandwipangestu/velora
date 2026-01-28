@@ -1,0 +1,106 @@
+---
+title: Google Analytics
+description: How to add google analytics to your site
+category: Integration
+categoryOrder: 3
+order: 3
+---
+
+# Setup Google Analytics
+
+What is Google Analytics? Google Analytics is a web analytics service offered by Google that tracks and reports website traffic. Google Analytics is a free service that helps you understand how visitors interact with your website.
+
+## Create Property
+
+Login to [Google Analytics](https://analytics.google.com/analytics/web/) and create a new property. Fill the form with your website information.
+
+```
+Property Name: Your Website Name
+Reporting Time Zone: Your Time Zone
+Currency: Your Currency
+```
+
+## Get Google Analytics ID
+
+After creating the property, you need to get the google analytics id. Go to `Property Settings` > `Data Collection and modification` > `Data streams` > `Choose Your Data Stream` and copy the `Measurement ID`.
+
+## Add Google Analytics Configuration to Environment Variable
+
+After getting the google analytics id, you need to add the google analytics id to the environment variable, fill the `.env.local` file with the google analytics id.
+
+```env
+# Google Analytics Configuration
+NEXT_PUBLIC_GA_MEASUREMENT_ID=your-google-analytics-measurement-id
+```
+
+# Example Send Event
+
+If you already setup the google analytics, you can send event to google analytics using `gaEvent(){:ts}` function. Here is the example:
+
+::: code-group
+```tsx title="page.tsx" showLineNumbers
+// [!code focus]
+// [!code ++]
+import { gaEvent } from "@/lib/ga";
+
+export default function Page() {
+    return (
+        <button onClick={() => {
+            // [!code focus:5]
+            // [!code ++:5]
+            gaEvent({
+                action: "click_button",
+                category: "engagement",
+                label: "button",
+            })
+        }}>
+            Click Me
+        </button>
+    );
+}
+```
+
+```ts title="lib/ga.ts" showLineNumbers
+interface GAEventParams {
+  action: string;
+  category?: string;
+  label?: string;
+  value?: string | number;
+}
+
+export const gaEvent = ({
+  action,
+  category,
+  label,
+  value,
+}: GAEventParams) => {
+  if (typeof window === 'undefined') return;
+  if (!window.gtag) return;
+
+  window.gtag('event', action, {
+    event_category: category,
+    event_label: label,
+    value,
+  });
+};
+```
+
+```ts title="lib/types/ga.d.ts" showLineNumbers
+export {};
+
+declare global {
+  interface Window {
+    gtag?: (
+      command: 'event',
+      action: string,
+      params?: {
+        event_category?: string;
+        event_label?: string;
+        value?: string | number;
+        [key: string]: unknown;
+      }
+    ) => void;
+  }
+}
+```
+:::

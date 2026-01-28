@@ -5,6 +5,7 @@ import { Search } from "lucide-react"
 import { BookOpenText } from "lucide-react"
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useDebounce } from "@/hooks/use-debounce";
+import { gaEvent } from "@/lib/ga";
 
 export function BlogHeader() {
     const searchParams = useSearchParams();
@@ -31,6 +32,11 @@ export function BlogHeader() {
 
         if (debouncedSearchQuery) {
             params.set("query", debouncedSearchQuery);
+            gaEvent({
+                action: "blog_search",
+                category: "engagement",
+                label: debouncedSearchQuery,
+            });
         } else {
             params.delete("query");
         }

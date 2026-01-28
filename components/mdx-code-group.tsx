@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useRef, createContext, useContext } from "react"
 import { cn } from "@/lib/utils"
+import { gaEvent } from "@/lib/ga";
 import { languageIcons, languageColors, languageAliases } from "./mdx-pre"
 import { FileCode, Check, Copy } from "lucide-react"
 
@@ -101,6 +102,12 @@ export function CodeGroup({ children }: CodeGroupProps) {
                 document.body.removeChild(textArea)
             }
             setTimeout(() => setIsCopied(false), 2000)
+
+            gaEvent({
+                action: "copy_code_group",
+                category: "blog_engagement",
+                label: activeTab?.title || "Code Group",
+            });
         } catch (err) {
             console.error('Failed to copy text: ', err)
         }

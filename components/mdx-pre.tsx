@@ -13,6 +13,7 @@ import { MdDifference } from "react-icons/md"
 import { PiFileCSharp, PiFileCppDuotone } from "react-icons/pi"
 import { useState, useRef } from "react"
 import { cn } from "@/lib/utils"
+import { gaEvent } from "@/lib/ga";
 
 export const languageIcons: Record<string, React.ReactNode> = {
     js: <RiJavascriptFill className="size-4" />,
@@ -387,6 +388,12 @@ export function Pre({
 
             setTimeout(() => {
                 setIsCopied(false)
+
+                gaEvent({
+                    action: "copy_code",
+                    category: "blog_engagement",
+                    label: displayTitle,
+                });
             }, 2000)
         } catch (err) {
             console.error('Failed to copy text: ', err)

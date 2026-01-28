@@ -8,6 +8,7 @@ import { Providers } from "@/components/providers";
 import { siteConfig } from "@/config/site";
 import { SiteFooter } from "@/components/site-footer";
 import Navbar from "@/components/layout/navbar";
+import GoogleAnalytics from "@/components/google-analytics";
 
 const geistSans = Geist({
   variable: "--font-sans",
@@ -51,39 +52,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-
   return (
 
     <html lang="en" suppressHydrationWarning className="scroll-pt-[3.5rem]">
-      <body
-        className={cn("min-h-screen bg-background font-sans antialiased", `${geistSans.variable} ${geistMono.variable} ${ubuntuMono.variable}`)}
-        suppressHydrationWarning
-      >
-        {/* Google Analytics */}
-        {gaId && (
-          <>
-            <Script
-              strategy="afterInteractive"
-              src={`https://www.googletamanager.com/gtag/js?id=${gaId}`}
-            />
-            <Script
-              id="google-analytics"
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date())
-                  gtag('config', '${gaId}', {
-                    page_path: window.location.pathname,
-                  })
-                `
-              }}
-            />
-          </>
-        )}
-
+      <head>
         {/* Umami Analytics */}
         <Script
           defer
@@ -91,6 +63,17 @@ export default function RootLayout({
           data-website-id={process.env.NEXT_PUBLIC_UMAMI_DATA_WEBSITE_ID}
           strategy="afterInteractive"
         />
+
+        {/* Vercel Analytics */}
+        <Analytics />
+      </head>
+
+      {/* Google Analytics */}
+      <GoogleAnalytics />
+      <body
+        className={cn("min-h-screen bg-background font-sans antialiased", `${geistSans.variable} ${geistMono.variable} ${ubuntuMono.variable}`)}
+        suppressHydrationWarning
+      >
 
         <Providers>
           <div className="relative flex min-h-dvh flex-col bg-background">
@@ -101,9 +84,6 @@ export default function RootLayout({
             <SiteFooter />
           </div>
         </Providers>
-
-        {/* Vercel Analytics */}
-        <Analytics />
       </body>
     </html>
   );

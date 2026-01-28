@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "./ui/sheet";
 import { Button } from "./ui/button";
 import { List } from "lucide-react";
+import { gaEvent } from "@/lib/ga";
 
 interface TocItem {
     title: string;
@@ -120,6 +121,13 @@ function TocItemRenderer({ item, activeId, level }: { item: TocItem, activeId: s
                         : "border-transparent text-muted-foreground hover:bg-muted/50 rounded-tr-sm rounded-br-sm"
                 )}
                 style={{ paddingLeft: `${level === 1 ? 16 : 16 + (level - 1) * 12}px` }}
+                onClick={() => {
+                    gaEvent({
+                        action: "click_toc",
+                        category: "blog_navigation",
+                        label: item.title,
+                    });
+                }}
             >
                 {item.title}
             </a>
@@ -142,7 +150,15 @@ function MobileTocList({ items, activeId, setOpen }: { items: TocItem[], activeI
                 <li key={item.url} className="space-y-2">
                     <a
                         href={item.url}
-                        onClick={() => setOpen(false)}
+                        onClick={() => {
+                            setOpen(false)
+
+                            gaEvent({
+                                action: "click_toc",
+                                category: "blog_navigation",
+                                label: item.title,
+                            });
+                        }}
                         className={cn(
                             "block no-underline transition-colors hover:text-foreground",
                             item.url === `#${activeId}` ? "font-medium text-primary" : "text-muted-foreground"

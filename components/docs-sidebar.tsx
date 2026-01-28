@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
 import { useState } from "react";
+import { gaEvent } from "@/lib/ga";
 
 export interface SidebarItem {
     title: string;
@@ -75,12 +76,27 @@ function SidebarNavInternalItem({
                                 : "text-muted-foreground",
                             level > 0 && "pl-6"
                         )}
+                        onClick={() => {
+                            gaEvent({
+                                action: "click_docs",
+                                category: "navigation",
+                                label: item.title,
+                            });
+                        }}
                     >
                         {item.title}
                     </Link>
                 ) : (
                     <button
-                        onClick={() => setIsOpen(!isOpen)}
+                        onClick={() => {
+                            setIsOpen(!isOpen)
+
+                            gaEvent({
+                                action: "click_docs",
+                                category: "navigation",
+                                label: item.title,
+                            });
+                        }}
                         className={cn(
                             "flex w-full items-center py-1.5 px-3 text-sm text-muted-foreground transition-colors hover:text-foreground",
                             level > 0 && "pl-6"
