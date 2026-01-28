@@ -1,10 +1,17 @@
-## [1.11.3](https://github.com/armandwipangestu/velora/compare/v1.11.2...v1.11.3) (2026-01-08)
+## [1.12.0-rc.1](https://github.com/armandwipangestu/velora/compare/v1.11.2-rc.1...v1.12.0-rc.1) (2026-01-28)
+
+### Features
+
+* **analytics:** add google analytics integration ([bede918](https://github.com/armandwipangestu/velora/commit/bede918f4ac5831c4e0517f26fd6bf2f3b0aa9b2))
+* **analytics:** add posthog integration ([74fb324](https://github.com/armandwipangestu/velora/commit/74fb32447c093e5f16679b67ce5182efc6301eb0))
+* **components:** add icon data typescript, posthog, google analytics ([907aca3](https://github.com/armandwipangestu/velora/commit/907aca38f0dd34c171fdcddc4ea5dbe6d54c3e24))
+* **components:** add mdx heading ([1459541](https://github.com/armandwipangestu/velora/commit/1459541baa8041e34153d037f61d8bb630ceb30f))
 
 ### Bug Fixes
 
 * syntax highlighting mdx docs callout ([6204ac1](https://github.com/armandwipangestu/velora/commit/6204ac1e48a4ee292ed009178fc26d07ccd7ec20))
 
-## [1.11.2](https://github.com/armandwipangestu/velora/compare/v1.11.1...v1.11.2) (2025-12-28)
+## [1.11.2-rc.1](https://github.com/armandwipangestu/velora/compare/v1.11.1...v1.11.2-rc.1) (2025-12-28)
 
 ### Bug Fixes
 

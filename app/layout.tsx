@@ -8,6 +8,10 @@ import { Providers } from "@/components/providers";
 import { siteConfig } from "@/config/site";
 import { SiteFooter } from "@/components/site-footer";
 import Navbar from "@/components/layout/navbar";
+import GoogleAnalytics from "@/components/google-analytics";
+import { PostHogProvider } from "@/components/providers/posthog-provider";
+import { Suspense } from "react";
+import { PostHogPageView } from "@/components/posthog-pageview";
 
 const geistSans = Geist({
   variable: "--font-sans",
@@ -51,39 +55,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-
   return (
 
     <html lang="en" suppressHydrationWarning className="scroll-pt-[3.5rem]">
-      <body
-        className={cn("min-h-screen bg-background font-sans antialiased", `${geistSans.variable} ${geistMono.variable} ${ubuntuMono.variable}`)}
-        suppressHydrationWarning
-      >
-        {/* Google Analytics */}
-        {gaId && (
-          <>
-            <Script
-              strategy="afterInteractive"
-              src={`https://www.googletamanager.com/gtag/js?id=${gaId}`}
-            />
-            <Script
-              id="google-analytics"
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date())
-                  gtag('config', '${gaId}', {
-                    page_path: window.location.pathname,
-                  })
-                `
-              }}
-            />
-          </>
-        )}
-
+      <head>
         {/* Umami Analytics */}
         <Script
           defer
@@ -92,18 +67,32 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
 
-        <Providers>
-          <div className="relative flex min-h-dvh flex-col bg-background">
-            <Navbar />
-            <main className="flex-1">
-              {children}
-            </main>
-            <SiteFooter />
-          </div>
-        </Providers>
-
         {/* Vercel Analytics */}
         <Analytics />
+      </head>
+
+      {/* Google Analytics */}
+      <GoogleAnalytics />
+      <body
+        className={cn("min-h-screen bg-background font-sans antialiased", `${geistSans.variable} ${geistMono.variable} ${ubuntuMono.variable}`)}
+        suppressHydrationWarning
+      >
+
+        <PostHogProvider>
+          <Suspense fallback={null}>
+            <PostHogPageView />
+          </Suspense>
+
+          <Providers>
+            <div className="relative flex min-h-dvh flex-col bg-background">
+              <Navbar />
+              <main className="flex-1">
+                {children}
+              </main>
+              <SiteFooter />
+            </div>
+          </Providers>
+        </PostHogProvider>
       </body>
     </html>
   );

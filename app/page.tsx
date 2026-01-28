@@ -8,6 +8,8 @@ import { pages } from "#site/content";
 import { MDXContent } from "@/components/mdx-components";
 import { TechStack } from "@/components/tech-stack";
 import "@/styles/mdx.css"
+import { GALink } from "@/components/google-analytics-link";
+import { phCapture } from "@/lib/posthog";
 
 export default function Home() {
   const landingPage = pages.find((p) => p.slug === "landing");
@@ -65,16 +67,19 @@ export default function Home() {
             <TechStack />
 
             <div className="flex flex-row gap-3 justify-center lg:justify-start pt-4 px-2">
-              <Link
+              <GALink
                 href="/guide/introduction"
                 className={cn(
                   buttonVariants({ size: "default" }),
                   "flex-1 sm:flex-none px-6 sm:px-8 rounded-full h-11 sm:h-12 text-sm sm:text-base font-semibold transition-all duration-300 hover:scale-105 bg-[#10b981] hover:bg-[#10b981]/90"
                 )}
+                action="click_get_started"
+                category="landing_page"
+                label="get_started"
               >
                 Get Started
-              </Link>
-              <Link
+              </GALink>
+              <GALink
                 href={siteConfig.links.github}
                 target="_blank"
                 rel="norefferrer noopener"
@@ -82,9 +87,12 @@ export default function Home() {
                   buttonVariants({ variant: "outline", size: "default" }),
                   "flex-1 sm:flex-none px-6 sm:px-8 rounded-full h-11 sm:h-12 text-sm sm:text-base font-semibold transition-all duration-300 hover:scale-105 bg-muted/50"
                 )}
+                action="click_github"
+                category="landing_page"
+                label="github"
               >
                 GitHub
-              </Link>
+              </GALink>
             </div>
           </div>
 

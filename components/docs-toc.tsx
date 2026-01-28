@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { gaEvent } from "@/lib/ga";
 
 interface TocItem {
     title: string;
@@ -93,6 +94,13 @@ function TocNavInternalItem({
                         ? "font-bold text-primary border-primary bg-primary/5"
                         : "text-muted-foreground/80 border-transparent"
                 )}
+                onClick={() => {
+                    gaEvent({
+                        category: "docs",
+                        action: "docs_toc_click",
+                        label: item.title,
+                    })
+                }}
             >
                 {item.title}
             </a>

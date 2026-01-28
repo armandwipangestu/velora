@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { ChevronDown, Hash } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { gaEvent } from "@/lib/ga";
 
 interface BlogSidebarProps {
     tags: Record<string, number>;
@@ -44,10 +45,24 @@ export function BlogSidebar({ tags }: BlogSidebarProps) {
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="w-[180px]">
-                            <DropdownMenuItem onClick={() => updateParams("sort", "newest")} className="cursor-pointer">
+                            <DropdownMenuItem onClick={() => {
+                                updateParams("sort", "newest")
+                                gaEvent({
+                                    action: "blog_sort",
+                                    category: "engagement",
+                                    label: "newest",
+                                })
+                            }} className="cursor-pointer">
                                 Newest
                             </DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => updateParams("sort", "oldest")} className="cursor-pointer">
+                            <DropdownMenuItem onClick={() => {
+                                updateParams("sort", "oldest")
+                                gaEvent({
+                                    action: "blog_sort",
+                                    category: "engagement",
+                                    label: "oldest",
+                                })
+                            }} className="cursor-pointer">
                                 Oldest
                             </DropdownMenuItem>
                         </DropdownMenuContent>
@@ -65,7 +80,14 @@ export function BlogSidebar({ tags }: BlogSidebarProps) {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="w-[180px]">
                             {["5", "10", "15", "20"].map((num) => (
-                                <DropdownMenuItem key={num} onClick={() => updateParams("perPage", num)} className="cursor-pointer">
+                                <DropdownMenuItem key={num} onClick={() => {
+                                    updateParams("perPage", num)
+                                    gaEvent({
+                                        action: "blog_per_page",
+                                        category: "engagement",
+                                        label: num,
+                                    })
+                                }} className="cursor-pointer">
                                     {num} Posts
                                 </DropdownMenuItem>
                             ))}
@@ -84,7 +106,14 @@ export function BlogSidebar({ tags }: BlogSidebarProps) {
                     <Button
                         variant={currentTag === "" ? "default" : "ghost"}
                         size="sm"
-                        onClick={() => updateParams("tag", "")}
+                        onClick={() => {
+                            updateParams("tag", "")
+                            gaEvent({
+                                action: "blog_tag",
+                                category: "engagement",
+                                label: "all",
+                            })
+                        }}
                         className="h-8 justify-start text-xs cursor-pointer"
                     >
                         All Posts
@@ -94,7 +123,14 @@ export function BlogSidebar({ tags }: BlogSidebarProps) {
                             key={tag}
                             variant={currentTag === tag ? "default" : "ghost"}
                             size="sm"
-                            onClick={() => updateParams("tag", tag)}
+                            onClick={() => {
+                                updateParams("tag", tag)
+                                gaEvent({
+                                    action: "blog_tag",
+                                    category: "engagement",
+                                    label: tag,
+                                })
+                            }}
                             className="h-8 justify-start text-xs cursor-pointer"
                         >
                             #{tag} <span className="ml-1 opacity-50">({count})</span>

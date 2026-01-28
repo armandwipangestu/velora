@@ -4,6 +4,7 @@ import * as React from "react";
 import { Moon, Sun, Monitor } from "lucide-react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
+import { gaEvent } from "@/lib/ga";
 
 export function ThemeToggle() {
     const { setTheme, theme } = useTheme();
@@ -37,7 +38,15 @@ export function ThemeToggle() {
                 return (
                     <button
                         key={option.value}
-                        onClick={() => setTheme(option.value)}
+                        onClick={() => {
+                            setTheme(option.value)
+
+                            gaEvent({
+                                action: "switch_theme",
+                                category: "engagement",
+                                label: option.value,
+                            });
+                        }}
                         className={cn(
                             "p-1.5 rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer",
                             isActive
