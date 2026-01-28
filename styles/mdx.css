@@ -378,12 +378,15 @@ html.dark {
 /* 10. Heading styling */
 .prose h1 .subheading-anchor,
 .prose h2 .subheading-anchor,
-.prose h3 .subheading-anchor {
+.prose h3 .subheading-anchor,
+.prose h4 .subheading-anchor,
+.prose h5 .subheading-anchor,
+.prose h6 .subheading-anchor {
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
-.prose :is(h1, h2, h3) .subheading-anchor:hover {
+.prose :is(h1, h2, h3, h4, h5, h6) .subheading-anchor:hover {
     color: #10b981 !important;
     text-decoration: underline;
 }
