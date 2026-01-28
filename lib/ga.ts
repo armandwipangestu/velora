@@ -1,3 +1,5 @@
+import { ANALYTICS_ENABLED } from "./env";
+
 interface GAEventParams {
   action: string;
   category?: string;
@@ -11,6 +13,7 @@ export const gaEvent = ({
   label,
   value,
 }: GAEventParams) => {
+  if (!ANALYTICS_ENABLED) return;
   if (typeof window === 'undefined') return;
   if (!window.gtag) return;
 
