@@ -1,0 +1,67 @@
+---
+title: PostHog
+description: How to add posthog to your site
+category: Integration
+categoryOrder: 3
+order: 4
+---
+
+# Setup PostHog
+
+What is PostHog? PostHog is an open-source product analytics platform that helps you understand how visitors interact with your website.
+
+## Create Project
+
+Create an account on [PostHog](https://us.posthog.com/login), after that login to your account and you have default project.
+
+## Get Project API Key
+
+After have a project, you need to get the project api key. Go to `Project Settings` > `Project` > `Project ID` and copy the `Project API Key`.
+
+## Add PostHog Configuration to Environment Variable
+
+After getting the project api key, you need to add the project api key to the environment variable, fill the `.env.local` file with the project api key.
+
+```env
+# PostHog Configuration
+NEXT_PUBLIC_POSTHOG_KEY=posthog-api-key
+NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
+```
+
+# Example Send Event
+
+If you already setup the posthog, you can send event to posthog using `phCapture(){:ts}` function. Here is the example:
+
+::: code-group
+```tsx title="page.tsx" showLineNumbers
+// [!code focus]
+// [!code ++]
+import { phCapture } from "@/lib/posthog";
+
+export default function Page() {
+    return (
+        <button onClick={() => {
+            // [!code focus:3]
+            // [!code ++:3]
+             phCapture("click_button", {
+                location: "page",
+            });
+        }}>
+            Click Me
+        </button>
+    );
+}
+```
+
+```ts icon="iPosthog" title="lib/posthog.ts" showLineNumbers
+import posthog from 'posthog-js';
+
+export const phCapture = (
+  event: string,
+  properties?: Record<string, unknown>
+) => {
+  if (typeof window === 'undefined') return;
+  posthog.capture(event, properties);
+};
+```
+:::

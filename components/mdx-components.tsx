@@ -5,15 +5,36 @@ import * as runtime from "react/jsx-runtime"
 import { Pre } from "./mdx-pre"
 import { Callout } from "./callout"
 import { CodeGroup } from "./mdx-code-group"
+import { MDXImage } from "@/components/mdx-image"
+import { cn } from "@/lib/utils"
+import { MDXHeading } from "./mdx-heading"
 
 const useMdxComponents = (code: string) => {
     const fn = new Function(code)
     return fn({ ...runtime }).default
 }
 
-import { MDXImage } from "@/components/mdx-image"
+const headingStyles: Record<number, string> = {
+    1: 'mt-12 scroll-m-20 text-4xl font-bold tracking-tight',
+    2: 'mt-10 scroll-m-20 text-3xl font-semibold tracking-tight',
+    3: 'mt-8 scroll-m-20 text-2xl font-semibold tracking-tight',
+    4: 'mt-6 scroll-m-20 text-xl font-semibold tracking-tight',
+    5: 'mt-4 scroll-m-20 text-lg font-semibold',
+    6: 'mt-4 scroll-m-20 text-base font-medium text-muted-foreground',
+};
 
-import { cn } from "@/lib/utils"
+const headingComponents = Object.fromEntries(
+    ([1, 2, 3, 4, 5, 6] as const).map((level) => [
+        `h${level}`,
+        ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+            <MDXHeading
+                level={level}
+                className={cn(headingStyles[level], className)}
+                {...props}
+            />
+        ),
+    ])
+);
 
 const components = {
     Image: MDXImage,
@@ -45,6 +66,7 @@ const components = {
     //         {...props}
     //     />
     // ),
+    ...headingComponents,
 }
 
 interface MdxProps {

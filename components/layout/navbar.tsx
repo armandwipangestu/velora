@@ -10,6 +10,7 @@ import { ThemeToggle } from "./theme-toggle";
 import { MobileNav } from "@/components/mobile-nav";
 import { buttonVariants } from "@/components/ui/button";
 import { VersionBadge } from "../ui/version-badge";
+import { gaEvent } from "@/lib/ga";
 
 export const navLinks = [
     { href: "/guide/introduction", label: "Guide" },
@@ -23,7 +24,17 @@ export default function Navbar() {
         <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
             <div className="container flex h-16 items-center justify-between">
                 <div className="flex items-center gap-2 md:gap-6">
-                    <Link href="/" className="flex items-center space-x-2">
+                    <Link
+                        href="/"
+                        className="flex items-center space-x-2"
+                        onClick={() => {
+                            gaEvent({
+                                action: "click_logo",
+                                category: "navigation",
+                                label: "logo",
+                            });
+                        }}
+                    >
                         <Icons.logo className="h-8 w-8" />
                         <span className="hidden font-bold sm:inline-block text-xl">
                             {siteConfig.name}
@@ -45,6 +56,13 @@ export default function Navbar() {
                                     "transition-colors hover:text-primary",
                                     pathname === link.href ? "text-foreground" : "text-muted-foreground"
                                 )}
+                                onClick={() => {
+                                    gaEvent({
+                                        action: "click_navbar",
+                                        category: "navigation",
+                                        label: link.label,
+                                    });
+                                }}
                             >
                                 {link.label}
                             </Link>
@@ -61,6 +79,13 @@ export default function Navbar() {
                                 buttonVariants({ variant: "ghost", size: "icon" }),
                                 "hidden md:flex"
                             )}
+                            onClick={() => {
+                                gaEvent({
+                                    action: "click_github",
+                                    category: "navigation",
+                                    label: "github",
+                                });
+                            }}
                         >
                             <Github className="h-5 w-5" />
                             <span className="sr-only">GitHub</span>
