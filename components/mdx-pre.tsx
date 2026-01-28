@@ -444,7 +444,12 @@ export function Pre({
                     </div>
                     <button
                         onClick={onCopy}
-                        className="flex items-center gap-2 rounded-md p-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-ring/40 hover:text-foreground cursor-pointer"
+                        className={cn(
+                            "flex items-center gap-2 rounded-md p-1.5 text-xs font-medium transition-all cursor-pointer",
+                            isCopied
+                                ? "text-green-600 dark:text-green-400 bg-green-500/10 dark:bg-green-400/10"
+                                : "text-muted-foreground hover:bg-ring/40 hover:text-foreground"
+                        )}
                         aria-label="Copy code"
                     >
                         {isCopied ? (
