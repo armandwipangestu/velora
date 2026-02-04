@@ -433,8 +433,52 @@ export function Pre({
             popup.style.top = `${rect.bottom + 6}px`;
         }
 
-        document.addEventListener("mousemove", reposition);
         return () => document.removeEventListener("mousemove", reposition);
+    }, []);
+
+    useEffect(() => {
+        let activePopup: HTMLElement | null = null;
+
+        function onPointerEnter(e: Event) {
+            const hover = (e.target as HTMLElement)?.closest(".twoslash-hover");
+            if (!hover) return;
+
+            const popup = hover.querySelector(
+            ".twoslash-popup-container"
+            ) as HTMLElement | null;
+
+            if (!popup) return;
+
+            const rect = hover.getBoundingClientRect();
+
+            popup.style.left = `${rect.left}px`;
+            popup.style.top = `${rect.bottom + 6}px`;
+            popup.style.opacity = "1";
+
+            activePopup = popup;
+        }
+
+        function onPointerLeave(e: Event) {
+            const hover = (e.target as HTMLElement)?.closest(".twoslash-hover");
+            if (!hover) return;
+
+            const popup = hover.querySelector(
+            ".twoslash-popup-container"
+            ) as HTMLElement | null;
+
+            if (!popup) return;
+
+            popup.style.opacity = "0";
+            activePopup = null;
+        }
+
+        document.addEventListener("pointerenter", onPointerEnter, true);
+        document.addEventListener("pointerleave", onPointerLeave, true);
+
+        return () => {
+            document.removeEventListener("pointerenter", onPointerEnter, true);
+            document.removeEventListener("pointerleave", onPointerLeave, true);
+        };
     }, []);
 
     return (

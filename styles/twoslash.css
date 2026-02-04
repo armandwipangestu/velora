@@ -76,7 +76,7 @@ html.dark {
   transform: translateY(0.5em);
   left: 0;
   top: 0;
-  pointer-events: auto;
+  pointer-events: none;
   background: var(--twoslash-popup-bg);
   color: var(--twoslash-popup-color);
   border: 1px solid var(--twoslash-border-color);
@@ -109,6 +109,7 @@ html.dark {
 
 .twoslash .twoslash-popup-container:hover {
   user-select: auto;
+  pointer-events: auto;
 }
 
 .twoslash .twoslash-popup-arrow {
