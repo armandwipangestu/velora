@@ -82,7 +82,8 @@ html.dark {
   @apply px-0;
   background-color: var(--mdx-pre-bg);
   font-family: var(--mdx-font-family, 'FiraCode Nerd Font', ui-monospace, monospace);
-  overflow: visible !important;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 /* Ligature Management */
@@ -390,8 +391,4 @@ html.dark {
 .prose :is(h1, h2, h3, h4, h5, h6) .subheading-anchor:hover {
     color: #10b981 !important;
     text-decoration: underline;
-}
-
-[data-rehype-pretty-code-figure] {
-  position: relative;
 }
