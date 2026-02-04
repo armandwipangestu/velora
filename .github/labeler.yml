@@ -1,0 +1,26 @@
+chore:
+  - CHANGELOG.md
+  - .gitignore
+  - .prettierrc
+  - package.json
+  - bun.lock
+
+ci:
+  - .github/workflows/**/*
+
+documentation:
+  - README.md
+  - docs/**/*
+
+feature:
+  - app/**/*
+  - components/**/*
+
+content:
+  - content/**/*
+
+config:
+  - "*.config.*"
+  - tsconfig.json
+  - components.json
+  - .env.example

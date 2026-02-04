@@ -50,6 +50,18 @@ A type-safe, very rich code block feature (using Shiki & Rehype), dynamic open g
 - Velite Integration for Content Pipeline
 - Giscus Integration for Discussion Section
 
+## Repo Stats
+
+![Alt](https://repobeats.axiom.co/api/embed/06ecc7a9f63292031470daea29831f99e87275a7.svg "Repobeats analytics image")
+
+<a href="https://www.star-history.com/#armandwipangestu/velora&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=armandwipangestu/velora&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=armandwipangestu/velora&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=armandwipangestu/velora&type=date&legend=top-left" />
+ </picture>
+</a>
+
 ## Running the Application
 
 - Using bun
