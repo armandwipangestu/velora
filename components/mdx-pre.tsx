@@ -438,13 +438,11 @@ export function Pre({
 
     useEffect(() => {
         let activePopup: HTMLElement | null = null;
+        let hideTimeout: number | null = null;
 
-        function onPointerEnter(e: Event) {
-            const hover = (e.target as HTMLElement)?.closest(".twoslash-hover");
-            if (!hover) return;
-
+        function showPopup(hover: HTMLElement) {
             const popup = hover.querySelector(
-            ".twoslash-popup-container"
+                ".twoslash-popup-container"
             ) as HTMLElement | null;
 
             if (!popup) return;
@@ -454,22 +452,47 @@ export function Pre({
             popup.style.left = `${rect.left}px`;
             popup.style.top = `${rect.bottom + 6}px`;
             popup.style.opacity = "1";
+            popup.style.pointerEvents = "auto";
 
             activePopup = popup;
         }
 
+        function hidePopupDelayed() {
+            if (!activePopup) return;
+
+            hideTimeout = window.setTimeout(() => {
+            if (activePopup) {
+                activePopup.style.opacity = "0";
+                activePopup.style.pointerEvents = "none";
+                activePopup = null;
+            }}, 120);
+        }
+
+        function cancelHide() {
+            if (hideTimeout) {
+                clearTimeout(hideTimeout);
+                hideTimeout = null;
+            }
+        }
+
+        function onPointerEnter(e: Event) {
+            const el = (e.target as Element | null)?.closest(".twoslash-hover");
+            if (!(el instanceof HTMLElement)) return;
+
+            cancelHide();
+            showPopup(el);
+        }
+
         function onPointerLeave(e: Event) {
-            const hover = (e.target as HTMLElement)?.closest(".twoslash-hover");
-            if (!hover) return;
+            const hover = (e.target as Element | null)?.closest(".twoslash-hover");
+            const popup = (e.target as Element | null)?.closest(".twoslash-popup-container");
 
-            const popup = hover.querySelector(
-            ".twoslash-popup-container"
-            ) as HTMLElement | null;
-
-            if (!popup) return;
-
-            popup.style.opacity = "0";
-            activePopup = null;
+            if (
+                (hover && hover instanceof HTMLElement) ||
+                (popup && popup instanceof HTMLElement)
+            ) {
+                hidePopupDelayed();
+            }
         }
 
         document.addEventListener("pointerenter", onPointerEnter, true);
