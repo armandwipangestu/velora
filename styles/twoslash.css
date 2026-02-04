@@ -76,7 +76,7 @@ html.dark {
   transform: translateY(0.5em);
   left: 0;
   top: 0;
-  pointer-events: none;
+  pointer-events: auto;
   background: var(--twoslash-popup-bg);
   color: var(--twoslash-popup-color);
   border: 1px solid var(--twoslash-border-color);
@@ -89,8 +89,9 @@ html.dark {
   min-width: 320px;
   max-width: 600px;
   /* Prevent popup from affecting layout */
-  height: fit-content;
+  height: auto;
   width: fit-content;
+  max-height: none;
 }
 
 .twoslash .twoslash-query-persisted .twoslash-popup-container {
@@ -325,4 +326,28 @@ html.dark {
 .twoslash .twoslash-hover:hover .twoslash-popup-container {
   opacity: 1;
   pointer-events: auto;
+}
+
+/* Allow twoslash popup to escape code block */
+.twoslash {
+  position: relative;
+}
+
+.twoslash .twoslash-popup-container {
+  position: fixed !important;
+  z-index: 9999;
+
+  /* reset inherited layout influence */
+  margin: 0;
+  inset: auto;
+}
+
+/* PRE must allow overflow */
+[data-rehype-pretty-code-figure] pre {
+  overflow: visible !important;
+}
+
+/* BUT scrolling only happens on parent */
+[data-rehype-pretty-code-figure] > div {
+  overflow-x: auto;
 }

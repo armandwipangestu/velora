@@ -12,7 +12,7 @@ import { TbBrandTypescript } from "react-icons/tb";
 import { DiRuby, DiMsqlServer } from "react-icons/di"
 import { MdDifference } from "react-icons/md"
 import { PiFileCSharp, PiFileCppDuotone } from "react-icons/pi"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { cn } from "@/lib/utils"
 import { gaEvent } from "@/lib/ga";
 
@@ -419,6 +419,24 @@ export function Pre({
         }
     }
 
+    useEffect(() => {
+        function reposition(e: MouseEvent) {
+            const hover = (e.target as HTMLElement)?.closest(".twoslash-hover");
+            if (!hover) return;
+
+            const popup = hover.querySelector(".twoslash-popup-container") as HTMLElement;
+            if (!popup) return;
+
+            const rect = hover.getBoundingClientRect();
+
+            popup.style.left = `${rect.left}px`;
+            popup.style.top = `${rect.bottom + 6}px`;
+        }
+
+        document.addEventListener("mousemove", reposition);
+        return () => document.removeEventListener("mousemove", reposition);
+    }, []);
+
     return (
         <div
             className={cn(
@@ -468,22 +486,18 @@ export function Pre({
                     </button>
                 </div>
             )}
-            <div className="overflow-x-auto scrollbar-hide" style={{ overflow: "visible" }}>
+              <div className="relative overflow-x-auto scrollbar-hide">
                 <pre
                     {...props}
                     ref={preRef}
-                    style={{
-                        ...style,
-                        position: "relative",
-                        overflow: "visible",
-                    }}
                     className={cn(
-                        "py-4 mt-0! mb-0! min-w-max",
-                        !hideTitleBar && "rounded-t-none",
-                        !hideBorder && "rounded-b-none",
+                        "py-4 mt-0! mb-0!",
+                        "min-w-max",
+                        "overflow-visible",
                         className
                     )}
-                >
+                    style={style}
+                    >
                     {children}
                 </pre>
             </div>
