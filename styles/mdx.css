@@ -82,8 +82,6 @@ html.dark {
   @apply px-0;
   background-color: var(--mdx-pre-bg);
   font-family: var(--mdx-font-family, 'FiraCode Nerd Font', ui-monospace, monospace);
-  overflow-x: auto;
-  overflow-y: hidden;
 }
 
 /* Ligature Management */

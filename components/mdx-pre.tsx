@@ -306,6 +306,28 @@ export function Pre({
     const [isCopied, setIsCopied] = useState(false)
     const preRef = useRef<HTMLPreElement>(null)
 
+    // Position popups correctly when using fixed positioning
+    const handlePopupPosition = () => {
+        const popups = preRef.current?.querySelectorAll('.twoslash-popup-container')
+        if (!popups) return
+
+        popups.forEach((popup) => {
+            const hover = popup.parentElement
+            if (!hover) return
+
+            const rect = hover.getBoundingClientRect()
+            const popupEl = popup as HTMLElement
+            
+            popupEl.style.left = `${rect.left}px`
+            popupEl.style.top = `${rect.bottom + 8}px`
+        })
+    }
+
+    // Recalculate positions on mount and when hovering
+    const handleMouseEnter = (e: React.MouseEvent) => {
+        setTimeout(handlePopupPosition, 0)
+    }
+
     // 1. Check props for data-title (passed from rehype)
     const dataTitle = (props as Record<string, unknown>)["data-title"] as string
     const dataFont = (props as Record<string, unknown>)["data-font"] as string
@@ -325,6 +347,7 @@ export function Pre({
     // 2. Determine the display label:
     // Priority: Prop title > data-title attribute from rehype > language extension
     const displayTitle = title || dataTitle || language
+    const isTwoslash = className?.includes("twoslash")
 
     // 3. Determine Icon
     // Priority: Custom icon from meta > language-based icon > default FileCode
@@ -466,22 +489,25 @@ export function Pre({
                     </button>
                 </div>
             )}
-            <pre
-                {...props}
-                ref={preRef}
-                style={{
-                    ...style,
-                    position: "relative",
-                }}
-                className={cn(
-                    "overflow-x-auto py-4 mt-0! mb-0!",
-                    !hideTitleBar && "rounded-t-none",
-                    !hideBorder && "rounded-b-none",
-                    className
-                )}
-            >
-                {children}
-            </pre>
+            <div className="overflow-x-auto scrollbar-hide">
+                <pre
+                    {...props}
+                    ref={preRef}
+                    onMouseEnter={handleMouseEnter}
+                    style={{
+                        ...style,
+                        position: "relative",
+                    }}
+                    className={cn(
+                        "py-4 mt-0! mb-0! overflow-visible min-w-max",
+                        !hideTitleBar && "rounded-t-none",
+                        !hideBorder && "rounded-b-none",
+                        className
+                    )}
+                >
+                    {children}
+                </pre>
+            </div>
         </div>
     )
 }
