@@ -1,3 +1,9 @@
+## [1.15.0](https://github.com/armandwipangestu/velora/compare/v1.14.0...v1.15.0) (2026-02-04)
+
+### Features
+
+* **docs:** add example styling markdown post ([8e8f488](https://github.com/armandwipangestu/velora/commit/8e8f488c5cb4d0d2d26e2a87df18a94ac176a6cd))
+
 ## [1.14.0](https://github.com/armandwipangestu/velora/compare/v1.13.0...v1.14.0) (2026-01-28)
 
 ### Features
