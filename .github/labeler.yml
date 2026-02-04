@@ -1,26 +1,38 @@
 chore:
-  - CHANGELOG.md
-  - .gitignore
-  - .prettierrc
-  - package.json
-  - bun.lock
+  - changed-files:
+      - any-glob-to-any-file:
+          - CHANGELOG.md
+          - .gitignore
+          - .prettierrc
+          - package.json
+          - bun.lock
 
 ci:
-  - .github/workflows/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/workflows/**/*
 
 documentation:
-  - README.md
-  - docs/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - README.md
+          - docs/**/*
 
 feature:
-  - app/**/*
-  - components/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - app/**/*
+          - components/**/*
 
 content:
-  - content/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/**/*
 
 config:
-  - "*.config.*"
-  - tsconfig.json
-  - components.json
-  - .env.example
+  - changed-files:
+      - any-glob-to-any-file:
+          - "*.config.*"
+          - tsconfig.json
+          - components.json
+          - .env.example
