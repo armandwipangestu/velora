@@ -45,7 +45,7 @@
     "@semantic-release/github": "^12.0.2",
     "@semantic-release/npm": "^13.1.3",
     "@semantic-release/release-notes-generator": "^14.1.0",
-    "@shikijs/rehype": "^3.20.0",
+    "@shikijs/rehype": "^3.22.0",
     "@shikijs/transformers": "^3.20.0",
     "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/typography": "^0.5.19",
