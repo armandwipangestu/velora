@@ -421,7 +421,7 @@ export function Pre({
     return (
         <div
             className={cn(
-                "my-6 overflow-hidden",
+                "my-6",
                 !hideBorder && "rounded-lg border bg-background"
             )}
             style={{
@@ -469,7 +469,10 @@ export function Pre({
             <pre
                 {...props}
                 ref={preRef}
-                style={style}
+                style={{
+                    ...style,
+                    position: "relative",
+                }}
                 className={cn(
                     "overflow-x-auto py-4 mt-0! mb-0!",
                     !hideTitleBar && "rounded-t-none",
