@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/armandwipangestu/velora/compare/v1.15.0...v1.15.1) (2026-02-04)
+
+### Bug Fixes
+
+* formatting labeler.yml ([b94236d](https://github.com/armandwipangestu/velora/commit/b94236d02f92cce9bd0034d45e87e7c965663535))
+* labeler.yml ([d56a0d3](https://github.com/armandwipangestu/velora/commit/d56a0d37633b72c288fe78eb3c1756aa86820352))
+
 ## [1.15.0](https://github.com/armandwipangestu/velora/compare/v1.14.0...v1.15.0) (2026-02-04)
 
 ### Features
