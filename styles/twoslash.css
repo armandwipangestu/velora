@@ -352,3 +352,16 @@ html.dark {
 [data-rehype-pretty-code-figure] > div {
   overflow-x: auto;
 }
+
+
+/* hover tooltip */
+.twoslash-hover:hover .twoslash-popup-container {
+  opacity: 1;
+}
+
+/* persist query (^?) */
+.twoslash-query-persisted .twoslash-popup-container {
+  opacity: 1 !important;
+  pointer-events: auto;
+  position: relative;
+}
