@@ -62,6 +62,12 @@ A type-safe, very rich code block feature (using Shiki & Rehype), dynamic open g
  </picture>
 </a>
 
+## Contributors
+
+<a href="https://github.com/armandwipangestu/velora/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=armandwipangestu/velora" />
+</a>
+
 ## Running the Application
 
 - Using bun
