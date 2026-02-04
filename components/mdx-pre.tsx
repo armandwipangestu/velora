@@ -12,7 +12,7 @@ import { TbBrandTypescript } from "react-icons/tb";
 import { DiRuby, DiMsqlServer } from "react-icons/di"
 import { MdDifference } from "react-icons/md"
 import { PiFileCSharp, PiFileCppDuotone } from "react-icons/pi"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { cn } from "@/lib/utils"
 import { gaEvent } from "@/lib/ga";
 
@@ -325,6 +325,7 @@ export function Pre({
     // 2. Determine the display label:
     // Priority: Prop title > data-title attribute from rehype > language extension
     const displayTitle = title || dataTitle || language
+    const isTwoslash = className?.includes("twoslash")
 
     // 3. Determine Icon
     // Priority: Custom icon from meta > language-based icon > default FileCode
@@ -418,14 +419,100 @@ export function Pre({
         }
     }
 
+    useEffect(() => {
+        function reposition(e: MouseEvent) {
+            const hover = (e.target as HTMLElement)?.closest(".twoslash-hover");
+            if (!hover) return;
+
+            const popup = hover.querySelector(".twoslash-popup-container") as HTMLElement;
+            if (!popup) return;
+
+            const rect = hover.getBoundingClientRect();
+
+            popup.style.left = `${rect.left}px`;
+            popup.style.top = `${rect.bottom + 6}px`;
+        }
+
+        return () => document.removeEventListener("mousemove", reposition);
+    }, []);
+
+    useEffect(() => {
+        let activePopup: HTMLElement | null = null;
+        let hideTimeout: number | null = null;
+
+        function showPopup(hover: HTMLElement) {
+            const popup = hover.querySelector(
+                ".twoslash-popup-container"
+            ) as HTMLElement | null;
+
+            if (!popup) return;
+
+            const rect = hover.getBoundingClientRect();
+
+            popup.style.left = `${rect.left}px`;
+            popup.style.top = `${rect.bottom + 6}px`;
+            popup.style.opacity = "1";
+            popup.style.pointerEvents = "auto";
+
+            activePopup = popup;
+        }
+
+        function hidePopupDelayed() {
+            if (!activePopup) return;
+
+            hideTimeout = window.setTimeout(() => {
+            if (activePopup) {
+                activePopup.style.opacity = "0";
+                activePopup.style.pointerEvents = "none";
+                activePopup = null;
+            }}, 120);
+        }
+
+        function cancelHide() {
+            if (hideTimeout) {
+                clearTimeout(hideTimeout);
+                hideTimeout = null;
+            }
+        }
+
+        function onPointerEnter(e: Event) {
+            const el = (e.target as Element | null)?.closest(".twoslash-hover");
+            if (!(el instanceof HTMLElement)) return;
+
+            cancelHide();
+            showPopup(el);
+        }
+
+        function onPointerLeave(e: Event) {
+            const hover = (e.target as Element | null)?.closest(".twoslash-hover");
+            const popup = (e.target as Element | null)?.closest(".twoslash-popup-container");
+
+            if (
+                (hover && hover instanceof HTMLElement) ||
+                (popup && popup instanceof HTMLElement)
+            ) {
+                hidePopupDelayed();
+            }
+        }
+
+        document.addEventListener("pointerenter", onPointerEnter, true);
+        document.addEventListener("pointerleave", onPointerLeave, true);
+
+        return () => {
+            document.removeEventListener("pointerenter", onPointerEnter, true);
+            document.removeEventListener("pointerleave", onPointerLeave, true);
+        };
+    }, []);
+
     return (
         <div
             className={cn(
-                "my-6 overflow-hidden",
+                "my-6 relative",
                 !hideBorder && "rounded-lg border bg-background"
             )}
             style={{
                 ...((fontValue) && { ["--mdx-font-family" as string]: `${fontValue}, monospace` }),
+                overflow: "visible",
             }}
         >
             {!hideTitleBar && (
@@ -466,19 +553,21 @@ export function Pre({
                     </button>
                 </div>
             )}
-            <pre
-                {...props}
-                ref={preRef}
-                style={style}
-                className={cn(
-                    "overflow-x-auto py-4 mt-0! mb-0!",
-                    !hideTitleBar && "rounded-t-none",
-                    !hideBorder && "rounded-b-none",
-                    className
-                )}
-            >
-                {children}
-            </pre>
+              <div className="relative overflow-x-auto scrollbar-hide">
+                <pre
+                    {...props}
+                    ref={preRef}
+                    className={cn(
+                        "py-4 mt-0! mb-0!",
+                        "min-w-max",
+                        "overflow-visible",
+                        className
+                    )}
+                    style={style}
+                    >
+                    {children}
+                </pre>
+            </div>
         </div>
     )
 }

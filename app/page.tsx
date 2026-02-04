@@ -8,6 +8,7 @@ import { pages } from "#site/content";
 import { MDXContent } from "@/components/mdx-components";
 import { TechStack } from "@/components/tech-stack";
 import "@/styles/mdx.css"
+import "@/styles/twoslash.css"
 import { GALink } from "@/components/google-analytics-link";
 import { phCapture } from "@/lib/posthog";
 

@@ -5,6 +5,7 @@ import rehypePrettyCode from "rehype-pretty-code"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import { transformerNotationDiff, transformerNotationHighlight, transformerNotationFocus, transformerNotationErrorLevel } from "@shikijs/transformers"
 import type { Root, Element, ElementContent } from "hast"
+import { transformerTwoslash, rendererRich } from "@shikijs/twoslash"
 
 const computedFields = <T extends { slug: string }>(data: T) => ({
     ...data,
@@ -203,6 +204,10 @@ export default defineConfig({
                         block: "plaintext"
                     },
                     transformers: [
+                        transformerTwoslash({
+                            explicitTrigger: true,
+                            renderer: rendererRich(),
+                        }),
                         transformerNotationDiff({ matchAlgorithm: 'v3' }),
                         transformerNotationHighlight({ matchAlgorithm: 'v3' }),
                         transformerNotationFocus({ matchAlgorithm: 'v3' }),
