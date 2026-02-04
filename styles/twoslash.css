@@ -28,7 +28,7 @@
 
 @media (prefers-color-scheme: dark) {
   html:not(.light) {
-    --twoslash-popup-bg: #1f2937;        /* slate-800 */
+    --twoslash-popup-bg: #161a20;        /* slate-800 */
     --twoslash-popup-color: #e5e7eb;     /* slate-200 */
     --twoslash-border-color: #ffffff22;
     --twoslash-popup-shadow: rgba(0, 0, 0, 0.4) 0px 8px 24px;
@@ -39,7 +39,7 @@
 }
 
 html.dark {
-  --twoslash-popup-bg: #1f2937;
+  --twoslash-popup-bg: #161a20;
   --twoslash-popup-color: #e5e7eb;
   --twoslash-border-color: #ffffff22;
   --twoslash-popup-shadow: rgba(0, 0, 0, 0.4) 0px 8px 24px;
@@ -69,6 +69,7 @@ html.dark {
 
 .twoslash .twoslash-popup-container {
   position: absolute;
+  z-index: 20;
   opacity: 0;
   display: inline-flex;
   flex-direction: column;
@@ -78,11 +79,12 @@ html.dark {
   border: 1px solid var(--twoslash-border-color);
   transition: opacity 0.3s;
   border-radius: 4px;
+  box-shadow: var(--twoslash-popup-shadow);
   pointer-events: none;
   z-index: 10;
   user-select: none;
   text-align: left;
-  box-shadow: var(--twoslash-popup-shadow);
+  white-space: normal;
 }
 
 .twoslash .twoslash-query-persisted .twoslash-popup-container {
