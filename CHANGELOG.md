@@ -1,3 +1,22 @@
+## [1.16.0](https://github.com/armandwipangestu/velora/compare/v1.15.7...v1.16.0) (2026-02-04)
+
+### Features
+
+* add twoslash prototype ([747f12f](https://github.com/armandwipangestu/velora/commit/747f12f72e60d9a264fcebf33c0c1b9e2d0b6a07))
+
+### Bug Fixes
+
+* add import twoslash css ([588e0eb](https://github.com/armandwipangestu/velora/commit/588e0eb494770cf5174bfb3f32e9a987dfc8b7d4))
+* error hover variable typescript ([e304816](https://github.com/armandwipangestu/velora/commit/e304816266126e517677628fb477375223f50bf1))
+* hover and unhover popup container ([7909380](https://github.com/armandwipangestu/velora/commit/790938016535364d18645779c02052991f16e409))
+* make twoslash hover container inside the pre element ([fc0a3fb](https://github.com/armandwipangestu/velora/commit/fc0a3fb94d16f4f415c768291e8c998eeaaa7de1))
+* make twoslash hover container outside the pre element ([d6bb68f](https://github.com/armandwipangestu/velora/commit/d6bb68f64f46df231db8586e79a74bc165b183f0))
+* overflow content horizontal and vertical ([7de8959](https://github.com/armandwipangestu/velora/commit/7de895905af525703ab6f795d00917a9ca3e64b8))
+* persist twoslash query ^? ([ef502b3](https://github.com/armandwipangestu/velora/commit/ef502b34081fbd3d6408d33c94025cddd96e358b))
+* twoslash hover container popup ([a8e1d2a](https://github.com/armandwipangestu/velora/commit/a8e1d2a65480944283575c15ba9b032b7b763153))
+* twoslash popup container out of the pre code element ([b10e6de](https://github.com/armandwipangestu/velora/commit/b10e6dee688154dd25dd1890cc55e436465c1f6b))
+* wrap twoslash hover container ([e2118ca](https://github.com/armandwipangestu/velora/commit/e2118ca45c555286f2a768315ada5ae2ed92dcdd))
+
 ## [1.15.7](https://github.com/armandwipangestu/velora/compare/v1.15.6...v1.15.7) (2026-02-04)
 
 ## [1.15.6](https://github.com/armandwipangestu/velora/compare/v1.15.5...v1.15.6) (2026-02-04)
