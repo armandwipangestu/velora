@@ -8,38 +8,6 @@ tags:
 published: true
 ---
 
-## Example Twoslash
-
-```ts twoslash
-const foo = "hello"
-foo
-```
-
-### Docs / tutorial
-
-```ts twoslash
-const foo = "hello"
-//    ^?
-```
-
-### Error
-
-```ts twoslash
-// @errors: 2322
-const age: number = "dua puluh"
-```
-
-### Focus Some Symbol
-
-```ts twoslash
-function greet(name: string) {
-  return "Hello " + name
-}
-//         ^?
-```
-
-----
-
 # @shikijs/twoslash
 
 A Shiki transformer for [Twoslash](https://github.com/twoslashes/twoslash), provide inline type hover inside code blocks.
@@ -104,9 +72,10 @@ We provide two renderers built-in, and you can also create your own:
 
 [Source code](https://github.com/shikijs/shiki/blob/main/packages/twoslash/src/renderer-rich.ts)
 
-::: tip
-This is the default renderer since v0.10.0.
-:::
+
+<Callout type="tip">
+  This is the default renderer since v0.10.0.
+</Callout>
 
 This renderer provides a more explicit class name is prefixed with `twoslash-` for better scoping.
 In addition, it runs syntax highlighting on the hover information.

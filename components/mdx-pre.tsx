@@ -306,28 +306,6 @@ export function Pre({
     const [isCopied, setIsCopied] = useState(false)
     const preRef = useRef<HTMLPreElement>(null)
 
-    // Position popups correctly when using fixed positioning
-    const handlePopupPosition = () => {
-        const popups = preRef.current?.querySelectorAll('.twoslash-popup-container')
-        if (!popups) return
-
-        popups.forEach((popup) => {
-            const hover = popup.parentElement
-            if (!hover) return
-
-            const rect = hover.getBoundingClientRect()
-            const popupEl = popup as HTMLElement
-            
-            popupEl.style.left = `${rect.left}px`
-            popupEl.style.top = `${rect.bottom + 8}px`
-        })
-    }
-
-    // Recalculate positions on mount and when hovering
-    const handleMouseEnter = (e: React.MouseEvent) => {
-        setTimeout(handlePopupPosition, 0)
-    }
-
     // 1. Check props for data-title (passed from rehype)
     const dataTitle = (props as Record<string, unknown>)["data-title"] as string
     const dataFont = (props as Record<string, unknown>)["data-font"] as string
@@ -449,6 +427,7 @@ export function Pre({
             )}
             style={{
                 ...((fontValue) && { ["--mdx-font-family" as string]: `${fontValue}, monospace` }),
+                overflow: "visible",
             }}
         >
             {!hideTitleBar && (
@@ -489,17 +468,17 @@ export function Pre({
                     </button>
                 </div>
             )}
-            <div className="overflow-x-auto scrollbar-hide">
+            <div className="overflow-x-auto scrollbar-hide" style={{ overflow: "visible" }}>
                 <pre
                     {...props}
                     ref={preRef}
-                    onMouseEnter={handleMouseEnter}
                     style={{
                         ...style,
                         position: "relative",
+                        overflow: "visible",
                     }}
                     className={cn(
-                        "py-4 mt-0! mb-0! overflow-visible min-w-max",
+                        "py-4 mt-0! mb-0! min-w-max",
                         !hideTitleBar && "rounded-t-none",
                         !hideBorder && "rounded-b-none",
                         className
