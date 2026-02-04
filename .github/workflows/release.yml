@@ -109,7 +109,7 @@ jobs:
               run: bun install --frozen-lockfile
 
             - name: Setup Node.js 25 for Semantic Release
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@v6
               with:
                   node-version: "25"
 
