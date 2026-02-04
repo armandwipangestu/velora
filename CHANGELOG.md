@@ -1,3 +1,5 @@
+## [1.15.6](https://github.com/armandwipangestu/velora/compare/v1.15.5...v1.15.6) (2026-02-04)
+
 ## [1.15.5](https://github.com/armandwipangestu/velora/compare/v1.15.4...v1.15.5) (2026-02-04)
 
 ## [1.15.4](https://github.com/armandwipangestu/velora/compare/v1.15.3...v1.15.4) (2026-02-04)
