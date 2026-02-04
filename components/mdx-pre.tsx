@@ -421,7 +421,7 @@ export function Pre({
     return (
         <div
             className={cn(
-                "my-6 overflow-hidden",
+                "my-6 relative",
                 !hideBorder && "rounded-lg border bg-background"
             )}
             style={{
