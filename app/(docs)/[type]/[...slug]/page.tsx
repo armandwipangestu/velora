@@ -4,6 +4,7 @@ import { MDXContent } from "@/components/mdx-components";
 import { DocsPager } from "@/components/docs-pager";
 import { getPager } from "@/lib/docs";
 import "@/styles/mdx.css"
+import "@/styles/twoslash.css"
 
 interface DocPageProps {
     params: Promise<{
