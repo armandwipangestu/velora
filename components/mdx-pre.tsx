@@ -1,6 +1,8 @@
 "use client"
 
-import { Check, Copy, FileCode } from "lucide-react"
+import { Check, Copy, FileCode, WrapText } from "lucide-react"
+import { GrTextAlignLeft } from "react-icons/gr";
+import { LuWrapText } from "react-icons/lu";
 import { FaReact, FaCss3Alt, FaHtml5, FaMarkdown, FaFileCsv, FaJava, FaGolang, FaPython, FaDocker, FaRust, FaC, FaSwift, FaLaravel, FaDartLang, FaFlutter, FaNpm, FaYarn, FaNodeJs, FaVuejs, FaAngular, FaSass, FaGitAlt, FaGithub } from "react-icons/fa6"
 import { FaGitlab } from "react-icons/fa"
 import { RiJavascriptFill, RiPhpLine } from "react-icons/ri"
@@ -294,12 +296,14 @@ export function Pre({
     hideTitleBar: hideTitleBarProp = false,
     hideBorder: hideBorderProp = false,
     wrap: wrapProp = false,
+    wrapToggleButton: wrapToggleButtonProp = false,
     ...props
 }: React.HTMLAttributes<HTMLPreElement> & {
     title?: string;
     hideTitleBar?: boolean;
     hideBorder?: boolean;
     wrap?: boolean;
+    wrapToggleButton?: boolean;
 }) {
     // 1. Check props for data-title (passed from rehype)
     const dataTitle = (props as Record<string, unknown>)["data-title"] as string
@@ -309,13 +313,16 @@ export function Pre({
     const rawIcon = (props as Record<string, unknown>)["data-icon"] as string;
     const language = (props as Record<string, unknown>)["data-language"] as string || "text"
     const dataWrap = (props as Record<string, unknown>)["data-wrap"] as string
-    
+    const dataWrapToggleButton = (props as Record<string, unknown>)["data-wrap-toggle-button"] as string
+
     const { isInCodeGroup } = useCodeGroup()
     const hideTitleBar = hideTitleBarProp || isInCodeGroup
     const hideBorder = hideBorderProp || isInCodeGroup
     const wrap = wrapProp || dataWrap === "true"
+    const showWrapToggle = wrapToggleButtonProp || dataWrapToggleButton === "true"
 
     const [isCopied, setIsCopied] = useState(false)
+    const [isWrapped, setIsWrapped] = useState(wrap)
     const preRef = useRef<HTMLPreElement>(null)
 
 
@@ -423,6 +430,18 @@ export function Pre({
             console.error('Failed to copy text: ', err)
         }
     }
+
+    const onToggleWrap = () => {
+        setIsWrapped(!isWrapped)
+    }
+
+    // Icon changes based on wrap state
+    const WrapToggleIcon = isWrapped ? LuWrapText : GrTextAlignLeft;
+
+    // Tooltip & accessibility labels
+    const wrapToggleLabel = isWrapped
+    ? "Disable text wrapping"
+    : "Enable text wrapping";
 
     useEffect(() => {
         function reposition(e: MouseEvent) {
@@ -552,28 +571,45 @@ export function Pre({
                             <span className="truncate">{displayTitle}</span>
                         </div>
                     </div>
-                    <button
-                        onClick={onCopy}
-                        className={cn(
-                            "flex items-center gap-2 rounded-md p-1.5 text-xs font-medium transition-all cursor-pointer",
-                            isCopied
-                                ? "text-green-600 dark:text-green-400 bg-green-500/10 dark:bg-green-400/10"
-                                : "text-muted-foreground hover:bg-ring/40 hover:text-foreground"
+                    <div className="flex items-center gap-2">
+                        {showWrapToggle && (
+                            <button
+                                onClick={onToggleWrap}
+                                className={cn(
+                                "flex items-center gap-2 rounded-md p-1.5 text-xs font-medium transition-all cursor-pointer",
+                                isWrapped
+                                    ? "text-blue-600 dark:text-blue-400 bg-blue-500/10 dark:bg-blue-400/10"
+                                    : "text-muted-foreground hover:bg-ring/40 hover:text-foreground"
+                                )}
+                                aria-label={wrapToggleLabel}
+                                title={wrapToggleLabel}
+                            >
+                                <WrapToggleIcon className="size-3.5" />
+                            </button>
                         )}
-                        aria-label="Copy code"
-                    >
-                        {isCopied ? (
-                            <>
-                                <Check className="size-3.5" />
-                                <span>Copied!</span>
-                            </>
-                        ) : (
-                            <>
-                                <Copy className="size-3.5" />
-                                <span>Copy</span>
-                            </>
-                        )}
-                    </button>
+                        <button
+                            onClick={onCopy}
+                            className={cn(
+                                "flex items-center gap-2 rounded-md p-1.5 text-xs font-medium transition-all cursor-pointer",
+                                isCopied
+                                    ? "text-green-600 dark:text-green-400 bg-green-500/10 dark:bg-green-400/10"
+                                    : "text-muted-foreground hover:bg-ring/40 hover:text-foreground"
+                            )}
+                            aria-label="Copy code"
+                        >
+                            {isCopied ? (
+                                <>
+                                    <Check className="size-3.5" />
+                                    <span>Copied!</span>
+                                </>
+                            ) : (
+                                <>
+                                    <Copy className="size-3.5" />
+                                    <span>Copy</span>
+                                </>
+                            )}
+                        </button>
+                    </div>
                 </div>
             )}
             <div className="relative overflow-x-auto rounded-b-[calc(var(--radius,0.5rem)-1px)]">
@@ -582,9 +618,9 @@ export function Pre({
                     ref={preRef}
                     className={cn(
                         "py-4 mt-0! mb-0!",
-                        !wrap && "min-w-max",
+                        !isWrapped && "min-w-max",
                         "overflow-visible",
-                        wrap && "whitespace-pre-wrap break-words",
+                        isWrapped && "whitespace-pre-wrap break-words",
                         className
                     )}
                     style={style}

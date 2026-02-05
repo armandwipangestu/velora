@@ -153,6 +153,17 @@ const rehypePreMeta = () => (tree: Root) => {
             }
         }
 
+        // 10. Extract Wrap Toggle Button preference
+        const wrapToggleMatch = meta.match(/wrapToggleButton=(true|false)/)
+        if (wrapToggleMatch) {
+            node.properties["data-wrap-toggle-button"] = wrapToggleMatch[1]
+        } else {
+            // Check if 'wrapToggleButton' is mentioned without a value (treat as true)
+            if (meta.includes("wrapToggleButton")) {
+                node.properties["data-wrap-toggle-button"] = "true"
+            }
+        }
+
         // If parent is a figure (from rehype-pretty-code), copy properties to it
         // This allows the CodeGroup component to see the properties on its direct children
         if (parent && parent.type === "element" && parent.tagName === "figure") {
