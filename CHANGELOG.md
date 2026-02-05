@@ -1,3 +1,15 @@
+## [1.17.5](https://github.com/armandwipangestu/velora/compare/v1.17.4...v1.17.5) (2026-02-05)
+
+### 🐛 Bug Fixes
+
+* add release notes generator preset config ([36d2415](https://github.com/armandwipangestu/velora/commit/36d2415e0e86f37724ca9712d5d57f144f3ae591))
+
+### 🧹 Chores
+
+* **release:** 1.12.0-rc.2 [skip ci] ([c59cf8d](https://github.com/armandwipangestu/velora/commit/c59cf8dc714ff8f95acbbe3826fcdcd3548b5ae5))
+* **release:** 1.17.0-rc.1 [skip ci] ([0b4ade4](https://github.com/armandwipangestu/velora/commit/0b4ade49665907e37ce41336d2b728ec92a5cac7))
+* **release:** 1.17.5-rc.1 [skip ci] ([93539df](https://github.com/armandwipangestu/velora/commit/93539dfe22b40a255dc138bc157033dd0706f2fb))
+
 ## [1.17.5-rc.1](https://github.com/armandwipangestu/velora/compare/v1.17.4...v1.17.5-rc.1) (2026-02-05)
 
 ### 🐛 Bug Fixes
