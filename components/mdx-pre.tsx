@@ -325,6 +325,18 @@ export function Pre({
     const [isWrapped, setIsWrapped] = useState(wrap)
     const preRef = useRef<HTMLPreElement>(null)
 
+    // Update isWrapped when wrap prop changes (from code group)
+    useEffect(() => {
+        setIsWrapped(wrap)
+    }, [wrap])
+
+    // Also check if we're in a code group and use its wrap state
+    const { isWrapped: codeGroupWrapped } = useCodeGroup()
+    useEffect(() => {
+        if (isInCodeGroup && codeGroupWrapped !== undefined) {
+            setIsWrapped(codeGroupWrapped)
+        }
+    }, [codeGroupWrapped, isInCodeGroup])
 
     // Helper to resolve aliases (e.g., "iNpm" -> "npm")
     const resolveKey = (key: string) => languageAliases[key] || key;
