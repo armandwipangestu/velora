@@ -527,15 +527,14 @@ export function Pre({
         <div
             className={cn(
                 "my-6 relative",
-                !hideBorder && "rounded-lg border bg-background"
+                !hideBorder && "rounded-lg border bg-background overflow-hidden"
             )}
             style={{
                 ...((fontValue) && { ["--mdx-font-family" as string]: `${fontValue}, monospace` }),
-                overflow: "visible",
             }}
         >
             {!hideTitleBar && (
-                <div className="flex items-center justify-between border-b bg-[#f6f8fa] dark:bg-[#161a20] px-4 py-2.5">
+                <div className="flex items-center justify-between border-b bg-[#f6f8fa] dark:bg-[#161a20] px-4 py-2.5 rounded-t-[calc(var(--radius,0.5rem)-1px)]">
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-1.5">
                             <div className="size-3 rounded-full bg-red-400/60 border border-red-500/80" />
@@ -572,7 +571,7 @@ export function Pre({
                     </button>
                 </div>
             )}
-              <div className="relative overflow-x-auto">
+            <div className="relative overflow-x-auto rounded-b-[calc(var(--radius,0.5rem)-1px)]">
                 <pre
                     {...props}
                     ref={preRef}
