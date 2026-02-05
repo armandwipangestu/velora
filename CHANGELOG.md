@@ -1,26 +1,49 @@
-## [1.17.4](https://github.com/armandwipangestu/velora/compare/v1.17.3...v1.17.4) (2026-02-05)
+## [1.17.5-rc.1](https://github.com/armandwipangestu/velora/compare/v1.17.4...v1.17.5-rc.1) (2026-02-05)
 
-## [1.17.3](https://github.com/armandwipangestu/velora/compare/v1.17.2...v1.17.3) (2026-02-05)
+### 🐛 Bug Fixes
 
-## [1.17.2](https://github.com/armandwipangestu/velora/compare/v1.17.1...v1.17.2) (2026-02-05)
+* add release notes generator preset config ([36d2415](https://github.com/armandwipangestu/velora/commit/36d2415e0e86f37724ca9712d5d57f144f3ae591))
 
-## [1.17.1](https://github.com/armandwipangestu/velora/compare/v1.17.0...v1.17.1) (2026-02-05)
+### 🧹 Chores
 
-## [1.17.0](https://github.com/armandwipangestu/velora/compare/v1.16.0...v1.17.0) (2026-02-05)
+* **release:** 1.12.0-rc.2 [skip ci] ([c59cf8d](https://github.com/armandwipangestu/velora/commit/c59cf8dc714ff8f95acbbe3826fcdcd3548b5ae5))
+* **release:** 1.17.0-rc.1 [skip ci] ([0b4ade4](https://github.com/armandwipangestu/velora/commit/0b4ade49665907e37ce41336d2b728ec92a5cac7))
 
-### Features
+## [1.17.0-rc.1](https://github.com/armandwipangestu/velora/compare/v1.16.0...v1.17.0-rc.1) (2026-02-05)
+
+### ✨ Features
 
 * **components:** add maxl lines code block (clamp, expand, collapse) ([0f70216](https://github.com/armandwipangestu/velora/commit/0f702168571ccd5c74ac85c3afeb71b0a0034d46))
 * **components:** add wrap code block feature ([7c65388](https://github.com/armandwipangestu/velora/commit/7c6538822d472c7425d23f6c9b421b7c2d39089a))
 * **components:** add wrap toggle button ([16be12e](https://github.com/armandwipangestu/velora/commit/16be12e74898aba44b25d59944efd6608ad42529))
 * **components:** add wrap toggle button on code group ([119653d](https://github.com/armandwipangestu/velora/commit/119653d4d0e918ce8dc5c8d117e8ceb571941a8c))
 
-### Bug Fixes
+### 🐛 Bug Fixes
 
+* add release notes generator preset config ([36d2415](https://github.com/armandwipangestu/velora/commit/36d2415e0e86f37724ca9712d5d57f144f3ae591))
 * collapse code block can't scroll content ([753479b](https://github.com/armandwipangestu/velora/commit/753479b5ccf84c8679e9bcd9b86d0603be85a1ed))
 * remove scroll hide ([d631d90](https://github.com/armandwipangestu/velora/commit/d631d90b6c5d8c8f18b29e68527581315f8adb4d))
 * rounded top and bottom code block ([b7e4880](https://github.com/armandwipangestu/velora/commit/b7e48800fdff54d529e5edac28e8b1a604d63fcd))
 * twoslash popup docs hover ([b042a86](https://github.com/armandwipangestu/velora/commit/b042a8670d8dd03b8b8d761dee11d091e26fc796))
+
+### 🧹 Chores
+
+* add wrapToggleButton to landing page code block ([6f1222f](https://github.com/armandwipangestu/velora/commit/6f1222fa1b0b520bcd7e8c2c1cb5514cf0b61cbb))
+* **docs:** add caption usage in code block ([229ffcc](https://github.com/armandwipangestu/velora/commit/229ffcc1cb47794135958eee28f340b218568b1a))
+* **docs:** add velite folder to contributing folder ([384f427](https://github.com/armandwipangestu/velora/commit/384f4277276d0d6d424a63d4609b5543f67af667))
+* **docs:** add wrap toggle button ([3127ac6](https://github.com/armandwipangestu/velora/commit/3127ac6d75b15c17674c19d5e396b8ef4f7fc2a6))
+* **docs:** remove wrap in code group ([b215321](https://github.com/armandwipangestu/velora/commit/b215321ae682307915ca8de9cf89f70e11dddee9))
+* **docs:** update basic usage link ([4927b12](https://github.com/armandwipangestu/velora/commit/4927b12d775521ded468c923fd5e062b347a6afa))
+* **docs:** update roadmap ([1ebff36](https://github.com/armandwipangestu/velora/commit/1ebff366ac2537d3e0ba12cb23f7d48e0b832dd1))
+* **docs:** update wrap in code group ([af8d5ee](https://github.com/armandwipangestu/velora/commit/af8d5eeb85aa73599c8917265ac4897de5ed7396))
+* **release:** 1.12.0-rc.2 [skip ci] ([c59cf8d](https://github.com/armandwipangestu/velora/commit/c59cf8dc714ff8f95acbbe3826fcdcd3548b5ae5))
+* update callout warning description ([501e81e](https://github.com/armandwipangestu/velora/commit/501e81e38b5def04311fed5a2e52e2ebd0c09c77))
+* update labeler.yml ([0029226](https://github.com/armandwipangestu/velora/commit/00292264e1b5aa3d1a6b75d11e6acbde68613ee8))
+
+### ♻️ Refactor
+
+* **components:** change ui expand and collapse button ([7c21a53](https://github.com/armandwipangestu/velora/commit/7c21a531ca89b97f26440f77c736467c6f3f8221))
+* move velite.config.ts to seperate files in velite folder ([7b25b16](https://github.com/armandwipangestu/velora/commit/7b25b164068590a90b1817c9154e2ce3d9171862))
 
 ## [1.16.0](https://github.com/armandwipangestu/velora/compare/v1.15.7...v1.16.0) (2026-02-04)
 
