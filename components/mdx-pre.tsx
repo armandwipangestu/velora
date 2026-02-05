@@ -651,6 +651,7 @@ export function Pre({
             )}
             <div className={cn(
                 "relative overflow-x-auto",
+                maxLines && !isExpanded && "overflow-y-hidden",
                 !maxLines || !expandable ? "rounded-b-[calc(var(--radius,0.5rem)-1px)]" : ""
             )}>
                 <pre
@@ -660,14 +661,15 @@ export function Pre({
                         "py-4 mt-0! mb-0!",
                         !isWrapped && "min-w-max",
                         isWrapped && "whitespace-pre-wrap break-words",
-                        maxLines && !isExpanded && "overflow-hidden",
+                        maxLines && !isExpanded ? "overflow-hidden select-none" : "",
                         className
                     )}
                     style={{
                         ...style,
                         ...(maxLines && !isExpanded && {
                             maxHeight: maxHeightValue,
-                            overflow: "hidden"
+                            overflow: "hidden",
+                            touchAction: "none"
                         })
                     }}
                     >
@@ -696,7 +698,7 @@ export function Pre({
                                 : "py-3 bg-background/50 backdrop-blur-sm border-t border-border/20"
                         )}
                     >
-                        <div className="flex items-center gap-2 bg-background/80 dark:bg-muted/20 px-3 py-1.5 rounded-full border border-border/40 backdrop-blur-md">
+                        <div className="flex items-center gap-2 bg-background/80 dark:bg-muted/20 px-3 py-1.5 rounded-full border border-border/80 backdrop-blur-md">
                             <ChevronDown
                                 className={cn(
                                     "size-3.5 transition-transform duration-300",
