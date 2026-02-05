@@ -461,11 +461,12 @@ export function Pre({
             if (!activePopup) return;
 
             hideTimeout = window.setTimeout(() => {
-            if (activePopup) {
-                activePopup.style.opacity = "0";
-                activePopup.style.pointerEvents = "none";
-                activePopup = null;
-            }}, 120);
+                if (activePopup) {
+                    activePopup.style.opacity = "0";
+                    activePopup.style.pointerEvents = "none";
+                    activePopup = null;
+                }
+            }, 120);
         }
 
         function cancelHide() {
@@ -475,22 +476,40 @@ export function Pre({
             }
         }
 
-        function onPointerEnter(e: Event) {
-            const el = (e.target as Element | null)?.closest(".twoslash-hover");
+        function onPointerEnter(e: PointerEvent) {
+            const el = (e.target as Element | null)?.closest(
+                ".twoslash-hover, .twoslash-popup-container"
+            );
+
             if (!(el instanceof HTMLElement)) return;
 
             cancelHide();
-            showPopup(el);
+
+            if (el.classList.contains("twoslash-hover")) {
+                showPopup(el);
+            }
         }
 
-        function onPointerLeave(e: Event) {
-            const hover = (e.target as Element | null)?.closest(".twoslash-hover");
-            const popup = (e.target as Element | null)?.closest(".twoslash-popup-container");
+        function onPointerLeave(e: PointerEvent) {
+            const from = e.target as Element | null;
+            const to = e.relatedTarget as Element | null;
 
-            if (
-                (hover && hover instanceof HTMLElement) ||
-                (popup && popup instanceof HTMLElement)
-            ) {
+            if (!from || !to) {
+                hidePopupDelayed();
+                return;
+            }
+
+            const leavingHover = from.closest(".twoslash-hover");
+            const enteringHover = to.closest(".twoslash-hover");
+
+            const leavingPopup = from.closest(".twoslash-popup-container");
+            const enteringPopup = to.closest(".twoslash-popup-container");
+
+            if (enteringHover || enteringPopup) {
+                return;
+            }
+
+            if (leavingHover || leavingPopup) {
                 hidePopupDelayed();
             }
         }
