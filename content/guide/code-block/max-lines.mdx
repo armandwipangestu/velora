@@ -1,0 +1,382 @@
+---
+title: Max Lines
+description: Limit the visible lines of a code block with optional expand and collapse behavior
+category: Custom Components
+categoryOrder: 2
+order: 16
+---
+
+# Code Block Max Lines
+
+The **max lines** feature allows you to limit how many lines of a code block are visible by default.
+
+This is especially useful when:
+- Code examples are long but only the beginning is relevant
+- You want cleaner, more scannable documentation
+- Readers should decide whether to expand the full code
+
+By default, limiting lines **does not enable expansion** unless explicitly configured.
+
+---
+
+## Basic Usage (`maxLines`)
+
+Use `maxLines` to limit how many lines are displayed.
+
+````mdx
+```tsx maxLines=6
+export function Example() {
+  return (
+    <div className="flex flex-col gap-4 rounded-lg border border-border bg-background p-6 shadow-sm">
+      <h2 className="text-lg font-semibold">Title</h2>
+      <p className="text-sm text-muted-foreground">
+        This component contains more content than is initially visible.
+      </p>
+      <p>Additional content that will be visually clipped.</p>
+      <p>More lines...</p>
+      <p>More lines...</p>
+      <p>More lines...</p>
+      <p>More lines...</p>
+    </div>
+  )
+}
+```
+````
+
+```tsx maxLines=6
+export function Example() {
+  return (
+    <div className="flex flex-col gap-4 rounded-lg border border-border bg-background p-6 shadow-sm">
+      <h2 className="text-lg font-semibold">Title</h2>
+      <p className="text-sm text-muted-foreground">
+        This component contains more content than is initially visible.
+      </p>
+      <p>Additional content that will be visually clipped.</p>
+      <p>More lines...</p>
+      <p>More lines...</p>
+      <p>More lines...</p>
+      <p>More lines...</p>
+    </div>
+  )
+}
+```
+
+**Behavior:**
+- Only the first `maxLines` lines are visible
+- Remaining lines are hidden
+- No expand or collapse button is shown
+
+---
+
+## Enable Expansion (`expandable`)
+
+To allow users to view the full code, add the `expandable` flag.
+
+````mdx
+```tsx maxLines=6 expandable
+export function Example() {
+  return (
+    <div className="flex flex-col gap-4 rounded-lg border border-border bg-background p-6 shadow-sm">
+      <h2 className="text-lg font-semibold">Expandable Example</h2>
+      <p className="text-sm text-muted-foreground">
+        This code block can be expanded by the reader.
+      </p>
+      <p>Hidden line 1</p>
+      <p>Hidden line 2</p>
+      <p>Hidden line 3</p>
+      <p>Hidden line 4</p>
+      <p>Hidden line 5</p>
+    </div>
+  )
+}
+```
+````
+
+```tsx maxLines=6 expandable
+export function Example() {
+  return (
+    <div className="flex flex-col gap-4 rounded-lg border border-border bg-background p-6 shadow-sm">
+      <h2 className="text-lg font-semibold">Expandable Example</h2>
+      <p className="text-sm text-muted-foreground">
+        This code block can be expanded by the reader.
+      </p>
+      <p>Hidden line 1</p>
+      <p>Hidden line 2</p>
+      <p>Hidden line 3</p>
+      <p>Hidden line 4</p>
+      <p>Hidden line 5</p>
+    </div>
+  )
+}
+```
+
+**Behavior:**
+
+* Code is initially clamped to `maxLines`
+* An **Expand code** button is shown
+* Users can toggle between collapsed and expanded states
+
+---
+
+## Custom Labels
+
+You can customize the expand and collapse button labels.
+
+````mdx
+```tsx maxLines=5 expandable expandLabel="Show more code" collapseLabel="Hide code"
+export function Layout() {
+  return (
+    <div className="grid grid-cols-[minmax(120px,1fr)_minmax(240px,2fr)_auto] gap-4">
+      <span>ID</span>
+      <span>Description</span>
+      <span>Status</span>
+      <span>1</span>
+      <span>Very long description that exceeds the initial line limit</span>
+      <span>Active</span>
+    </div>
+  )
+}
+```
+````
+
+```tsx maxLines=5 expandable expandLabel="Show more code" collapseLabel="Hide code"
+export function Layout() {
+  return (
+    <div className="grid grid-cols-[minmax(120px,1fr)_minmax(240px,2fr)_auto] gap-4">
+      <span>ID</span>
+      <span>Description</span>
+      <span>Status</span>
+      <span>1</span>
+      <span>Very long description that exceeds the initial line limit</span>
+      <span>Active</span>
+    </div>
+  )
+}
+```
+
+---
+
+## Max Lines in Code Group
+
+Max lines and expansion also work inside **code groups**.
+Each tab manages its own expand/collapse state independently.
+
+````mdx
+::: code-group
+
+```tsx maxLines=5 expandable
+export function Card({ title }: { title: string }) {
+  return (
+    <article className="flex flex-col gap-2 rounded-lg border border-border bg-background p-4">
+      <h3 className="text-lg font-semibold">{title}</h3>
+      <p>Line 1</p>
+      <p>Line 2</p>
+      <p>Line 3</p>
+      <p>Line 4</p>
+      <p>Line 5</p>
+      <p>Line 6</p>
+    </article>
+  )
+}
+```
+
+```ts maxLines=5 expandable
+export function createCard(title: string): HTMLDivElement {
+  const el = document.createElement("article")
+  el.className = "flex flex-col gap-2 rounded-lg border border-border bg-background p-4"
+  el.textContent = title
+  return el
+}
+```
+
+:::
+````
+
+::: code-group
+
+```tsx maxLines=5 expandable
+export function Card({ title }: { title: string }) {
+  return (
+    <article className="flex flex-col gap-2 rounded-lg border border-border bg-background p-4">
+      <h3 className="text-lg font-semibold">{title}</h3>
+      <p>Line 1</p>
+      <p>Line 2</p>
+      <p>Line 3</p>
+      <p>Line 4</p>
+      <p>Line 5</p>
+      <p>Line 6</p>
+    </article>
+  )
+}
+```
+
+```ts maxLines=5 expandable
+export function createCard(title: string): HTMLDivElement {
+  const el = document.createElement("article")
+  el.className = "flex flex-col gap-2 rounded-lg border border-border bg-background p-4"
+  el.textContent = title
+  return el
+}
+```
+
+:::
+
+---
+
+## Max Lines with Wrap
+
+Max lines can be combined with **code wrapping** to improve readability when dealing with **very long lines**.
+
+This combination is especially useful when:
+- Code contains long strings or utility-heavy class names
+- Horizontal scrolling would hurt readability
+- You still want to limit vertical space
+
+When used together:
+- `maxLines` controls **how many lines are visible**
+- `wrap` controls **how each line is rendered**
+
+---
+
+### Max Lines + Wrap
+
+Add both `maxLines` and `wrap` to the code block.
+
+````mdx
+```tsx maxLines=6 wrap
+export function Button() {
+  return (
+    <button className="inline-flex items-center justify-center rounded-md bg-emerald-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+      Click me
+    </button>
+  )
+}
+```
+````
+
+```tsx maxLines=6 wrap
+export function Button() {
+  return (
+    <button className="inline-flex items-center justify-center rounded-md bg-emerald-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+      Click me
+    </button>
+  )
+}
+```
+
+**Behavior:**
+- Lines wrap naturally instead of scrolling horizontally
+- Only the first `maxLines` lines are visible
+- Content beyond the limit is visually clipped
+
+---
+
+### Max Lines + Wrap + Expandable
+
+To allow users to view the full wrapped code, add `expandable`.
+
+````mdx
+```tsx maxLines=6 wrap expandable
+export function Alert({ message }: { message: string }) {
+  return (
+    <div className="flex w-full items-center gap-3 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+      {message}
+    </div>
+  )
+}
+```
+````
+
+```tsx maxLines=6 wrap expandable
+export function Alert({ message }: { message: string }) {
+  return (
+    <div className="flex w-full items-center gap-3 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+      {message}
+    </div>
+  )
+}
+```
+
+**Behavior:**
+
+* Code is wrapped to avoid horizontal overflow
+* Initial view is limited to `maxLines`
+* An **Expand code** button allows toggling the full content
+
+---
+
+### Wrap Toggle with Max Lines
+
+You can also combine **wrap toggle**, **max lines**, and **expandable** for full user control.
+
+````mdx
+```tsx maxLines=6 wrap wrapToggleButton expandable
+export function Profile({ name, bio }: { name: string; bio: string }) {
+  return (
+    <section className="flex flex-col gap-4 rounded-lg border border-border bg-background p-6">
+      <h2 className="text-xl font-semibold">{name}</h2>
+      <p className="text-sm leading-relaxed text-muted-foreground">{bio}</p>
+    </section>
+  )
+}
+```
+````
+
+```tsx maxLines=6 wrap wrapToggleButton expandable
+export function Profile({ name, bio }: { name: string; bio: string }) {
+  return (
+    <section className="flex flex-col gap-4 rounded-lg border border-border bg-background p-6">
+      <h2 className="text-xl font-semibold">{name}</h2>
+      <p className="text-sm leading-relaxed text-muted-foreground">{bio}</p>
+    </section>
+  )
+}
+```
+
+**Behavior:**
+
+* Users can toggle line wrapping on demand
+* Vertical space is limited by `maxLines`
+* Full content can be expanded or collapsed
+
+---
+
+### Notes on Combining Wrap and Max Lines
+
+* Wrapping affects **horizontal layout**, max lines affect **vertical layout**
+* Wrapping does not change how lines are counted for `maxLines`
+* Expand/collapse does not reset wrap state
+* All features work consistently inside code groups
+
+---
+
+Using wrap together with max lines gives readers fine-grained control over both **width** and **height**, making long code snippets easier to scan without sacrificing access to the full implementation.
+
+---
+
+## When to Use Max Lines
+
+Use max lines when:
+
+* Code examples are long but only partially relevant
+* You want to improve readability and reduce visual noise
+* Readers should opt in to viewing full code
+
+Avoid max lines when:
+
+* Every line is important to understand the example
+* Code alignment or full context is critical
+* The snippet is already short
+
+---
+
+## Notes
+
+* Max lines affect **visual rendering only**
+* Full code is preserved and copied when using the copy button
+* Expansion state does not affect other code blocks
+* Max lines work alongside wrap, wrap toggle, captions, and code groups
+
+---
+
+Max lines help keep documentation focused and readable—while still giving readers access to the full implementation when they need it.

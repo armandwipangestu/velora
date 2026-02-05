@@ -164,6 +164,39 @@ const rehypePreMeta = () => (tree: Root) => {
             }
         }
 
+        // 11. Extract Max Lines preference
+        const maxLinesMatch = meta.match(/maxLines=(\d+)/)
+        if (maxLinesMatch) {
+            node.properties["data-max-lines"] = maxLinesMatch[1]
+        }
+
+        // 12. Extract Expandable preference
+        const expandableMatch = meta.match(/expandable=(true|false)/)
+        if (expandableMatch) {
+            node.properties["data-expandable"] = expandableMatch[1]
+        } else {
+            // Check if 'expandable' is mentioned without a value (treat as true)
+            if (meta.includes("expandable")) {
+                node.properties["data-expandable"] = "true"
+            }
+        }
+
+        // 13. Extract Expand Label
+        const expandLabelMatch = meta.match(/expandLabel="([^"]*)"/)
+        if (expandLabelMatch) {
+            node.properties["data-expand-label"] = expandLabelMatch[1]
+        } else {
+            node.properties["data-expand-label"] = "Expand code"
+        }
+
+        // 14. Extract Collapse Label
+        const collapseLabelMatch = meta.match(/collapseLabel="([^"]*)"/)
+        if (collapseLabelMatch) {
+            node.properties["data-collapse-label"] = collapseLabelMatch[1]
+        } else {
+            node.properties["data-collapse-label"] = "Collapse"
+        }
+
         // If parent is a figure (from rehype-pretty-code), copy properties to it
         // This allows the CodeGroup component to see the properties on its direct children
         if (parent && parent.type === "element" && parent.tagName === "figure") {

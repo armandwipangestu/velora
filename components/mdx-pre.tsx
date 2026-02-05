@@ -1,6 +1,6 @@
 "use client"
 
-import { Check, Copy, FileCode, WrapText } from "lucide-react"
+import { Check, Copy, FileCode, WrapText, ChevronDown } from "lucide-react"
 import { GrTextAlignLeft } from "react-icons/gr";
 import { LuWrapText } from "react-icons/lu";
 import { FaReact, FaCss3Alt, FaHtml5, FaMarkdown, FaFileCsv, FaJava, FaGolang, FaPython, FaDocker, FaRust, FaC, FaSwift, FaLaravel, FaDartLang, FaFlutter, FaNpm, FaYarn, FaNodeJs, FaVuejs, FaAngular, FaSass, FaGitAlt, FaGithub } from "react-icons/fa6"
@@ -292,11 +292,15 @@ import { phCapture } from "@/lib/posthog"
 export function Pre({
     children,
     className,
-    title, // This comes from MDX props if passed like <Pre title="foo" />
+    title,
     hideTitleBar: hideTitleBarProp = false,
     hideBorder: hideBorderProp = false,
     wrap: wrapProp = false,
     wrapToggleButton: wrapToggleButtonProp = false,
+    maxLines: maxLinesProp,
+    expandable: expandableProp = false,
+    expandLabel: expandLabelProp,
+    collapseLabel: collapseLabelProp,
     ...props
 }: React.HTMLAttributes<HTMLPreElement> & {
     title?: string;
@@ -304,6 +308,10 @@ export function Pre({
     hideBorder?: boolean;
     wrap?: boolean;
     wrapToggleButton?: boolean;
+    maxLines?: number;
+    expandable?: boolean;
+    expandLabel?: string;
+    collapseLabel?: string;
 }) {
     // 1. Check props for data-title (passed from rehype)
     const dataTitle = (props as Record<string, unknown>)["data-title"] as string
@@ -314,15 +322,24 @@ export function Pre({
     const language = (props as Record<string, unknown>)["data-language"] as string || "text"
     const dataWrap = (props as Record<string, unknown>)["data-wrap"] as string
     const dataWrapToggleButton = (props as Record<string, unknown>)["data-wrap-toggle-button"] as string
+    const dataMaxLines = (props as Record<string, unknown>)["data-max-lines"] as string
+    const dataExpandable = (props as Record<string, unknown>)["data-expandable"] as string
+    const dataExpandLabel = (props as Record<string, unknown>)["data-expand-label"] as string
+    const dataCollapseLabel = (props as Record<string, unknown>)["data-collapse-label"] as string
 
     const { isInCodeGroup } = useCodeGroup()
     const hideTitleBar = hideTitleBarProp || isInCodeGroup
     const hideBorder = hideBorderProp || isInCodeGroup
     const wrap = wrapProp || dataWrap === "true"
     const showWrapToggle = wrapToggleButtonProp || dataWrapToggleButton === "true"
+    const maxLines = maxLinesProp || (dataMaxLines ? parseInt(dataMaxLines, 10) : undefined)
+    const expandable = expandableProp || dataExpandable === "true"
+    const expandLabel = expandLabelProp ?? dataExpandLabel ?? "Expand code"
+    const collapseLabel = collapseLabelProp ?? dataCollapseLabel ?? "Collapse"
 
     const [isCopied, setIsCopied] = useState(false)
     const [isWrapped, setIsWrapped] = useState(wrap)
+    const [isExpanded, setIsExpanded] = useState(false)
     const preRef = useRef<HTMLPreElement>(null)
 
     // Update isWrapped when wrap prop changes (from code group)
@@ -454,6 +471,14 @@ export function Pre({
     const wrapToggleLabel = isWrapped
     ? "Disable text wrapping"
     : "Enable text wrapping";
+
+    const onToggleExpand = () => {
+        setIsExpanded(!isExpanded)
+    }
+
+    // Calculate max height for clamping - using line-height of 1.5
+    // Each line is approximately 1.5em, so we add padding (py-4 = 1rem top + 1rem bottom)
+    const maxHeightValue = maxLines ? `calc(${maxLines} * 1.5em + 2rem)` : undefined
 
     useEffect(() => {
         function reposition(e: MouseEvent) {
@@ -624,22 +649,56 @@ export function Pre({
                     </div>
                 </div>
             )}
-            <div className="relative overflow-x-auto rounded-b-[calc(var(--radius,0.5rem)-1px)]">
+            <div className={cn(
+                "relative overflow-x-auto",
+                !maxLines || !expandable ? "rounded-b-[calc(var(--radius,0.5rem)-1px)]" : ""
+            )}>
                 <pre
                     {...props}
                     ref={preRef}
                     className={cn(
                         "py-4 mt-0! mb-0!",
                         !isWrapped && "min-w-max",
-                        "overflow-visible",
                         isWrapped && "whitespace-pre-wrap break-words",
+                        maxLines && !isExpanded && "overflow-hidden",
                         className
                     )}
-                    style={style}
+                    style={{
+                        ...style,
+                        ...(maxLines && !isExpanded && {
+                            maxHeight: maxHeightValue,
+                            overflow: "hidden"
+                        })
+                    }}
                     >
                     {children}
                 </pre>
             </div>
+            {maxLines && expandable && (
+                <div className="relative border-t border-border/50 bg-background/50 rounded-b-[calc(var(--radius,0.5rem)-1px)]">
+                    {!isExpanded && (
+                        <div className="absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-background to-transparent pointer-events-none" />
+                    )}
+                    <button
+                        onClick={onToggleExpand}
+                        className={cn(
+                            "w-full py-2 px-4 text-xs font-medium transition-all cursor-pointer",
+                            "text-muted-foreground hover:text-foreground",
+                            "hover:bg-background/80 backdrop-blur-sm"
+                        )}
+                    >
+                        <div className="flex items-center justify-center gap-2">
+                            <ChevronDown
+                                className={cn(
+                                    "size-4 transition-transform",
+                                    isExpanded && "rotate-180"
+                                )}
+                            />
+                            <span>{isExpanded ? collapseLabel : expandLabel}</span>
+                        </div>
+                    </button>
+                </div>
+            )}
         </div>
     )
 }
