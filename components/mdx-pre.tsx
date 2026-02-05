@@ -675,22 +675,31 @@ export function Pre({
                 </pre>
             </div>
             {maxLines && expandable && (
-                <div className="relative border-t border-border/50 bg-background/50 rounded-b-[calc(var(--radius,0.5rem)-1px)]">
+                <div className={cn(
+                    "relative",
+                    !isExpanded ? "absolute bottom-0 inset-x-0 h-28 flex flex-col justify-end" : "border-t border-border/40"
+                )}>
                     {!isExpanded && (
-                        <div className="absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-background to-transparent pointer-events-none" />
+                        <div 
+                            className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent pointer-events-none" 
+                            aria-hidden="true"
+                        />
                     )}
+
                     <button
                         onClick={onToggleExpand}
                         className={cn(
-                            "w-full py-2 px-4 text-xs font-medium transition-all cursor-pointer",
-                            "text-muted-foreground hover:text-foreground",
-                            "hover:bg-background/80 backdrop-blur-sm"
+                            "relative z-10 w-full px-4 text-xs font-medium transition-all duration-200 cursor-pointer",
+                            "flex items-center justify-center gap-2 text-muted-foreground hover:text-foreground",
+                            !isExpanded 
+                                ? "pb-4 pt-10 bg-none" 
+                                : "py-3 bg-background/50 backdrop-blur-sm border-t border-border/20"
                         )}
                     >
-                        <div className="flex items-center justify-center gap-2">
+                        <div className="flex items-center gap-2 bg-background/80 dark:bg-muted/20 px-3 py-1.5 rounded-full border border-border/40 backdrop-blur-md">
                             <ChevronDown
                                 className={cn(
-                                    "size-4 transition-transform",
+                                    "size-3.5 transition-transform duration-300",
                                     isExpanded && "rotate-180"
                                 )}
                             />
