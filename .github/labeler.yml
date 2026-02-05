@@ -38,6 +38,7 @@ config:
   - any:
       - changed-files:
           - any-glob-to-any-file:
+              - "velite/**/*"
               - "*.config.*"
               - tsconfig.json
               - components.json
