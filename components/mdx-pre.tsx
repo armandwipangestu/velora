@@ -1,6 +1,8 @@
 "use client"
 
-import { Check, Copy, FileCode } from "lucide-react"
+import { Check, Copy, FileCode, WrapText, ChevronDown } from "lucide-react"
+import { GrTextAlignLeft } from "react-icons/gr";
+import { LuWrapText } from "react-icons/lu";
 import { FaReact, FaCss3Alt, FaHtml5, FaMarkdown, FaFileCsv, FaJava, FaGolang, FaPython, FaDocker, FaRust, FaC, FaSwift, FaLaravel, FaDartLang, FaFlutter, FaNpm, FaYarn, FaNodeJs, FaVuejs, FaAngular, FaSass, FaGitAlt, FaGithub } from "react-icons/fa6"
 import { FaGitlab } from "react-icons/fa"
 import { RiJavascriptFill, RiPhpLine } from "react-icons/ri"
@@ -290,22 +292,27 @@ import { phCapture } from "@/lib/posthog"
 export function Pre({
     children,
     className,
-    title, // This comes from MDX props if passed like <Pre title="foo" />
+    title,
     hideTitleBar: hideTitleBarProp = false,
     hideBorder: hideBorderProp = false,
+    wrap: wrapProp = false,
+    wrapToggleButton: wrapToggleButtonProp = false,
+    maxLines: maxLinesProp,
+    expandable: expandableProp = false,
+    expandLabel: expandLabelProp,
+    collapseLabel: collapseLabelProp,
     ...props
 }: React.HTMLAttributes<HTMLPreElement> & {
     title?: string;
     hideTitleBar?: boolean;
     hideBorder?: boolean;
+    wrap?: boolean;
+    wrapToggleButton?: boolean;
+    maxLines?: number;
+    expandable?: boolean;
+    expandLabel?: string;
+    collapseLabel?: string;
 }) {
-    const { isInCodeGroup } = useCodeGroup()
-    const hideTitleBar = hideTitleBarProp || isInCodeGroup
-    const hideBorder = hideBorderProp || isInCodeGroup
-
-    const [isCopied, setIsCopied] = useState(false)
-    const preRef = useRef<HTMLPreElement>(null)
-
     // 1. Check props for data-title (passed from rehype)
     const dataTitle = (props as Record<string, unknown>)["data-title"] as string
     const dataFont = (props as Record<string, unknown>)["data-font"] as string
@@ -313,6 +320,40 @@ export function Pre({
     const dataIconColor = (props as Record<string, unknown>)["data-icon-color"] as string
     const rawIcon = (props as Record<string, unknown>)["data-icon"] as string;
     const language = (props as Record<string, unknown>)["data-language"] as string || "text"
+    const dataWrap = (props as Record<string, unknown>)["data-wrap"] as string
+    const dataWrapToggleButton = (props as Record<string, unknown>)["data-wrap-toggle-button"] as string
+    const dataMaxLines = (props as Record<string, unknown>)["data-max-lines"] as string
+    const dataExpandable = (props as Record<string, unknown>)["data-expandable"] as string
+    const dataExpandLabel = (props as Record<string, unknown>)["data-expand-label"] as string
+    const dataCollapseLabel = (props as Record<string, unknown>)["data-collapse-label"] as string
+
+    const { isInCodeGroup } = useCodeGroup()
+    const hideTitleBar = hideTitleBarProp || isInCodeGroup
+    const hideBorder = hideBorderProp || isInCodeGroup
+    const wrap = wrapProp || dataWrap === "true"
+    const showWrapToggle = wrapToggleButtonProp || dataWrapToggleButton === "true"
+    const maxLines = maxLinesProp || (dataMaxLines ? parseInt(dataMaxLines, 10) : undefined)
+    const expandable = expandableProp || dataExpandable === "true"
+    const expandLabel = expandLabelProp ?? dataExpandLabel ?? "Expand code"
+    const collapseLabel = collapseLabelProp ?? dataCollapseLabel ?? "Collapse"
+
+    const [isCopied, setIsCopied] = useState(false)
+    const [isWrapped, setIsWrapped] = useState(wrap)
+    const [isExpanded, setIsExpanded] = useState(false)
+    const preRef = useRef<HTMLPreElement>(null)
+
+    // Update isWrapped when wrap prop changes (from code group)
+    useEffect(() => {
+        setIsWrapped(wrap)
+    }, [wrap])
+
+    // Also check if we're in a code group and use its wrap state
+    const { isWrapped: codeGroupWrapped } = useCodeGroup()
+    useEffect(() => {
+        if (isInCodeGroup && codeGroupWrapped !== undefined) {
+            setIsWrapped(codeGroupWrapped)
+        }
+    }, [codeGroupWrapped, isInCodeGroup])
 
     // Helper to resolve aliases (e.g., "iNpm" -> "npm")
     const resolveKey = (key: string) => languageAliases[key] || key;
@@ -419,6 +460,26 @@ export function Pre({
         }
     }
 
+    const onToggleWrap = () => {
+        setIsWrapped(!isWrapped)
+    }
+
+    // Icon changes based on wrap state
+    const WrapToggleIcon = isWrapped ? LuWrapText : GrTextAlignLeft;
+
+    // Tooltip & accessibility labels
+    const wrapToggleLabel = isWrapped
+    ? "Disable text wrapping"
+    : "Enable text wrapping";
+
+    const onToggleExpand = () => {
+        setIsExpanded(!isExpanded)
+    }
+
+    // Calculate max height for clamping - using line-height of 1.5
+    // Each line is approximately 1.5em, so we add padding (py-4 = 1rem top + 1rem bottom)
+    const maxHeightValue = maxLines ? `calc(${maxLines} * 1.5em + 2rem)` : undefined
+
     useEffect(() => {
         function reposition(e: MouseEvent) {
             const hover = (e.target as HTMLElement)?.closest(".twoslash-hover");
@@ -461,11 +522,12 @@ export function Pre({
             if (!activePopup) return;
 
             hideTimeout = window.setTimeout(() => {
-            if (activePopup) {
-                activePopup.style.opacity = "0";
-                activePopup.style.pointerEvents = "none";
-                activePopup = null;
-            }}, 120);
+                if (activePopup) {
+                    activePopup.style.opacity = "0";
+                    activePopup.style.pointerEvents = "none";
+                    activePopup = null;
+                }
+            }, 120);
         }
 
         function cancelHide() {
@@ -475,22 +537,40 @@ export function Pre({
             }
         }
 
-        function onPointerEnter(e: Event) {
-            const el = (e.target as Element | null)?.closest(".twoslash-hover");
+        function onPointerEnter(e: PointerEvent) {
+            const el = (e.target as Element | null)?.closest(
+                ".twoslash-hover, .twoslash-popup-container"
+            );
+
             if (!(el instanceof HTMLElement)) return;
 
             cancelHide();
-            showPopup(el);
+
+            if (el.classList.contains("twoslash-hover")) {
+                showPopup(el);
+            }
         }
 
-        function onPointerLeave(e: Event) {
-            const hover = (e.target as Element | null)?.closest(".twoslash-hover");
-            const popup = (e.target as Element | null)?.closest(".twoslash-popup-container");
+        function onPointerLeave(e: PointerEvent) {
+            const from = e.target as Element | null;
+            const to = e.relatedTarget as Element | null;
 
-            if (
-                (hover && hover instanceof HTMLElement) ||
-                (popup && popup instanceof HTMLElement)
-            ) {
+            if (!from || !to) {
+                hidePopupDelayed();
+                return;
+            }
+
+            const leavingHover = from.closest(".twoslash-hover");
+            const enteringHover = to.closest(".twoslash-hover");
+
+            const leavingPopup = from.closest(".twoslash-popup-container");
+            const enteringPopup = to.closest(".twoslash-popup-container");
+
+            if (enteringHover || enteringPopup) {
+                return;
+            }
+
+            if (leavingHover || leavingPopup) {
                 hidePopupDelayed();
             }
         }
@@ -508,15 +588,14 @@ export function Pre({
         <div
             className={cn(
                 "my-6 relative",
-                !hideBorder && "rounded-lg border bg-background"
+                !hideBorder && "rounded-lg border bg-background overflow-hidden"
             )}
             style={{
                 ...((fontValue) && { ["--mdx-font-family" as string]: `${fontValue}, monospace` }),
-                overflow: "visible",
             }}
         >
             {!hideTitleBar && (
-                <div className="flex items-center justify-between border-b bg-[#f6f8fa] dark:bg-[#161a20] px-4 py-2.5">
+                <div className="flex items-center justify-between border-b bg-[#f6f8fa] dark:bg-[#161a20] px-4 py-2.5 rounded-t-[calc(var(--radius,0.5rem)-1px)]">
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-1.5">
                             <div className="size-3 rounded-full bg-red-400/60 border border-red-500/80" />
@@ -529,45 +608,108 @@ export function Pre({
                             <span className="truncate">{displayTitle}</span>
                         </div>
                     </div>
-                    <button
-                        onClick={onCopy}
-                        className={cn(
-                            "flex items-center gap-2 rounded-md p-1.5 text-xs font-medium transition-all cursor-pointer",
-                            isCopied
-                                ? "text-green-600 dark:text-green-400 bg-green-500/10 dark:bg-green-400/10"
-                                : "text-muted-foreground hover:bg-ring/40 hover:text-foreground"
+                    <div className="flex items-center gap-2">
+                        {showWrapToggle && (
+                            <button
+                                onClick={onToggleWrap}
+                                className={cn(
+                                "flex items-center gap-2 rounded-md p-1.5 text-xs font-medium transition-all cursor-pointer",
+                                isWrapped
+                                    ? "text-blue-600 dark:text-blue-400 bg-blue-500/10 dark:bg-blue-400/10"
+                                    : "text-muted-foreground hover:bg-ring/40 hover:text-foreground"
+                                )}
+                                aria-label={wrapToggleLabel}
+                                title={wrapToggleLabel}
+                            >
+                                <WrapToggleIcon className="size-3.5" />
+                            </button>
                         )}
-                        aria-label="Copy code"
-                    >
-                        {isCopied ? (
-                            <>
-                                <Check className="size-3.5" />
-                                <span>Copied!</span>
-                            </>
-                        ) : (
-                            <>
-                                <Copy className="size-3.5" />
-                                <span>Copy</span>
-                            </>
-                        )}
-                    </button>
+                        <button
+                            onClick={onCopy}
+                            className={cn(
+                                "flex items-center gap-2 rounded-md p-1.5 text-xs font-medium transition-all cursor-pointer",
+                                isCopied
+                                    ? "text-green-600 dark:text-green-400 bg-green-500/10 dark:bg-green-400/10"
+                                    : "text-muted-foreground hover:bg-ring/40 hover:text-foreground"
+                            )}
+                            aria-label="Copy code"
+                        >
+                            {isCopied ? (
+                                <>
+                                    <Check className="size-3.5" />
+                                    <span>Copied!</span>
+                                </>
+                            ) : (
+                                <>
+                                    <Copy className="size-3.5" />
+                                    <span>Copy</span>
+                                </>
+                            )}
+                        </button>
+                    </div>
                 </div>
             )}
-              <div className="relative overflow-x-auto scrollbar-hide">
+            <div className={cn(
+                "relative overflow-x-auto",
+                maxLines && !isExpanded && "overflow-y-hidden",
+                !maxLines || !expandable ? "rounded-b-[calc(var(--radius,0.5rem)-1px)]" : ""
+            )}>
                 <pre
                     {...props}
                     ref={preRef}
                     className={cn(
                         "py-4 mt-0! mb-0!",
-                        "min-w-max",
-                        "overflow-visible",
+                        !isWrapped && "min-w-max",
+                        isWrapped && "whitespace-pre-wrap break-words",
+                        maxLines && !isExpanded ? "overflow-hidden select-none" : "",
                         className
                     )}
-                    style={style}
+                    style={{
+                        ...style,
+                        ...(maxLines && !isExpanded && {
+                            maxHeight: maxHeightValue,
+                            overflow: "hidden",
+                            touchAction: "none"
+                        })
+                    }}
                     >
                     {children}
                 </pre>
             </div>
+            {maxLines && expandable && (
+                <div className={cn(
+                    "relative",
+                    !isExpanded ? "absolute bottom-0 inset-x-0 h-28 flex flex-col justify-end" : "border-t border-border/40"
+                )}>
+                    {!isExpanded && (
+                        <div 
+                            className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent pointer-events-none" 
+                            aria-hidden="true"
+                        />
+                    )}
+
+                    <button
+                        onClick={onToggleExpand}
+                        className={cn(
+                            "relative z-10 w-full px-4 text-xs font-medium transition-all duration-200 cursor-pointer",
+                            "flex items-center justify-center gap-2 text-muted-foreground hover:text-foreground",
+                            !isExpanded 
+                                ? "pb-4 pt-10 bg-none" 
+                                : "py-3 bg-background/50 backdrop-blur-sm border-t border-border/20"
+                        )}
+                    >
+                        <div className="flex items-center gap-2 bg-background/80 dark:bg-muted/20 px-3 py-1.5 rounded-full border border-border/80 backdrop-blur-md">
+                            <ChevronDown
+                                className={cn(
+                                    "size-3.5 transition-transform duration-300",
+                                    isExpanded && "rotate-180"
+                                )}
+                            />
+                            <span>{isExpanded ? collapseLabel : expandLabel}</span>
+                        </div>
+                    </button>
+                </div>
+            )}
         </div>
     )
 }

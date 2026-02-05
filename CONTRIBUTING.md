@@ -59,6 +59,7 @@ root
 ├── components/        # Shared UI components
 ├── content/           # MDX content (blog posts, examples)
 ├── docs/              # Documentation source
+├── velite/            # Velite collections, plugins configuration
 ├── velite.config.ts   # Velite content pipeline configuration
 ├── release.config.cjs # semantic-release configuration
 └── package.json
@@ -68,6 +69,7 @@ root
 
 * **Content changes** → `content/`
 * **UI / theme changes** → `components/` or `app/`
+* **Collection / Plugins changes**  → `velite/`
 * **Docs** → `docs/` or `README.md`
 * **Tooling / CI** → `.github/`
 

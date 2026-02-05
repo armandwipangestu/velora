@@ -116,8 +116,8 @@ The following are the features I want to achieve or are under development:
 - [ ✅ ] Add google analytics
 - [ ✅ ] Add posthog analytics
 - [ ✅ ] Add twoslash integration
-- [ ] Wrap code block content
-- [ ] Max line (Expand code / Wrap Vertical)
+- [ ✅ ] Wrap code block content
+- [ ✅ ] Max line (Expand code / Wrap Vertical)
 - [ ] Language switcher (one code block have an dropdown to switch language)
 - [ ] Code block Theme switcher button
 - [ ] Add preview rendered code block
