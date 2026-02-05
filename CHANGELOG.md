@@ -1,4 +1,67 @@
-## [1.12.0-rc.2](https://github.com/armandwipangestu/velora/compare/v1.12.0-rc.1...v1.12.0-rc.2) (2026-01-28)
+## [1.16.0](https://github.com/armandwipangestu/velora/compare/v1.15.7...v1.16.0) (2026-02-04)
+
+### Features
+
+* add twoslash prototype ([747f12f](https://github.com/armandwipangestu/velora/commit/747f12f72e60d9a264fcebf33c0c1b9e2d0b6a07))
+
+### Bug Fixes
+
+* add import twoslash css ([588e0eb](https://github.com/armandwipangestu/velora/commit/588e0eb494770cf5174bfb3f32e9a987dfc8b7d4))
+* error hover variable typescript ([e304816](https://github.com/armandwipangestu/velora/commit/e304816266126e517677628fb477375223f50bf1))
+* hover and unhover popup container ([7909380](https://github.com/armandwipangestu/velora/commit/790938016535364d18645779c02052991f16e409))
+* make twoslash hover container inside the pre element ([fc0a3fb](https://github.com/armandwipangestu/velora/commit/fc0a3fb94d16f4f415c768291e8c998eeaaa7de1))
+* make twoslash hover container outside the pre element ([d6bb68f](https://github.com/armandwipangestu/velora/commit/d6bb68f64f46df231db8586e79a74bc165b183f0))
+* overflow content horizontal and vertical ([7de8959](https://github.com/armandwipangestu/velora/commit/7de895905af525703ab6f795d00917a9ca3e64b8))
+* persist twoslash query ^? ([ef502b3](https://github.com/armandwipangestu/velora/commit/ef502b34081fbd3d6408d33c94025cddd96e358b))
+* twoslash hover container popup ([a8e1d2a](https://github.com/armandwipangestu/velora/commit/a8e1d2a65480944283575c15ba9b032b7b763153))
+* twoslash popup container out of the pre code element ([b10e6de](https://github.com/armandwipangestu/velora/commit/b10e6dee688154dd25dd1890cc55e436465c1f6b))
+* wrap twoslash hover container ([e2118ca](https://github.com/armandwipangestu/velora/commit/e2118ca45c555286f2a768315ada5ae2ed92dcdd))
+
+## [1.15.7](https://github.com/armandwipangestu/velora/compare/v1.15.6...v1.15.7) (2026-02-04)
+
+## [1.15.6](https://github.com/armandwipangestu/velora/compare/v1.15.5...v1.15.6) (2026-02-04)
+
+## [1.15.5](https://github.com/armandwipangestu/velora/compare/v1.15.4...v1.15.5) (2026-02-04)
+
+## [1.15.4](https://github.com/armandwipangestu/velora/compare/v1.15.3...v1.15.4) (2026-02-04)
+
+## [1.15.3](https://github.com/armandwipangestu/velora/compare/v1.15.2...v1.15.3) (2026-02-04)
+
+## [1.15.2](https://github.com/armandwipangestu/velora/compare/v1.15.1...v1.15.2) (2026-02-04)
+
+## [1.15.1](https://github.com/armandwipangestu/velora/compare/v1.15.0...v1.15.1) (2026-02-04)
+
+### Bug Fixes
+
+* formatting labeler.yml ([b94236d](https://github.com/armandwipangestu/velora/commit/b94236d02f92cce9bd0034d45e87e7c965663535))
+* labeler.yml ([d56a0d3](https://github.com/armandwipangestu/velora/commit/d56a0d37633b72c288fe78eb3c1756aa86820352))
+
+## [1.15.0](https://github.com/armandwipangestu/velora/compare/v1.14.0...v1.15.0) (2026-02-04)
+
+### Features
+
+* **docs:** add example styling markdown post ([8e8f488](https://github.com/armandwipangestu/velora/commit/8e8f488c5cb4d0d2d26e2a87df18a94ac176a6cd))
+
+## [1.14.0](https://github.com/armandwipangestu/velora/compare/v1.13.0...v1.14.0) (2026-01-28)
+
+### Features
+
+* **env:** disable analytics if development mode ([da8c018](https://github.com/armandwipangestu/velora/commit/da8c01841e96e3b0981b71ffde4c9b544bce1c5b))
+
+## [1.13.0](https://github.com/armandwipangestu/velora/compare/v1.12.0...v1.13.0) (2026-01-28)
+
+### Features
+
+* **components:** add green color to copy button on code ([54d782b](https://github.com/armandwipangestu/velora/commit/54d782bdbdbe3ab0ee99d86a6682f244806d7402))
+
+## [1.12.0](https://github.com/armandwipangestu/velora/compare/v1.11.3...v1.12.0) (2026-01-28)
+
+### Features
+
+* **analytics:** add google analytics integration ([bede918](https://github.com/armandwipangestu/velora/commit/bede918f4ac5831c4e0517f26fd6bf2f3b0aa9b2))
+* **analytics:** add posthog integration ([74fb324](https://github.com/armandwipangestu/velora/commit/74fb32447c093e5f16679b67ce5182efc6301eb0))
+* **components:** add icon data typescript, posthog, google analytics ([907aca3](https://github.com/armandwipangestu/velora/commit/907aca38f0dd34c171fdcddc4ea5dbe6d54c3e24))
+* **components:** add mdx heading ([1459541](https://github.com/armandwipangestu/velora/commit/1459541baa8041e34153d037f61d8bb630ceb30f))
 
 ## [1.12.0-rc.1](https://github.com/armandwipangestu/velora/compare/v1.11.2-rc.1...v1.12.0-rc.1) (2026-01-28)
 

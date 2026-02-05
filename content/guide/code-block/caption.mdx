@@ -1,0 +1,160 @@
+---
+title: Caption
+description: Add descriptive captions below code blocks for better context
+category: Custom Components
+categoryOrder: 2
+order: 14
+---
+
+# Code Block Caption
+
+Code block captions allow you to add **contextual descriptions** below a code block.
+
+This is useful when:
+- You want to explain *what* the snippet demonstrates
+- The filename or title alone is not enough
+- You need short explanations without breaking the reading flow
+
+Captions are rendered **below the code block**, visually separated from the title bar.
+
+---
+
+## Basic Usage
+
+To add a caption, use the `caption` attribute on the code block.
+
+````mdx
+```ts caption="This is a simple React component"
+export default function Home() {
+  return <></>
+}
+```
+````
+
+This will render a caption directly below the code block.
+
+```ts caption="This is a simple React component"
+export default function Home() {
+  return <></>
+}
+```
+
+---
+
+## Caption with Title
+
+Captions work seamlessly alongside the `title` attribute.
+
+````mdx
+```ts title="Home.tsx" caption="Main entry component for the homepage"
+export default function Home() {
+  return <></>
+}
+```
+````
+
+This will render a caption directly below the code block.
+
+```ts title="Home.tsx" caption="Main entry component for the homepage"
+export default function Home() {
+  return <></>
+}
+```
+
+---
+
+## Caption with Line Highlighting
+
+Captions do not interfere with line highlighting or other code features.
+
+````mdx
+```ts {2-4} caption="Highlighted lines show the component props"
+export default function Button(props) {
+  const { label, onClick } = props
+
+  return <button onClick={onClick}>{label}</button>
+}
+```
+````
+
+This will render a caption directly below the code block.
+
+```ts {2-4} caption="Highlighted lines show the component props"
+export default function Button(props) {
+  const { label, onClick } = props
+
+  return <button onClick={onClick}>{label}</button>
+}
+```
+
+---
+
+## Caption with Line Numbers
+
+You can combine captions with line numbers for tutorial-style documentation.
+
+````mdx
+```ts showLineNumbers caption="Line numbers make step-by-step explanations easier"
+function add(a: number, b: number) {
+  return a + b
+}
+```
+````
+
+This will render a caption directly below the code block.
+
+```ts showLineNumbers caption="Line numbers make step-by-step explanations easier"
+function add(a: number, b: number) {
+  return a + b
+}
+```
+
+---
+
+## Full Feature Combination
+
+Captions work with **all supported code block features**.
+
+````mdx
+```ts showLineNumbers {2-4} title="example.tsx" /function/ caption="This component demonstrates a minimal React page"
+export default function Home(props) {
+  return <></>
+}
+```
+````
+
+This will render a caption directly below the code block.
+
+```ts showLineNumbers {2-4} title="example.tsx" /function/ caption="This component demonstrates a minimal React page"
+export default function Home(props) {
+  return <></>
+}
+```
+
+---
+
+## When to Use Captions
+
+Captions are best used when:
+
+* The explanation is **short and contextual**
+* You want to avoid breaking the article with extra paragraphs
+* The code snippet needs clarification but not full documentation
+
+Avoid captions for:
+
+* Long explanations (use normal prose instead)
+* Repeating information already obvious from the code
+
+---
+
+## Notes
+
+* Captions are rendered using `<figcaption>`
+* Captions are **not part of the code block**, so they won’t be copied
+* Captions respect dark mode and typography styles
+* Captions are ignored inside code groups unless explicitly enabled
+
+---
+
+Code block captions help make documentation clearer, more readable, and easier to scan—especially in tutorials and guides.

@@ -1,0 +1,437 @@
+---
+title: Wrap
+description: Enable line wrapping for long code lines inside code blocks
+category: Custom Components
+categoryOrder: 2
+order: 15
+---
+
+# Code Block Wrap
+
+Code block wrapping allows long lines of code to **automatically wrap to the next line** instead of overflowing horizontally.
+
+This is especially useful when:
+- Code contains very long strings
+- You want better readability on smaller screens
+- Horizontal scrolling would hurt the reading flow
+
+By default, code blocks **do not wrap**.
+
+---
+
+## Enable Wrap (Keyword)
+
+The simplest way to enable wrapping is by adding the `wrap` keyword to the code block.
+
+````mdx
+```tsx wrap
+export default function Button() {
+  return (
+    <button className="inline-flex items-center justify-center rounded-md bg-emerald-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
+      Click me
+    </button>
+  )
+}
+```
+````
+
+This will render a wrap directly below the code block.
+
+```tsx wrap
+export default function Button() {
+  return (
+    <button className="inline-flex items-center justify-center rounded-md bg-emerald-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
+      Click me
+    </button>
+  )
+}
+```
+
+When `wrap` is present, horizontal scrolling is disabled and lines will wrap naturally.
+
+---
+
+## Enable Wrap Explicitly (`wrap=true`)
+
+You can also explicitly control wrapping using `wrap=true`.
+
+````mdx
+```tsx wrap=true
+type CardProps = {
+  title: string
+  description: string
+  imageUrl: string
+}
+
+export function Card({ title, description, imageUrl }: CardProps) {
+  return (
+    <article className="flex w-full max-w-md flex-col overflow-hidden rounded-xl border border-border bg-background shadow-sm transition-shadow hover:shadow-md">
+      <img src={imageUrl} alt={title} className="h-48 w-full object-cover" />
+      <div className="flex flex-1 flex-col gap-2 p-4">
+        <h3 className="text-lg font-semibold">{title}</h3>
+        <p className="text-sm text-muted-foreground">{description}</p>
+      </div>
+    </article>
+  )
+}
+```
+````
+
+This will render a wrap directly below the code block.
+
+```tsx wrap=true
+type CardProps = {
+  title: string
+  description: string
+  imageUrl: string
+}
+
+export function Card({ title, description, imageUrl }: CardProps) {
+  return (
+    <article className="flex w-full max-w-md flex-col overflow-hidden rounded-xl border border-border bg-background shadow-sm transition-shadow hover:shadow-md">
+      <img src={imageUrl} alt={title} className="h-48 w-full object-cover" />
+      <div className="flex flex-1 flex-col gap-2 p-4">
+        <h3 className="text-lg font-semibold">{title}</h3>
+        <p className="text-sm text-muted-foreground">{description}</p>
+      </div>
+    </article>
+  )
+}
+```
+
+This is useful when you want clarity or consistency across documentation.
+
+---
+
+## Disable Wrap (`wrap=false`)
+
+If wrapping is enabled by default (for example, via a code group or global setting), you can explicitly disable it.
+
+````mdx
+```tsx wrap=false
+export function Grid() {
+  return (
+    <div className="grid grid-cols-[minmax(120px,1fr)_minmax(200px,2fr)_minmax(80px,auto)] gap-4">
+      <span>ID</span>
+      <span>Description</span>
+      <span>Status</span>
+    </div>
+  )
+}
+```
+````
+
+This will render a not wrap directly below the code block.
+
+```tsx wrap=false
+export function Grid() {
+  return (
+    <div className="grid grid-cols-[minmax(120px,1fr)_minmax(200px,2fr)_minmax(80px,auto)] gap-4">
+      <span>ID</span>
+      <span>Description</span>
+      <span>Status</span>
+    </div>
+  )
+}
+```
+
+---
+
+## Wrap with Other Features
+
+Wrapping works seamlessly with other code block features.
+
+````mdx
+```tsx wrap showLineNumbers title="example.tsx"
+type ProfileProps = {
+  name: string
+  bio: string
+}
+
+export function Profile({ name, bio }: ProfileProps) {
+  return (
+    <section className="flex w-full max-w-xl flex-col gap-4 rounded-lg border border-border bg-background p-6">
+      <h2 className="text-xl font-semibold">{name}</h2>
+      <p className="text-sm leading-relaxed text-muted-foreground">{bio}</p>
+    </section>
+  )
+}
+```
+````
+
+This will render a wrap directly below the code block.
+
+```tsx wrap showLineNumbers title="example.tsx"
+type ProfileProps = {
+  name: string
+  bio: string
+}
+
+export function Profile({ name, bio }: ProfileProps) {
+  return (
+    <section className="flex w-full max-w-xl flex-col gap-4 rounded-lg border border-border bg-background p-6">
+      <h2 className="text-xl font-semibold">{name}</h2>
+      <p className="text-sm leading-relaxed text-muted-foreground">{bio}</p>
+    </section>
+  )
+}
+```
+
+---
+
+## Interactive Wrap (Wrap Toggle Button)
+
+In addition to static wrapping (`wrap`, `wrap=true`, `wrap=false`), you can enable an **interactive wrap toggle** that lets readers decide how they want to view the code.
+
+Instead of forcing a single layout, this feature adds a **toggle button** that allows users to switch between:
+
+- Wrapped lines
+- Horizontal scrolling
+
+This makes code blocks more flexible and reader-friendly.
+
+---
+
+### Enable Wrap Toggle Button
+
+To enable the interactive toggle, add the `wrapToggleButton` flag to the code block.
+
+````mdx
+```tsx wrapToggleButton
+export function Button({ label }: { label: string }) {
+  return (
+    <button className="inline-flex items-center justify-center rounded-md bg-indigo-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+      {label}
+    </button>
+  )
+}
+```
+````
+
+```tsx wrapToggleButton
+export function Button({ label }: { label: string }) {
+  return (
+    <button className="inline-flex items-center justify-center rounded-md bg-indigo-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+      {label}
+    </button>
+  )
+}
+```
+
+The reader can now toggle wrapping **without reloading the page**.
+
+---
+
+### Default State + Toggle
+
+You can still control the **initial wrapping state**, while allowing users to override it.
+
+#### Start Wrapped
+
+````mdx
+```tsx wrap wrapToggleButton
+export function Card({ title }: { title: string }) {
+  return (
+    <div className="flex w-full max-w-lg flex-col rounded-xl border border-border bg-background p-6 shadow-sm">
+      <h3 className="text-lg font-semibold">{title}</h3>
+    </div>
+  )
+}
+```
+````
+
+```tsx wrap wrapToggleButton
+export function Card({ title }: { title: string }) {
+  return (
+    <div className="flex w-full max-w-lg flex-col rounded-xl border border-border bg-background p-6 shadow-sm">
+      <h3 className="text-lg font-semibold">{title}</h3>
+    </div>
+  )
+}
+```
+
+#### Start Unwrapped
+
+````mdx
+```tsx wrap=false wrapToggleButton
+export function Grid() {
+  return (
+    <div className="grid grid-cols-[minmax(120px,1fr)_minmax(200px,2fr)_minmax(80px,auto)] gap-4">
+      <span>ID</span>
+      <span>Description</span>
+      <span>Status</span>
+    </div>
+  )
+}
+```
+````
+
+```tsx wrap=false wrapToggleButton
+export function Grid() {
+  return (
+    <div className="grid grid-cols-[minmax(120px,1fr)_minmax(200px,2fr)_minmax(80px,auto)] gap-4">
+      <span>ID</span>
+      <span>Description</span>
+      <span>Status</span>
+    </div>
+  )
+}
+```
+
+---
+
+### Wrap Toggle in Code Group
+
+Wrap toggle also works inside **code groups**.
+Each tab manages its own wrap state independently.
+
+````mdx
+::: code-group
+
+```tsx wrapToggleButton
+export function Avatar({ src }: { src: string }) {
+  return (
+    <img
+      src={src}
+      className="h-12 w-12 rounded-full object-cover ring-2 ring-offset-2 ring-indigo-500"
+    />
+  )
+}
+```
+
+```ts wrapToggleButton
+export function createAvatar(src: string): HTMLImageElement {
+  const img = document.createElement("img")
+  img.src = src
+  img.className =
+    "h-12 w-12 rounded-full object-cover ring-2 ring-offset-2 ring-indigo-500"
+  return img
+}
+```
+
+```ts wrapToggleButton
+export function createAvatarWithFallback(
+  src: string,
+  fallback: string,
+  size: number = 48,
+  ringColor: string = "ring-indigo-500"
+): HTMLImageElement {
+  const img = document.createElement("img")
+
+  img.src = src || fallback
+  img.width = size
+  img.height = size
+  img.alt = "Avatar"
+  img.className = `h-${size} w-${size} rounded-full object-cover ring-2 ring-offset-2 ${ringColor}`
+
+  img.onerror = () => {
+    img.src = fallback
+  }
+
+  return img
+}
+```
+
+:::
+````
+
+::: code-group
+
+```tsx wrapToggleButton
+export function Avatar({ src }: { src: string }) {
+  return (
+    <img
+      src={src}
+      className="h-12 w-12 rounded-full object-cover ring-2 ring-offset-2 ring-indigo-500"
+    />
+  )
+}
+```
+
+```ts wrapToggleButton
+export function createAvatar(src: string): HTMLImageElement {
+  const img = document.createElement("img")
+  img.src = src
+  img.className =
+    "h-12 w-12 rounded-full object-cover ring-2 ring-offset-2 ring-indigo-500"
+  return img
+}
+```
+
+```ts wrapToggleButton
+export function createAvatarWithFallback(
+  src: string,
+  fallback: string,
+  size: number = 48,
+  ringColor: string = "ring-indigo-500"
+): HTMLImageElement {
+  const img = document.createElement("img")
+
+  img.src = src || fallback
+  img.width = size
+  img.height = size
+  img.alt = "Avatar"
+  img.className = `h-${size} w-${size} rounded-full object-cover ring-2 ring-offset-2 ${ringColor}`
+
+  img.onerror = () => {
+    img.src = fallback
+  }
+
+  return img
+}
+```
+
+:::
+
+---
+
+### Wrap vs Wrap Toggle
+
+| Feature                         | Behavior                                |
+| ------------------------------- | --------------------------------------- |
+| `wrap`                          | Static wrapping defined by author       |
+| `wrap=true` / `wrap=false`      | Explicit static control                 |
+| `wrapToggleButton`              | User-controlled interactive wrapping    |
+| `wrap + wrapToggleButton`       | Wrapped by default, user can override   |
+| `wrap=false + wrapToggleButton` | Unwrapped by default, user can override |
+
+---
+
+### Notes for Interactive Wrapping
+
+* Wrap toggle affects **visual layout only**
+* Toggling does not change copied code
+* Wrap toggle state is local to each code block
+* Wrap toggle respects titles, captions, and line numbers
+* Wrap toggle does not override hard renderer constraints
+
+---
+
+Using wrap together with an interactive toggle gives readers full control—keeping code readable without sacrificing precision.
+
+
+## When to Use Wrap
+
+Use wrapping when:
+
+* The exact horizontal layout of code is **not important**
+* You want better readability on mobile or narrow screens
+* Long strings or chained expressions dominate the snippet
+
+Avoid wrapping when:
+
+* Horizontal alignment is important (tables, ASCII diagrams)
+* Comparing code line-by-line
+* Showing diffs or precise formatting
+
+---
+
+## Notes
+
+* Wrapping affects only visual layout, not the copied code
+* Wrapping applies per code block
+* Wrap settings can be overridden explicitly using `wrap=true` or `wrap=false`
+
+---
+
+Code block wrapping helps keep documentation clean, readable, and accessible—especially for long or explanatory examples.

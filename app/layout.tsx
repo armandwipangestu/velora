@@ -12,6 +12,7 @@ import GoogleAnalytics from "@/components/google-analytics";
 import { PostHogProvider } from "@/components/providers/posthog-provider";
 import { Suspense } from "react";
 import { PostHogPageView } from "@/components/posthog-pageview";
+import { ANALYTICS_ENABLED } from "@/lib/env";
 
 const geistSans = Geist({
   variable: "--font-sans",
@@ -60,29 +61,43 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className="scroll-pt-[3.5rem]">
       <head>
         {/* Umami Analytics */}
-        <Script
-          defer
-          src="https://cloud.umami.is/script.js"
-          data-website-id={process.env.NEXT_PUBLIC_UMAMI_DATA_WEBSITE_ID}
-          strategy="afterInteractive"
-        />
+        {ANALYTICS_ENABLED && (
+          <Script
+            defer
+            src="https://cloud.umami.is/script.js"
+            data-website-id={process.env.NEXT_PUBLIC_UMAMI_DATA_WEBSITE_ID}
+            strategy="afterInteractive"
+          />
+        )}
 
         {/* Vercel Analytics */}
-        <Analytics />
+        {ANALYTICS_ENABLED && <Analytics />}
       </head>
 
       {/* Google Analytics */}
-      <GoogleAnalytics />
+      {ANALYTICS_ENABLED && <GoogleAnalytics />}
       <body
         className={cn("min-h-screen bg-background font-sans antialiased", `${geistSans.variable} ${geistMono.variable} ${ubuntuMono.variable}`)}
         suppressHydrationWarning
       >
 
-        <PostHogProvider>
-          <Suspense fallback={null}>
-            <PostHogPageView />
-          </Suspense>
+        {ANALYTICS_ENABLED ? (
+          <PostHogProvider>
+            <Suspense fallback={null}>
+              <PostHogPageView />
+            </Suspense>
 
+            <Providers>
+              <div className="relative flex min-h-dvh flex-col bg-background">
+                <Navbar />
+                <main className="flex-1">
+                  {children}
+                </main>
+                <SiteFooter />
+              </div>
+            </Providers>
+          </PostHogProvider>
+        ) : (
           <Providers>
             <div className="relative flex min-h-dvh flex-col bg-background">
               <Navbar />
@@ -92,7 +107,7 @@ export default function RootLayout({
               <SiteFooter />
             </div>
           </Providers>
-        </PostHogProvider>
+        )}
       </body>
     </html>
   );

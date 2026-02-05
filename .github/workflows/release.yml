@@ -25,7 +25,7 @@ jobs:
     
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
     
             - name: Extract commit SHA
               id: sha
@@ -42,6 +42,7 @@ jobs:
                   docker build \
                     --platform linux/amd64 \
                     -f Dockerfile \
+                    --build-arg NEXT_PUBLIC_APP_ENV=${{ secrets.NEXT_PUBLIC_APP_ENV }} \
                     --build-arg NEXT_PUBLIC_APP_URL=${{ secrets.NEXT_PUBLIC_APP_URL }} \
                     --build-arg NEXT_PUBLIC_GISCUS_REPO=${{ secrets.NEXT_PUBLIC_GISCUS_REPO }} \
                     --build-arg NEXT_PUBLIC_GISCUS_REPO_ID=${{ secrets.NEXT_PUBLIC_GISCUS_REPO_ID }} \
@@ -85,7 +86,7 @@ jobs:
 
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
               with:
                   fetch-depth: 0
 
@@ -95,7 +96,7 @@ jobs:
                 bun-version: "latest"
 
             - name: Restore Bun Cache
-              uses: actions/cache@v4
+              uses: actions/cache@v5
               with:
                 path: |
                   ~/.bun/install/cache
@@ -108,7 +109,7 @@ jobs:
               run: bun install --frozen-lockfile
 
             - name: Setup Node.js 25 for Semantic Release
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@v6
               with:
                   node-version: "25"
 
@@ -142,10 +143,10 @@ jobs:
     
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
     
             - name: Download version.txt artifact
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v7
               with:
                   name: release-version
               continue-on-error: true # Prevents crash if no release happened
@@ -163,7 +164,7 @@ jobs:
     
             - name: Download sha.txt artifact
               if: steps.check-version.outputs.RELEASE_EXISTS == 'true'
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v7
               with:
                   name: built-sha
     

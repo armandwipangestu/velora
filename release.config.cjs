@@ -55,6 +55,18 @@ module.exports = {
       "@semantic-release/release-notes-generator", 
       { 
         preset: "conventionalcommits",
+        presetConfig: {
+          types: [
+            { type: "feat", section: "✨ Features" },
+            { type: "fix", section: "🐛 Bug Fixes" },
+            { type: "hotfix", section: "🚑 Hotfixes" },
+            { type: "chore", section: "🧹 Chores" },
+            { type: "revert", section: "⏪ Reverts" },
+            { type: "perf", section: "⚡ Performance" },
+            { type: "refactor", section: "♻️ Refactor" },
+            { type: "patch", section: "🩹 Patch" },
+          ]
+        },
         parserOpts: {
           noteKeywords: [
             "BREAKING CHANGE",

@@ -5,14 +5,18 @@ import { cn } from "@/lib/utils"
 import { gaEvent } from "@/lib/ga";
 import { languageIcons, languageColors, languageAliases } from "./mdx-pre"
 import { FileCode, Check, Copy } from "lucide-react"
+import { GrTextAlignLeft } from "react-icons/gr";
+import { LuWrapText } from "react-icons/lu";
 import { phCapture } from "@/lib/posthog";
 
 interface CodeGroupContextType {
     isInCodeGroup: boolean
+    isWrapped?: boolean
 }
 
 export const CodeGroupContext = createContext<CodeGroupContextType>({
-    isInCodeGroup: false
+    isInCodeGroup: false,
+    isWrapped: false
 })
 
 export const useCodeGroup = () => useContext(CodeGroupContext)
@@ -24,6 +28,7 @@ interface CodeGroupProps {
 export function CodeGroup({ children }: CodeGroupProps) {
     const [activeIndex, setActiveIndex] = useState(0)
     const [isCopied, setIsCopied] = useState(false)
+    const [isWrapped, setIsWrapped] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
 
     const tabs = useMemo(() => {
@@ -36,6 +41,7 @@ export function CodeGroup({ children }: CodeGroupProps) {
                 "data-icon"?: string
                 "data-icon-color"?: string
                 "data-caption"?: string
+                "data-wrap-toggle-button"?: string
             }
 
             const title = props["data-title"] || props["data-language"] || "Code"
@@ -43,6 +49,7 @@ export function CodeGroup({ children }: CodeGroupProps) {
             const iconColorEnabled = props["data-icon-color"] !== "false"
             const caption = props["data-caption"]
             const rawIcon = props["data-icon"] as string;
+            const hasWrapToggle = props["data-wrap-toggle-button"] === "true"
 
             // Helper to resolve aliases (e.g., "iNpm" -> "npm")
             const resolveKey = (key: string) => languageAliases[key] || key;
@@ -70,9 +77,17 @@ export function CodeGroup({ children }: CodeGroupProps) {
                 </span>
             ) : iconElement
 
-            return { title, icon, caption }
+            return { title, icon, caption, hasWrapToggle }
         })?.filter(Boolean) || []
     }, [children])
+
+    // Check if any tab has wrap toggle enabled
+    const showWrapToggle = tabs.some(tab => tab?.hasWrapToggle)
+
+    const WrapToggleIcon = isWrapped ? LuWrapText : GrTextAlignLeft;
+    const wrapToggleLabel = isWrapped
+        ? "Disable text wrapping"
+        : "Enable text wrapping";
 
     const onCopy = async () => {
         if (!containerRef.current) return
@@ -119,12 +134,16 @@ export function CodeGroup({ children }: CodeGroupProps) {
         }
     }
 
+    const onToggleWrap = () => {
+        setIsWrapped(!isWrapped)
+    }
+
     if (tabs.length === 0) return <>{children}</>
 
     const activeTab = tabs[activeIndex]
 
     return (
-        <CodeGroupContext.Provider value={{ isInCodeGroup: true }}>
+        <CodeGroupContext.Provider value={{ isInCodeGroup: true, isWrapped }}>
             <div className="my-6">
                 <div ref={containerRef} className="code-group overflow-hidden rounded-lg border bg-background">
                     {/* Integrated Title Bar */}
@@ -157,23 +176,45 @@ export function CodeGroup({ children }: CodeGroupProps) {
                             </div>
                         </div>
 
-                        <button
-                            onClick={onCopy}
-                            className="flex items-center gap-2 rounded-md p-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-ring/40 hover:text-foreground shrink-0 cursor-pointer"
-                            aria-label="Copy code"
-                        >
-                            {isCopied ? (
-                                <>
-                                    <Check className="size-3.5" />
-                                    <span>Copied!</span>
-                                </>
-                            ) : (
-                                <>
-                                    <Copy className="size-3.5" />
-                                    <span>Copy</span>
-                                </>
+                        <div className="flex items-center gap-2">
+                            {showWrapToggle && (
+                                <button
+                                    onClick={onToggleWrap}
+                                    className={cn(
+                                        "flex items-center gap-2 rounded-md p-1.5 text-xs font-medium transition-all cursor-pointer",
+                                        isWrapped
+                                            ? "text-blue-600 dark:text-blue-400 bg-blue-500/10 dark:bg-blue-400/10"
+                                            : "text-muted-foreground hover:bg-ring/40 hover:text-foreground"
+                                    )}
+                                    aria-label={wrapToggleLabel}
+                                    title={wrapToggleLabel}
+                                >
+                                    <WrapToggleIcon className="size-3.5" />
+                                </button>
                             )}
-                        </button>
+                            <button
+                                onClick={onCopy}
+                                className={cn(
+                                    "flex items-center gap-2 rounded-md p-1.5 text-xs font-medium transition-all cursor-pointer",
+                                    isCopied
+                                        ? "text-green-600 dark:text-green-400 bg-green-500/10 dark:bg-green-400/10"
+                                        : "text-muted-foreground hover:bg-ring/40 hover:text-foreground"
+                                )}
+                                aria-label="Copy code"
+                            >
+                                {isCopied ? (
+                                    <>
+                                        <Check className="size-3.5" />
+                                        <span>Copied!</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Copy className="size-3.5" />
+                                        <span>Copy</span>
+                                    </>
+                                )}
+                            </button>
+                        </div>
                     </div>
 
                     <div className="code-group-content">

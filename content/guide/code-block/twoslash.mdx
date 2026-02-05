@@ -1,0 +1,132 @@
+---
+title: Twoslash
+description: TypeScript-aware code blocks with inline type information
+category: Custom Components
+categoryOrder: 2
+order: 13
+---
+
+# Twoslash
+
+Twoslash is a special code block mode that enables **TypeScript type inspection**, **inline errors**, and **hover tooltips** directly inside your code blocks.
+
+It is especially useful for writing documentation that needs to stay in sync with actual TypeScript types.
+
+---
+
+## Enable Twoslash
+
+To enable Twoslash, add the `twoslash` keyword to your code block language.
+
+````mdx
+```ts twoslash
+const message = "Hello World"
+```
+````
+
+This tells the code block renderer to analyze the code using TypeScript.
+
+---
+
+## Hover Tooltip (`^|`)
+
+The `^|` marker shows type information when the code is hovered.
+
+````mdx
+```ts twoslash
+Number.parseInt('123', 10)
+//      ^|
+```
+````
+
+It will show the inferred type when you hover the highlighted code.
+
+```ts twoslash
+Number.parseInt('123', 10)
+//      ^|
+
+
+```
+
+---
+
+## Persist Query (`^?`)
+
+The `^?` marker displays type information **immediately**, without requiring hover.
+
+This is useful when you want the explanation to always be visible.
+
+````mdx
+```ts twoslash
+interface User {
+  name: string
+}
+
+const user: Readonly<User> = {
+  name: "Alice",
+//   ^?
+}
+```
+````
+
+It will render the type information inline, attached to the code.
+
+```ts twoslash
+interface User {
+  name: string
+}
+
+const user: Readonly<User> = {
+  name: "Alice",
+//   ^?
+}
+```
+
+---
+
+## Errors and Diagnostics
+
+Twoslash can also display TypeScript errors inline.
+
+````mdx
+```ts twoslash
+// @errors: 2540
+interface Todo {
+  title: string
+}
+
+const todo: Readonly<Todo> = {
+  title: "Hello"
+}
+
+todo.title = "World"
+```
+````
+
+The error will be rendered directly in the code block.
+
+```ts twoslash
+// @errors: 2540
+interface Todo {
+  title: string
+}
+
+const todo: Readonly<Todo> = {
+  title: "Hello"
+}
+
+todo.title = "World"
+```
+
+---
+
+## Notes
+
+* Twoslash runs at **build time**, not in the browser.
+* Type information is generated using the TypeScript compiler.
+* Hover tooltips (`^|`) are ideal for lightweight hints.
+* Persist queries (`^?`) are best for explanations that should always be visible.
+
+---
+
+Twoslash helps keep documentation accurate, expressive, and closely aligned with real TypeScript behavior.
