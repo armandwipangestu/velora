@@ -142,6 +142,17 @@ const rehypePreMeta = () => (tree: Root) => {
             node.properties["data-language"] = language
         }
 
+        // 9. Extract Wrap preference
+        const wrapMatch = meta.match(/wrap=(true|false)/)
+        if (wrapMatch) {
+            node.properties["data-wrap"] = wrapMatch[1]
+        } else {
+            // Check if 'wrap' is mentioned without a value (treat as true)
+            if (meta.includes("wrap")) {
+                node.properties["data-wrap"] = "true"
+            }
+        }
+
         // If parent is a figure (from rehype-pretty-code), copy properties to it
         // This allows the CodeGroup component to see the properties on its direct children
         if (parent && parent.type === "element" && parent.tagName === "figure") {

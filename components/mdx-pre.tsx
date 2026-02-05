@@ -293,19 +293,14 @@ export function Pre({
     title, // This comes from MDX props if passed like <Pre title="foo" />
     hideTitleBar: hideTitleBarProp = false,
     hideBorder: hideBorderProp = false,
+    wrap: wrapProp = false,
     ...props
 }: React.HTMLAttributes<HTMLPreElement> & {
     title?: string;
     hideTitleBar?: boolean;
     hideBorder?: boolean;
+    wrap?: boolean;
 }) {
-    const { isInCodeGroup } = useCodeGroup()
-    const hideTitleBar = hideTitleBarProp || isInCodeGroup
-    const hideBorder = hideBorderProp || isInCodeGroup
-
-    const [isCopied, setIsCopied] = useState(false)
-    const preRef = useRef<HTMLPreElement>(null)
-
     // 1. Check props for data-title (passed from rehype)
     const dataTitle = (props as Record<string, unknown>)["data-title"] as string
     const dataFont = (props as Record<string, unknown>)["data-font"] as string
@@ -313,6 +308,16 @@ export function Pre({
     const dataIconColor = (props as Record<string, unknown>)["data-icon-color"] as string
     const rawIcon = (props as Record<string, unknown>)["data-icon"] as string;
     const language = (props as Record<string, unknown>)["data-language"] as string || "text"
+    const dataWrap = (props as Record<string, unknown>)["data-wrap"] as string
+    
+    const { isInCodeGroup } = useCodeGroup()
+    const hideTitleBar = hideTitleBarProp || isInCodeGroup
+    const hideBorder = hideBorderProp || isInCodeGroup
+    const wrap = wrapProp || dataWrap === "true"
+
+    const [isCopied, setIsCopied] = useState(false)
+    const preRef = useRef<HTMLPreElement>(null)
+
 
     // Helper to resolve aliases (e.g., "iNpm" -> "npm")
     const resolveKey = (key: string) => languageAliases[key] || key;
@@ -577,8 +582,9 @@ export function Pre({
                     ref={preRef}
                     className={cn(
                         "py-4 mt-0! mb-0!",
-                        "min-w-max",
+                        !wrap && "min-w-max",
                         "overflow-visible",
+                        wrap && "whitespace-pre-wrap break-words",
                         className
                     )}
                     style={style}
