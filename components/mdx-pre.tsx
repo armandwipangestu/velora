@@ -572,7 +572,7 @@ export function Pre({
                     </button>
                 </div>
             )}
-              <div className="relative overflow-x-auto scrollbar-hide">
+              <div className="relative overflow-x-auto">
                 <pre
                     {...props}
                     ref={preRef}
