@@ -1,3 +1,13 @@
+## [1.17.6-rc.1](https://github.com/armandwipangestu/velora/compare/v1.17.5...v1.17.6-rc.1) (2026-02-06)
+
+### 🐛 Bug Fixes
+
+* hidden chore scope release ([ebc03d1](https://github.com/armandwipangestu/velora/commit/ebc03d1cfc868ad6e2d214f0f3992382fda9120d))
+
+### 🧹 Chores
+
+* **release:** 1.17.5-rc.2 [skip ci] ([121a8b2](https://github.com/armandwipangestu/velora/commit/121a8b2b45500175cdaf0a20339bf9bf8aea5ab2))
+
 ## [1.17.5-rc.2](https://github.com/armandwipangestu/velora/compare/v1.17.5-rc.1...v1.17.5-rc.2) (2026-02-06)
 
 ### 🐛 Bug Fixes
