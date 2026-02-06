@@ -42,6 +42,7 @@ module.exports = {
           { type: "style", release: false },
           { type: "test", release: false },
           { type: "ci", release: false },
+          { type: "chore", scope: "release", release: false },
         ],
         parserOpts: {
           noteKeywords: [
@@ -61,6 +62,7 @@ module.exports = {
             { type: "fix", section: "🐛 Bug Fixes" },
             { type: "hotfix", section: "🚑 Hotfixes" },
             { type: "chore", section: "🧹 Chores" },
+            { type: "chore", scope: "release", hidden: true },
             { type: "revert", section: "⏪ Reverts" },
             { type: "perf", section: "⚡ Performance" },
             { type: "refactor", section: "♻️ Refactor" },
