@@ -469,8 +469,8 @@ export function Pre({
 
     // Tooltip & accessibility labels
     const wrapToggleLabel = isWrapped
-    ? "Disable text wrapping"
-    : "Enable text wrapping";
+        ? "Disable text wrapping"
+        : "Enable text wrapping";
 
     const onToggleExpand = () => {
         setIsExpanded(!isExpanded)
@@ -613,10 +613,10 @@ export function Pre({
                             <button
                                 onClick={onToggleWrap}
                                 className={cn(
-                                "flex items-center gap-2 rounded-md p-1.5 text-xs font-medium transition-all cursor-pointer",
-                                isWrapped
-                                    ? "text-blue-600 dark:text-blue-400 bg-blue-500/10 dark:bg-blue-400/10"
-                                    : "text-muted-foreground hover:bg-ring/40 hover:text-foreground"
+                                    "flex items-center gap-2 rounded-md p-1.5 text-xs font-medium transition-all cursor-pointer",
+                                    isWrapped
+                                        ? "text-blue-600 dark:text-blue-400 bg-blue-500/10 dark:bg-blue-400/10"
+                                        : "text-muted-foreground hover:bg-ring/40 hover:text-foreground"
                                 )}
                                 aria-label={wrapToggleLabel}
                                 title={wrapToggleLabel}
@@ -669,10 +669,9 @@ export function Pre({
                         ...(maxLines && !isExpanded && {
                             maxHeight: maxHeightValue,
                             overflow: "hidden",
-                            touchAction: "none"
                         })
                     }}
-                    >
+                >
                     {children}
                 </pre>
             </div>
@@ -682,8 +681,8 @@ export function Pre({
                     !isExpanded ? "absolute bottom-0 inset-x-0 h-28 flex flex-col justify-end" : "border-t border-border/40"
                 )}>
                     {!isExpanded && (
-                        <div 
-                            className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent pointer-events-none" 
+                        <div
+                            className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent pointer-events-none"
                             aria-hidden="true"
                         />
                     )}
@@ -693,8 +692,8 @@ export function Pre({
                         className={cn(
                             "relative z-10 w-full px-4 text-xs font-medium transition-all duration-200 cursor-pointer",
                             "flex items-center justify-center gap-2 text-muted-foreground hover:text-foreground",
-                            !isExpanded 
-                                ? "pb-4 pt-10 bg-none" 
+                            !isExpanded
+                                ? "pb-4 pt-10 bg-none"
                                 : "py-3 bg-background/50 backdrop-blur-sm border-t border-border/20"
                         )}
                     >
