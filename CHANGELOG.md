@@ -1,3 +1,12 @@
+## [1.17.7](https://github.com/armandwipangestu/velora/compare/v1.17.6...v1.17.7) (2026-02-07)
+
+### 🐛 Bug Fixes
+
+* mobile e.target.closest error ([a7238e4](https://github.com/armandwipangestu/velora/commit/a7238e4fe2c6e4777d6127d306583a9da3ec8efe))
+* mobile touch code block scroll ([8340d9c](https://github.com/armandwipangestu/velora/commit/8340d9cb1deb3816422a8b4ff97553ef28bdb056))
+* showLineNumbers remove wrap effect ([e672447](https://github.com/armandwipangestu/velora/commit/e67244765d9725ed9a66d16dcd3be0dc5da598d3))
+* title scrolled horizontal ([209b79f](https://github.com/armandwipangestu/velora/commit/209b79f9eee35a44f9c4bcaca66b6d9ba27a681f))
+
 ## [1.17.6](https://github.com/armandwipangestu/velora/compare/v1.17.5...v1.17.6) (2026-02-06)
 
 ### 🐛 Bug Fixes
