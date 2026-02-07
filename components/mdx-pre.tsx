@@ -537,10 +537,19 @@ export function Pre({
             }
         }
 
+        function getClosest(
+            target: EventTarget | null,
+            selector: string
+        ): HTMLElement | null {
+            if (!(target instanceof Element)) return null
+            return target.closest(selector) as HTMLElement | null
+        }
+
         function onPointerEnter(e: PointerEvent) {
-            const el = (e.target as Element | null)?.closest(
+            const el = getClosest(
+                e.target,
                 ".twoslash-hover, .twoslash-popup-container"
-            );
+            )
 
             if (!(el instanceof HTMLElement)) return;
 
@@ -552,26 +561,24 @@ export function Pre({
         }
 
         function onPointerLeave(e: PointerEvent) {
-            const from = e.target as Element | null;
-            const to = e.relatedTarget as Element | null;
+            const fromEl = e.target instanceof Element ? e.target : null
+            const toEl = e.relatedTarget instanceof Element ? e.relatedTarget : null
 
-            if (!from || !to) {
-                hidePopupDelayed();
-                return;
+            if (!fromEl || !toEl) {
+                hidePopupDelayed()
+                return
             }
 
-            const leavingHover = from.closest(".twoslash-hover");
-            const enteringHover = to.closest(".twoslash-hover");
+            const leavingHover = fromEl.closest(".twoslash-hover")
+            const enteringHover = toEl.closest(".twoslash-hover")
 
-            const leavingPopup = from.closest(".twoslash-popup-container");
-            const enteringPopup = to.closest(".twoslash-popup-container");
+            const leavingPopup = fromEl.closest(".twoslash-popup-container")
+            const enteringPopup = toEl.closest(".twoslash-popup-container")
 
-            if (enteringHover || enteringPopup) {
-                return;
-            }
+            if (enteringHover || enteringPopup) return
 
             if (leavingHover || leavingPopup) {
-                hidePopupDelayed();
+                hidePopupDelayed()
             }
         }
 
