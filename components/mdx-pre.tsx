@@ -469,8 +469,8 @@ export function Pre({
 
     // Tooltip & accessibility labels
     const wrapToggleLabel = isWrapped
-    ? "Disable text wrapping"
-    : "Enable text wrapping";
+        ? "Disable text wrapping"
+        : "Enable text wrapping";
 
     const onToggleExpand = () => {
         setIsExpanded(!isExpanded)
@@ -537,10 +537,19 @@ export function Pre({
             }
         }
 
+        function getClosest(
+            target: EventTarget | null,
+            selector: string
+        ): HTMLElement | null {
+            if (!(target instanceof Element)) return null
+            return target.closest(selector) as HTMLElement | null
+        }
+
         function onPointerEnter(e: PointerEvent) {
-            const el = (e.target as Element | null)?.closest(
+            const el = getClosest(
+                e.target,
                 ".twoslash-hover, .twoslash-popup-container"
-            );
+            )
 
             if (!(el instanceof HTMLElement)) return;
 
@@ -552,26 +561,24 @@ export function Pre({
         }
 
         function onPointerLeave(e: PointerEvent) {
-            const from = e.target as Element | null;
-            const to = e.relatedTarget as Element | null;
+            const fromEl = e.target instanceof Element ? e.target : null
+            const toEl = e.relatedTarget instanceof Element ? e.relatedTarget : null
 
-            if (!from || !to) {
-                hidePopupDelayed();
-                return;
+            if (!fromEl || !toEl) {
+                hidePopupDelayed()
+                return
             }
 
-            const leavingHover = from.closest(".twoslash-hover");
-            const enteringHover = to.closest(".twoslash-hover");
+            const leavingHover = fromEl.closest(".twoslash-hover")
+            const enteringHover = toEl.closest(".twoslash-hover")
 
-            const leavingPopup = from.closest(".twoslash-popup-container");
-            const enteringPopup = to.closest(".twoslash-popup-container");
+            const leavingPopup = fromEl.closest(".twoslash-popup-container")
+            const enteringPopup = toEl.closest(".twoslash-popup-container")
 
-            if (enteringHover || enteringPopup) {
-                return;
-            }
+            if (enteringHover || enteringPopup) return
 
             if (leavingHover || leavingPopup) {
-                hidePopupDelayed();
+                hidePopupDelayed()
             }
         }
 
@@ -596,27 +603,27 @@ export function Pre({
         >
             {!hideTitleBar && (
                 <div className="flex items-center justify-between border-b bg-[#f6f8fa] dark:bg-[#161a20] px-4 py-2.5 rounded-t-[calc(var(--radius,0.5rem)-1px)]">
-                    <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-4 overflow-hidden">
+                        <div className="flex items-center gap-1.5 shrink-0">
                             <div className="size-3 rounded-full bg-red-400/60 border border-red-500/80" />
                             <div className="size-3 rounded-full bg-yellow-400/60 border border-yellow-500/80" />
                             <div className="size-3 rounded-full bg-green-400/60 border border-green-500/80" />
                         </div>
                         {/* Icon and Title/Extension */}
-                        <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                            {icon}
-                            <span className="truncate">{displayTitle}</span>
+                        <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground overflow-x-auto scrollbar-hide whitespace-nowrap">
+                            <span className="shrink-0">{icon}</span>
+                            <span className="overflow-x-auto scrollbar-hide">{displayTitle}</span>
                         </div>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 shrink-0">
                         {showWrapToggle && (
                             <button
                                 onClick={onToggleWrap}
                                 className={cn(
-                                "flex items-center gap-2 rounded-md p-1.5 text-xs font-medium transition-all cursor-pointer",
-                                isWrapped
-                                    ? "text-blue-600 dark:text-blue-400 bg-blue-500/10 dark:bg-blue-400/10"
-                                    : "text-muted-foreground hover:bg-ring/40 hover:text-foreground"
+                                    "flex items-center gap-2 rounded-md p-1.5 text-xs font-medium transition-all cursor-pointer",
+                                    isWrapped
+                                        ? "text-blue-600 dark:text-blue-400 bg-blue-500/10 dark:bg-blue-400/10"
+                                        : "text-muted-foreground hover:bg-ring/40 hover:text-foreground"
                                 )}
                                 aria-label={wrapToggleLabel}
                                 title={wrapToggleLabel}
@@ -669,10 +676,9 @@ export function Pre({
                         ...(maxLines && !isExpanded && {
                             maxHeight: maxHeightValue,
                             overflow: "hidden",
-                            touchAction: "none"
                         })
                     }}
-                    >
+                >
                     {children}
                 </pre>
             </div>
@@ -682,8 +688,8 @@ export function Pre({
                     !isExpanded ? "absolute bottom-0 inset-x-0 h-28 flex flex-col justify-end" : "border-t border-border/40"
                 )}>
                     {!isExpanded && (
-                        <div 
-                            className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent pointer-events-none" 
+                        <div
+                            className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent pointer-events-none"
                             aria-hidden="true"
                         />
                     )}
@@ -693,8 +699,8 @@ export function Pre({
                         className={cn(
                             "relative z-10 w-full px-4 text-xs font-medium transition-all duration-200 cursor-pointer",
                             "flex items-center justify-center gap-2 text-muted-foreground hover:text-foreground",
-                            !isExpanded 
-                                ? "pb-4 pt-10 bg-none" 
+                            !isExpanded
+                                ? "pb-4 pt-10 bg-none"
                                 : "py-3 bg-background/50 backdrop-blur-sm border-t border-border/20"
                         )}
                     >
