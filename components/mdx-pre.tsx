@@ -603,19 +603,19 @@ export function Pre({
         >
             {!hideTitleBar && (
                 <div className="flex items-center justify-between border-b bg-[#f6f8fa] dark:bg-[#161a20] px-4 py-2.5 rounded-t-[calc(var(--radius,0.5rem)-1px)]">
-                    <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-4 overflow-hidden">
+                        <div className="flex items-center gap-1.5 shrink-0">
                             <div className="size-3 rounded-full bg-red-400/60 border border-red-500/80" />
                             <div className="size-3 rounded-full bg-yellow-400/60 border border-yellow-500/80" />
                             <div className="size-3 rounded-full bg-green-400/60 border border-green-500/80" />
                         </div>
                         {/* Icon and Title/Extension */}
-                        <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                            {icon}
-                            <span className="truncate">{displayTitle}</span>
+                        <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground overflow-x-auto scrollbar-hide whitespace-nowrap">
+                            <span className="shrink-0">{icon}</span>
+                            <span className="overflow-x-auto scrollbar-hide">{displayTitle}</span>
                         </div>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 shrink-0">
                         {showWrapToggle && (
                             <button
                                 onClick={onToggleWrap}
