@@ -66,7 +66,7 @@ jobs:
               run: echo "${SHORT_SHA}" > sha.txt
     
             - name: Upload SHA artifact
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v7
               with:
                   name: built-sha
                   path: sha.txt
@@ -120,7 +120,7 @@ jobs:
               run: npx semantic-release
 
             - name: Upload version.txt artifact
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v7
               with:
                   name: release-version
                   path: version.txt
